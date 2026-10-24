@@ -25,7 +25,7 @@ const yearOf = (e: TimelineEvent) => e.year ?? e.date.match(/\d{4}/)?.[0] ?? e.d
       </div>
       <div class="tl__body">
         <p class="label-row label tl__meta">
-          <time>{e.date}</time>
+          {e.date !== yearOf(e) && <time>{e.date}</time>}
           {e.place && <span>{e.place}</span>}
           {e.tag && <span class="tl__tag">{e.tag}</span>}
         </p>

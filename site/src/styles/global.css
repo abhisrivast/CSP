@@ -104,6 +104,10 @@ hr { border: 0; border-top: var(--rule); }
 }
 .label-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.9rem; }
 .label-row > * + *::before { content: '/'; margin-right: 0.9rem; opacity: .5; }
+@media (max-width: 560px) {
+  .label-row { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+  .label-row > * + *::before { display: none; }
+}
 .tag {
   display: inline-block; padding: 0.3em 0.6em 0.25em; border: 1.5px solid currentColor;
   font-size: var(--fs-label); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; line-height: 1.1;
@@ -168,6 +172,7 @@ hr { border: 0; border-top: var(--rule); }
 .prose th, .prose td { text-align: left; padding: .6em .7em; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
 .prose th { border-bottom: 3px solid var(--line); font-size: var(--fs-label); letter-spacing: .12em; text-transform: uppercase; }
 .prose .table-scroll { overflow-x: auto; }
+.prose sup { line-height: 0; }
 .prose sup a, .fn-ref { font-family: var(--font-sans); font-weight: 800; font-size: .7em; text-decoration: none; padding: 0 .15em; }
 .prose hr { margin-block: 2.5em; }
 .prose figure { margin-block: 2em; }

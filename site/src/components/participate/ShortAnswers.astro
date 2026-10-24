@@ -25,10 +25,9 @@ const { items, title = 'Five big questions, answered first' } = Astro.props;
 <style>
   .short { padding-block: clamp(3.5rem, 8vw, 6.5rem); }
   .short__inner { position: relative; z-index: 2; display: grid; gap: clamp(24px, 4vw, 44px); }
-  .short__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px 40px; padding-top: 12px; border-top: 3px solid var(--paper); }
+  .short__head { display: grid; justify-items: start; gap: 14px; padding-top: 12px; border-top: 3px solid var(--paper); }
   .short__num { color: var(--coral); font-weight: 900; }
   .short__head .h2 { max-width: 16ch; }
-  .short__label { order: 2; }
   .short__grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0; border-top: 1px solid rgba(243, 236, 220, .3); }
   .short__item { grid-column: span 2; display: grid; align-content: start; gap: 12px; padding: clamp(20px, 2.6vw, 32px) clamp(16px, 2.2vw, 30px) clamp(24px, 3vw, 36px); border-bottom: 1px solid rgba(243, 236, 220, .3); }
   .short__item + .short__item { border-left: 1px solid rgba(243, 236, 220, .3); }

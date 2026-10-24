@@ -17,6 +17,10 @@ export function displayTitle(p: PhotoMeta) {
     .replace(/_/g, ' ')
     .replace(/\s*\(\d{8,}\)\s*$/, '')
     .replace(/\s+-\s+Original$/, '')
+    .replace(/\s+(LCCN|LOC)\s*\d{7,}$/, '')     // Library of Congress catalogue numbers
+    .replace(/^-(?=[A-Z])/, '#')                 // Commons filenames can’t hold "#": "-SayHerName" was "#SayHerName"
+    .replace(/(^|[\s(])"/g, '$1\u201c').replace(/"/g, '\u201d')
+    .replace(/(^|[\s(])'/g, '$1\u2018').replace(/'/g, '\u2019')
     .replace(/\s+/g, ' ')
     .trim();
   return t.replace(/\.$/, '');

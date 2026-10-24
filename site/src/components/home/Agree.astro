@@ -66,11 +66,11 @@ import { SRC } from './home';
   .agree__caveat { font-size: .86rem; line-height: 1.45; padding-top: 12px; border-top: 1.5px dashed var(--paper-light); }
   .agree__caveat .label { display: block; margin-bottom: 4px; }
   /* wide screens: the placard stands in the empty space under the "%", clear of the digits. It is placed in units
-     of the figure's size (--fig): the digits end at about .81 of it. */
+     of the figure’s size (--fig): the digits end at about .81 of it. */
   .agree__left { --fig: clamp(11rem, 38vw, 34rem); }
   .agree__figure { font-size: var(--fig); }
   .agree__placard { position: absolute; left: calc(var(--fig) * .84); top: calc(var(--fig) * .5); z-index: 2; width: max-content; }
-  /* (the Placard's own size rule is more specific, hence .placard.placard--l) */
+  /* (the Placard’s own size rule is more specific, hence .placard.placard--l) */
   .agree__placard :global(.placard.placard--l .placard__text) { font-size: clamp(1.6rem, 3.6vw, 2.7rem); }
   @media (max-width: 860px) {
     .agree__grid { grid-template-columns: 1fr; }

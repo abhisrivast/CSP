@@ -19,7 +19,7 @@ const p = 'edit';
       <option value="25-34">25 to 34</option>
       <option value="35-plus">35 or older</option>
     </select>
-    <p class="hint" id={`${p}-age-hint`}>Under 18? You can still send a suggestion. We just won't ask for your email.</p>
+    <p class="hint" id={`${p}-age-hint`}>Under 18? You can still send a suggestion. We just won’t ask for your email.</p>
   </div>
 
   <div class="field">
@@ -27,18 +27,18 @@ const p = 'edit';
     <select class="select" id={`${p}-clause`} name="clause" required>
       <option value="">Choose a clause</option>
       {CLAUSES.map((c) => <option value={String(c.n)}>{pad(c.n)} · {c.title}</option>)}
-      <option value="missing">Something that's missing</option>
+      <option value="missing">Something that’s missing</option>
     </select>
   </div>
 
   <div class="field">
     <label for={`${p}-text`}>Your suggested edit</label>
     <textarea class="textarea" id={`${p}-text`} name="suggestion" required minlength="10" maxlength="2000" rows="6" aria-describedby={`${p}-text-hint`}></textarea>
-    <p class="hint" id={`${p}-text-hint`}>Rewrite a line, add a missing group, challenge a claim, or send us a better source. Please don't include names or details of other people.</p>
+    <p class="hint" id={`${p}-text-hint`}>Rewrite a line, add a missing group, challenge a claim, or send us a better source. Please don’t include names or details of other people.</p>
   </div>
 
   <div class="field edit__email">
-    <label for={`${p}-email`}>Email <span class="opt">(optional, only if you'd like a reply)</span></label>
+    <label for={`${p}-email`}>Email <span class="opt">(optional, only if you’d like a reply)</span></label>
     <input class="input" id={`${p}-email`} type="email" name="email" autocomplete="email" inputmode="email" aria-describedby={`${p}-email-hint`} />
     <p class="hint" id={`${p}-email-hint`}>We use it only to reply to you.</p>
   </div>

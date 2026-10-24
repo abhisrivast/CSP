@@ -1,5 +1,5 @@
 // Typographic "evidence cards" for milestones that have no licensed photo. Every phrase or figure here is
-// taken from the milestone's own sourced text in src/content/memory.json; nothing new is claimed.
+// taken from the milestone’s own sourced text in src/content/memory.json; nothing new is claimed.
 export type TypeCard = { big: string; small: string; lang?: string; list?: string[] };
 
 export const CARDS: Record<string, TypeCard> = {

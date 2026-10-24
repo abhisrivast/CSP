@@ -231,7 +231,7 @@ const [coverMain, coverTail] = cover ? splitTitle(cover.data.title) : ['', null]
     </div>
   </section>
 
-  <JoinBand ground="red" title="Read it. Share it. Then bring a friend." text="Every guide here is free. When you're ready to do more than read, joining takes a minute. Yes, boys too." />
+  <JoinBand ground="red" title="Read it. Share it. Bring a friend." text="Every guide here is free. When you're ready to do more than read, joining takes a minute. Yes, boys too." />
 </Base>
 
 <style>
@@ -239,6 +239,10 @@ const [coverMain, coverTail] = cover ? splitTitle(cover.data.title) : ['', null]
   :global(.photo--fixed .photo__img > picture) { display: block; height: 100%; }
   /* JoinBand: ground link colours override .btn text (see report); keep the button's own colours. */
   :global(.join-band .btn) { color: var(--btn-fg); }
+  /* Ticker (shared) wraps with its ✶ separators stranded at line ends on phones: stack the slogans there instead. */
+  @media (max-width: 600px) { :global(.ticker .ticker__dot) { display: none; } :global(.ticker .ticker__row) { flex-direction: column; gap: .25em; } }
+  /* JoinBand: its 14ch headline split "Share / it." here; give this title room to break at the full stops. */
+  :global(.join-band .join-band__text .h2.h2.h2) { max-width: 19ch; text-wrap: balance; }
 
   /* ---------- masthead ---------- */
   .masthead { background: var(--paper); padding-block: 18px 0; border-bottom: var(--rule); overflow: hidden; }
@@ -269,6 +273,8 @@ const [coverMain, coverTail] = cover ? splitTitle(cover.data.title) : ['', null]
   /* SectionHead numbers: protest red fails AA at label size, so use red-ink (ink on pink). */
   .find :global(.section-head__num), .deeper :global(.section-head__num) { color: var(--red-ink); }
   .gloss :global(.section-head__num) { color: var(--ink); }
+  /* Big section titles: no one-word last lines ("FROM / ZERO" at 360px). */
+  .section :global(.section-head .h2) { text-wrap: balance; }
 
   /* ---------- cover + contents ---------- */
   .cover-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(28px, 4vw, 56px); align-items: start; }
@@ -376,7 +382,7 @@ const [coverMain, coverTail] = cover ? splitTitle(cover.data.title) : ['', null]
   .door { position: relative; display: grid; gap: 0; border: 3px solid var(--ink); background: var(--paper-light); }
   .door__body { display: grid; gap: 12px; padding: 22px clamp(18px, 3vw, 30px) 26px; border-top: 3px solid var(--ink); }
   .door__kicker { color: var(--red-ink); }
-  .door__title { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(2rem, 3.6vw, 3.2rem); line-height: .9; }
+  .door__title { text-wrap: balance; font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(2rem, 3.6vw, 3.2rem); line-height: .9; }
   .door__title a { color: var(--ink); text-decoration: none; }
   .door__title a::after { content: ''; position: absolute; inset: 0; z-index: 4; }
   .door:hover .door__title a { text-decoration: underline; text-decoration-color: var(--red); text-decoration-thickness: 4px; }

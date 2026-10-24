@@ -26,7 +26,7 @@ export const FOUNDER = {
   slug: 'rubby-singh',
   // Verified public facts only (research/founder.md, section 7).
   shortBio:
-    'Rubby Singh is the founder of Cultural Shock Party. A social worker and book reviewer, she is the author of Garbhadosh: The Fault In Our Wombs (2026), a novel about how the idea of a "defective womb" and everyday patriarchy shape girls’ lives, and the awakening that undoes it.',
+    'Rubby Singh is the founder of Cultural Shock Party. A social worker and book reviewer, she is the author of Garbhadosh: The Fault In Our Wombs (2026), a novel about how the idea of a \u201cdefective womb\u201d and everyday patriarchy shape girls’ lives, and the awakening that undoes it.',
   // Only the profiles research/founder.md §7 lists as safe to publish. CONFIRM: consent to list them in schema sameAs.
   // Do not add other profiles (e.g. LinkedIn) until the founder confirms them in writing.
   sameAs: [

@@ -29,7 +29,7 @@ const { forms } = Astro.props;
               {f.where.map((w, j) => <>{j > 0 && <span aria-hidden="true"> · </span>}<a href={w.href}>{w.label}</a></>)}
             </p>
           </div>
-          <code class="ledger__code" title="The form's name in our records">{f.code}</code>
+          <code class="ledger__code" title="The form’s name in our records">{f.code}</code>
         </header>
         <dl class="ledger__dl">
           <div>

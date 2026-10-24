@@ -153,6 +153,8 @@ const hindiCount = terms.filter((t) => t.data.hindi).length;
   /* JoinBand: ground link colours override .btn text (see report); keep the button's own colours. */
   :global(.join-band .btn) { color: var(--btn-fg); }
   .g-hero__extra { margin-top: 6px; }
+  /* PageHero bottom-aligns its text; next to this tall photo that left a void above the headline. */
+  @media (min-width: 901px) { :global(body.page-glossary .page-hero.page-hero--photo .page-hero__inner) { align-items: center; } }
 
   /* ---------- A–Z bar ---------- */
   .az { position: sticky; top: 71px; z-index: 30; background: var(--ink); color: var(--paper); border-bottom: 3px solid var(--red); }
@@ -191,8 +193,8 @@ const hindiCount = terms.filter((t) => t.data.hindi).length;
   /* the last card of an odd-numbered group spans the row: term on the left, definition on the right */
   .term--wide { grid-column: 1 / -1; }
   @media (min-width: 701px) {
-    .term--wide { grid-template-columns: minmax(180px, .75fr) minmax(0, 2fr); column-gap: clamp(20px, 3vw, 40px); align-items: start; }
-    .term--wide > :not(.term__head):not(.term__anchor) { grid-column: 2; max-width: 68ch; }
+    .term--wide { grid-template-columns: minmax(180px, .75fr) minmax(0, 2fr); column-gap: clamp(20px, 3vw, 40px); align-items: start; padding-right: 52px; }
+    .term--wide > :not(.term__head):not(.term__anchor) { grid-column: 2; }
     .term--wide .term__head { grid-column: 1; grid-row: 1 / span 5; flex-direction: column; align-items: start; }
   }
   .g-legal { max-width: 70ch; margin-top: clamp(36px, 5vw, 56px); padding: 14px 16px; border: 2px solid var(--ink); border-left-width: 8px; border-left-color: var(--marigold); background: var(--paper-light); color: var(--ink-soft); }
@@ -228,6 +230,7 @@ const hindiCount = terms.filter((t) => t.data.hindi).length;
   .interlude:nth-of-type(even) .interlude__photo { order: 2; }
 
   /* ---------- reads ---------- */
+  .g-reads .h2 { text-wrap: balance; }
   .g-reads__label { padding-top: 12px; border-top: var(--rule); margin-bottom: 14px; }
   .g-reads__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(18px, 2.6vw, 30px); margin-block: clamp(26px, 4vw, 44px); }
 

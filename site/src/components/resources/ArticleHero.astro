@@ -12,6 +12,9 @@ const d = entry.data;
 const [main, tail] = splitTitle(d.title);
 // A title split at "(…)" shows its tail without brackets; keep them for screen readers and plain-text readers.
 const paren = !!tail && d.title === `${main} (${tail})`;
+// A title split at ": " drops the colon from the display line (the serif tail already reads as a subtitle).
+const colon = !!tail && main.endsWith(':');
+const mainShown = colon ? main.slice(0, -1) : main;
 const size = main.length <= 40 ? 'xl' : main.length <= 58 ? 'l' : 'm';
 const aud = audienceLabels(d.audience);
 const no = ISSUE_ORDER.indexOf(entry.id);
@@ -22,7 +25,7 @@ const no = ISSUE_ORDER.indexOf(entry.id);
     <div class="a-hero__text">
       <p class="a-hero__kicker label"><span class="a-hero__kind">{d.kind}</span>{no >= 0 && <span>Journal No. {String(no + 1).padStart(2, '0')}</span>}<span>{minutes} min read</span></p>
       <h1 class:list={['a-hero__title', `a-hero__title--${size}`]}>
-        <span class="a-hero__main">{main}</span>{tail && ' '}{tail && <span class="a-hero__tail">{paren && <span class="visually-hidden">(</span>}{tail}{paren && <span class="visually-hidden">)</span>}</span>}
+        <span class="a-hero__main">{mainShown}{colon && <span class="visually-hidden">:</span>}</span>{tail && ' '}{tail && <span class="a-hero__tail">{paren && <span class="visually-hidden">(</span>}{tail}{paren && <span class="visually-hidden">)</span>}</span>}
       </h1>
       <p class="a-hero__dek">{d.description}</p>
     </div>
@@ -91,7 +94,9 @@ const no = ISSUE_ORDER.indexOf(entry.id);
     .a-hero__crumbs { grid-area: crumbs; }
     .a-hero--photo .a-hero__text { grid-area: text; padding-bottom: 28px; }
     .a-hero--photo .a-hero__title { margin-right: -18%; }
-    .a-hero--photo .a-hero__main { background: var(--paper); padding: 0 .12em 0 0; }
+    /* Paper behind the headline where it overlaps the photo. Each line's paper starts below the line above's
+       baseline, so it never paints over that line's comma tails and descenders (they read as full stops). */
+    .a-hero--photo .a-hero__main { background: linear-gradient(var(--paper), var(--paper)) 0 100% / 100% 76% no-repeat; padding: 0 .12em 0 0; }
     .a-hero__photo { grid-area: photo; margin-bottom: -2px; }
     .a-hero:not(.a-hero--photo) .a-hero__grid { grid-template-columns: minmax(0, 1fr) 260px; grid-template-areas: 'crumbs crumbs' 'text stamp'; align-items: center; }
     .a-hero:not(.a-hero--photo) .a-hero__crumbs { grid-area: crumbs; }

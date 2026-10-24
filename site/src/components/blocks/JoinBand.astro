@@ -17,7 +17,7 @@ const here = Astro.url.pathname;
 const {
   title = 'Bring a friend. Yes, boys too.',
   text = 'Joining is free and takes a minute. Start small: read, share, sign the manifesto. Go big when you are ready.',
-  placard = 'The next wave is us',
+  placard = 'Hope first. Receipts always.',
   ground = 'green',
   next,
 } = Astro.props;
@@ -54,7 +54,7 @@ const external = (href: string) => /^https?:\/\//.test(href);
   .join-band { padding-block: clamp(3.5rem, 8vw, 6rem); position: relative; }
   .join-band__inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: center; }
   .join-band__text { display: grid; gap: 22px; }
-  .join-band__text .h2 { max-width: 14ch; }
+  .join-band__text .h2 { max-width: 18ch; text-wrap: balance; }
   .join-band__ctas { display: flex; flex-wrap: wrap; gap: 18px 28px; align-items: center; }
   .join-band .link-arrow { color: var(--paper); border-color: var(--marigold); }
   .join-band .link-arrow:hover { color: var(--marigold); }

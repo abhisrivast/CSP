@@ -57,7 +57,7 @@ const demo = photoMeta(DEMO);
         </div>
       </div>
       <Annotation text="same photo, our colours: that’s an adaptation" arrow="up" width="18ch" tilt={-3} />
-      <figcaption id="demo-cap" class="demo__cap">{demo.caption} Photo: {displayCredit(demo)}. Right: recoloured by CSP, and shared under the same licence.</figcaption>
+      <figcaption id="demo-cap" class="demo__cap">{demo.caption.replace(/(^|\s)'/g, '$1‘').replace(/'/g, '’')} Photo: {displayCredit(demo)}. Right: recoloured by CSP, and shared under the same licence.</figcaption>
     </figure>
   </TrustHero>
 

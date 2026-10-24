@@ -8,7 +8,7 @@ import { displayCredit, displayTitle, hostLabel, licenceLabel } from './credits'
 export interface Props { p: PhotoMeta }
 const { p } = Astro.props;
 const title = displayTitle(p);
-// Devanagari runs (e.g. a photographer's name) are marked up so screen readers switch voice.
+// Devanagari runs (e.g. a photographer’s name) are marked up so screen readers switch voice.
 const creditParts = displayCredit(p).split(/([\u0900-\u097F][\u0900-\u097F\s]*[\u0900-\u097F])/);
 ---
 <li class="ci" id={p.id}>

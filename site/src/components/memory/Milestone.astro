@@ -147,7 +147,7 @@ const pubs = [...new Set(m.sources.map((s) => (s.publisher ?? s.label).replace(/
   .ms__media { display: grid; gap: 8px; padding-top: 6px; }
   .ms__media--portrait { max-width: 260px; }
   .ms__media :global(.photo__img picture) { display: block; height: 100%; }
-  .ms__later { justify-self: start; background: var(--ink); color: var(--paper); padding: .35em .55em .3em; }
+  .ms__later { justify-self: start; position: relative; z-index: 4; margin-bottom: 14px; background: var(--ink); color: var(--paper); padding: .35em .55em .3em; }
 
   .tcard {
     --bg: var(--pink); --fg: var(--ink);
@@ -174,7 +174,7 @@ const pubs = [...new Set(m.sources.map((s) => (s.publisher ?? s.label).replace(/
   @media (max-width: 700px) {
     .ms { grid-template-columns: minmax(0, 1fr); gap: 14px; }
     .ms__marker { position: static; grid-auto-flow: column; justify-content: start; align-items: end; gap: 14px; }
-    .ms__media { grid-column: auto; grid-row: 2; max-width: 100%; }
+    .ms__media { grid-column: auto; grid-row: 2; max-width: 100%; margin-bottom: 12px; }
     .ms__media--portrait { max-width: 280px; }
     .ms__top { align-items: flex-start; }
     .ms__meta { flex-direction: column; align-items: flex-start; gap: 3px; }

@@ -65,7 +65,7 @@ const right = NOTES.filter((n) => n.side === 'r');
     .anatomy__notes--l .anatomy__num { left: auto; right: 0; }
   }
   @media (max-width: 999px) {
-    /* one reading order (1–6) on smaller screens: let both lists' items join the figure's grid */
+    /* one reading order (1–6) on smaller screens: let both lists' items join the figure’s grid */
     .anatomy { grid-template-columns: 1fr 1fr; gap: 28px 32px; }
     .anatomy__art { grid-column: 1 / -1; order: 0; max-width: 560px; justify-self: center; width: 100%; }
     .anatomy__notes { display: contents; }

@@ -42,6 +42,7 @@ export default defineConfig({
   site: 'https://culturalshockparty.com',
   trailingSlash: 'always',
   build: { format: 'directory' },
+  devToolbar: { enabled: false },
   image: {
     // AVIF effort 2 builds ~3× faster than the default with files only a few % larger.
     service: { entrypoint: 'astro/assets/services/sharp', config: { avif: { effort: 2 }, webp: { effort: 4 } } },

@@ -53,6 +53,8 @@ const hasAside = Astro.slots.has('aside');
   }
   @media (max-width: 560px) {
     .thero__kicker { flex-basis: 100%; }
-    .thero__meta > span:nth-child(2)::before { content: none; margin: 0; }
+    /* the facts wrap at phone width: drop the slashes so no line starts with an orphan "/" */
+    .thero__meta { column-gap: 1.1rem; }
+    .thero__meta > span::before { content: none !important; margin: 0; }
   }
 </style>

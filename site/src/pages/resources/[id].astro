@@ -131,6 +131,8 @@ const schema: object[] = [
   :global(.photo--fixed .photo__img > picture) { display: block; height: 100%; }
   /* JoinBand: ground link colours override .btn text (see report); keep the button's own colours. */
   :global(.join-band .btn) { color: var(--btn-fg); }
+  /* Ticker (shared) wraps with its ✶ separators stranded at line ends on phones: stack the slogans there instead. */
+  @media (max-width: 600px) { :global(.ticker .ticker__dot) { display: none; } :global(.ticker .ticker__row) { flex-direction: column; gap: .25em; } }
 
   /* ---------- layout ---------- */
   .article {
@@ -165,9 +167,10 @@ const schema: object[] = [
     float: left; font-family: var(--font-sans); font-weight: 900; font-stretch: var(--display-stretch); color: var(--red);
     font-size: 4.6em; line-height: .8; padding: .04em .1em 0 0; text-transform: uppercase;
   }
-  .article__prose :global(h2), .article__prose :global(h3) { scroll-margin-top: 96px; }
+  .article__prose :global(h2), .article__prose :global(h3) { scroll-margin-top: 96px; text-wrap: balance; }
   .article__prose > :global(:is(figure.photo, .pull, .timeline, .r-wide, .table-scroll, table)) { grid-column: wide; }
-  .article__prose > :global(.r-full) { grid-column: full; }
+  /* full-bleed: the article has side padding, so pull r-full blocks out to the viewport edges */
+  .article__prose > :global(.r-full) { grid-column: full; margin-inline: calc(-1 * var(--gutter)); }
   .article__prose > :global(figure.photo) { margin-block: 2.2em; }
   .article__prose > :global(figure.photo figcaption) { font-family: var(--font-sans); }
   .article__prose > :global(.pull) { margin-block: 1.6em; }
@@ -186,8 +189,10 @@ const schema: object[] = [
     .article__prose :global(.timeline--dense .tl) { grid-template-columns: 1fr; gap: 8px; }
     .article__prose :global(.timeline--dense .tl__marker) { position: static; grid-template-columns: auto auto; justify-content: start; align-items: end; gap: 12px; }
   }
-  .article__prose :global(.pull blockquote) { border-left: 0; padding: 0; font-size: clamp(1.9rem, 4.4vw, 3.4rem); }
+  .article__prose :global(.pull blockquote) { border-left: 0; padding: 0; font-size: clamp(1.9rem, 4.4vw, 3.4rem); text-wrap: balance; }
   .article__prose :global(.thinkers), .article__prose :global(.waves) { margin-top: 1.6em; }
+  /* a figure inside a padded ground panel (the seat waffle) takes the panel's padding, not prose figure margins */
+  .article__prose > :global(.ground-ink > figure:only-child) { margin: 0; }
 
   /* the closing "What you can do" list becomes numbered action cards */
   .article__prose > :global(h2[id^='what-you-can-do']) { color: var(--ink); }

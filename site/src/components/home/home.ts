@@ -138,14 +138,14 @@ export const RUNGS = [
 export const FEATURED_CASES = ['delhi-2012-justice-verma', 'sewa-self-employed-women', 'iceland-womens-strikes'];
 // Optional picks for the featured case files. `note` says where and when the photo was taken, and says so
 // plainly when it is not the movement itself. A case missing here (or whose pick is already on the page) falls back
-// to the case card rules in components/cases/case-utils.ts (card photo, or the case's typographic poster).
+// to the case card rules in components/cases/case-utils.ts (card photo, or the case’s typographic poster).
 export const CASE_PHOTO: Record<string, { id: string; tone: Tone; alt: string; note: string }> = {
   'delhi-2012-justice-verma': { id: '2012-delhi-raisina-hill-protest-crowd', tone: 'red', note: 'Raisina Hill, New Delhi, 22 Dec 2012', alt: 'Thousands of students fill Raisina Hill in New Delhi in December 2012, an Indian flag above the crowd.' },
   'sewa-self-employed-women': { id: 'in-026-2008-rural-women-self-help-group-meeting', tone: 'green', note: 'a self-help group, 2008, not SEWA', alt: 'Rural women in bright saris sit together and laugh at a self-help group meeting.' },
   'iceland-womens-strikes': { id: '2005-reykjavik-womens-strike-signs', tone: 'marigold', note: 'Reykjavík, 24 Oct 2005', alt: 'Women wave hand-made placards at the women’s strike in Reykjavík, 2005.' },
 };
-// Journal cards use each article's card pool (resources/lib.ts CARD_PHOTOS), not its hero, so the homepage does
-// not repeat the article's own opening picture. `seed` picks the starting photo in that pool.
+// Journal cards use each article’s card pool (resources/lib.ts CARD_PHOTOS), not its hero, so the homepage does
+// not repeat the article’s own opening picture. `seed` picks the starting photo in that pool.
 export const JOURNAL = [
   { id: 'what-is-fourth-wave-feminism', tone: 'red' as Tone, seed: 1 },
   { id: 'feminism-myths-and-receipts', tone: 'ink' as Tone, seed: 0 },

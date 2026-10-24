@@ -37,7 +37,7 @@ const { label, title, lead, crumbs, photo, tone = 'red', photoPosition, meta = [
 <style>
   .page-hero { padding-block: clamp(28px, 4vw, 48px) clamp(48px, 8vw, 96px); border-bottom: var(--rule); overflow: hidden; }
   .page-hero__inner { position: relative; z-index: 2; display: grid; gap: 24px; }
-  .page-hero--photo .page-hero__inner { grid-template-columns: 1.25fr 1fr; grid-template-areas: 'crumbs crumbs' 'text photo'; align-items: end; }
+  .page-hero--photo .page-hero__inner { grid-template-columns: 1.25fr 1fr; grid-template-areas: 'crumbs crumbs' 'text photo'; align-items: center; }
   .page-hero--photo :global(.crumbs) { grid-area: crumbs; }
   .page-hero__text { grid-area: text; display: grid; gap: 20px; position: relative; z-index: 3; }
   .page-hero__kicker { color: var(--red-ink); }

@@ -52,10 +52,10 @@ const [lead, rest] = splitLead(item.a);
   .qa__src a { color: inherit; text-decoration-color: var(--red); }
   .qa__src a:hover { color: var(--red-ink); }
   .qa__link a {
-    display: inline-flex; align-items: center; min-height: 44px; font-weight: 800; font-stretch: 85%; letter-spacing: .01em;
+    display: inline-block; padding-block: 10px; line-height: 1.5; font-weight: 800; font-stretch: 85%; letter-spacing: .01em;
     color: var(--red-ink); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .22em;
   }
   .qa__link a:hover { color: var(--ink); }
-  .qa__arrow { transition: transform .15s var(--ease); display: inline-block; margin-left: .25em; }
+  .qa__arrow { transition: transform .15s var(--ease); display: inline-block; margin-left: .25em; white-space: nowrap; }
   .qa__link a:hover .qa__arrow { transform: translateX(3px); }
 </style>

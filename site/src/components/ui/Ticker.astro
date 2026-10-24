@@ -16,6 +16,10 @@ const { items, tone = 'red', tilt = 0 } = Astro.props;
     font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(1.4rem, 3.4vw, 2.6rem); line-height: 1;
   }
   .ticker__dot { font-size: .6em; opacity: .8; }
+  @media (max-width: 599px) {
+    .ticker__row { flex-direction: column; gap: .2em; }
+    .ticker__dot { display: none; }
+  }
   .ticker--ink { --bg: var(--ink); --fg: var(--paper); }
   .ticker--marigold { --bg: var(--marigold); --fg: var(--ink); }
   .ticker--green { --bg: var(--green); --fg: var(--paper); }
