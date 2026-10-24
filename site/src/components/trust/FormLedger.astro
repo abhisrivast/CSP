@@ -1,0 +1,91 @@
+---
+// One ruled "ledger card" per form: what it collects, why, on what basis, and for how long.
+// Keep these in step with the short notices printed beside each form.
+export type LedgerForm = {
+  id: string;                         // anchor id
+  name: string;                       // "Join the movement"
+  code: string;                       // Netlify form name, e.g. "join"
+  where: { label: string; href: string }[];
+  collect: string[];
+  optional?: string[];
+  use: string;
+  basis: string;
+  kept: string[];
+  note?: string;
+};
+export interface Props { forms: LedgerForm[] }
+const { forms } = Astro.props;
+---
+<ol class="ledger" role="list">
+  {forms.map((f, i) => (
+    <li class="ledger__item" id={f.id}>
+      <article aria-labelledby={`${f.id}-name`}>
+        <header class="ledger__head">
+          <span class="ledger__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <div class="ledger__names">
+            <h3 class="ledger__name" id={`${f.id}-name`}>{f.name}</h3>
+            <p class="ledger__where">
+              <span class="visually-hidden">Where: </span>
+              {f.where.map((w, j) => <>{j > 0 && <span aria-hidden="true"> · </span>}<a href={w.href}>{w.label}</a></>)}
+            </p>
+          </div>
+          <code class="ledger__code" title="The form's name in our records">{f.code}</code>
+        </header>
+        <dl class="ledger__dl">
+          <div>
+            <dt>We collect</dt>
+            <dd><ul role="list" class="ledger__chips">{f.collect.map((c) => <li>{c}</li>)}</ul></dd>
+          </div>
+          {f.optional?.length ? (
+            <div>
+              <dt>Only if you choose</dt>
+              <dd><ul role="list" class="ledger__chips ledger__chips--opt">{f.optional.map((c) => <li>{c}</li>)}</ul></dd>
+            </div>
+          ) : null}
+          <div>
+            <dt>We use it to</dt>
+            <dd>{f.use}<span class="ledger__basis"><span class="ledger__basis-k">Legal basis</span> {f.basis}</span></dd>
+          </div>
+          <div class="ledger__kept">
+            <dt>Kept for</dt>
+            <dd>{f.kept.length === 1 ? f.kept[0] : <ul role="list" class="ledger__kept-list">{f.kept.map((k) => <li>{k}</li>)}</ul>}</dd>
+          </div>
+        </dl>
+        {f.note && <p class="ledger__note">{f.note}</p>}
+      </article>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .ledger { display: grid; gap: 18px; font-family: var(--font-sans); }
+  .ledger__item { scroll-margin-top: 96px; background: var(--paper-light); border: 2px solid var(--ink); }
+  .ledger__item:target { box-shadow: 0 0 0 4px var(--marigold); }
+  .ledger__head { display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; padding: 14px 18px; border-bottom: 2px solid var(--ink); }
+  .ledger__n { font-weight: 900; font-stretch: var(--display-stretch); font-size: 2.3rem; line-height: .8; color: var(--red); }
+  .ledger__names { display: grid; gap: 2px; min-width: 0; }
+  .ledger__name { font-weight: 900; font-stretch: var(--head-stretch); font-size: clamp(1.25rem, 2vw, 1.5rem); line-height: 1.05; }
+  .ledger__where { font-size: .86rem; color: var(--ink-soft); }
+  .ledger__where a { font-weight: 700; }
+  .ledger__code { font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace; font-size: .78rem; padding: .25em .55em; background: var(--ink); color: var(--paper-light); white-space: nowrap; }
+  .ledger__dl > div { display: grid; grid-template-columns: 10.5em minmax(0, 1fr); gap: 4px 16px; padding: 12px 18px; border-top: 1px solid var(--line-soft); }
+  .ledger__dl > div:first-child { border-top: 0; }
+  .ledger__dl dt { font-size: var(--fs-label); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; line-height: 1.5; padding-top: 2px; }
+  .ledger__dl dd { font-size: .98rem; line-height: 1.5; color: var(--ink); }
+  .ledger__chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ledger__chips li { padding: .2em .6em; border: 1.5px solid var(--ink); font-size: .86rem; font-weight: 700; line-height: 1.35; background: var(--paper); }
+  .ledger__chips--opt li { border-style: dashed; font-weight: 600; background: transparent; }
+  .ledger__basis { display: block; margin-top: 6px; font-size: .86rem; color: var(--ink-soft); }
+  .ledger__basis-k { font-size: var(--fs-label); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); margin-right: 6px; }
+  .ledger__kept { background: #F7E7CC; }
+  .ledger__kept-list { display: grid; gap: 4px; }
+  .ledger__kept-list li { padding-left: 14px; position: relative; }
+  .ledger__kept-list li::before { content: ''; position: absolute; left: 0; top: .62em; width: 7px; height: 7px; background: var(--red-ink); }
+  .ledger__note { padding: 10px 18px 12px; border-top: 1px solid var(--line-soft); font-size: .86rem; color: var(--ink-soft); }
+  @media (max-width: 640px) {
+    .ledger__head { grid-template-columns: auto 1fr; padding: 12px 14px; }
+    .ledger__code { grid-column: 2; justify-self: start; }
+    .ledger__dl > div { grid-template-columns: 1fr; padding: 10px 14px; }
+    .ledger__note { padding-inline: 14px; }
+  }
+</style>

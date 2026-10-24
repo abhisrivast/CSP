@@ -1,0 +1,41 @@
+---
+// One entry on /credits/: a small natural-colour thumbnail, a readable title, the full credit,
+// and two links (licence, original). The <li> id is the photo id, so any page can link to /credits/#<id>.
+import Photo from '../media/Photo.astro';
+import type { PhotoMeta } from '../../lib/photos';
+import { displayCredit, displayTitle, hostLabel, licenceLabel } from './credits';
+
+export interface Props { p: PhotoMeta }
+const { p } = Astro.props;
+const title = displayTitle(p);
+// Devanagari runs (e.g. a photographer's name) are marked up so screen readers switch voice.
+const creditParts = displayCredit(p).split(/([\u0900-\u097F][\u0900-\u097F\s]*[\u0900-\u097F])/);
+---
+<li class="ci" id={p.id}>
+  <div class="ci__thumb">
+    <Photo id={p.id} aspect="1 / 1" alt="" caption={false} widths={[120]} sizes="64px" />
+  </div>
+  <div class="ci__body">
+    <p class="ci__title">{title}</p>
+    <p class="ci__credit">{creditParts.map((part, i) => (i % 2 ? <span lang="hi">{part}</span> : part))}</p>
+    <p class="ci__links">
+      <a class="ci__lic" href={p.licenceUrl} rel="noopener license">{licenceLabel(p)}<span class="visually-hidden"> licence: {title}</span></a>
+      <a class="ci__src" href={p.sourcePage} rel="noopener">{hostLabel(p)}<span class="visually-hidden">: original of {title}</span> <span aria-hidden="true">↗</span></a>
+    </p>
+  </div>
+</li>
+
+<style>
+  .ci { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 14px; align-items: start; padding: 14px 0; border-bottom: 1px solid var(--line-soft); scroll-margin-top: 96px; }
+  .ci:target { background: #F7E7CC; box-shadow: 0 0 0 8px #F7E7CC; }
+  .ci__thumb { width: 64px; }
+  .ci__thumb :global(.photo__img) { border: 1.5px solid var(--ink); }
+  .ci__thumb :global(picture) { display: block; height: 100%; } /* Photo leaves <picture> inline unless taped */
+  .ci__body { display: grid; gap: 3px; min-width: 0; }
+  .ci__title { font-weight: 800; font-size: .92rem; line-height: 1.3; overflow-wrap: anywhere; }
+  .ci__credit { font-size: .8rem; line-height: 1.4; color: var(--ink-soft); overflow-wrap: anywhere; }
+  .ci__links { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; margin-top: 4px; font-size: .78rem; font-weight: 700; }
+  .ci__lic { display: inline-flex; align-items: center; min-height: 26px; padding: 0 .55em; border: 1.5px solid var(--ink); color: var(--ink); text-decoration: none; letter-spacing: .02em; }
+  .ci__lic:hover { background: var(--ink); color: var(--paper-light); }
+  .ci__src { color: var(--red-ink); min-height: 26px; display: inline-flex; align-items: center; }
+</style>

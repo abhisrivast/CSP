@@ -1,0 +1,51 @@
+---
+// "The short version": a ruled summary table at the top of a trust document, for people who read nothing else.
+export interface Props {
+  id?: string;
+  title?: string;
+  intro?: string;
+  rows: { k: string; v: string; strong?: string }[];   // strong = a short bold answer shown before v
+  foot?: string;
+}
+const { id = 'short', title = 'The short version', intro, rows, foot } = Astro.props;
+---
+<section class="short" id={id} aria-labelledby={`${id}-title`}>
+  <div class="short__head">
+    <h2 class="short__title" id={`${id}-title`}>{title}</h2>
+    {intro && <p class="short__intro">{intro}</p>}
+  </div>
+  <table class="short__table">
+    <tbody>
+      {rows.map((r) => (
+        <tr>
+          <th scope="row">{r.k}</th>
+          <td>{r.strong && <strong>{r.strong} </strong>}{r.v}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  {foot && <p class="short__foot">{foot}<slot name="foot" /></p>}
+</section>
+
+<style>
+  .short { scroll-margin-top: 96px; background: var(--paper-light); border: 2px solid var(--ink); border-top-width: 10px; box-shadow: 8px 8px 0 var(--ink); }
+  .short__head { display: grid; gap: 8px; padding: clamp(18px, 2.6vw, 28px) clamp(18px, 3vw, 32px) 16px; border-bottom: 3px solid var(--ink); }
+  .short__title { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(2rem, 3.6vw, 3rem); line-height: .88; }
+  .short__intro { color: var(--ink-soft); font-size: .98rem; max-width: 60ch; }
+  .short__table { width: 100%; border-collapse: collapse; }
+  .short__table tr + tr { border-top: 1px solid var(--line-soft); }
+  .short__table th {
+    width: 13em; padding: 14px 12px 14px clamp(18px, 3vw, 32px); vertical-align: top; text-align: left;
+    font-size: var(--fs-label); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; line-height: 1.4; color: var(--ink);
+  }
+  .short__table td { padding: 12px clamp(18px, 3vw, 32px) 14px 8px; font-family: var(--font-serif); font-size: 1.1rem; line-height: 1.45; }
+  .short__table td strong { font-family: var(--font-sans); font-weight: 800; font-size: .98rem; }
+  .short__foot { padding: 14px clamp(18px, 3vw, 32px) 16px; border-top: 3px solid var(--ink); font-size: .9rem; color: var(--ink-soft); }
+  .short__foot :global(a) { font-weight: 700; }
+  @media (max-width: 640px) {
+    .short { box-shadow: 5px 5px 0 var(--ink); }
+    .short__table, .short__table tbody, .short__table tr, .short__table th, .short__table td { display: block; width: auto; }
+    .short__table th { padding: 14px 16px 2px; }
+    .short__table td { padding: 2px 16px 14px; font-size: 1.05rem; }
+  }
+</style>

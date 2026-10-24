@@ -1,0 +1,43 @@
+---
+// One numbered section of a trust document: big red number, condensed H2 under a strong rule, then serif reading text.
+// Slotted content is styled here (paragraphs, lists, h3, links), so pages write plain HTML.
+export interface Props { id: string; n: string; title: string; kicker?: string; tight?: boolean }
+const { id, n, title, kicker, tight = false } = Astro.props;
+---
+<section class:list={['dsec', { 'dsec--tight': tight }]} id={id} aria-labelledby={`${id}-h`}>
+  <header class="dsec__head">
+    <p class="dsec__n" aria-hidden="true">{n}</p>
+    <div class="dsec__titles">
+      {kicker && <p class="label dsec__kicker">{kicker}</p>}
+      <h2 class="dsec__title" id={`${id}-h`}>{title}</h2>
+    </div>
+  </header>
+  <div class="dsec__body">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .dsec { scroll-margin-top: 96px; border-top: 3px solid var(--ink); padding-top: 18px; display: grid; gap: clamp(18px, 2.4vw, 26px); }
+  .dsec__head { display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: start; }
+  .dsec__n { font-weight: 900; font-stretch: var(--display-stretch); font-size: clamp(2.6rem, 4.4vw, 3.6rem); line-height: .8; color: var(--red); letter-spacing: -.02em; min-width: 1.3em; }
+  .dsec__titles { display: grid; gap: 6px; padding-top: 2px; }
+  .dsec__kicker { color: var(--red-ink); }
+  .dsec__title { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(1.9rem, 3.4vw, 2.7rem); line-height: .9; letter-spacing: -.005em; text-wrap: balance; max-width: 22ch; }
+  .dsec__body { display: grid; gap: 1.05em; font-family: var(--font-serif); font-size: clamp(1.08rem, 1.3vw, 1.2rem); line-height: 1.6; }
+  .dsec__body > :global(*) { min-width: 0; }
+  .dsec__body > :global(p), .dsec__body > :global(.dsec-list) { max-width: 64ch; }
+  .dsec__body > :global(p a), .dsec__body > :global(.dsec-list a), .dsec__body > :global(.dsec-note a) { color: var(--red-ink); }
+  .dsec__body > :global(p a:hover), .dsec__body > :global(.dsec-list a:hover) { color: var(--ink); }
+  .dsec__body :global(strong) { font-weight: 700; }
+  .dsec__body > :global(h3) { font-family: var(--font-sans); font-weight: 800; font-stretch: var(--head-stretch); font-size: 1.35rem; line-height: 1.12; margin-top: .6em; }
+  .dsec__body > :global(.dsec-list) { padding-left: 1.2em; display: grid; gap: .45em; }
+  .dsec__body > :global(.dsec-list > li::marker) { color: var(--red); font-weight: 800; }
+  .dsec__body > :global(.dsec-note) { font-family: var(--font-sans); font-size: .9rem; line-height: 1.5; color: var(--ink-soft); max-width: 70ch; padding-left: 14px; border-left: 3px solid var(--line-soft); }
+  .dsec__body :global(.fn-ref) { color: var(--red-ink); }
+  .dsec--tight .dsec__body { gap: .8em; }
+  @media (max-width: 560px) {
+    .dsec__head { grid-template-columns: 1fr; gap: 8px; }
+    .dsec__n { font-size: 2.4rem; }
+  }
+</style>

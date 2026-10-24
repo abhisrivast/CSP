@@ -32,7 +32,7 @@ const LEARN = [
 ---
 <div class="jf">
   <aside class="notice" id="notice" aria-labelledby="notice-title">
-    <p class="label notice__label">Before you join</p>
+    <p class="label notice__label">In plain words</p>
     <h3 class="notice__title" id="notice-title">What we do with your details</h3>
     <dl class="notice__list">
       <div><dt>What we collect</dt><dd>Your age band and email. If you choose: a first name, your state or city, your interests.</dd></div>
@@ -40,7 +40,7 @@ const LEARN = [
       <div><dt>Who sees it</dt><dd>A small team at Cultural Shock Party, and Netlify, which hosts this site and its forms. Never any political party, candidate or advertiser.</dd></div>
       <div><dt>How long</dt><dd>Newsletter: until you unsubscribe. Volunteering and events: 12 months after we last hear from you, and we’ll email before we delete.</dd></div>
       <div><dt>What we never ask</dt><dd>Caste, religion, Aadhaar, voter ID, address, phone, school, employer or photos.</dd></div>
-      <div><dt>Your control</dt><dd>Unsubscribe from any email. Ask to see, correct or delete your data through <a href="/contact/?topic=data#contact-form">the contact form</a>; we reply within 30 days at the latest. You can also complain to the Data Protection Board of India.</dd></div>
+      <div><dt>Your control</dt><dd>Unsubscribe from any email. Ask to see, correct or delete your data through <a href="/contact/?topic=data#contact-form">the contact form</a>; we reply within 30 days at the latest. From 13 May 2027 you can also complain to the Data Protection Board of India (it had no members appointed as of October 2026; see <a href="/privacy/#rights">our privacy notice</a>).</dd></div>
     </dl>
     <p class="notice__foot small"><a href="/privacy/">Read the full privacy notice</a> <span class="muted">· Notice v1.0, 24 October 2026</span></p>
   </aside>
@@ -217,12 +217,15 @@ const LEARN = [
   .minor__title { font-weight: 900; font-stretch: var(--head-stretch); font-size: 1.35rem; line-height: 1.1; }
   .minor__label { margin-top: 4px; }
   .minor__links { display: grid; gap: 4px; }
-  .minor__links a { display: inline-flex; gap: .35em; min-height: 40px; align-items: center; color: var(--ink); font-weight: 800; text-decoration-thickness: 2px; }
+  .minor__links a { display: inline-flex; gap: .35em; min-height: 44px; align-items: center; color: var(--ink); font-weight: 800; text-decoration-thickness: 2px; }
 
   .jform__adult { display: grid; gap: 20px; transition: opacity .2s var(--ease); }
   .jform__adult:disabled { opacity: .38; }
   .jform__row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .jform__group { padding-top: 18px; border-top: 1px solid var(--line-soft) !important; }
+  .jform .jform__group { padding-top: 20px; border-top: 1px solid var(--line-soft); }
+  /* A floated legend sits inside the fieldset, so the rule runs above it instead of through it. */
+  .jform__group > .jform__legend { float: left; width: 100%; }
+  .jform__group > .jform__legend + * { clear: both; }
 
   .chips { display: flex; flex-wrap: wrap; gap: 8px; }
   .chip { position: relative; }
@@ -248,6 +251,9 @@ const LEARN = [
   .jform__submit { justify-self: start; font-size: 1.1rem; }
   .jform__after { color: var(--muted); max-width: 52ch; }
 
+  @media (max-width: 1200px) and (min-width: 961px) {
+    .notice__list > div { grid-template-columns: 1fr; gap: 2px; }
+  }
   @media (max-width: 960px) {
     .jf { grid-template-columns: 1fr; }
     .notice { position: static; order: 2; }

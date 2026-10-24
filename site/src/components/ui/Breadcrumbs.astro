@@ -17,5 +17,8 @@ const { items } = Astro.props;
   .crumbs li + li::before { content: '/'; margin-right: .7em; opacity: .5; }
   .crumbs a { color: inherit; text-decoration: none; border-bottom: 1.5px solid currentColor; }
   .crumbs a:hover { color: var(--red-ink); }
+  /* Grow the tiny label-size links to a ≥44px touch target without moving anything. */
+  .crumbs a { position: relative; }
+  .crumbs a::before { content: ''; position: absolute; inset: -16px -6px; }
   .crumbs [aria-current] { opacity: .75; }
 </style>

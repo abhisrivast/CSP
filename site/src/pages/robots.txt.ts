@@ -7,7 +7,8 @@ const searchBots = ['Googlebot', 'Bingbot', 'OAI-SearchBot', 'ChatGPT-User', 'Cl
 const trainingBots = ['GPTBot', 'ClaudeBot', 'Google-Extended', 'Applebot-Extended', 'CCBot'];
 
 export const GET: APIRoute = ({ site }) => {
-  const rules = 'Allow: /\nDisallow: /admin/\nDisallow: /thanks/\n';
+  // /thanks/ is not disallowed: crawlers must be able to fetch it to see its noindex (it is also left out of the sitemap).
+  const rules = 'Allow: /\nDisallow: /admin/\n';
   const body = [
     '# Cultural Shock Party: culturalshockparty.com',
     '# A bot that matches a named group ignores the * group, so the rules repeat per group.',

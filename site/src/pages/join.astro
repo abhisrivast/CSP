@@ -14,6 +14,7 @@ import TornEdge from '../components/ui/TornEdge.astro';
 import Annotation from '../components/ui/Annotation.astro';
 import Receipt from '../components/ui/Receipt.astro';
 import Placard from '../components/ui/Placard.astro';
+import Stamp from '../components/ui/Stamp.astro';
 import Shot from '../components/participate/Shot.astro';
 import ShareBar from '../components/blocks/ShareBar.astro';
 import JoinBand from '../components/blocks/JoinBand.astro';
@@ -109,14 +110,14 @@ const faqItems = faqIds.map((id) => faq.find((e) => e.data.id === id)!.data);
 >
   <JoinHero crumbs={crumbs} />
 
-  <Ticker items={['Start where you are', 'Bring a friend', 'Yes, boys too']} tone="ink" />
+  <Ticker items={['Free to join', 'Start on any rung', 'Yes, boys too']} tone="ink" />
 
   <!-- 01 The ladder -->
   <section class="section ground-light ladder" id="ladder" aria-labelledby="ladder-title">
     <div class="wrap">
       <div class="ladder__head">
         <SectionHead num="01" label="The ladder" id="ladder-title" title="Five rungs. Start on any." lead="You don’t have to do everything. Pick the rung that fits your week, then climb when you’re ready. The rungs ask more of you as they go down, and every single one counts." />
-        <div class="ladder__note" aria-hidden="true"><Annotation text="most people start here" arrow="down" tilt={-5} width="12ch" /></div>
+        <div class="ladder__note" aria-hidden="true"><Annotation text="new? start here" arrow="down" tilt={-5} width="12ch" /></div>
       </div>
       <LadderSpine rungs={rungs} />
       <p class="ladder__foot small">Times are rough guides, not targets. Under 18? Reading, sharing and learning are yours today, with no sign-up needed.</p>
@@ -143,7 +144,10 @@ const faqItems = faqIds.map((id) => faq.find((e) => e.data.id === id)!.data);
   <!-- 03 The form -->
   <section class="section ground-deep form-sec" id="join-form" aria-labelledby="form-title">
     <div class="wrap">
-      <SectionHead num="03" label="Join" id="form-title" title="Join with the choices you tick" lead="One minute, the minimum of data, and a separate box for everything we might do with it. Nothing is ticked for you." />
+      <div class="form-sec__head">
+        <SectionHead num="03" label="Join" id="form-title" title="Join with the choices you tick" lead="One minute, the minimum of data, and a separate box for everything we might do with it. Nothing is ticked for you." />
+        <span class="form-sec__stamp" aria-hidden="true"><Stamp text="Nothing pre-ticked" sub="Your data · your call" color="red" tilt={-7} /></span>
+      </div>
       <JoinForm />
     </div>
   </section>
@@ -197,7 +201,6 @@ const faqItems = faqIds.map((id) => faq.find((e) => e.data.id === id)!.data);
           alt="A young woman and a young man smile as they hold up a yellow hand-lettered poster in Hindi and English."
           caption="A poster-making workshop before the Kolkata Rainbow Pride Walk, 21 December 2019."
           sizes="(min-width: 900px) 30vw, 80vw" />
-        <Annotation text="made together" arrow="left" color="ink" tilt={-6} right="-19%" top="30%" width="9ch" />
         <div class="allies__receipt">
           <Receipt figure="69%" label="of Gen Z men across 29 countries do not agree that “a wife should always obey her husband”" source="King’s College London and Ipsos" href="https://www.kcl.ac.uk/news/almost-a-third-of-gen-z-men-agree-a-wife-should-obey-her-husband" date="Mar 2026" tone="paper" tilt={2} />
         </div>
@@ -217,7 +220,7 @@ const faqItems = faqIds.map((id) => faq.find((e) => e.data.id === id)!.data);
   <section class="section questions" id="questions" aria-labelledby="questions-title">
     <div class="wrap questions__grid">
       <div class="questions__head">
-        <SectionHead num="06" label="Questions" id="questions-title" title="Before you join" lead="The five things people ask on this page. Every other answer is on the FAQ." />
+        <SectionHead num="06" label="Questions" id="questions-title" title="Before you join" lead="Five things worth knowing before you join. Every other answer is on the FAQ." />
         <a class="btn btn--ink" href="/faq/">All 45 answers <span class="arrow" aria-hidden="true">→</span></a>
       </div>
       <div class="questions__list">
@@ -231,7 +234,7 @@ const faqItems = faqIds.map((id) => faq.find((e) => e.data.id === id)!.data);
     text="Read the manifesto, add your name, then send it to one friend. That’s rung one, done."
     primary={{ label: 'Sign the manifesto', href: '/manifesto/#sign' }}
     secondary={{ label: 'Read the FAQ', href: '/faq/' }}
-    placard="Start where you are"
+    placard="Rung one, done"
   />
 </Base>
 
@@ -242,6 +245,10 @@ const faqItems = faqIds.map((id) => faq.find((e) => e.data.id === id)!.data);
   .ladder__note { position: absolute; left: min(62%, 780px); bottom: 4px; }
   .ladder__foot { margin-top: 18px; color: var(--muted); }
   .form-sec :global(.section-head .h2), .nosign :global(.section-head .h2) { max-width: 15ch; text-wrap: balance; }
+  .form-sec__head { position: relative; }
+  .form-sec__stamp { position: absolute; right: 3%; top: 34%; }
+  .form-sec__stamp :global(.stamp__text) { font-size: clamp(1.3rem, 2.2vw, 1.9rem); }
+  .form-sec__stamp :global(.stamp__sub) { font-size: .72rem; }
 
   .roles-sec__inner { position: relative; z-index: 2; }
   .roles-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px clamp(24px, 5vw, 72px); align-items: end; margin-bottom: clamp(28px, 4vw, 48px); }
@@ -299,6 +306,7 @@ const faqItems = faqIds.map((id) => faq.find((e) => e.data.id === id)!.data);
     .rules__list { grid-template-columns: 1fr; }
   }
   @media (max-width: 900px) {
+    .form-sec__stamp { display: none; }
     .nosign__grid, .questions__grid { grid-template-columns: 1fr; }
     .questions__head { position: static; }
     .ladder__note { display: none; }
@@ -308,7 +316,6 @@ const faqItems = faqIds.map((id) => faq.find((e) => e.data.id === id)!.data);
   @media (max-width: 760px) {
     .allies__grid { grid-template-columns: 1fr; grid-template-areas: 'text' 'pic' 'rules'; }
     .allies__pic { max-width: 380px; width: 92%; }
-    .allies__pic :global(.annot) { display: none; }
     .roles-head { grid-template-columns: 1fr; }
   }
   @media (max-width: 480px) {

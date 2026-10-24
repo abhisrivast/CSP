@@ -59,8 +59,13 @@ const year = new Date().getFullYear();
     .cols { grid-template-columns: 1fr 1fr; }
     .col--news { grid-column: 1 / -1; }
   }
+  @media (max-width: 720px) {
+    /* Touch: every footer link is a full 44px row. */
+    .col ul { gap: 0; margin-top: 6px; }
+    .col a, .base a { display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; }
+  }
   @media (max-width: 520px) {
-    .slogan { grid-template-columns: 1fr; }
-    .slogan__badge { justify-self: end; margin-top: -40px; }
+    .slogan { grid-template-columns: 1fr; gap: 10px; }
+    .slogan__badge { justify-self: end; width: 104px; margin-top: 0; }
   }
 </style>

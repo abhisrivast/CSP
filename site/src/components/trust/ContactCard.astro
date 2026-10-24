@@ -1,0 +1,42 @@
+---
+// A letterhead-style card naming the role that answers a trust question, how to reach it and how fast.
+// No personal names, emails or phone numbers are published (team safety; see /contact/).
+export interface Props {
+  kicker: string;          // "Data & Grievance contact"
+  role: string;            // "Data & Grievance Lead"
+  org?: string;
+  cta: { label: string; href: string };
+  reply?: string;          // "Reply within 30 days at the latest"
+  tone?: 'paper' | 'marigold' | 'ink';
+  id?: string;
+}
+const { kicker, role, org = 'Cultural Shock Party', cta, reply, tone = 'paper', id } = Astro.props;
+---
+<aside class:list={['ccard', `ccard--${tone}`]} id={id} aria-label={kicker}>
+  <p class="label ccard__kicker">{kicker}</p>
+  <p class="ccard__role">{role}</p>
+  <p class="ccard__org">{org}</p>
+  <div class="ccard__body"><slot /></div>
+  <div class="ccard__foot">
+    <a class:list={['btn', tone === 'ink' ? 'btn--paper' : 'btn--ink']} href={cta.href}>{cta.label} <span class="arrow" aria-hidden="true">→</span></a>
+    {reply && <p class="ccard__reply"><span class="label">Reply</span> {reply}</p>}
+  </div>
+</aside>
+
+<style>
+  .ccard { display: grid; gap: 10px; padding: clamp(18px, 2.6vw, 28px); border: 2px solid var(--ink); border-top: 8px solid var(--red-ink); background: var(--paper-light); color: var(--ink); font-family: var(--font-sans); position: relative; }
+  .ccard--marigold { background: var(--marigold); border-top-color: var(--ink); }
+  .ccard--ink { background: var(--ink); color: var(--paper); border-color: var(--ink); border-top-color: var(--marigold); }
+  .ccard__kicker { color: var(--red-ink); }
+  .ccard--marigold .ccard__kicker { color: var(--ink); }
+  .ccard--ink .ccard__kicker { color: var(--marigold); }
+  .ccard__role { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(1.9rem, 3vw, 2.5rem); line-height: .88; }
+  .ccard__org { font-family: var(--font-serif); font-style: italic; font-size: 1.05rem; padding-bottom: 10px; border-bottom: 1.5px dashed currentColor; }
+  .ccard__body { display: grid; gap: .6em; font-size: .98rem; line-height: 1.5; }
+  .ccard__body :global(a) { color: inherit; font-weight: 700; }
+  .ccard__body :global(ul) { display: grid; gap: 4px; padding-left: 1.1em; }
+  .ccard__foot { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; padding-top: 8px; }
+  .ccard .btn { min-height: 46px; font-size: .95rem; }
+  .ccard__reply { font-size: .9rem; font-weight: 600; }
+  .ccard__reply .label { margin-right: 6px; }
+</style>

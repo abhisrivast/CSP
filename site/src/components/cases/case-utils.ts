@@ -20,28 +20,64 @@ export function isStock(p: PhotoMeta) {
   return p.source === 'stock' || /unsplash|pexels/i.test(`${p.sourcePage} ${p.credit}`);
 }
 
-/** True when the registry tags a photo for this very case study ("case-study:<id>"-style suggested use). */
+// Registry keys ("case-study:<key>" in suggestedUse) and extra photo ids that document each case itself.
+// Exact keys only: substring matching mixed up, for example, a 2022 Reclaim the Night march with Bengal 2024.
+const OWN_KEYS: Record<string, string[]> = {
+  'delhi-2012-justice-verma': ['delhi-2012'],
+  'iceland-womens-strikes': ['iceland-womens-strike'],
+  'ni-una-menos': ['ni-una-menos'],
+  'poland-strajk-kobiet': ['strajk-kobiet'],
+  'repeal-the-8th': ['repeal-the-8th'],
+  'woman-life-freedom': ['woman-life-freedom'],
+  'reclaim-the-night-bengal-2024': ['rg-kar-2024', 'rg-kar-kolkata-2024'],
+};
+const OWN_IDS: Record<string, string[]> = {
+  'reclaim-the-night-bengal-2024': [
+    'in-003-2024-kolkata-we-want-justice-candles', 'in-006-2024-kolkata-dont-stop-till-they-drop-placard',
+    'in-008-2024-kolkata-street-meeting-megaphones', 'in-010-2024-kolkata-protest-under-biswa-bangla-gate',
+  ],
+};
+
+/** True when a photo documents this very case (its own march, vigil or strike), not a related place or event. */
 export function isOwn(p: PhotoMeta, caseId: string) {
-  return p.suggestedUse.some((u) => {
-    if (!u.startsWith('case-study:')) return false;
-    const k = u.slice('case-study:'.length);
-    return k.length > 3 && (caseId.includes(k) || k.includes(caseId));
-  });
+  if (OWN_IDS[caseId]?.includes(p.id)) return true;
+  const keys = p.suggestedUse.filter((u) => u.startsWith('case-study:')).map((u) => u.slice('case-study:'.length));
+  if (caseId in OWN_KEYS) return keys.some((k) => OWN_KEYS[caseId].includes(k));
+  return keys.some((k) => k.length > 3 && (caseId === k || caseId.startsWith(`${k}-`) || caseId.endsWith(`-${k}`)));
+}
+
+/** Stock photos whose registry caption records a real, dated public event (a march, a rally). */
+export function isEventStock(p: PhotoMeta) {
+  return isStock(p) && /\b(19|20)\d\d\b/.test(p.caption) && /\b(march|rally|protest|strike|walk|vigil|demonstration)\b/i.test(p.caption);
+}
+
+/** Generic stock: illustrative only. Never captioned as this movement; marked ◦ and explained once. */
+export function isIllustrative(p: PhotoMeta) {
+  return isStock(p) && !isEventStock(p);
+}
+
+export type Relation = 'own' | 'other' | 'illustrative';
+/** How a photo relates to a case: documents it, shows another real place or event, or is illustrative stock. */
+export function relation(p: PhotoMeta, caseId: string): Relation {
+  if (isIllustrative(p)) return 'illustrative';
+  return !isStock(p) && isOwn(p, caseId) ? 'own' : 'other';
 }
 
 /** Natural colour for documentary photos (colour is part of the record); the case's duotone for illustrative ones. */
 export function heroTone(p: PhotoMeta, tone: Tone): Tone {
-  if (!isStock(p)) return 'natural';
+  if (!isIllustrative(p)) return 'natural';
   return tone === 'natural' ? 'red' : tone;
 }
 
-/** Honest caption: the registry's real what/where/when for documentary photos; a generic line for stock. */
+/** Honest caption: the registry's real what/where/when, or nothing for illustrative stock (marked ◦ instead). */
 export function honestCaption(p: PhotoMeta, caseId?: string): string {
-  if (isStock(p)) return 'Illustrative photo. It does not show this movement or a specific event.';
-  // Registry captions are true (what, where, when), so a photo from another event explains itself.
   void caseId;
+  if (isIllustrative(p)) return '';
   return p.caption;
 }
+
+/** Short caption for an illustrative photo that sits on its own, outside the photo wall. */
+export const ILLUSTRATIVE_NOTE = '◦ Illustrative stock photo: not this movement or a specific event.';
 
 const MONTHS = 'January|February|March|April|May|June|July|August|September|October|November|December';
 /** The date a documentary photo was taken, read from its registry caption ("24 October 2005" → "24 Oct 2005"). */
@@ -54,9 +90,12 @@ export function photoDate(p: PhotoMeta): string | undefined {
   return p.caption.match(/\b(1[89]\d\d|20\d\d)\b/)?.[1];
 }
 
-/** Hero photo: heroPhoto, else the first valid gallery photo. */
+/**
+ * Hero photo: `heroPhoto` only. With no `heroPhoto` the case gets a typographic poster (see POSTERS) instead of
+ * borrowing a gallery photo, so another movement's picture never sits under this movement's name and place.
+ */
 export function heroOf(c: CaseEntry): PhotoMeta | undefined {
-  return photo(c.data.heroPhoto) ?? c.data.gallery.map((id) => byId.get(id)).find(Boolean);
+  return photo(c.data.heroPhoto);
 }
 
 /** Valid gallery photos, without the hero and without duplicates. */
@@ -90,6 +129,9 @@ export function lever(c: CaseEntry) {
 
 /** "Reykjavík, Iceland" style short place for card labels. */
 export function shortPlace(c: CaseEntry) {
+  // "Warsaw and hundreds of towns across Poland" → "Across Poland": the card label stays one short line.
+  const across = c.data.place.split(',')[0].match(/\bacross (.+)$/i);
+  if (across) return `Across ${across[1].trim()}`;
   const seg = c.data.place.split(',').map((x) => x.trim()).filter(Boolean);
   const two = seg.slice(0, 2).join(', ');
   return seg.length >= 2 && two.length <= 26 ? two : seg[0] ?? c.data.region;
@@ -174,3 +216,144 @@ export function splitBody(html: string) {
 
 /** Strip tags for plain-text uses (aria labels, share text). */
 export const plain = (s: string) => s.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+
+// ---------------------------------------------------------------------------------------------------------------
+// Typographic posters: cases with no licensed photo of their own get their words set in type, on the hero and on
+// cards, instead of a picture from another place. Text is either the movement's own words (sourced on the page)
+// or a plain CSP line, credited as such.
+// Lines use *asterisks* for the accent colour. `wide` re-breaks the lines for the wide desktop hero.
+export type Poster = { lines: string[]; wide?: string[]; lang?: string; gloss?: string; credit: string; ground: 'ink' | 'red' | 'green' };
+export const POSTERS: Record<string, Poster> = {
+  'end-femicide-kenya': {
+    lines: ['Stop', '*killing*', 'women'], wide: ['Stop *killing*', 'women'], ground: 'ink',
+    credit: 'Placard words from the Nairobi march of 1 June 2026 (Africanews), set in type by CSP. No licensed photo of the Kenyan marches is available to us yet.',
+  },
+  'las-tesis': {
+    lines: ['*Un violador*', 'en tu camino'], lang: 'es', gloss: 'A rapist in your path', ground: 'red',
+    credit: 'Title of the LASTESIS performance, first staged in Valparaíso on 20 November 2019, set in type by CSP. No licensed photo of the performance is available to us yet.',
+  },
+  metoo: {
+    lines: ['*#MeToo*'], gloss: 'Two words, since 2006', ground: 'ink',
+    credit: 'The phrase Tarana Burke began using in 2006, set in type by CSP.',
+  },
+  'bhanwari-devi-vishaka-posh': {
+    lines: ['One village', 'worker.', '*Every*', '*workplace.*'], wide: ['One village', 'worker.', '*Every workplace.*'], ground: 'green',
+    credit: 'A Cultural Shock Party line, set in type. No licensed photo of Bhanwari Devi is available to us.',
+  },
+};
+export const posterOf = (c: CaseEntry): Poster | undefined => (heroOf(c) ? undefined : POSTERS[c.id]);
+
+/** Photos of a case's own place (a building, a museum piece), not of another movement's event. */
+const PLACE_PHOTOS: Record<string, string[]> = {
+  'northern-ireland-abortion': [
+    'belfast-city-hall-international-womens-day-window', '1914-lisburn-lilian-metge-hunger-strike-medal', '011-belfast-welcome-mural-corner',
+  ],
+};
+
+/**
+ * Photos that may sit beside the story text: this movement's own photos, its own places, and illustrative stock
+ * (marked ◦). Photos of other movements' events go to the photo wall, under a heading that says so.
+ */
+export function railEligible(p: PhotoMeta, caseId: string) {
+  const r = relation(p, caseId);
+  return r !== 'other' || !!PLACE_PHOTOS[caseId]?.includes(p.id);
+}
+
+/** Hand-written hero notes for heroes that show a related place or moment, not the movement itself. */
+export const HERO_NOTES: Record<string, string> = {
+  'pinjra-tod': 'Delhi, Sept 2015: not a Pinjra Tod event',
+  'sewa-self-employed-women': 'A self-help group, 2008: not SEWA',
+  'reclaim-these-streets': 'London, 2022: a Kill the Bill protest',
+  'northern-ireland-abortion': 'Belfast City Hall, 2018',
+};
+
+/** Short "where, when" for a documentary photo used on another case's card. */
+const PLACE_LABELS: Record<string, string> = {
+  'in-027-2017-cuddalore-women-self-help-group-circle': 'a self-help group, Cuddalore, 2017',
+  'in-013-2009-bengaluru-take-back-the-night-placards': 'Take Back the Night, Bengaluru, 2009',
+  'in-030-2015-jantar-mantar-art-students-bilingual-placards': 'Delhi students, Sept 2015',
+  'belfast-city-hall-international-womens-day-window': 'Belfast City Hall, 2018',
+  '2022-london-courage-calls-kill-the-bill': 'Kill the Bill protest, London, 2022',
+  'in-026-2008-rural-women-self-help-group-meeting': 'a self-help group, 2008',
+  'in-033-2014-varanasi-bhu-women-medical-students': 'students at BHU, Varanasi, 2014',
+  '2011-london-million-women-rise': 'Million Women Rise, London, 2011',
+};
+
+/** Card photos per case: pictures other than the hero, rotated by the page showing the card (see cardPicOf). */
+const CARD_PHOTOS: Record<string, string[]> = {
+  'delhi-2012-justice-verma': ['in-011-2012-delhi-raisina-hill-stop-molestation', '2012-delhi-protest-placards'],
+  'sewa-self-employed-women': ['in-027-2017-cuddalore-women-self-help-group-circle'],
+  'pinjra-tod': ['in-013-2009-bengaluru-take-back-the-night-placards', 'in-033-2014-varanasi-bhu-women-medical-students'],
+  'reclaim-the-night-bengal-2024': ['in-009-2024-kolkata-nurses-candle-vigil', 'in-002-2024-kolkata-rg-kar-women-chanting-handprint'],
+  'iceland-womens-strikes': ['2005-reykjavik-womens-strike-megaphone', '2005-reykjavik-womens-strike-intergenerational', '2005-reykjavik-womens-strike-shout'],
+  'ni-una-menos': ['2018-cordoba-ni-una-menos', '2026-la-plata-ni-una-menos-c', '2026-la-plata-ni-una-menos-d'],
+  'repeal-the-8th': ['2018-dublin-castle-repeal-result-a', '2018-dublin-castle-repeal-result-d', '2018-dublin-castle-repeal-result-c'],
+  'northern-ireland-abortion': ['belfast-city-hall-international-womens-day-window'],
+  'reclaim-these-streets': ['2022-london-courage-calls-kill-the-bill', '2011-london-million-women-rise'],
+  'poland-strajk-kobiet': ['2020-krakow-strajk-kobiet', '2020-poznan-revolution-is-a-woman', '2016-lodz-black-march-b'],
+  'woman-life-freedom': ['2021-vienna-jin-jiyan-azadi-mural', '2022-richmond-hill-woman-life-freedom-sign', '2022-ottawa-iran-solidarity-a'],
+};
+
+export type CardPic = { photo?: PhotoMeta; note?: string; poster?: Poster };
+/**
+ * What a case's card shows: its card photo (else the second gallery photo, else the hero), skipping any photo id in
+ * `avoid` (photos already on the current page). Cases without a photo of their own show their poster. A documentary
+ * photo of another place carries a small "Photo: <where>" note on the card.
+ */
+export function cardPicOf(c: CaseEntry, avoid: Set<string> = new Set(), seed = 0): CardPic {
+  const poster = posterOf(c);
+  if (poster) return { poster };
+  const hero = heroOf(c);
+  const own = CARD_PHOTOS[c.id] ?? [];
+  const start = own.length ? seed % own.length : 0;
+  const rotated = [...own.slice(start), ...own.slice(0, start)].map((id) => photo(id));
+  const pool = [...rotated, ...galleryOf(c, hero?.id).slice(1), hero, ...galleryOf(c, hero?.id).slice(0, 1)]
+    .filter((p): p is PhotoMeta => !!p && !isIllustrative(p));
+  const pick = pool.find((p) => !avoid.has(p.id)) ?? pool[0];
+  if (!pick) return { poster: POSTERS[c.id] };
+  const note = isOwn(pick, c.id) ? undefined : PLACE_LABELS[pick.id] ?? shortCaption(pick);
+  return { photo: pick, note };
+}
+
+/** "Barcelona, 2025"-style fallback from a caption: the clause holding the date. */
+function shortCaption(p: PhotoMeta) {
+  const y = photoYear(p);
+  const m = p.caption.match(/,\s*([A-Z][^,.;()]+?),\s*(?:[A-Z][a-z]+,\s*)?(?:\d{1,2}\s+)?(?:[A-Z][a-z]+\s+)?(?:19|20)\d\d/);
+  return [m?.[1], y].filter(Boolean).join(', ') || 'another place and time';
+}
+
+// Topic clusters: each case links to Journal articles and back to its milestone on /memory/.
+export const CASE_ARTICLES: Record<string, string[]> = {
+  'delhi-2012-justice-verma': ['protest-safety-india', 'what-is-fourth-wave-feminism'],
+  'reclaim-the-night-bengal-2024': ['protest-safety-india', 'safe-online-toolkit'],
+  metoo: ['safe-online-toolkit', 'what-is-fourth-wave-feminism'],
+  'pinjra-tod': ['how-to-join-or-start-a-feminist-group', 'protest-safety-india'],
+  'sewa-self-employed-women': ['care-is-work', 'how-to-join-or-start-a-feminist-group'],
+  'iceland-womens-strikes': ['care-is-work', 'feminism-myths-and-receipts'],
+  'bhanwari-devi-vishaka-posh': ['indian-feminists-history-forgot', 'safe-online-toolkit'],
+  'repeal-the-8th': ['feminism-myths-and-receipts', 'how-to-join-or-start-a-feminist-group'],
+  'northern-ireland-abortion': ['feminism-myths-and-receipts', 'intersectional-feminism-explained'],
+  'poland-strajk-kobiet': ['feminism-myths-and-receipts', 'is-gen-z-feminist'],
+  'reclaim-these-streets': ['protest-safety-india', 'what-is-fourth-wave-feminism'],
+  'woman-life-freedom': ['what-is-fourth-wave-feminism', 'intersectional-feminism-explained'],
+  'ni-una-menos': ['what-is-fourth-wave-feminism', 'how-to-join-or-start-a-feminist-group'],
+  'las-tesis': ['what-is-fourth-wave-feminism', 'fourth-wave-reading-list'],
+  'end-femicide-kenya': ['what-is-fourth-wave-feminism', 'is-gen-z-feminist'],
+};
+export const CASE_MEMORY: Record<string, string> = {
+  'delhi-2012-justice-verma': 'delhi-protests-2012',
+  'bhanwari-devi-vishaka-posh': 'vishaka-1997',
+  'sewa-self-employed-women': 'sewa-1972',
+  'pinjra-tod': 'pinjra-tod-2015',
+  'reclaim-the-night-bengal-2024': 'reclaim-the-night-2024',
+  'iceland-womens-strikes': 'iceland-strikes-1975-2023',
+  'ni-una-menos': 'ni-una-menos-2015',
+  metoo: 'metoo-2017',
+  'woman-life-freedom': 'woman-life-freedom-2022',
+};
+
+/** Shorter <title>s where the full title would push past ~60 characters with the site suffix. H1s keep the full title. */
+export const SEO_TITLES: Record<string, string> = {
+  'delhi-2012-justice-verma': 'Delhi 2012 and the Justice Verma Committee',
+  'sewa-self-employed-women': 'SEWA: organising self-employed women',
+};

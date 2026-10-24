@@ -37,7 +37,7 @@ const commitments = [
   { h: 'Your data never goes to a party.', p: 'We never share supporter data with any political party, candidate or advertiser. Not for money, not for favours, not ever.' },
   { h: 'Volunteer-run, and no donations yet.', p: 'Cultural Shock Party is run by volunteers and does not accept donations, which is why there is no Donate button on this site.' },
   { h: 'If that changes, we publish who funds us.', p: 'Before we accept a single rupee, we will publish a funding policy on this page, and then who gives, by category and total.' },
-  { h: 'No foreign money.', p: 'We will not accept money or in-kind support from foreign citizens, organisations or governments. Under India’s Foreign Contribution (Regulation) Act 2010, political parties and organisations of a political nature may not accept foreign contributions.' },
+  { h: 'No foreign money.', p: 'We take no foreign money, by choice: no money or in-kind support from foreign citizens, organisations or governments. Under India’s Foreign Contribution (Regulation) Act 2010, an organisation needs FCRA registration or permission to accept foreign contributions, and political parties and organisations the government declares “of a political nature” may not accept them at all (sections 3, 5 and 11).' },
 ];
 
 const steps = [
@@ -170,7 +170,7 @@ const story = [
   <section class="section ground-green grain how" id="how" aria-labelledby="how-title">
     <div class="wrap how__grid">
       <div class="how__side">
-        <SectionHead num="04" label="How we work" id="how-title" title="Five rules we hold ourselves to" />
+        <SectionHead num="04" label="How we work" id="how-title" title="Five rules we hold ourselves to" />
         <div class="how__photos">
           <Pic id="060-armed-with-a-mind-sign" tone="marigold" aspect="4 / 3" tilt={-3} frame alt="A cardboard protest sign, hand-lettered: Armed with a mind." sizes="(min-width: 900px) 26vw, 70vw" widths={[360, 560]} />
           <Pic id="084-crochet-does-it-bring-you-joy" tone="pink" aspect="4 / 5" tilt={4} frame class="how__photo2" alt="A crocheted sign on a fence asks: but does it bring you joy?" sizes="(min-width: 900px) 18vw, 50vw" widths={[240, 360, 480]} />
@@ -208,7 +208,7 @@ const story = [
         </div>
         <div class="who__founding">
           <p class="label">The collective</p>
-          <h3 class="who__title">The collective is forming. This is the moment to be a founding member.</h3>
+          <h3 class="who__title">This is the moment to be a founding member.</h3>
           <p class="who__text">We won’t show you a wall of members we don’t have. What we have is a manifesto, a plan and an open door. The people who join first can help shape the next version of the manifesto and decide what we build first.</p>
           <div class="sheet" aria-hidden="true">
             <p class="sheet__head"><span>Founding members</span><span>Sheet 01</span></p>
@@ -220,7 +220,7 @@ const story = [
           </div>
           <div class="who__ctas">
             <a class="btn" href="/join/">Become a founding member <span class="arrow" aria-hidden="true">→</span></a>
-            <a class="link-arrow" href="/manifesto/">Read the manifesto first <span aria-hidden="true">↗</span></a>
+            <a class="link-arrow" href="/manifesto/">Read the manifesto first <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </div>
@@ -249,7 +249,7 @@ const story = [
         </ol>
         <p class="indep__foot small">
           Policy version 1.0, 24 October 2026. This is our policy, not legal advice. The law on foreign contributions:{' '}
-          <a href="https://prsindia.org/files/bills_acts/acts_parliament/2010/the-foreign-contribution-(regulation)-act,-2010.pdf" rel="noopener">Foreign Contribution (Regulation) Act 2010, section 3 (PRS copy)</a>.
+          <a href="https://prsindia.org/files/bills_acts/acts_parliament/2010/the-foreign-contribution-(regulation)-act,-2010.pdf" rel="noopener">Foreign Contribution (Regulation) Act 2010, sections 3, 5 and 11 (PRS copy)</a>.
           How we handle your data:{' '}<a href="/privacy/">privacy notice</a>.
         </p>
       </div>
@@ -300,7 +300,7 @@ const story = [
   <!-- 09 FAQ teaser -->
   <section class="section ground-deep faq-sec" aria-labelledby="faq-title">
     <div class="wrap faq-sec__grid">
-      <SectionHead num="09" label="FAQ" id="faq-title" title="Straight answers" lead="The three questions we get most. There are more in the FAQ." />
+      <SectionHead num="09" label="FAQ" id="faq-title" title="Straight answers" lead="Three questions you might have. There are more in the FAQ." />
       <div class="faq-sec__list">
         <Faq q="Is Cultural Shock Party a political party?" open>
           <p>No. Cultural Shock Party is a movement, not a registered political party: it does not contest elections or endorse candidates.</p>
@@ -325,7 +325,7 @@ const story = [
 <style>
   .jump ul { display: flex; flex-wrap: wrap; gap: 8px; }
   .jump a {
-    display: inline-flex; align-items: center; min-height: 40px; padding: 0 12px; border: 2px solid var(--ink); color: var(--ink);
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; border: 2px solid var(--ink); color: var(--ink);
     background: var(--paper-light); font-weight: 750; font-size: .86rem; text-decoration: none;
   }
   .jump a:hover { background: var(--ink); color: var(--paper); }
@@ -379,6 +379,7 @@ const story = [
   .who { overflow-x: clip; }
   .how__grid { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr); gap: clamp(32px, 6vw, 90px); align-items: start; }
   .how__side { position: sticky; top: 96px; }
+  .how__side :global(.section-head .h2) { text-wrap: balance; }
   .how__photos { position: relative; display: grid; grid-template-columns: 1.4fr 1fr; gap: 12px; align-items: end; max-width: 520px; }
   .how__photos :global(.how__photo2) { margin-bottom: -30px; }
   .how__list { display: grid; }
@@ -399,7 +400,7 @@ const story = [
   .who__bio { font-size: 1rem; line-height: 1.5; }
   .who__founding { display: grid; gap: 18px; }
   .who__founding > .label { color: var(--ink); }
-  .who__title { font-weight: 900; font-stretch: 62%; text-transform: uppercase; font-size: clamp(2.2rem, 4.6vw, 4rem); line-height: .88; max-width: 15ch; text-wrap: balance; }
+  .who__title { font-weight: 900; font-stretch: 62%; text-transform: uppercase; font-size: clamp(2rem, 3.4vw, 3rem); line-height: .9; max-width: 22ch; text-wrap: balance; }
   .who__text { font-size: 1.08rem; line-height: 1.55; max-width: 52ch; }
   .sheet { position: relative; margin: 10px 0 8px; padding: 18px 22px 22px; background: var(--paper-light); border: 2px solid var(--ink); max-width: 460px; transform: rotate(-1.2deg); box-shadow: 6px 7px 0 rgba(29, 28, 24, .25); }
   .sheet__head { display: flex; justify-content: space-between; font-weight: 800; font-stretch: 80%; text-transform: uppercase; letter-spacing: .08em; font-size: .8rem; border-bottom: 3px solid var(--ink); padding-bottom: 8px; }

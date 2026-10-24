@@ -1,0 +1,78 @@
+---
+// Typographic poster for a case with no licensed photo of its own: the movement's words set big, protest-poster
+// style, in place of a borrowed picture. Used as the case hero ("hero") and on case cards ("card").
+import type { Poster } from './case-utils';
+
+export interface Props { poster: Poster; size?: 'hero' | 'card'; aspect?: string; caption?: boolean }
+const { poster, size = 'card', aspect = '3 / 2', caption = size === 'hero' } = Astro.props;
+const { lines, wide = lines, lang, gloss, credit, ground } = poster;
+
+const plain = (l: string) => l.replace(/\*/g, '');
+// Font size in container-width units: fit the longest line across ~88% of the width and every line into the
+// frame's height (line-height .84). Archivo at 62% stretch averages about .42em per uppercase character (measured).
+const fit = (set: string[], ratio: number) => {
+  const longest = Math.max(...set.map((l) => plain(l).length), 4);
+  const h = 100 / ratio;
+  const byWidth = 210 / longest;
+  const byHeight = (h * (gloss ? 0.6 : 0.74)) / (set.length * 0.84);
+  return `${Math.min(byWidth, byHeight, 30).toFixed(2)}cqi`;
+};
+const [aw, ah] = aspect.split('/').map((n) => Number(n.trim()));
+const ratio = aw && ah ? aw / ah : 1.5;
+const parts = (l: string) => l.split(/(\*[^*]+\*)/).filter(Boolean).map((t) => ({ text: plain(t), accent: t.startsWith('*') }));
+const label = `Poster: ${lines.map(plain).join(' ')}${gloss ? ` (${gloss})` : ''}`;
+const layouts = size === 'hero'
+  ? [{ cls: 'narrow', set: lines, fs: fit(lines, 4 / 3) }, { cls: 'wide', set: wide, fs: fit(wide, 2.1) }]
+  : [{ cls: 'card', set: lines, fs: fit(lines, ratio) }];
+---
+<figure class:list={['cposter', `cposter--${size}`, `cposter--${ground}`]}>
+  <div class="cposter__frame grain" role="img" aria-label={label} style={`--aspect:${aspect}`}>
+    {layouts.map((L) => (
+      <div class:list={['cposter__set', `cposter__set--${L.cls}`]} style={`--fs:${L.fs}`} aria-hidden="true">
+        <p class="cposter__text" lang={lang}>
+          {L.set.map((l) => <span class="cposter__line">{parts(l).map((t) => t.accent ? <span class="cposter__accent">{t.text}</span> : t.text)}</span>)}
+        </p>
+        {gloss && <p class="cposter__gloss">{gloss}</p>}
+      </div>
+    ))}
+    <span class="cposter__tape" aria-hidden="true"></span>
+  </div>
+  {caption && <figcaption class="cposter__credit">{credit}</figcaption>}
+</figure>
+
+<style>
+  .cposter { position: relative; }
+  .cposter__frame {
+    position: relative; container-type: inline-size; aspect-ratio: var(--aspect); overflow: hidden;
+    display: grid; align-content: center; padding: 6% 6% 5%;
+    background: var(--g); color: var(--paper-light); border: 3px solid var(--ink);
+  }
+  .cposter--ink { --g: var(--ink); --accent: var(--coral); --gloss: var(--marigold); }
+  .cposter--red { --g: var(--red); --accent: var(--ink); --gloss: var(--paper-light); }
+  .cposter--green { --g: var(--green); --accent: var(--marigold); --gloss: var(--pink); }
+  .cposter__set { position: relative; z-index: 2; display: grid; gap: .55em; }
+  .cposter__text {
+    display: grid; font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase;
+    font-size: var(--fs); line-height: .84; letter-spacing: -.015em;
+  }
+  .cposter__line { display: block; white-space: nowrap; }
+  .cposter__accent { color: var(--accent); }
+  .cposter__gloss {
+    font-family: var(--font-serif); font-style: italic; font-weight: 500; color: var(--gloss);
+    font-size: max(1rem, calc(var(--fs) * .2)); line-height: 1.2;
+  }
+  /* a strip of masking tape, as if the poster were pasted up */
+  .cposter__tape {
+    position: absolute; z-index: 3; top: -4px; right: 7%; width: 18%; min-width: 70px; height: 24px;
+    background: rgba(241, 179, 98, .82); transform: rotate(4deg); clip-path: polygon(3% 0, 97% 8%, 100% 92%, 0 100%);
+  }
+  .cposter__credit { margin-top: 12px; font-size: .86rem; line-height: 1.4; color: var(--muted); max-width: 70ch; }
+
+  .cposter--hero .cposter__frame { aspect-ratio: 4 / 3; box-shadow: 8px 8px 0 var(--ink); margin-right: 8px; }
+  .cposter__set--wide { display: none; }
+  @media (min-width: 1000px) {
+    .cposter--hero .cposter__frame { aspect-ratio: 2.1 / 1; padding-inline: 5%; }
+    .cposter__set--wide { display: grid; }
+    .cposter__set--narrow { display: none; }
+  }
+</style>

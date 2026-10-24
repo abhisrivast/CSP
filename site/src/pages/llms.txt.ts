@@ -20,6 +20,8 @@ export const GET: APIRoute = async ({ site }) => {
     `- [Founder: ${FOUNDER.name}](${u(`/about/${FOUNDER.slug}/`)})`,
     `- [What we do](${u('/what-we-do/')}): ideas → research → public consciousness → collective action`,
     `- [Public memory](${u('/memory/')}): a sourced timeline of feminist history, India and global`,
+    `- [Case studies](${u('/case-studies/')}): ${cases.length} feminist movements, what they did and what changed`,
+    `- [Resources](${u('/resources/')}): plain-language guides, explainers and toolkits`,
     `- [FAQ](${u('/faq/')}): direct answers about CSP and feminism`,
     `- [Join](${u('/join/')}) · [Contact](${u('/contact/')})`,
     '',

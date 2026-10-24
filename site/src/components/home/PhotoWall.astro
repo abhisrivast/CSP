@@ -1,0 +1,110 @@
+---
+// "This is what the Fourth Wave looks like": a duotone wall of real feminist movements in India and the world.
+// Every tile is a documentary photo with its real place and year; credits live on /credits/.
+import SectionHead from '../ui/SectionHead.astro';
+import Photo from '../media/Photo.astro';
+import Placard from '../ui/Placard.astro';
+import { getCollection } from 'astro:content';
+import { WALL } from './home';
+
+const milestones = (await getCollection('memory')).length;
+
+const years = WALL.map((t) => Number(t.chip.match(/\d{4}/)?.[0])).filter(Boolean);
+const from = Math.min(...years);
+const to = Math.max(...years);
+const sizes: Record<string, string> = {
+  big: '(min-width: 1100px) 300px, (min-width: 700px) 32vw, 48vw',
+  wide: '(min-width: 1100px) 300px, (min-width: 700px) 32vw, 48vw',
+  tall: '(min-width: 1100px) 150px, (min-width: 700px) 16vw, 24vw',
+  one: '(min-width: 1100px) 150px, (min-width: 700px) 16vw, 24vw',
+};
+const widths: Record<string, number[]> = { big: [240, 360, 480, 640], wide: [240, 360, 480, 640], tall: [240, 360], one: [160, 240, 360] };
+---
+<section class="section wall ground-ink grain" aria-labelledby="wall-title">
+  <div class="wrap wall__inner">
+    <div class="wall__head">
+      <SectionHead num="04" label="The movement" id="wall-title">This is what the <span class="wall__red">Fourth Wave</span> looks like</SectionHead>
+      <p class="wall__lede">Farmers and suffragists, strikers and Pride marchers, from Kolkata and Kerala to Kraków and Córdoba. Different cities, the same demand: equal rights, freedom and safety, for everyone.</p>
+    </div>
+
+    <div class="wall__box">
+    <ul class="wall__grid" role="list">
+      {WALL.map((t, i) => {
+        const size = t.size ?? 'one';
+        return (
+          <li class:list={['tile', `tile--${size}`]} style={`--r:${[-1.2, .8, -.4, 1.1, -.9, .5][i % 6]}deg`}>
+            <Photo id={t.id} tone={t.tone} alt={t.alt} position={t.position} caption={false} aspect={size === 'wide' ? '2 / 1' : size === 'tall' ? '1 / 2' : '1 / 1'}
+              widths={widths[size]} sizes={sizes[size]} />
+            <span class="tile__chip" aria-hidden="true">{t.chip}</span>
+          </li>
+        );
+      })}
+      <li class="tile tile--placard" aria-hidden="true">
+        <Placard text="Nobody is free until everybody is" color="paper" size="m" tilt={-4} decorative />
+      </li>
+    </ul>
+    </div>
+
+    <p class="wall__caption">
+      <span class="label">On the wall</span>
+      <span>Women’s movements in India and around the world, {from}–{to}. Each photo is credited on our <a href="/credits/">image credits page</a>.</span>
+      <a class="link-arrow wall__link" href="/memory/">Walk the timeline: {milestones} milestones <span aria-hidden="true">→</span></a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .wall { overflow: hidden; }
+  .wall__inner { position: relative; z-index: 2; }
+  .wall__head { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 0 48px; align-items: end; }
+  .wall__head :global(.section-head) { margin-bottom: 0; }
+  .wall__red { color: var(--coral); white-space: nowrap; }
+  .wall__lede { color: var(--ink-soft); font-size: 1.08rem; line-height: 1.5; max-width: 38ch; padding-bottom: 6px; }
+
+  .wall__box { container-type: inline-size; margin-top: clamp(32px, 5vw, 56px); }
+  .wall__grid {
+    --cols: 8; --gap: clamp(6px, 1vw, 12px);
+    display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); grid-auto-flow: dense;
+    grid-auto-rows: calc((100cqw - (var(--cols) - 1) * var(--gap)) / var(--cols)); gap: var(--gap);
+  }
+  .tile :global(.photo), .tile :global(.photo__img) { height: 100%; }
+  .tile :global(.photo__img) { aspect-ratio: auto !important; }
+  .tile :global(.photo__img picture), .tile :global(.photo__img img) { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .tile { position: relative; transform: rotate(var(--r)); transition: transform .25s var(--ease); }
+  .tile:hover { transform: rotate(0deg) scale(1.03); z-index: 3; }
+  .tile :global(.photo__img) { outline: 3px solid var(--ink); }
+  .tile--big { grid-column: span 2; grid-row: span 2; }
+  .tile--wide { grid-column: span 2; }
+  .tile--tall { grid-row: span 2; }
+  .tile__chip {
+    position: absolute; left: 6px; bottom: 6px; z-index: 2; max-width: calc(100% - 12px);
+    padding: 3px 5px 2px; background: var(--ink); color: var(--paper);
+    font-size: .6rem; font-weight: 800; font-stretch: 85%; letter-spacing: .06em; text-transform: uppercase; line-height: 1.2;
+    white-space: nowrap;
+  }
+  .tile--placard { grid-column: span 3; display: grid; place-items: center; padding: 8px; transform: none; }
+  .tile--placard:hover { transform: none; }
+  .tile--placard :global(.placard__text) { font-size: clamp(1.2rem, 2vw, 1.75rem); max-width: 18ch; overflow-wrap: normal; hyphens: none; }
+
+  .wall__caption {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 18px; margin-top: clamp(26px, 4vw, 40px);
+    padding-top: 14px; border-top: 1px solid rgba(243, 236, 220, .35); font-size: .95rem; color: var(--ink-soft);
+  }
+  .wall__caption .label { color: var(--paper); }
+  .wall__link { margin-left: auto; color: var(--paper); border-color: var(--coral); }
+  .wall__link:hover { color: var(--coral); }
+
+  @media (max-width: 1100px) {
+    .wall__grid { --cols: 6; }
+    .tile--placard { grid-column: span 6; }
+    .tile:nth-child(24) { display: none; }
+  }
+  @media (max-width: 860px) {
+    .wall__head { grid-template-columns: 1fr; gap: 16px; }
+    .wall__grid { --cols: 4; }
+    .tile--one .tile__chip { display: none; }
+    .wall__link { margin-left: 0; }
+  }
+  @media (max-width: 860px) { .tile--placard { grid-column: span 4; } }
+  @media (max-width: 420px) { .tile__chip { font-size: .56rem; left: 4px; bottom: 4px; } }
+</style>

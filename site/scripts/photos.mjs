@@ -94,15 +94,18 @@ async function syncOriginals() {
       }
     }
     const meta = await sharp(dest).metadata();
+    // Captions, alt text, credits and notes are edited by hand in the registry (cataloguing notes moved to `notes`,
+    // no duplicated "Photo:" prefix), so a rebuild keeps the registry's copy and only fills them for new photos.
+    const prev = byId.get(id);
     byId.set(id, {
       id, file, source: e._source,
       width: meta.width, height: meta.height,
       orientation: meta.width >= meta.height ? (meta.width / meta.height > 1.2 ? 'landscape' : 'square') : 'portrait',
-      title: e.title ?? '', caption: e.caption ?? '', alt: e.alt ?? e.source_alt ?? e.caption ?? e.title ?? '',
+      title: e.title ?? '', caption: prev?.caption ?? e.caption ?? '', alt: prev?.alt ?? e.alt ?? e.source_alt ?? e.caption ?? e.title ?? '',
       author: e.author ?? '', licence, licenceUrl: e.licence_url ?? e.license_url ?? '',
-      sourcePage: e.source_page ?? '', credit: e.attribution_text ?? `${e.author ?? 'Unknown'} / ${licence}`,
+      sourcePage: e.source_page ?? '', credit: prev?.credit ?? String(e.attribution_text ?? `${e.author ?? 'Unknown'} / ${licence}`).replace(/^Photo:\s*/i, ''),
       peopleIdentifiable: !!e.people_identifiable, tags: e.tags ?? [], suggestedUse: e.suggested_use ?? [],
-      notes: e.quality_notes ?? '',
+      notes: prev?.notes ?? e.quality_notes ?? '',
     });
   }
   const list = [...byId.values()].sort((a, b) => a.id.localeCompare(b.id));

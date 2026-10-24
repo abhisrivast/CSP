@@ -1,0 +1,64 @@
+---
+// Allies: "Bring a friend. Yes, boys too." The problem is the manosphere industry, not boys.
+import Photo from '../media/Photo.astro';
+import Receipt from '../ui/Receipt.astro';
+import { SRC, ALLIES_PHOTOS } from './home';
+
+const [pic1, pic2] = ALLIES_PHOTOS;
+---
+<section class="section allies ground-pink" aria-labelledby="allies-title">
+  <div class="wrap allies__inner">
+    <div class="allies__pic">
+      <Photo id={pic1.id} tone={pic1.tone} aspect="4 / 3" caption={false} tape="both" tilt={-2}
+        alt={pic1.alt}
+        widths={[360, 560, 800, 1100]} sizes="(min-width: 900px) 46vw, 92vw" />
+      <div class="allies__pic2">
+        <Photo id={pic2.id} tone={pic2.tone} aspect="1 / 1" caption={false} tape="tl" tilt={5}
+          alt={pic2.alt}
+          widths={[240, 360, 480]} sizes="(min-width: 900px) 18vw, 40vw" />
+      </div>
+    </div>
+    <div class="allies__text">
+      <p class="label allies__label"><span class="allies__num">11</span> / Allies</p>
+      <h2 class="allies__title" id="allies-title">Bring a friend. <span>Yes, boys too.</span></h2>
+      <p class="allies__lead">
+        Boys and men are invited: it is the tenth position in our manifesto. The problem is not boys. It is a manosphere
+        industry that sells them loneliness and a grudge. We offer something better: friendship, equality, and freedom from
+        rigid ideas of what a “real man” has to be.
+      </p>
+      <Receipt figure="69%" tone="paper" tilt={1}
+        label="of Gen Z men across 29 countries do not agree that “a wife should always obey her husband”. 31% do."
+        source="Ipsos and King’s College London" href={SRC.kcl} date="Mar 2026" />
+      <p class="allies__links">
+        <a class="btn btn--ink" href="/resources/boys-men-and-the-manosphere/">Boys, men and the manosphere: a guide for allies <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="allies__more" href="/join/#allies">How allies can take part</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .allies__inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: start; }
+  .allies__pic { margin-top: clamp(0px, 5vw, 70px); }
+  .allies__pic { position: relative; }
+  .allies__pic :global(.photo__img) { border: 8px solid var(--paper-light); box-shadow: 8px 10px 0 rgba(29, 28, 24, .22); }
+  .allies__pic2 { position: relative; z-index: 3; width: 42%; margin: -18% 0 0 auto; margin-right: -4%; }
+  .allies__pic2 :global(.photo__img) { border-width: 6px; }
+  .allies__text { display: grid; gap: 20px; justify-items: start; }
+  .allies__label { padding-top: 12px; border-top: 3px solid var(--ink); width: 100%; }
+  .allies__num { font-weight: 900; }
+  .allies__title { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: var(--fs-h2); line-height: .9; }
+  .allies__title span { color: var(--red-ink); display: block; }
+  .allies__lead { font-size: 1.08rem; line-height: 1.55; max-width: 48ch; color: var(--ink); }
+  .allies :global(.receipt) { max-width: 360px; }
+  .allies :global(.receipt__figure) { font-size: clamp(3rem, 5vw, 4.4rem); }
+  .allies__links { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; }
+  .allies__links .btn { white-space: normal; }
+  .allies__more { color: var(--ink); font-weight: 800; }
+  .allies { overflow-x: clip; }
+  @media (max-width: 900px) {
+    .allies__inner { grid-template-columns: 1fr; }
+    .allies__pic { max-width: 560px; }
+    .allies__pic2 { margin-right: 0; width: 38%; }
+  }
+</style>

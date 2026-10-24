@@ -1,7 +1,7 @@
 ---
-// "The short version": the five questions people ask first, each answered with one poster-sized word and one line.
+// "The short version": five big questions up front, each answered with one poster-sized word and one line.
 export interface Props { items: { id: string; q: string; big: string; short: string }[]; title?: string }
-const { items, title = 'The five we get asked most' } = Astro.props;
+const { items, title = 'Five big questions, answered first' } = Astro.props;
 ---
 <section class="short ground-ink grain" aria-labelledby="short-title">
   <div class="wrap short__inner">
@@ -43,7 +43,7 @@ const { items, title = 'The five we get asked most' } = Astro.props;
   }
   .short__item--1 .short__big, .short__item--3 .short__big { color: var(--coral); }
   .short__a { font-family: var(--font-serif); font-weight: 500; font-size: clamp(1.2rem, 1.7vw, 1.45rem); line-height: 1.22; max-width: 30ch; color: #E9E2D2; text-wrap: pretty; }
-  .short__more { justify-self: start; display: inline-flex; align-items: center; min-height: 44px; font-weight: 800; font-stretch: 85%; text-transform: uppercase; letter-spacing: .06em; font-size: .82rem; }
+  .short__more { justify-self: start; display: inline-flex; align-items: center; gap: .45em; min-height: 44px; font-weight: 800; font-stretch: 85%; text-transform: uppercase; letter-spacing: .06em; font-size: .82rem; }
   @media (max-width: 900px) {
     .short__grid { grid-template-columns: 1fr 1fr; }
     .short__item, .short__item--4, .short__item--5 { grid-column: span 1; padding-left: 18px; }

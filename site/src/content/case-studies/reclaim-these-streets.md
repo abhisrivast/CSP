@@ -150,7 +150,7 @@ Four women in London, Jessica Leigh, Anna Birley, Henna Shah and Jamie Klingler,
 
 ## The story
 
-### The vigil that wasn't
+### The vigil that wasn’t
 
 Reclaim These Streets did what organisers are supposed to do. They told the police. The Met's answer was that under Covid rules, the organisers could be fined.<sup><a class="fn-ref" href="#src-1" aria-label="Source 1">1</a></sup> An urgent High Court hearing on 12 March did not give them the protection they needed, and they called the vigil off.<sup><a class="fn-ref" href="#src-1" aria-label="Source 1">1</a></sup>
 
@@ -162,7 +162,7 @@ In the evening, a crowd of several hundred gathered at the bandstand for speeche
 
 ### Taking the Met to court
 
-The four founders did not let it go. They asked the High Court to review the Met's decisions before the vigil.
+The four founders did not let it go. They asked the High Court to review the Met’s decisions before the vigil.
 
 On 11 March 2022, almost exactly a year later, the court ruled that six of those decisions were unlawful. The police had failed to consider whether going to a vigil could be a reasonable excuse under Covid rules, given people's rights to freedom of expression and assembly under Articles 10 and 11 of the European Convention on Human Rights.<sup><a class="fn-ref" href="#src-3" aria-label="Source 3">3</a></sup> The Met tried to appeal and was refused, first by the High Court and then by the Court of Appeal.<sup><a class="fn-ref" href="#src-1" aria-label="Source 1">1</a></sup> Women had been silenced, the group said, and now a court had confirmed that the police were wrong to do it.<sup><a class="fn-ref" href="#src-3" aria-label="Source 3">3</a></sup>
 

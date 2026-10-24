@@ -7,12 +7,11 @@ region: "Global"
 years: "2006–present"
 start: 2006
 order: 9
-heroPhoto: "056-kuala-lumpur-we-will-not-be-silenced"
 tone: "ink"
 gallery:
-  - "054-sydney-phone-filming-protest-bw"
-  - "057-kuala-lumpur-boys-held-accountable"
   - "2018-london-womens-strike-banner"
+  - "057-kuala-lumpur-boys-held-accountable"
+  - "2017-london-womens-march-strong-women"
   - "2024-womens-march-rights-not-up-for-grabs"
 timeline:
   - date: "2006"
@@ -61,10 +60,10 @@ numbers:
     href: "https://www.pewresearch.org/short-reads/2018/10/11/how-social-media-users-have-discussed-sexual-harassment-since-metoo-went-viral/"
     date: "Oct 2018"
 stages:
-  ideas: "Empathy first: you are not alone. Tarana Burke's idea was survivor-to-survivor solidarity, years before it was a hashtag. In 2017 it widened into a demand for accountability from powerful men, and from the institutions that protected them."
+  ideas: "Empathy first: you are not alone. Tarana Burke’s idea was survivor-to-survivor solidarity, years before it was a hashtag. In 2017 it widened into a demand for accountability from powerful men, and from the institutions that protected them."
   research: "Investigative journalism opened the door. Then testimony at scale became data: Pew Research Center analysed millions of #MeToo tweets to show who was speaking, in which languages and about what."
-  consciousness: "A two-word act of disclosure anyone could copy, from any phone, in any language. Celebrities amplified it and TIME's “Silence Breakers” cover fixed it in public memory. It made the scale of harassment impossible to wave away."
-  action: "Mostly online at first, then into workplaces, courts and parliaments: new workplace policies, campaigns against forced arbitration and non-disclosure agreements, and criminal cases. Street action was secondary, feeding into the Women's Marches of 2018."
+  consciousness: "A two-word act of disclosure anyone could copy, from any phone, in any language. Celebrities amplified it and TIME’s “Silence Breakers” cover fixed it in public memory. It made the scale of harassment impossible to wave away."
+  action: "Mostly online at first, then into workplaces, courts and parliaments: new workplace policies, campaigns against forced arbitration and non-disclosure agreements, and criminal cases. Street action was secondary, feeding into the Women’s Marches of 2018."
 lessons:
   - title: "Credit the originators"
     text: "Always name and resource the people who started the work, especially women of colour and, in India, Dalit, Adivasi and Bahujan organisers."
@@ -72,7 +71,7 @@ lessons:
     text: "Gather stories privately, anonymise them and turn them into data and policy demands, with trauma-informed care and legal advice before anything is published."
   - title: "Build what comes after the hashtag"
     text: "Survivor support, legal routes and clear asks of institutions. Attention peaks in days; accountability takes years, and can be reversed."
-limits: "Tarana Burke publicly challenged the erasure of Black women's foundational work, even as she welcomed the wider movement. Pew found that in peak periods 15% of #MeToo tweets were about celebrities or entertainment and 71% were in English, so many voices were missing. And the courts proved fragile: a landmark New York conviction was overturned in 2024, and the remaining rape count was dropped in June 2026 after two retrials ended without a verdict on it."
+limits: "Tarana Burke publicly challenged the erasure of Black women’s foundational work, even as she welcomed the wider movement. Pew found that in peak periods 15% of #MeToo tweets were about celebrities or entertainment and 71% were in English, so many voices were missing. And the courts proved fragile: a landmark New York conviction was overturned in 2024, and the remaining rape count was dropped in June 2026 after two retrials ended without a verdict on it."
 tags:
   - "digital testimony"
   - "sexual harassment"
@@ -133,20 +132,20 @@ Two words worked because they asked so little and said so much. You did not need
 
 Testimony at that scale became evidence. Pew Research Center found the hashtag had been used more than 19 million times on Twitter in under a year: about 55,319 times a day. Its analysis also showed the gaps. In peak periods, 71% of #MeToo tweets were in English, and 15% were about celebrities or entertainment. Even inside a global moment, some voices carried further than others.
 
-### India's #MeToo
+### India’s #MeToo
 
 In September 2018, an interview given by the actor Tanushree Dutta set off a wave of public accounts of harassment in India, across film, media and politics. One case became a landmark. The former Union minister M.J. Akbar filed a criminal defamation case against the journalist Priya Ramani over her account. On 17 February 2021 a Delhi court acquitted her, holding that a woman has the right to raise her grievance even after decades. Newspapers across India reported it as a landmark for women who speak up.
 
 ### The long road through the courts
 
-In the United States, Harvey Weinstein was convicted in New York in 2020. In April 2024 the state's highest court overturned those convictions and ordered a new trial. At the 2025 retrial he was convicted on one count and acquitted on another, and the jury could not agree on a third. A second retrial on that count also ended without a verdict, and on 25 June 2026 prosecutors said they would not try it again.
+In the United States, Harvey Weinstein was convicted in New York in 2020. In April 2024 the state’s highest court overturned those convictions and ordered a new trial. At the 2025 retrial he was convicted on one count and acquitted on another, and the jury could not agree on a third. A second retrial on that count also ended without a verdict, and on 25 June 2026 prosecutors said they would not try it again.
 
-Tarana Burke, meanwhile, publicly challenged the way Black women's foundational work was being written out of the story, even as she welcomed the wider movement. The movement began with survivors, long before it had celebrities.
+Tarana Burke, meanwhile, publicly challenged the way Black women’s foundational work was being written out of the story, even as she welcomed the wider movement. The movement began with survivors, long before it had celebrities.
 
 ## Why it matters for the Fourth Wave
 
 #MeToo proved that testimony, gathered at scale, can change what a society treats as normal in weeks. It also showed how quickly attention moves on, and how slowly courts, workplaces and laws catch up.
 
-For a Fourth Wave movement in India, the lesson is to build the infrastructure the hashtag did not have. India's workplaces already have a legal framework against sexual harassment, the POSH Act of 2013, which grew out of the Supreme Court's Vishaka guidelines of 1997 (read our case on [Bhanwari Devi, Vishaka and the POSH Act](/case-studies/bhanwari-devi-vishaka-posh/)). A movement can help people use it: plain-language guides, private and safe ways to share experiences, legal advice before anything is published, and research that turns many private stories into one public demand.
+For a Fourth Wave movement in India, the lesson is to build the infrastructure the hashtag did not have. India’s workplaces already have a legal framework against sexual harassment, the POSH Act of 2013, which grew out of the Supreme Court’s Vishaka guidelines of 1997 (read our case on [Bhanwari Devi, Vishaka and the POSH Act](/case-studies/bhanwari-devi-vishaka-posh/)). A movement can help people use it: plain-language guides, private and safe ways to share experiences, legal advice before anything is published, and research that turns many private stories into one public demand.
 
 And it should always credit where the work began. Every hashtag has an organiser behind it.

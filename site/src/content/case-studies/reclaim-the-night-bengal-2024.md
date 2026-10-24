@@ -5,7 +5,7 @@ dek: >-
   Bengal. Then the junior doctors refused to go back until things changed.
 summary: >-
   From 11:55 pm on 14 August 2024, women across West Bengal marched to Reclaim the Night after a trainee doctor was
-  raped and murdered at work in Kolkata. The marches fed a junior doctors' movement that won Supreme Court action on
+  raped and murdered at work in Kolkata. The marches fed a junior doctors’ movement that won Supreme Court action on
   hospital safety.
 place: "Kolkata, West Bengal"
 region: India
@@ -56,7 +56,7 @@ timeline:
   - date: "21 Sep 2024"
     title: "Back to emergency duty, after 41 days"
     text: >-
-      With Kolkata's police commissioner replaced and two senior health officials removed, junior doctors partly end
+      With Kolkata’s police commissioner replaced and two senior health officials removed, junior doctors partly end
       their cease-work and return to emergency and essential services.
   - date: "18–20 Jan 2025"
     title: "A conviction and a life sentence"
@@ -87,7 +87,7 @@ numbers:
 stages:
   ideas: >-
     The night belongs to women too. Instead of telling women to stay in, marchers claimed public space after dark, and
-    doctors framed hospital safety as a woman's right to work, not a favour. The Supreme Court used the same frame:
+    doctors framed hospital safety as a woman’s right to work, not a favour. The Supreme Court used the same frame:
     equal opportunities, not concessions.
   research: >-
     Doctors collected their own evidence: an Indian Medical Association survey of 3,885 doctors found that 45% had no
@@ -95,7 +95,7 @@ stages:
     down to the number of duty rooms, toilets and cameras.
   consciousness: >-
     A Bengali slogan, a single time and WhatsApp did the spreading. Conch shells, Tagore songs, a red-hand-and-moon
-    poster and a ban on party flags made the night feel like everyone's, not any party's.
+    poster and a ban on party flags made the night feel like everyone’s, not any party’s.
   action: >-
     Midnight marches in dozens of places at once, then a 41-day cease-work by junior doctors, talks with the state and a
     Supreme Court case. The results: a national task force, officials replaced, night-shift advice for women doctors
@@ -103,9 +103,9 @@ stages:
 lessons:
   - title: "Give one time, and let people choose the place"
     text: >-
-      "11:55 pm on 14 August" was an instruction anyone could follow, anywhere. Make the ask simple, local and
+      “11:55 pm on 14 August” was an instruction anyone could follow, anywhere. Make the ask simple, local and
       repeatable, so people can lead in their own neighbourhood without waiting for permission from a centre.
-  - title: "Stay non-party, and plan for the people who aren't"
+  - title: "Stay non-party, and plan for the people who aren’t"
     text: >-
       Organisers banned party flags, and the same night a group posing as protesters stormed the hospital. Plan for
       both: say clearly who you are, train volunteer marshals, agree routes and an end time, and separate yourselves in
@@ -115,9 +115,9 @@ lessons:
       Demand the things that make work safe: duty rooms with locks, lighting, transport, CCTV and working complaints
       committees. Then track every promise made to the court in public, with dates, until it is built.
 limits: >-
-  The movement's energy was hard to protect: after midnight on the first night, about 40 people posing as
-  demonstrators stormed the hospital and damaged property, police said. The state's first instinct was to advise women
-  doctors to avoid night shifts, which it dropped only after the Supreme Court objected. The assembly's flagship
+  The movement’s energy was hard to protect: after midnight on the first night, about 40 people posing as
+  demonstrators stormed the hospital and damaged property, police said. The state’s first instinct was to advise women
+  doctors to avoid night shifts, which it dropped only after the Supreme Court objected. The assembly’s flagship
   response, a bill seeking the death penalty, was reportedly sent back by the President in July 2025 as excessively
   harsh: punishment, not prevention. And promises of duty rooms and cameras stay promises until someone checks them.
 tags: [night marches, India, West Bengal, Kolkata, sexual violence, workplace safety, doctors, public space, street]
@@ -130,7 +130,7 @@ sources:
     href: "https://www.etvbharat.com/en/!state/kolkata-doctor-rape-murder-case-reclaim-the-night-enn24081500790"
     publisher: "ETV Bharat"
     date: "15 Aug 2024"
-  - label: "RG Kar hospital case: can't wait for another rape for things to change, Supreme Court forms task force on doctors' safety"
+  - label: "RG Kar hospital case: can’t wait for another rape for things to change, Supreme Court forms task force on doctors’ safety"
     href: "https://www.livelaw.in/amp/top-stories/rg-kar-hospital-case-cant-wait-for-another-rape-for-things-to-change-supreme-court-forms-task-force-on-doctors-safety-267101"
     publisher: "LiveLaw"
     date: "20 Aug 2024"
@@ -150,20 +150,20 @@ sources:
     href: "https://newsonair.gov.in/accused-sanjay-roy-sentenced-to-life-imprisonment-in-rg-kar-medical-college-rape-murder-case"
     publisher: "News on AIR (All India Radio)"
     date: "20 Jan 2025"
-  - label: "President sends 'excessively harsh' Aparajita Bill back to West Bengal"
+  - label: "President sends ‘excessively harsh’ Aparajita Bill back to West Bengal"
     href: "https://www.etvbharat.com/en/!bharat/president-sends-excessively-harsh-aparajita-bill-back-to-west-bengal-enn25072600502"
     publisher: "ETV Bharat"
     date: "26 Jul 2025"
 updated: 2026-10-24
 ---
 
-*Content note: this case study discusses the rape and murder of a doctor at her workplace. We do not name her or show images of her: Indian law protects a survivor's identity, and the Supreme Court has said it must not be published.*
+*Content note: this case study discusses the rape and murder of a doctor at her workplace. We do not name her or show images of her: Indian law protects a survivor’s identity, and the Supreme Court has said it must not be published.*
 
 ## Context
 
 On 9 August 2024, a postgraduate trainee doctor was found dead at RG Kar Medical College and Hospital in Kolkata. She had been raped and murdered while on duty, inside the hospital where she worked.<sup style="line-height:0"><a href="#src-1" aria-label="Source 1">1</a></sup>
 
-The news hit a nerve every working woman knows. Nurses, doctors, call-centre staff, students and shift workers hear the same advice all their lives: don't stay late, don't go out at night, don't be alone. Here was a woman at work, in a government hospital, and still she was not safe.
+The news hit a nerve every working woman knows. Nurses, doctors, call-centre staff, students and shift workers hear the same advice all their lives: don’t stay late, don’t go out at night, don’t be alone. Here was a woman at work, in a government hospital, and still she was not safe.
 
 Junior doctors stopped work.<sup style="line-height:0"><a href="#src-6" aria-label="Source 6">6</a></sup> Grief and anger spread across Bengal, then the country. And one woman decided that this time the answer to fear of the night would not be to stay at home. It would be to go out into it, together.
 

@@ -1,6 +1,6 @@
 ---
-// "Suggest an edit" to the manifesto (Netlify Forms). No age gate: the email field is optional and
-// under-18s are asked to leave it blank, so no personal data from children is collected.
+// "Suggest an edit" to the manifesto (Netlify Forms). Age band first (site rule): under-18s can still send a
+// suggestion, but the optional email field is hidden and disabled for them, so no contact data from children is kept.
 import { CLAUSES, pad } from './manifesto';
 const p = 'edit';
 ---
@@ -8,6 +8,19 @@ const p = 'edit';
   <input type="hidden" name="form-name" value="manifesto-feedback" />
   <input type="hidden" name="manifesto_version" value="1.0" />
   <p class="visually-hidden"><label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+
+  <div class="field">
+    <label for={`${p}-age`}>First, how old are you?</label>
+    <select class="select" id={`${p}-age`} name="age_band" required aria-describedby={`${p}-age-hint`} data-edit-age>
+      <option value="">Choose one</option>
+      <option value="under-13">Under 13</option>
+      <option value="13-17">13 to 17</option>
+      <option value="18-24">18 to 24</option>
+      <option value="25-34">25 to 34</option>
+      <option value="35-plus">35 or older</option>
+    </select>
+    <p class="hint" id={`${p}-age-hint`}>Under 18? You can still send a suggestion. We just won't ask for your email.</p>
+  </div>
 
   <div class="field">
     <label for={`${p}-clause`}>Which clause?</label>
@@ -24,10 +37,10 @@ const p = 'edit';
     <p class="hint" id={`${p}-text-hint`}>Rewrite a line, add a missing group, challenge a claim, or send us a better source. Please don't include names or details of other people.</p>
   </div>
 
-  <div class="field">
+  <div class="field edit__email">
     <label for={`${p}-email`}>Email <span class="opt">(optional, only if you'd like a reply)</span></label>
     <input class="input" id={`${p}-email`} type="email" name="email" autocomplete="email" inputmode="email" aria-describedby={`${p}-email-hint`} />
-    <p class="hint" id={`${p}-email-hint`}>Under 18? Please leave this blank. Your suggestion still counts.</p>
+    <p class="hint" id={`${p}-email-hint`}>We use it only to reply to you.</p>
   </div>
 
   <label class="check">
@@ -38,10 +51,21 @@ const p = 'edit';
   <button class="btn btn--ink" type="submit">Send my edit <span class="arrow" aria-hidden="true">→</span></button>
 </form>
 
+<script>
+  // Under-18s: disable the email field so a typed address is never submitted (CSS also hides it).
+  document.querySelectorAll<HTMLSelectElement>('select[data-edit-age]').forEach((age) => {
+    const email = age.form?.elements.namedItem('email') as HTMLInputElement | null;
+    const sync = () => { if (email) email.disabled = age.value === 'under-13' || age.value === '13-17'; };
+    age.addEventListener('change', sync);
+    sync();
+  });
+</script>
+
 <style>
   .edit { display: grid; gap: 18px; }
   .edit .opt { font-weight: 500; color: var(--muted); }
   .edit .hint { color: var(--muted); }
   .edit .check { font-size: .92rem; }
   .edit .btn { justify-self: start; }
+  .edit:has(option[value='under-13']:checked) .edit__email, .edit:has(option[value='13-17']:checked) .edit__email { display: none; }
 </style>

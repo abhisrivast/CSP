@@ -23,7 +23,10 @@ const { num, label, title, lead, as: Tag = 'h2', size = 'h2', id, align = 'start
   .section-head--center { justify-items: center; text-align: center; }
   .section-head--center .lead { margin-inline: auto; }
   .section-head__label { display: flex; align-items: center; gap: .3em; padding-top: 12px; border-top: 3px solid var(--line); width: 100%; }
-  .section-head__num { color: var(--red); font-weight: 900; }
-  :global(.ground-ink) .section-head__num, :global(.ground-green) .section-head__num { color: var(--coral); }
+  /* Small text: --red-ink on light grounds (--red is 4.44:1 on paper), coral on ink, marigold on green (coral is 3.15:1 there). */
+  .section-head__num { color: var(--red-ink); font-weight: 900; }
+  :global(.ground-ink) .section-head__num { color: var(--coral); }
+  :global(.ground-green) .section-head__num { color: var(--marigold); }
+  :global(.ground-pink) .section-head__num { color: var(--ink); }
   :global(.ground-red) .section-head__num { color: var(--paper-light); }
 </style>

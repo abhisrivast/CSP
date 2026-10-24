@@ -5,11 +5,14 @@ import { NAV, liveSocials } from '../../data/site';
 
 const current = Astro.url.pathname;
 const isCurrent = (href: string) => (href === '/' ? current === '/' : current.startsWith(href));
+// The sticky mobile "Join" button is pointless on the join page itself and would cover the form there,
+// and on /thanks/ it would cover the share buttons right after someone has joined.
+const showStickyJoin = !['/join/', '/thanks/'].includes(current);
 ---
 <header class="site-header">
   <div class="bar wrap">
     <a class="brand" href="/" aria-label="Cultural Shock Party, home">
-      <Image src={badge} alt="" width={56} height={56} densities={[1, 2]} loading="eager" fetchpriority="high" class="brand__badge" />
+      <Image src={badge} alt="" width={56} height={56} densities={[1, 2]} loading="eager" class="brand__badge" />
       <img src="/brand/wordmark.svg" alt="Cultural Shock Party" width="200" height="20" class="brand__word" />
     </a>
 
@@ -43,9 +46,9 @@ const isCurrent = (href: string) => (href === '/' ? current === '/' : current.st
       )}
     </nav>
   </div>
-</header>
 
-<a class="sticky-join btn" href="/join/">Join the movement <span class="arrow" aria-hidden="true">→</span></a>
+  {showStickyJoin && <a class="sticky-join btn" href="/join/">Join the movement <span class="arrow" aria-hidden="true">→</span></a>}
+</header>
 
 <script>
   const btn = document.querySelector<HTMLButtonElement>('.menu-btn');
@@ -116,6 +119,17 @@ const isCurrent = (href: string) => (href === '/' ? current === '/' : current.st
     }
     .sticky-join:hover { transform: translate(calc(-50% - 2px), -2px); }
     :global(html.menu-open) .sticky-join { display: none; }
+    /* Most heroes already show a Join button: the sticky one fades in once you scroll past the first screen.
+       Browsers without scroll-driven animations (and reduced-motion users) simply always see it. */
+    @supports (animation-timeline: scroll()) {
+      @media (prefers-reduced-motion: no-preference) {
+        .sticky-join { animation: sticky-join-in linear both; animation-timeline: scroll(root); animation-range: 0 640px; }
+      }
+    }
+  }
+  @keyframes sticky-join-in {
+    0%, 55% { opacity: 0; visibility: hidden; translate: 0 18px; }
+    100% { opacity: 1; visibility: visible; translate: 0 0; }
   }
   @media (max-width: 420px) {
     .brand__badge { width: 44px; height: 44px; }

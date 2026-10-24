@@ -112,4 +112,14 @@ const { rungs } = Astro.props;
     .step__pic :global(.photo__img) { border-width: 4px; }
     .step__cap { display: none; }
   }
+  /* Narrow phones: long rung titles ("In the institutions") need the full width, so the thumbnail
+     drops into the number column, beside the text. */
+  @media (max-width: 440px) {
+    .step { grid-template-columns: 64px minmax(0, 1fr); }
+    .step__n { justify-self: start; }
+    .step__titles { grid-column: 2; }
+    .step__pic { grid-column: 1; grid-row: 2; width: 64px; margin-top: 4px; }
+    .step__text { grid-column: 2; grid-row: 2; }
+    .step__where { font-size: clamp(1.5rem, 7.4vw, 1.75rem); overflow-wrap: anywhere; }
+  }
 </style>

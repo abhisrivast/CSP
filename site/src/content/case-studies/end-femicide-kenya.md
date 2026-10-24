@@ -10,13 +10,12 @@ region: Africa
 years: "2024–present"
 start: 2024
 order: 15
-heroPhoto: 2025-barcelona-25n-mural
 tone: ink
 gallery:
+  - 2025-barcelona-25n-mural
   - 2026-la-plata-ni-una-menos-e
-  - in-003-2024-kolkata-we-want-justice-candles
   - 2024-madrid-8m-sign-feminicidios
-  - 086-clasped-hands-overhead
+  - in-003-2024-kolkata-we-want-justice-candles
 timeline:
   - date: "Late Jan 2024"
     title: "Thousands in the streets"
@@ -62,12 +61,12 @@ numbers:
     label: "Killings of women in the ‘Silencing Women’ database that meet the UNODC definition of femicide, out of at least 1,069 recorded from court records and media"
     source: "Africa Data Hub, with Africa Uncensored and Odipodev"
     href: "https://www.africadatahub.org/femicide-kenya"
-    date: "accessed Oct 2026"
+    date: "Oct 2026"
   - figure: "80%"
     label: "Share of killers in that database who were, or had been, in an intimate relationship with the woman"
     source: "Africa Data Hub, ‘Silencing Women’"
     href: "https://www.africadatahub.org/femicide-kenya"
-    date: "accessed Oct 2026"
+    date: "Oct 2026"
   - figure: "220+"
     label: "Femicides counted by civil society in Kenya in 2025, including 129 in January–March alone"
     source: "Heinrich Böll Stiftung Nairobi, 27 Jan 2026"

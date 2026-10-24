@@ -78,13 +78,26 @@ You can join a feminist movement in five minutes: read something, share it, sign
 
 ## How do I find a feminist movement to join?
 
-Start where you are, and climb one rung at a time. Our engagement ladder has five rungs, and nobody has to start at the top:
+Start where you are, and climb one rung at a time. Our engagement ladder has five rungs, and nobody has to start at the top.
 
-1. **On your phone (5 minutes).** Read one guide and save it.
-2. **In the group chat.** Share a receipt with friends or family. That counts.
-3. **At school, college or work.** Join or start a group or a reading circle.
-4. **On the street.** Peaceful, lawful, joyful public action. Read our guide to [showing up safely at a protest](/resources/protest-safety-india/) first.
-5. **In the institutions.** Letters and public records that make people in power answer.
+<figure class="r-wide" aria-labelledby="ladder-title" style={{ margin: '1.8em 0 2.4em', fontFamily: 'var(--font-sans)' }}>
+  <p class="label" id="ladder-title" style={{ paddingTop: '12px', borderTop: '3px solid var(--line)' }}>The ladder: five ways in, from easiest to biggest</p>
+  <ol role="list" style={{ listStyle: 'none', padding: 0, margin: '14px 0 0', display: 'grid', gap: '8px' }}>
+    {[
+      { where: 'On your phone', time: '5 minutes', text: <>Read one guide and save it.</>, bg: 'var(--paper-light)', fg: 'var(--ink)', num: 'var(--red-ink)' },
+      { where: 'In the group chat', time: '10 minutes', text: <>Share a receipt with friends or family. That counts.</>, bg: 'var(--pink)', fg: 'var(--ink)', num: 'var(--ink)' },
+      { where: 'At school, college or work', time: 'An hour a week', text: <>Join or start a group or a reading circle. This guide shows you how.</>, bg: 'var(--marigold)', fg: 'var(--ink)', num: 'var(--ink)' },
+      { where: 'On the street', time: 'A Saturday', text: <>Peaceful, lawful, joyful public action. Read <a href="/resources/protest-safety-india/" style={{ color: 'var(--paper-light)' }}>how to show up safely at a protest</a> first.</>, bg: 'var(--red-ink)', fg: 'var(--paper-light)', num: 'var(--paper-light)' },
+      { where: 'In the institutions', time: 'The long haul', text: <>Letters and public records that make people in power answer.</>, bg: 'var(--ink)', fg: 'var(--paper)', num: 'var(--coral)' },
+    ].map((r, i) => (
+      <li style={{ margin: `0 0 0 calc(${i} * min(5.5vw, 70px))`, display: 'grid', gridTemplateColumns: 'auto minmax(0, 1fr)', gap: '4px 16px', alignItems: 'center', padding: '14px 18px', background: r.bg, color: r.fg, border: '2px solid var(--ink)', boxShadow: '4px 4px 0 var(--ink)' }}>
+        <span aria-hidden="true" style={{ gridRow: 'span 2', fontWeight: 900, fontStretch: '62%', fontSize: 'clamp(2.4rem, 5vw, 3.4rem)', lineHeight: 0.8, color: r.num }}>{String(i + 1).padStart(2, '0')}</span>
+        <span style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', gap: '4px 12px' }}><strong style={{ fontWeight: 900, fontStretch: '62%', textTransform: 'uppercase', fontSize: 'clamp(1.45rem, 2.6vw, 1.9rem)', lineHeight: 0.95 }}>{r.where}</strong><span style={{ fontSize: '.72rem', fontWeight: 800, letterSpacing: '.12em', textTransform: 'uppercase', padding: '.2em .5em', border: '1.5px solid currentColor' }}>{r.time}</span></span>
+        <span style={{ fontSize: '.98rem', lineHeight: 1.4 }}>{r.text}</span>
+      </li>
+    ))}
+  </ol>
+</figure>
 
 Cultural Shock Party is new, so we are honest about what exists: you can read, share and [sign the Fourth Wave Manifesto](/manifesto/) today, and anyone 18 or over can [join the movement](/join/). Under-18s are welcome to learn with us; signing up needs a parent's or guardian's consent.
 
@@ -98,53 +111,66 @@ Before you join any group, check four things:
 - **Is it peaceful and lawful,** and does it respect people who disagree?
 
 <ReceiptRow label="Why groups work">
-  <Receipt figure="70%" label="of girls and young women surveyed have supported another girl who faced sexism or misogyny" source="Girlguiding, Girls' Attitudes Survey (UK)" href="https://girlguidingulster.org.uk/assets/uploads/Files/Girls-Attitudes-Survey-2025.pdf" date="2025" />
+  <Receipt figure="70%" label="of UK girls and young women aged 11–21 have supported another girl who faced sexism or misogyny" source="Girlguiding, Girls' Attitudes Survey (UK)" href="https://girlguidingulster.org.uk/assets/uploads/Files/Girls-Attitudes-Survey-2025.pdf" date="2025" />
   <Receipt figure="49%" label="of 17–18-year-olds have held back from challenging sexism for fear of looking 'too sensitive' (32% of 11–16s)" source="Girlguiding, Girls' Attitudes Survey (UK)" href="https://girlguidingulster.org.uk/assets/uploads/Files/Girls-Attitudes-Survey-2025.pdf" date="2025" tone="ink" note="It is easier to speak up when you are not alone." />
   <Receipt figure="68%" label="of urban, online Indians surveyed call themselves feminists: 65% of men, 71% of women" source="Ipsos and King's College London" href="https://www.ipsos.com/sites/default/files/ct/news/documents/2026-03/IWD%202026%20Global%20Charts%20FINAL.pdf" date="Mar 2026" tone="marigold" note="Not a national sample, but a good sign you are not the only one." />
 </ReceiptRow>
 
-## How do I start a group at college, school, work or in my neighbourhood?
+## How do I start a feminist group?
 
 Find two people who care about the same thing as you. That is a group. Pick a regular time and one question to work on together, such as "Why do the girls' hostels close at 8 pm?" or "Who does the cooking in our homes?"
 
-<Placard color="cardboard" tilt={-3} size="l" stick decorative>Three people. One room. One question.</Placard>
+<Placard color="cardboard" tilt={-3} size="l" stick decorative>Three people.<br />One room.<br />One question.</Placard>
 
-### At college
+<div class="r-wide" style={{ margin: '2em 0', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(340px, 100%), 1fr))', gap: '16px', fontFamily: 'var(--font-sans)' }}>
+  {[
+    { id: 'college', where: 'At college', text: <>Ask the student affairs office how societies are registered and whether you need a faculty adviser. Book a free room and post in your batch groups. Good first projects are small and visible: a reading circle, a campus safety walk with friends, or a survey of hostel rules for women and men.</> },
+    { id: 'school', where: 'At school', text: <>If you are under 18, start with an adult on your side. Ask a teacher to sponsor the group, tell your parents, and meet on school premises during school hours. Keep it about learning: debates, a reading circle, a poster competition, an assembly on women your textbooks skipped.</> },
+    { id: 'work', where: 'At work', text: <>Start a women's network or employee group, and invite men as allies. Under the POSH Act 2013, any workplace with 10 or more workers must have an <a href="/resources/glossary/#internal-committee">Internal Committee</a> for sexual harassment complaints, and volunteers and interns count as employees. Your group can make sure people know who sits on it. It should never replace it.</> },
+    { id: 'neighbourhood', where: 'In your neighbourhood', text: <>Libraries, community halls and resident welfare associations are good places to meet: in daylight, easy to reach, step-free if you can. Planning anything in public? Check local rules first. In Delhi, check the current Delhi Police order: in October 2026 Jantar Mantar was de-notified as a protest site and three other grounds were named (ThePrint, 12 October 2026).</> },
+  ].map((c, i) => (
+    <section aria-labelledby={`start-${c.id}`} style={{ display: 'grid', alignContent: 'start', gap: '10px', padding: '18px 20px 20px', background: i % 2 ? 'var(--paper-deep)' : 'var(--paper-light)', border: '2px solid var(--ink)', borderTopWidth: '8px' }}>
+      <h3 id={`start-${c.id}`} style={{ margin: 0, fontFamily: 'var(--font-sans)', fontWeight: 900, fontStretch: '62%', textTransform: 'uppercase', fontSize: 'clamp(1.7rem, 3vw, 2.2rem)', lineHeight: 0.92 }}>{c.where}</h3>
+      <p style={{ margin: 0, fontSize: '1rem', lineHeight: 1.5 }}>{c.text}</p>
+    </section>
+  ))}
+</div>
 
-Ask the student affairs office how societies are registered and whether you need a faculty adviser. Book a free room and post in your batch groups. Good first projects are small and visible: a reading circle, a campus safety walk with friends, or a survey of hostel rules for women and men.
-
-### At school
-
-If you are under 18, start with an adult on your side. Ask a teacher to sponsor the group, tell your parents, and meet on school premises during school hours. Keep it about learning: debates, a reading circle, a poster competition, an assembly on women your textbooks skipped.
-
-### At work
-
-Many workplaces have a women's network or an employee group. If yours doesn't, start one, and invite men as allies. Under the POSH Act 2013, any workplace with 10 or more workers must have an Internal Committee to hear sexual harassment complaints, and the law counts volunteers and interns as employees. Your group can make sure people know who sits on the [Internal Committee](/resources/glossary/#internal-committee) and how to reach it. It should never replace it.
-
-### In your neighbourhood
-
-Libraries, community halls and resident welfare associations are good places to meet: in daylight, easy to reach, step-free if you can. If you plan anything in public, check local rules first. In Delhi, check the current Delhi Police order before you plan: in October 2026 Jantar Mantar was de-notified as a protest site, and three other grounds were named (ThePrint, 12 October 2026).
+<PhotoPair>
+  <Photo id="in-033-2014-varanasi-bhu-women-medical-students" tone="green" aspect="1 / 1" position="50% 45%" caption="Women medical students walk together at Banaras Hindu University, Varanasi, 14 February 2014." widths={[360, 560, 800]} sizes="(min-width: 900px) 460px, 92vw" />
+  <Photo id="in-039-2019-kolkata-pride-workshop-love-knows-no-gender" tone="green" aspect="1 / 1" position="60% 50%" caption="A participant paints a 'Love knows no gender' poster at the Kolkata Rainbow Pride Walk workshop, 21 December 2019." widths={[360, 560, 800]} sizes="(min-width: 900px) 460px, 92vw" />
+</PhotoPair>
 
 ## What happens at the first meeting?
 
-Keep it to an hour, start on time and end on time. Here is an agenda that works:
+Keep it to an hour, start on time and end on time. Here is an agenda that works.
 
-<div>
-
-| Time | What | Why |
-|---|---|---|
-| 0–10 min | Welcome, names, pronouns if people want, and a quick check on access needs | Everyone feels seen from the start |
-| 10–20 min | Agree a short group agreement (see the rules below) | Safety and respect are not left to chance |
-| 20–35 min | Go round: why did you come? | You find out what people care about |
-| 35–50 min | Choose one small action for the next month | A group needs something to do, not just talk about |
-| 50–55 min | Share out the jobs | Nobody does everything |
-| 55–60 min | Fix the next date, then chai | People come back to things they enjoy |
-
-</div>
+<figure class="r-wide" aria-labelledby="agenda-title" style={{ margin: '1.8em 0 2.4em', padding: 'clamp(18px, 3vw, 30px)', background: 'var(--paper-light)', border: '2px solid var(--ink)', borderTop: '14px solid var(--ink)', boxShadow: '7px 7px 0 var(--marigold)', fontFamily: 'var(--font-sans)' }}>
+  <p style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', justifyContent: 'space-between', gap: '4px 18px' }}><span id="agenda-title" style={{ fontWeight: 900, fontStretch: '62%', textTransform: 'uppercase', fontSize: 'clamp(1.9rem, 3.6vw, 2.6rem)', lineHeight: 0.9 }}>First meeting: 60 minutes</span><span class="hand" style={{ fontSize: 'clamp(1.35rem, 2.4vw, 1.7rem)', color: 'var(--red-ink)', transform: 'rotate(-2deg)' }}>steal this agenda</span></p>
+  <div aria-hidden="true" style={{ display: 'grid', gridTemplateColumns: '10fr 10fr 15fr 15fr 5fr 5fr', height: '14px', marginTop: '16px', border: '2px solid var(--ink)' }}>
+    {['var(--red)', 'var(--pink)', 'var(--marigold)', 'var(--green)', 'var(--ink)', 'var(--paper-deep)'].map((c) => <span style={{ background: c, borderRight: '2px solid var(--ink)' }}></span>)}
+  </div>
+  <ol role="list" style={{ listStyle: 'none', padding: 0, margin: '14px 0 0', display: 'grid' }}>
+    {[
+      ['0–10', 'Welcome, names, pronouns if people want, and a quick check on access needs', 'Everyone feels seen from the start.'],
+      ['10–20', 'Agree a short group agreement (see the rules below)', 'Safety and respect are not left to chance.'],
+      ['20–35', 'Go round: why did you come?', 'You find out what people care about.'],
+      ['35–50', 'Choose one small action for the next month', 'A group needs something to do, not just talk about.'],
+      ['50–55', 'Share out the jobs', 'Nobody does everything.'],
+      ['55–60', 'Fix the next date, then chai', 'People come back to things they enjoy.'],
+    ].map(([t, what, why]) => (
+      <li style={{ margin: 0, display: 'grid', gridTemplateColumns: 'clamp(4.9rem, 21vw, 6.6rem) minmax(0, 1fr)', gap: '2px 12px', alignItems: 'baseline', padding: '12px 0', borderTop: '1.5px dashed var(--line-soft)' }}>
+        <span style={{ gridRow: 'span 2', fontWeight: 900, fontStretch: '62%', fontSize: 'clamp(1.55rem, 4.4vw, 1.9rem)', lineHeight: 0.9, color: 'var(--red-ink)', whiteSpace: 'nowrap' }}>{t}<span style={{ fontSize: '.8rem', fontStretch: '100%', fontWeight: 700, marginLeft: '3px' }}>min</span></span>
+        <strong style={{ fontWeight: 800, fontSize: '1.02rem', lineHeight: 1.35 }}>{what}</strong>
+        <span style={{ fontSize: '.95rem', lineHeight: 1.4, color: 'var(--ink-soft)' }}>{why}</span>
+      </li>
+    ))}
+  </ol>
+</figure>
 
 Invite people with a message that is short, specific and easy to say yes to. Here is one example.
 
-<ChatScript n="01" chat="Batch group: 2nd year" situation="You want to start a small reading circle and need a first message for your class group." lines={[
+<ChatScript chat="Batch group: 2nd year" situation="You want to start a small reading circle and need a first message for your class group." lines={[
   { from: 'you', text: 'Starting a small feminist reading circle. Thursday 5 pm, library room 2, 45 minutes. First read is three pages. No experience needed. Bring a friend (yes, boys too).' },
   { from: 'them', text: 'what do we have to do?' },
   { from: 'you', text: 'Just read and talk. And there will be chai.' },
@@ -157,34 +183,59 @@ Invite people with a message that is short, specific and easy to say yes to. Her
 
 ## Which jobs does a group need?
 
-Five jobs, shared out and swapped every few months, so that no one burns out and everyone learns:
+Five jobs, shared out and swapped every few months, so that no one burns out and everyone learns.
 
-1. **Convenor.** Books the room, sends the reminder, keeps time.
-2. **Note-taker.** Writes down what was decided and who is doing what. Keep receipts.
-3. **Safety and inclusion lead.** Knows the group agreement, checks access needs, and is the person people can come to.
-4. **Culture lead.** Posters, social posts, zines and the group's playlist.
-5. **Outreach.** Brings in new people and links up with other groups.
+<ul class="r-wide" role="list" style={{ listStyle: 'none', padding: 0, margin: '1.8em 0 2.4em', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(176px, 100%), 1fr))', gap: '14px', fontFamily: 'var(--font-sans)' }}>
+  {[
+    ['Convenor', 'Books the room, sends the reminder, keeps time.', 'var(--red-ink)', 'var(--paper-light)'],
+    ['Note-taker', 'Writes down what was decided and who is doing what. Keeps the receipts.', 'var(--green)', 'var(--paper)'],
+    ['Safety and inclusion lead', 'Knows the group agreement, checks access needs, and is the person people can come to.', 'var(--marigold)', 'var(--ink)'],
+    ['Culture lead', 'Posters, social posts, zines and the group playlist.', 'var(--pink)', 'var(--ink)'],
+    ['Outreach', 'Brings in new people and links up with other groups.', 'var(--ink)', 'var(--paper)'],
+  ].map(([role, task, band, bandText], i) => (
+    <li style={{ margin: 0, display: 'grid', gridTemplateRows: 'auto 1fr', background: 'var(--paper-light)', border: '2px solid var(--ink)', borderRadius: '10px', overflow: 'hidden', boxShadow: '4px 4px 0 var(--ink)', transform: `rotate(${[-1.2, 0.8, -0.5, 1, -0.8][i]}deg)` }}>
+      <span style={{ display: 'block', padding: '10px 14px 8px', background: band, color: bandText, fontSize: '.72rem', fontWeight: 800, letterSpacing: '.14em', textTransform: 'uppercase', textAlign: 'center' }}>Hello, I'm the</span>
+      <span style={{ display: 'grid', alignContent: 'start', gap: '8px', padding: '12px 14px 16px', textAlign: 'center' }}>
+        <strong style={{ fontWeight: 900, fontStretch: '62%', textTransform: 'uppercase', fontSize: 'clamp(1.5rem, 2.4vw, 1.85rem)', lineHeight: 0.92 }}>{role}</strong>
+        <span style={{ fontSize: '.93rem', lineHeight: 1.4, color: 'var(--ink-soft)' }}>{task}</span>
+      </span>
+    </li>
+  ))}
+</ul>
 
 ## What are the safety and inclusion rules?
 
-Agree these at your first meeting and write them down:
+Agree these at your first meeting, write them down, and read them out when someone new joins.
 
-- **Respect, always.** No slurs about caste, religion, region, gender, sexuality or disability. Disagree with ideas, not people.
-- **What is shared here stays here,** unless someone is in danger.
-- **Consent for photos.** Nobody is photographed or posted without saying yes. Don't share members' faces, addresses or phone numbers.
-- **Everyone gets heard.** Take turns. People who usually talk the most, talk a little less.
-- **Collect as little data as you can.** A first name and a way to reach someone is enough. Never collect caste, religion or home addresses.
-- **Peaceful and lawful.** Shock the culture, not people.
+<figure class="r-wide ground-green" aria-labelledby="agree-title" style={{ margin: '1.8em 0 2.4em', padding: 'clamp(20px, 3.4vw, 34px)', border: '2px solid var(--ink)', boxShadow: '7px 7px 0 var(--ink)', fontFamily: 'var(--font-sans)' }}>
+  <p style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', justifyContent: 'space-between', gap: '4px 18px' }}><span id="agree-title" style={{ fontWeight: 900, fontStretch: '62%', textTransform: 'uppercase', fontSize: 'clamp(2rem, 4vw, 2.9rem)', lineHeight: 0.9, color: 'var(--paper)' }}>Our group agreement</span><span class="hand" style={{ fontSize: 'clamp(1.35rem, 2.4vw, 1.7rem)', color: 'var(--marigold)', transform: 'rotate(-2deg)' }}>pin it up at every meeting</span></p>
+  <ol role="list" style={{ listStyle: 'none', padding: 0, margin: '16px 0 0', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(300px, 100%), 1fr))', gap: '0 28px' }}>
+    {[
+      ['Respect, always.', 'No slurs about caste, religion, region, gender, sexuality or disability. Disagree with ideas, not people.'],
+      ['What is shared here stays here,', 'unless someone is in danger.'],
+      ['Consent for photos.', 'Nobody is photographed or posted without saying yes. Never share members’ faces, addresses or phone numbers.'],
+      ['Everyone gets heard.', 'Take turns. People who usually talk the most, talk a little less.'],
+      ['Collect as little data as you can.', 'A first name and a way to reach someone is enough. Never collect caste, religion or home addresses.'],
+      ['Peaceful and lawful.', 'Shock the culture, not people.'],
+    ].map(([b, t], i) => (
+      <li style={{ margin: 0, display: 'grid', gridTemplateColumns: '2.6rem minmax(0, 1fr)', gap: '10px', alignItems: 'baseline', padding: '12px 0', borderTop: '1.5px dashed rgba(243, 236, 220, .45)', fontSize: '1rem', lineHeight: 1.45 }}><span aria-hidden="true" style={{ fontWeight: 900, fontStretch: '62%', fontSize: '1.8rem', lineHeight: 0.8, color: 'var(--marigold)' }}>{String(i + 1).padStart(2, '0')}</span><span><strong style={{ fontWeight: 800 }}>{b}</strong> {t}</span></li>
+    ))}
+  </ol>
+</figure>
 
 ### If anyone in the group is under 18
 
-<div><Stamp text="Under 18" sub="Read this first" tilt={-4} color="red" /></div>
+<div class="ground-pink" style={{ padding: 'clamp(16px, 3vw, 26px)', border: '2px solid var(--ink)', boxShadow: '5px 5px 0 var(--ink)', fontFamily: 'var(--font-sans)', fontSize: '1rem', lineHeight: 1.5 }}>
+
+<p style={{ margin: '0 0 14px' }}><Stamp text="Under 18" sub="Read this first" tilt={-4} color="ink" /></p>
 
 - An adult such as a teacher or parent knows about the group, and two adults are present at any activity.
 - No one-to-one private messages between adults and students. Use a group channel the sponsoring adult can see.
 - No photos of under-18s without a parent's consent, and never post school names or uniforms.
 - Under-16s go to any public event only with a parent or guardian.
 - If anyone tells you a child is being sexually abused, the POCSO Act says anyone who knows must report it to the police or the Special Juvenile Police Unit. Call 1098, the Child Helpline, or 112 in an emergency.
+
+</div>
 
 ## How do I run a reading circle?
 
@@ -208,7 +259,7 @@ Most groups don't fail because people stop caring. They fail because three peopl
 - **Make it fun.** Food, music, films, a poster night.
 - **Look after each other.** Check in with people who go quiet. Tele-MANAS on 14416 is free if someone needs to talk.
 
-<Photo id="074-making-a-protest-banner-milan" tone="red" aspect="16 / 9" position="50% 55%" caption="Illustrative photo: hand-painting a banner together." widths={[480, 720, 960]} sizes="(min-width: 1000px) 1000px, 92vw" />
+<Photo id="074-making-a-protest-banner-milan" tone="red" aspect="2 / 1" position="50% 55%" caption="Illustrative photo: taping down a hand-painted banner." widths={[480, 720, 960]} sizes="(min-width: 1000px) 1000px, 92vw" />
 
 <PullQuote quote="Start where you are. Bring a friend. Yes, boys too." by="Cultural Shock Party" />
 
@@ -216,12 +267,12 @@ Most groups don't fail because people stop caring. They fail because three peopl
 
 <div><Stamp text="Coming soon" sub="Now building, 2026" tilt={-6} color="green" /></div>
 
-Honestly: they don't exist yet. Cultural Shock Party was founded in 2026, and we would rather say so than invent a map of chapters. We are building the basics first: a starter kit, a code of conduct and a safeguarding policy, published before the first chapter opens.
+Honestly: they don't exist yet. Cultural Shock Party was founded in 2026, and we would rather say so than invent a map of chapters. We are writing the chapter guidelines, including a starter kit, a code of conduct and a safeguarding policy, and we will publish them on this site before any chapter opens.
 
-Until then, you don't need our permission. Run a reading circle with this guide, keep your receipts, and [join the movement](/join/) if you are 18 or over so we can tell you when chapters open near you.
+Until then, you don't need our permission to start a group, but please don't call it an official Cultural Shock Party chapter. Run a reading circle with this guide, keep your receipts, and [join the movement](/join/) if you are 18 or over so we can tell you when chapters open near you.
 
 <div class="r-full" style="font-family: var(--font-sans); margin-block: 2em;">
-  <Ticker items={['Start where you are', 'Bring a friend', 'Yes, boys too']} tone="ink" />
+  <Ticker items={['Read one guide', 'Bring two friends', 'Book one room']} tone="ink" />
 </div>
 
 ## What you can do

@@ -1,0 +1,211 @@
+---
+// /accessibility/ — Accessibility statement, shaped like a simple conformance report (research/india-compliance.md §9,
+// compliance.md §5): standard, status, what we built in, honest known limitations, how we test, how to report a barrier,
+// the law, and the date of last review.
+import Base from '../layouts/Base.astro';
+import TrustHero from '../components/trust/TrustHero.astro';
+import DocLayout from '../components/trust/DocLayout.astro';
+import DocSection from '../components/trust/DocSection.astro';
+import ShortVersion from '../components/trust/ShortVersion.astro';
+import Checklist from '../components/trust/Checklist.astro';
+import ContactCard from '../components/trust/ContactCard.astro';
+import TrustClose from '../components/trust/TrustClose.astro';
+import Photo from '../components/media/Photo.astro';
+import Placard from '../components/ui/Placard.astro';
+import Sources from '../components/blocks/Sources.astro';
+
+const path = '/accessibility/';
+const crumbs = [{ name: 'Accessibility', href: path }];
+const description =
+  'Cultural Shock Party builds this site to WCAG 2.2 AA, aligned with India’s IS 17802 and the RPwD Act. What works, what doesn’t yet, and how to report a barrier.';
+const REPORT = '/contact/?topic=general#contact-form';
+
+const TOC = [
+  { id: 'standard', n: '01', title: 'Our standard' },
+  { id: 'built-in', n: '02', title: 'What we’ve built in' },
+  { id: 'limits', n: '03', title: 'What isn’t perfect yet' },
+  { id: 'testing', n: '04', title: 'How we test' },
+  { id: 'report', n: '05', title: 'Report a barrier' },
+  { id: 'law', n: '06', title: 'The law, and this statement' },
+];
+
+const SHORT = [
+  { k: 'Standard', strong: 'WCAG 2.2, Level AA.', v: 'The W3C’s Web Content Accessibility Guidelines, the international benchmark.' },
+  { k: 'Status', strong: 'Partially conforms.', v: 'We design, build and test to the standard, but we haven’t yet finished a full manual audit with disabled users.' },
+  { k: 'Also aligned with', strong: 'IS 17802 and GIGW 3.0,', v: 'India’s accessibility standards, and the Rights of Persons with Disabilities Act 2016.' },
+  { k: 'Last reviewed', strong: '24 October 2026.', v: 'We review this statement at least once a year.' },
+  { k: 'Found a barrier?', strong: 'Tell us.', v: 'Use the contact form. We aim to reply within five working days.' },
+];
+
+const BUILT = [
+  { t: 'Colours you can read', d: 'Every text colour in our palette is checked against WCAG AA. Our red on paper measures 5.6:1 and our grey text 4.9:1; the minimum is 4.5:1.', ref: 'WCAG 1.4.3 Contrast' },
+  { t: 'Works with a keyboard', d: 'A “Skip to content” link comes first. Every link, button and form field can be reached with the Tab key, and shows a thick, high-contrast focus ring.', ref: 'WCAG 2.1.1, 2.4.1, 2.4.7' },
+  { t: 'Calm motion', d: 'No autoplay, no parallax, no scroll-jacking, no moving tickers. If your device asks for reduced motion, we switch animations off.', ref: 'WCAG 2.2.2, 2.3.3' },
+  { t: 'Words for every picture', d: 'Photos have alt text that describes the scene in plain words, and captions that say what, where and when. Decorative marks are hidden from screen readers.', ref: 'WCAG 1.1.1' },
+  { t: 'Plain language', d: 'We write for a reading age of about 12 to 14, explain each term the first time, and keep a <a href="/resources/glossary/">glossary</a>.', ref: 'WCAG 3.1.5 (our aim)' },
+  { t: 'Clear structure', d: 'One main heading per page, headings in order, and labelled regions (header, navigation, main content, footer). Pages are marked as English (India), and Hindi phrases as Hindi.', ref: 'WCAG 1.3.1, 3.1.1, 3.1.2' },
+  { t: 'Forms that explain themselves', d: 'Every field has a visible label. Hints and errors are written out, never shown by colour alone. No CAPTCHA puzzles and no time limits.', ref: 'WCAG 1.4.1, 3.3.2, 3.3.8' },
+  { t: 'Targets for thumbs', d: 'Buttons are at least 48 pixels tall, and the phone menu has large, well-spaced links.', ref: 'WCAG 2.5.8' },
+  { t: 'Phone first', d: 'Pages are designed at phone width first, and checked for sideways scrolling. Text can be zoomed in your browser without breaking the layout.', ref: 'WCAG 1.4.4, 1.4.10' },
+  { t: 'Light on data', d: 'No third-party scripts, compressed images that load as you scroll, and forms that work without JavaScript. Kinder to low-cost phones and slow connections.', ref: 'Good practice' },
+];
+
+const LIMITS = [
+  { t: 'No full manual audit yet', d: 'Automated tools catch only some problems. We have not yet tested the site with screen-reader users (NVDA, TalkBack, VoiceOver), or at 200% zoom on a low-cost Android phone. That is our next step.' },
+  { t: 'Mostly in English', d: 'Most pages are only in English. We use some Hindi words and phrases, always with a translation, and we want to publish key pages in Hindi.' },
+  { t: 'Big capital headlines', d: 'Our condensed capital headlines are part of the poster look, but capitals can be harder to read for some people, including some dyslexic readers. We keep them short, and all reading text is in sentence case.' },
+  { t: 'Handwritten notes', d: 'A few short notes and placards use a handwriting-style font. We use it only for short labels, never for paragraphs, and we are checking that none carries information you can’t find in plain text.' },
+  { t: 'Words inside photos', d: 'Archive photos of placards and banners have words that are part of the picture. We describe the important ones in the alt text or caption, but not always every word.' },
+  { t: 'Other people’s documents', d: 'We link to official sources, such as government PDFs, that may not be accessible. We can’t fix them, but if you’re stuck, ask us and we’ll tell you what the source says.' },
+  { t: 'No video yet', d: 'We don’t publish video yet. When we do, every video will have captions and a transcript.' },
+];
+
+const SOURCES = [
+  { label: 'Web Content Accessibility Guidelines (WCAG) 2.2', href: 'https://www.w3.org/TR/WCAG22/', publisher: 'W3C', date: 'Recommendation since 5 Oct 2023; current edition 12 Dec 2024' },
+  { label: 'The Rights of Persons with Disabilities Act, 2016 (gazette copy)', href: 'https://mphc.gov.in/PDF/web_pdf/JJC/LAW%20&%20POLICY/ACT%20&%20RULES/Other%20Child%20related%20Legislations/The%20Rights%20of%20Persons%20with%20Disabilities%20Act,%202016.pdf', publisher: 'Government of India, hosted by the Madhya Pradesh High Court', note: 'Sections 2(v), 40, 46 and 89.' },
+  { label: 'RPwD (Amendment) Rules 2023: websites to follow IS 17802', href: 'https://scconline.com/blog/?p=291941', publisher: 'SCC Online', date: '12 May 2023' },
+  { label: 'Supreme Court directs the Union to frame mandatory accessibility rules (Rajive Raturi v Union of India)', href: 'https://www.livelaw.in/amp/top-stories/supreme-court-directs-union-to-frame-mandatory-rules-under-rights-of-persons-with-disabilities-act-for-accessibility-of-public-spaces-274704', publisher: 'LiveLaw', date: '9 Nov 2024' },
+  { label: 'Draft RPwD (Amendment) Rules 2026, S.O. 3962(E)', href: 'https://www.indialaw.in/blog/regulatory/rpwd-amendment-rules-2026/', publisher: 'IndiaLaw', date: '29 Jul 2026', note: 'Still a draft when we checked.' },
+  { label: 'What is GIGW 3.0? (aligned with WCAG 2.1 AA; 88 mandatory checkpoints)', href: 'https://www.digit.in/features/general/what-is-gigw-3-0-indian-govts-design-guidelines-for-official-websites-and-apps.html', publisher: 'Digit', date: '29 Aug 2025' },
+];
+---
+<Base
+  title="Accessibility statement"
+  description={description}
+  pageType="WebPage"
+  breadcrumbs={crumbs}
+  modified="2026-10-24"
+>
+  <TrustHero
+    crumbs={crumbs}
+    current="accessibility"
+    label="Accessibility statement"
+    meta={['Reviewed 24 Oct 2026', '5 min read']}
+    title="Accessibility"
+    sub="A movement is only as open as its front door."
+    lead="This site should work for everyone: on a cheap phone or a slow connection, with a screen reader, a keyboard, zoomed-in text or tired eyes. Here is what we’ve done, what isn’t perfect yet, and how to tell us when something gets in your way."
+  >
+    <p class="hero-actions">
+      <a class="btn btn--ink" href={REPORT}>Report a barrier <span class="arrow" aria-hidden="true">→</span></a>
+      <a class="link-arrow" href="#limits">What isn’t perfect yet <span aria-hidden="true">↓</span></a>
+    </p>
+    <div slot="aside" class="ac-art">
+      <Photo
+        id="in-055-chennai-woman-reading-on-kerb"
+        tone="marigold"
+        aspect="4 / 3"
+        position="60% 50%"
+        alt="A young woman sits on a kerb, reading a paperback."
+        caption={false}
+        priority
+        sizes="(min-width: 900px) 40vw, 92vw"
+        widths={[480, 720, 960, 1200]}
+        tape="tl"
+      />
+      <div class="ac-art__sticker" aria-hidden="true"><Placard text="Plain words. Big buttons. No autoplay." color="paper" shape="sticker" size="s" tilt={5} decorative /></div>
+    </div>
+  </TrustHero>
+
+  <section class="short-wrap" aria-label="Summary">
+    <div class="wrap short-wrap__inner">
+      <ShortVersion id="short" title="At a glance" rows={SHORT} intro="The five things an accessibility statement should tell you." />
+    </div>
+  </section>
+
+  <DocLayout toc={TOC} updated="Last reviewed 24 October 2026">
+    <DocSection id="standard" n="01" title="Our standard">
+      <p>We build this site to the <strong>Web Content Accessibility Guidelines (WCAG) 2.2, Level AA</strong>, the W3C Recommendation first published on 5 October 2023 (current edition 12 December 2024).<sup><a class="fn-ref" href="#src-1">1</a></sup> WCAG 2.2 builds on WCAG 2.1, which is the basis of India’s IS 17802 standard for websites and of GIGW 3.0, the Government of India’s website guidelines; meeting 2.2 AA covers both.<sup><a class="fn-ref" href="#src-3">3</a></sup><sup><a class="fn-ref" href="#src-6">6</a></sup></p>
+      <div class="status">
+        <p class="status__label label">Our status</p>
+        <p class="status__big">Partially conforms</p>
+        <p class="status__text">That’s the honest word for it. We meet the standard in how we design and build, and our automated checks pass, but we haven’t yet completed a full manual audit with disabled users. Until we have, we won’t claim full conformance.</p>
+      </div>
+    </DocSection>
+
+    <DocSection id="built-in" n="02" title="What we’ve built in">
+      <Checklist items={BUILT} />
+    </DocSection>
+
+    <DocSection id="limits" n="03" title="What isn’t perfect yet">
+      <p>We would rather tell you than have you find out. These are the gaps we know about.</p>
+      <ol class="limits" role="list">
+        {LIMITS.map((l, i) => (
+          <li class="limit">
+            <span class="limit__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <div><h3 class="limit__t">{l.t}</h3><p class="limit__d">{l.d}</p></div>
+          </li>
+        ))}
+      </ol>
+    </DocSection>
+
+    <DocSection id="testing" n="04" title="How we test">
+      <p>Before a page goes live, we:</p>
+      <ul class="dsec-list">
+        <li>check it with <strong>axe-core</strong>, an automated tester, against the WCAG 2.2 AA rules;</li>
+        <li>look at it at <strong>phone and desktop widths</strong> (390 and 1440 pixels), for sideways scrolling, overlapping text and weak contrast;</li>
+        <li>check that every photo has alt text and a true caption, and that every number links to its source.</li>
+      </ul>
+      <p>This statement was last reviewed on <strong>24 October 2026</strong>.</p>
+    </DocSection>
+
+    <DocSection id="report" n="05" title="Report a barrier">
+      <p>If something on this site doesn’t work for you, it’s our problem, not yours. Tell us and we’ll fix it, or get you the content another way: as plain text, in large print, or as a simpler summary by email.</p>
+      <ContactCard
+        id="barrier"
+        kicker="Report a barrier"
+        role="Tell us what got in the way"
+        cta={{ label: 'Report a barrier', href: REPORT }}
+        reply="we aim to reply within five working days"
+      >
+        <p>Use the contact form and start your message with the word <strong>Accessibility</strong>. It helps if you tell us:</p>
+        <ul>
+          <li>the page address, or what you were looking for</li>
+          <li>what you were trying to do, and what went wrong</li>
+          <li>the device, browser or assistive technology you use, if you’re happy to share</li>
+        </ul>
+      </ContactCard>
+    </DocSection>
+
+    <DocSection id="law" n="06" title="The law, and this statement">
+      <p>In India, the <strong>Rights of Persons with Disabilities Act 2016</strong> covers private establishments, including associations, trusts and organisations, and requires service providers to follow the government’s accessibility rules (sections 2(v), 40 and 46).<sup><a class="fn-ref" href="#src-2">2</a></sup> Since 2023, those rules point websites to <strong>IS 17802</strong>.<sup><a class="fn-ref" href="#src-3">3</a></sup></p>
+      <p>On 8 November 2024, in <em>Rajive Raturi v Union of India</em>, the Supreme Court ordered the government to make accessibility rules mandatory.<sup><a class="fn-ref" href="#src-4">4</a></sup> Draft amendment rules published in July 2026 would require organisations to publish Accessibility Conformance Reports; they were still a draft when we checked.<sup><a class="fn-ref" href="#src-5">5</a></sup> This statement is written in that spirit.</p>
+      <p>Version 1.0, last reviewed 24 October 2026. Next review: by October 2027, or after any major redesign, whichever comes first.</p>
+      <p class="dsec-note">This page is information, not legal advice.</p>
+      <Sources sources={SOURCES} />
+    </DocSection>
+  </DocLayout>
+
+  <TrustClose
+    current="accessibility"
+    title="Something got in your way?"
+    text="Tell us what happened and what you were trying to do. We’ll fix it, or send you what you need another way."
+    cta={{ label: 'Report a barrier', href: REPORT }}
+    placard="Everyone in. No exceptions."
+  />
+</Base>
+
+<style>
+  .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; margin-top: 6px; }
+  .short-wrap { padding-block: clamp(36px, 5vw, 64px) 0; }
+  .short-wrap__inner { max-width: 1100px; }
+  .ac-art { position: relative; padding-bottom: 30px; }
+  .ac-art__sticker { position: absolute; right: -10px; bottom: 0; z-index: 3; }
+  .ac-art__sticker :global(.placard__text) { max-width: 12ch; }
+
+  .status { display: grid; grid-template-columns: auto 1fr; gap: 6px 24px; align-items: center; padding: 18px 0; border-block: 3px solid var(--ink); font-family: var(--font-sans); }
+  .status__label { grid-column: 1 / -1; color: var(--red-ink); }
+  .status__big { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(2.2rem, 4vw, 3.4rem); line-height: .86; padding: .12em .3em .06em; background: var(--marigold); transform: rotate(-1.5deg); }
+  .status__text { font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.5; max-width: 52ch; }
+
+  .limits { display: grid; border-top: 3px solid var(--ink); font-family: var(--font-sans); }
+  .limit { display: grid; grid-template-columns: 3.4rem 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line-soft); }
+  .limit__n { font-weight: 900; font-stretch: var(--display-stretch); font-size: 2.2rem; line-height: .85; color: var(--red); }
+  .limit__t { font-weight: 850; font-stretch: var(--head-stretch); font-size: 1.22rem; line-height: 1.15; margin-bottom: 4px; }
+  .limit__d { font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.5; color: var(--ink-soft); max-width: 64ch; }
+
+  @media (max-width: 640px) {
+    .status { grid-template-columns: 1fr; }
+    .status__big { justify-self: start; }
+    .ac-art__sticker { right: 6px; }
+  }
+</style>

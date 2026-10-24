@@ -1,45 +1,221 @@
 ---
+// /credits/ — Every photo in the register (src/data/photos.json, via lib/photos PHOTOS) with its credit, licence link
+// and source, grouped so it can be scanned without a search box. Entries keep id={photo id} for /credits/#<id> links.
 import Base from '../layouts/Base.astro';
-import PageHero from '../components/blocks/PageHero.astro';
-import { PHOTOS } from '../lib/photos';
+import TrustHero from '../components/trust/TrustHero.astro';
+import CreditItem from '../components/trust/CreditItem.astro';
+import TrustClose from '../components/trust/TrustClose.astro';
+import Photo from '../components/media/Photo.astro';
+import Annotation from '../components/ui/Annotation.astro';
+import { PHOTOS, photoMeta } from '../lib/photos';
+import { buildGroups, displayCredit, FAMILIES, familyOf } from '../components/trust/credits';
 
-const groups = [
-  { key: 'commons', title: 'Documentary and archival photographs (Wikimedia Commons / Openverse)' },
-  { key: 'india', title: 'India and South Asia' },
-  { key: 'stock', title: 'Photographs from Unsplash and Pexels' },
-];
-const other = PHOTOS.filter((p) => !groups.some((g) => g.key === p.source));
+const path = '/credits/';
+const crumbs = [{ name: 'Image credits', href: path }];
+const description =
+  'Every photo on the Cultural Shock Party site, with its photographer, licence and original source. Documentary photos are real; stock photos are illustrative.';
+
+const groups = buildGroups(PHOTOS);
+const total = PHOTOS.length;
+const listed = groups.reduce((n, g) => n + g.subs.reduce((m, s) => m + s.items.length, 0), 0);
+if (listed !== total) throw new Error(`/credits/ lists ${listed} of ${total} photos`);
+const tally = FAMILIES.map((f) => ({ ...f, n: PHOTOS.filter((p) => familyOf(p) === f.key).length }));
+const groupCount = (g: (typeof groups)[number]) => g.subs.reduce((m, s) => m + s.items.length, 0);
+const DEMO = 'in-039-2019-kolkata-pride-workshop-love-knows-no-gender';
+const demo = photoMeta(DEMO);
 ---
 <Base
-  title="Image credits"
-  description="Every photograph on Cultural Shock Party, with its photographer, licence and source. We only use images we're allowed to use, and we credit them."
-  breadcrumbs={[{ name: 'Image credits', href: '/credits/' }]}
+  title="Image credits: every photo and its licence"
+  description={description}
+  pageType="WebPage"
+  breadcrumbs={crumbs}
+  modified="2026-10-24"
 >
-  <PageHero label="Credits" title="Image credits" lead="Every photo on this site is credited here with its licence. Documentary photos show the real event named in their caption; stock photos are illustrative and do not show CSP members or events." crumbs={[{ name: 'Image credits', href: '/credits/' }]} />
-  <section class="section"><div class="wrap wrap--narrow stack" style="--flow: 2.5rem">
-    <p>Many photos on this site are shown as duotones (recoloured in our palette). Under their licences that counts as an adaptation; the originals are linked below. Licences: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>, <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>, public domain, the <a href="https://unsplash.com/license">Unsplash License</a> and the <a href="https://www.pexels.com/license/">Pexels License</a>. Our duotone adaptations of CC BY-SA photos are shared under the same licence.</p>
-    <p>Spotted a photo of yourself you'd like removed, or a credit that's wrong? <a href="/contact/">Tell us</a> and we'll fix it within 48 hours.</p>
-    {[...groups.map((g) => ({ ...g, items: PHOTOS.filter((p) => p.source === g.key) })), { key: 'other', title: 'Other', items: other }]
-      .filter((g) => g.items.length)
-      .map((g) => (
-        <section>
-          <h2 class="h3">{g.title}</h2>
-          <ol class="credits" role="list">
-            {g.items.map((p) => (
-              <li id={p.id}>
-                <span class="credits__title">{p.title || p.caption || p.id}</span>
-                <span class="small">{p.credit}{p.licence && !p.credit.includes(p.licence) ? ` · ${p.licence}` : ''}</span>
-                <span class="small">{p.sourcePage && <a href={p.sourcePage} rel="noopener">Source</a>}{p.licenceUrl && <> · <a href={p.licenceUrl} rel="noopener">Licence</a></>}</span>
-              </li>
-            ))}
-          </ol>
-        </section>
-      ))}
-  </div></section>
+  <TrustHero
+    crumbs={crumbs}
+    current="credits"
+    label="Image credits"
+    meta={[`${total} photographs`, 'Checked 24 Oct 2026']}
+    title="Image credits"
+    sub="Every photo, and who made it."
+    lead="We only use photos we are allowed to use, and we credit every one. Documentary photos show the real event named in their caption. Stock photos are illustrative: they never show CSP members or CSP events."
+  >
+    <nav class="jump" aria-label="Jump to a group">
+      <ul role="list">
+        {groups.map((g) => <li><a href={`#${g.id}`}><span class="jump__n">{groupCount(g)}</span><span>{g.title}</span></a></li>)}
+      </ul>
+    </nav>
+    <figure slot="aside" class="demo" aria-labelledby="demo-cap">
+      <div class="demo__pair">
+        <div class="demo__item">
+          <p class="label demo__label">The original</p>
+          <Photo id={DEMO} aspect="4 / 3" caption={false} priority sizes="(min-width: 900px) 22vw, 45vw" widths={[320, 480, 640]} alt="A person bends over a black poster, painting white letters that read Love knows no gender." />
+        </div>
+        <div class="demo__item demo__item--tone">
+          <p class="label demo__label">Our duotone</p>
+          <Photo id={DEMO} tone="red" aspect="4 / 3" caption={false} sizes="(min-width: 900px) 22vw, 45vw" widths={[320, 480, 640]} alt="" tilt={2} />
+        </div>
+      </div>
+      <Annotation text="same photo, our colours: that’s an adaptation" arrow="up" width="18ch" tilt={-3} />
+      <figcaption id="demo-cap" class="demo__cap">{demo.caption} Photo: {displayCredit(demo)}. Right: recoloured by CSP, and shared under the same licence.</figcaption>
+    </figure>
+  </TrustHero>
+
+  <!-- Licence tally -->
+  <section class="tally" aria-labelledby="tally-title">
+    <div class="wrap">
+      <div class="tally__head">
+        <h2 class="tally__title" id="tally-title">{total} photos, five kinds of licence</h2>
+        <p class="tally__note">Counted from our photo register on 24 October 2026.</p>
+      </div>
+      <ul class="tally__list" role="list">
+        {tally.map((t) => (
+          <li class="tally__item">
+            <span class="tally__n">{t.n}</span>
+            <a class="tally__lic" href={t.href} rel="noopener">{t.label}</a>
+            <span class="tally__what">{t.note}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- How we use photos -->
+  <section class="rules" aria-labelledby="rules-title">
+    <div class="wrap">
+      <h2 class="visually-hidden" id="rules-title">How we use photos</h2>
+      <ol class="rules__list" role="list">
+        <li><span class="rules__n" aria-hidden="true">01</span><h3>Real photos keep real captions</h3><p>Documentary and archive photos say what happened, where and when, as recorded by the photographer or archive. We never re-caption them.</p></li>
+        <li><span class="rules__n" aria-hidden="true">02</span><h3>Stock is illustrative</h3><p>Photos from Unsplash and Pexels illustrate ideas. We never present them as CSP, as our members, or as a specific event.</p></li>
+        <li><span class="rules__n" aria-hidden="true">03</span><h3>Duotones are adaptations</h3><p>Many photos appear recoloured in our palette. Under Creative Commons licences that is a change to the original, which is linked below. Our adaptations of <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener">CC BY-SA</a> photos are shared under the same licence.</p></li>
+        <li><span class="rules__n" aria-hidden="true">04</span><h3>Spotted yourself?</h3><p>Want a photo of you taken down, or found a credit that’s wrong? <a href="/contact/?topic=general#contact-form">Tell us</a> and we will fix it within 48 hours.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- The register -->
+  {groups.map((g, gi) => (
+    <section class:list={['group', { 'group--alt': gi % 2 === 1 }]} id={g.id} aria-labelledby={`${g.id}-title`}>
+      <div class="wrap">
+        <header class="group__head">
+          <p class="group__n" aria-hidden="true">{String(gi + 1).padStart(2, '0')}</p>
+          <div class="group__titles">
+            <h2 class="group__title" id={`${g.id}-title`}>{g.title}</h2>
+            <p class="group__lead">{g.lead}</p>
+          </div>
+          <p class="group__count"><span>{groupCount(g)}</span> photos</p>
+        </header>
+        {g.subs.length > 1 && (
+          <nav class="subnav" aria-label={`${g.title}: sections`}>
+            <ul role="list">{g.subs.map((s) => <li><a href={`#${s.id}`}>{s.title} <span class="subnav__n">{s.items.length}</span></a></li>)}</ul>
+          </nav>
+        )}
+        {g.subs.map((s) => (
+          <section class="sub" id={s.id} aria-labelledby={`${s.id}-title`}>
+            <h3 class="sub__title" id={`${s.id}-title`}>{s.title} <span class="sub__n">{s.items.length}</span></h3>
+            <ul class="sub__list" role="list">
+              {s.items.map((p) => <CreditItem p={p} />)}
+            </ul>
+          </section>
+        ))}
+      </div>
+    </section>
+  ))}
+
+  <section class="words">
+    <div class="wrap words__inner">
+      <p class="label">Words and badge</p>
+      <p>Our words are licensed <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener">CC BY-SA 4.0</a> unless a page says otherwise: share and adapt them, credit Cultural Shock Party, and share alike. The Cultural Shock Party name and badge are ours and are not covered by that licence.</p>
+    </div>
+  </section>
+
+  <TrustClose
+    current="credits"
+    title="A credit wrong, or a photo of you?"
+    text="Tell us and we will fix it within 48 hours. We take photos down first and ask questions later."
+    cta={{ label: 'Tell us', href: '/contact/?topic=general#contact-form' }}
+    placard="Credit where it’s due."
+  />
 </Base>
 
 <style>
-  .credits { margin-top: 14px; border-top: 3px solid var(--line); }
-  .credits li { display: grid; gap: 2px; padding: 12px 0; border-bottom: 1px solid var(--line-soft); }
-  .credits__title { font-weight: 700; }
+  .jump ul { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+  .jump a { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 14px 0 6px; border: 2px solid var(--ink); background: var(--paper-light); color: var(--ink); text-decoration: none; font-weight: 800; font-size: .95rem; }
+  .jump a:hover { background: var(--ink); color: var(--paper-light); }
+  .jump__n { display: inline-grid; place-items: center; min-width: 2.6em; height: 32px; padding: 0 .4em; background: var(--red-ink); color: var(--paper-light); font-weight: 900; font-stretch: var(--display-stretch); font-size: 1.15rem; }
+
+  .demo { display: grid; gap: 14px; justify-items: center; }
+  .demo__pair { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; width: 100%; }
+  .demo__label { margin-bottom: 8px; }
+  .demo__item--tone .demo__label { color: var(--red-ink); }
+  .demo :global(.annot) { margin-top: -4px; }
+  .demo__cap { font-size: .8rem; line-height: 1.4; color: var(--ink-soft); max-width: 52ch; text-align: center; }
+
+  .tally { border-bottom: 3px solid var(--ink); background: var(--ink); color: var(--paper); padding-block: clamp(28px, 4vw, 44px); }
+  .tally__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 8px 24px; padding-bottom: 16px; border-bottom: 1.5px solid #5A554D; }
+  .tally__title { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(1.8rem, 3.4vw, 2.8rem); line-height: .9; }
+  .tally__note { font-size: .85rem; color: #CFC6B4; }
+  .tally__list { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .tally__item { display: grid; gap: 4px; align-content: start; padding: 18px 18px 6px 0; }
+  .tally__item + .tally__item { padding-left: 18px; border-left: 1.5px solid #5A554D; }
+  .tally__n { font-weight: 900; font-stretch: var(--display-stretch); font-size: clamp(3rem, 5.4vw, 4.6rem); line-height: .82; color: var(--marigold); }
+  .tally .tally__lic { color: var(--paper); font-weight: 800; font-size: 1rem; text-decoration-color: var(--coral); }
+  .tally .tally__lic:hover { color: var(--marigold); }
+  .tally__what { font-size: .82rem; line-height: 1.35; color: #CFC6B4; }
+
+  .rules { padding-block: clamp(36px, 5vw, 64px); border-bottom: 3px solid var(--ink); }
+  .rules__list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-top: 3px solid var(--ink); }
+  .rules__list li { display: grid; gap: 8px; align-content: start; padding: 18px 20px 6px 0; }
+  .rules__list li + li { padding-left: 20px; border-left: 1px solid var(--ink); }
+  .rules__n { font-weight: 900; font-stretch: var(--display-stretch); font-size: 2.2rem; line-height: .8; color: var(--red); }
+  .rules__list h3 { font-weight: 900; font-stretch: var(--head-stretch); font-size: 1.3rem; line-height: 1.08; }
+  .rules__list p { font-family: var(--font-serif); font-size: 1.02rem; line-height: 1.5; color: var(--ink-soft); }
+
+  .group { padding-block: clamp(40px, 6vw, 80px); border-bottom: 3px solid var(--ink); }
+  .group--alt { background: var(--paper-light); }
+  .group__head { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 18px; align-items: end; padding-top: 14px; border-top: 3px solid var(--ink); }
+  .group__n { font-weight: 900; font-stretch: var(--display-stretch); font-size: clamp(3rem, 6vw, 5rem); line-height: .8; color: var(--red); }
+  .group__titles { display: grid; gap: 8px; }
+  .group__title { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(2.2rem, 5vw, 4rem); line-height: .86; }
+  .group__lead { font-family: var(--font-serif); font-size: 1.08rem; line-height: 1.45; color: var(--ink-soft); max-width: 62ch; }
+  .group__count { font-size: var(--fs-label); font-weight: 800; letter-spacing: .14em; text-transform: uppercase; text-align: right; }
+  .group__count span { display: block; font-weight: 900; font-stretch: var(--display-stretch); font-size: clamp(2.4rem, 4vw, 3.4rem); line-height: .85; letter-spacing: 0; }
+
+  .subnav ul { display: flex; flex-wrap: wrap; gap: 6px 8px; margin-top: 22px; }
+  .subnav a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 12px; border: 1.5px solid var(--ink); color: var(--ink); text-decoration: none; font-weight: 700; font-size: .88rem; background: var(--paper); }
+  .group--alt .subnav a { background: var(--paper-light); }
+  .subnav a:hover { background: var(--ink); color: var(--paper-light); }
+  .subnav__n { font-weight: 900; color: var(--red-ink); }
+  .subnav a:hover .subnav__n { color: var(--marigold); }
+
+  .sub { margin-top: clamp(28px, 4vw, 44px); scroll-margin-top: 90px; }
+  .sub__title { display: flex; align-items: baseline; gap: 10px; padding-bottom: 10px; border-bottom: 3px solid var(--ink); font-weight: 900; font-stretch: var(--head-stretch); font-size: clamp(1.25rem, 2vw, 1.55rem); line-height: 1.1; }
+  .sub__n { font-size: .9rem; font-stretch: 100%; font-weight: 800; color: var(--red-ink); }
+  .sub__list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: clamp(20px, 2.6vw, 36px); }
+
+  .words { padding-block: clamp(32px, 5vw, 56px); }
+  .words__inner { display: grid; gap: 10px; font-family: var(--font-serif); font-size: 1.08rem; line-height: 1.55; }
+  .words__inner p { max-width: 72ch; }
+  .words__inner .label { font-family: var(--font-sans); color: var(--red-ink); }
+
+  @media (max-width: 1100px) {
+    .sub__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tally__list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tally__item:nth-child(4) { padding-left: 0; border-left: 0; }
+    .rules__list { grid-template-columns: 1fr 1fr; }
+    .rules__list li:nth-child(3) { padding-left: 0; border-left: 0; }
+    .rules__list li:nth-child(n+3) { border-top: 1px solid var(--ink); }
+  }
+  @media (max-width: 640px) {
+    .sub__list { grid-template-columns: 1fr; }
+    .tally__list { grid-template-columns: 1fr 1fr; }
+    .tally__item, .tally__item + .tally__item { padding: 14px 12px 6px 0; border-left: 0; }
+    .tally__item:nth-child(even) { padding-left: 14px; border-left: 1.5px solid #5A554D; }
+    .rules__list { grid-template-columns: 1fr; }
+    .rules__list li, .rules__list li + li { padding: 16px 0 10px; border-left: 0; }
+    .rules__list li + li { border-top: 1px solid var(--ink); }
+    .group__head { grid-template-columns: 1fr; gap: 10px; }
+    .group__count { text-align: left; }
+    .demo__pair { gap: 12px; }
+  }
 </style>

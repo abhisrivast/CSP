@@ -21,6 +21,8 @@ const description =
 const crumbs = [{ name: 'About', href: '/about/' }, { name: FOUNDER.name, href: path }];
 const book = FOUNDER.book;
 const [bookMain, bookSub] = book.title.split(':').map((s) => s.trim());
+// Typeset the shared bio: curly quotes, and the book title set as a title.
+const bioHtml = FOUNDER.shortBio.replace(/"([^"]+)"/g, '“$1”').replace(book.title, `<cite>${book.title}</cite>`);
 const isbn = `${book.isbn13.slice(0, 3)}-${book.isbn13.slice(3)}`;
 const published = new Date(book.published).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 const handles = [
@@ -65,7 +67,7 @@ const handles = [
       <div class="bio__main">
         <p class="label section-label"><span class="num">01</span> / In short</p>
         <h2 class="h2" id="bio-title">Who is Rubby Singh?</h2>
-        <p class="bio__text serif">{FOUNDER.shortBio}</p>
+        <p class="bio__text serif" set:html={bioHtml} />
         <p class="bio__more">We publish only what we can source. Her own story of her work is hers to tell.</p>
       </div>
       <aside class="dossier" aria-labelledby="dossier-title">
@@ -156,7 +158,7 @@ const handles = [
     </div>
   </section>
 
-  <JoinBand ground="green" />
+  <JoinBand ground="green" placard="Start where you are" />
 </Base>
 
 <style>

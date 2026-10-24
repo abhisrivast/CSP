@@ -54,7 +54,8 @@ timeline:
     title: "Bail after a year inside"
     text: >-
       The Delhi High Court grants bail to members Devangana Kalita and Natasha Narwal, arrested in May 2020 in cases
-      linked to the 2020 north-east Delhi riots, including under the anti-terror UAPA.
+      linked to the 2020 north-east Delhi riots, including under the anti-terror UAPA. Their trial was still pending
+      in October 2026; being accused is not a finding of guilt.
 numbers:
   - figure: "8 pm"
     label: "Curfew at Jamia Millia Islamia’s women’s hostel in 2015; returning later needed a guardian’s written permission"
@@ -110,7 +111,7 @@ limits: >-
   In 2019, nine Bahujan, tribal and Muslim members said the collective was run by a few upper-caste members, that
   caste was missing from its principles and that marginalised members were consulted mostly when an incident touched
   their community. Two of its best-known members spent about a year in custody under anti-terror law before being
-  granted bail in 2021, which shows how fast student activists can face the full weight of the state. Wins came
+  granted bail in 2021; their trial had not concluded by October 2026. That shows how fast student activists can face the full weight of the state. Wins came
   campus by campus and were uneven. And the group’s public channels have been quiet for years: its last visible
   Instagram post dates from August 2021.
 tags: [India, Delhi, Student organising, campus, curfews, public space, safety, intersectionality]
@@ -152,7 +153,7 @@ updated: 2026-10-24
 
 In 2015, if you were a woman living in many Indian college hostels, your day had a hard stop. At Jamia Millia Islamia in Delhi, the women's hostel shut at 8 pm. Coming back later needed written permission from a local guardian, and breaking the rules could cost you your room.<sup><a class="fn-ref" href="#src-1" aria-label="Source 1">1</a></sup>
 
-The reason given was always the same: *it's for your safety*.
+The reason given was always the same: *it’s for your safety*.
 
 In August 2015, the Delhi Commission for Women challenged Jamia's rules as moral policing applied only to women.<sup><a class="fn-ref" href="#src-1" aria-label="Source 1">1</a></sup> Students had heard the safety argument their whole lives, usually as a reason to do less, go out less, stay in. Nearly three years after the Delhi bus attack of December 2012, a lot of them were done hearing it used against them.
 
@@ -168,7 +169,7 @@ A booth popped up at Ambedkar University. A petition went online. Graffiti, Face
 
 ### Rulebooks as evidence
 
-The collective's best move was also its simplest. It collected hostel rulebooks.
+The collective’s best move was also its simplest. It collected hostel rulebooks.
 
 Read side by side, the rules made the argument for them: earlier curfews, extra permissions and fines that applied to women and not to men. In October 2015, students marched at night across North Campus and carried those rulebooks to the Ministry of Human Resource Development.<sup><a class="fn-ref" href="#src-6" aria-label="Source 6">6</a></sup> In November, they sent the Delhi Commission for Women a report on discriminatory conditions in the city's women's hostels.<sup><a class="fn-ref" href="#src-3" aria-label="Source 3">3</a></sup>
 
@@ -188,13 +189,13 @@ That same month, the University Grants Commission published regulations on sexua
 
 In February 2019, nine Bahujan, tribal and Muslim students and alumni left the collective in public. Upper-caste members dominated decisions, they said, caste concerns were sidelined, and marginalised members were consulted mostly when something happened to their own community.<sup><a class="fn-ref" href="#src-4" aria-label="Source 4">4</a></sup>
 
-Then came the arrests. In May 2020, Devangana Kalita and Natasha Narwal were arrested in cases linked to the north-east Delhi riots of February 2020, including under the anti-terror Unlawful Activities (Prevention) Act. They spent about a year in custody before the Delhi High Court granted them bail on 15 June 2021.<sup><a class="fn-ref" href="#src-5" aria-label="Source 5">5</a></sup>
+Then came the arrests. In May 2020, Devangana Kalita and Natasha Narwal were arrested in cases linked to the north-east Delhi riots of February 2020, including under the anti-terror Unlawful Activities (Prevention) Act. They spent about a year in custody before the Delhi High Court granted them bail on 15 June 2021.<sup><a class="fn-ref" href="#src-5" aria-label="Source 5">5</a></sup> When we last checked, in October 2026, the case had not been decided: that month the High Court noted that the trial was likely to take considerable time ([Verdictum, 19 Oct 2026](https://www.verdictum.in/delhi-high-court/2026-dhc-9372-natasha-narwal-v-state-of-nct-of-delhi-1624315)). Being accused is not a finding of guilt.
 
 Since then the collective has gone quiet online. Its last visible Instagram post dates from August 2021.<sup><a class="fn-ref" href="#src-7" aria-label="Source 7">7</a></sup>
 
 ## Why it matters for the Fourth Wave
 
-Pinjra Tod changed the question. Instead of asking how to keep women safe, it asked who gets to decide where women can be, and when. That is the Fourth Wave's safety agenda in one line: freedom, not cages.
+Pinjra Tod changed the question. Instead of asking how to keep women safe, it asked who gets to decide where women can be, and when. That is the Fourth Wave’s safety agenda in one line: freedom, not cages.
 
 It also left a method anyone can copy. Collect the rules. Compare them. Send them to the body with the power to act. Then keep showing up: at night, on the bus, in public, in numbers.
 

@@ -27,6 +27,13 @@ const {
 
 const { src, meta } = await getPhoto(id, tone);
 const text = caption === false ? '' : caption ?? meta.caption;
+// Credit line: no bare licence URLs (each licence is linked on /credits/) and never "Photo: Photo by…".
+const credit = meta.credit.replace(/\s*\(https?:\/\/[^)]+\)/g, '').replace(/^Photo:\s*/i, '').trim();
+const creditLine = /^photo(graph)?\b/i.test(credit) ? credit : `Photo: ${credit}`;
+// Placard text in Hindi, Bengali or Urdu gets its own lang so screen readers switch voice (STRATEGY §10).
+const SCRIPT_RUN = /([\u0900-\u097F\u0980-\u09FF\u0600-\u06FF](?:[\u0900-\u097F\u0980-\u09FF\u0600-\u06FF\s!?,.।]*[\u0900-\u097F\u0980-\u09FF\u0600-\u06FF!?।])?)/;
+const langOf = (run: string) => (/[\u0980-\u09FF]/.test(run) ? 'bn' : /[\u0600-\u06FF]/.test(run) ? 'ur' : 'hi');
+const runs = (s: string) => s.split(SCRIPT_RUN).map((part, i) => ({ part, lang: i % 2 ? langOf(part) : undefined })).filter((r) => r.part);
 const style = [aspect && `--aspect:${aspect}`, position && `--pos:${position}`, tilt && `--tilt:${tilt}deg`].filter(Boolean).join(';');
 ---
 <figure class:list={['photo', cls, { 'photo--frame': frame, 'photo--tilt': !!tilt, [`photo--tape-${tape}`]: !!tape, 'photo--fixed': !!aspect }]} style={style || undefined}>
@@ -46,8 +53,8 @@ const style = [aspect && `--aspect:${aspect}`, position && `--pos:${position}`, 
   </div>
   {(text || showCredit) && caption !== false && (
     <figcaption>
-      {text && <span class="photo__caption">{text}</span>}
-      {showCredit && <span class="photo__credit">Photo: {meta.credit}</span>}
+      {text && <span class="photo__caption">{runs(text).map((r) => (r.lang ? <span lang={r.lang} dir={r.lang === 'ur' ? 'rtl' : undefined}>{r.part}</span> : r.part))}</span>}
+      {showCredit && <span class="photo__credit">{runs(creditLine).map((r) => (r.lang ? <span lang={r.lang}>{r.part}</span> : r.part))}</span>}
     </figcaption>
   )}
 </figure>
@@ -56,6 +63,7 @@ const style = [aspect && `--aspect:${aspect}`, position && `--pos:${position}`, 
   .photo { position: relative; transform: rotate(var(--tilt, 0deg)); }
   .photo__img { position: relative; overflow: hidden; background: var(--paper-deep); }
   .photo--fixed .photo__img { aspect-ratio: var(--aspect); }
+  .photo--fixed .photo__img :global(picture) { display: block; height: 100%; }
   .photo__img :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 50% 50%); }
   .photo--frame .photo__img { border: 10px solid var(--paper-light); box-shadow: 0 1px 0 rgba(0,0,0,.06), 6px 8px 0 rgba(29,28,24,.18); }
   figcaption { display: grid; gap: 2px; margin-top: 10px; font-size: .86rem; line-height: 1.4; max-width: 60ch; }

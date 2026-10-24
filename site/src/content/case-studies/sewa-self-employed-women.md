@@ -1,11 +1,11 @@
 ---
-title: "SEWA: organising India's self-employed women"
+title: "SEWA: organising India’s self-employed women"
 dek: >-
   Vegetable vendors, head-loaders and home-based workers had no boss and no union. In 1972 they formed one. Then they
   built their own bank.
 summary: >-
-  SEWA, the Self Employed Women's Association, was registered in Ahmedabad on 12 April 1972 as a trade union for women
-  who work without an employer. Founded by Ela Bhatt, it set up a members' bank in 1974 and had 25,32,846 members in
+  SEWA, the Self Employed Women’s Association, was registered in Ahmedabad on 12 April 1972 as a trade union for women
+  who work without an employer. Founded by Ela Bhatt, it set up a members’ bank in 1974 and had 25,32,846 members in
   2022.
 place: "Ahmedabad, Gujarat"
 region: India
@@ -16,16 +16,15 @@ heroPhoto: in-026-2008-rural-women-self-help-group-meeting
 tone: green
 gallery:
   - in-054-older-woman-writing-in-ledger-shop
-  - in-059-kerala-woman-farmer-watering-field
-  - 067-group-of-women-in-saris
+  - in-027-2017-cuddalore-women-self-help-group-circle
   - in-061-delhi-women-equal-pay-for-equal-work-placard
-  - in-057-india-smiling-woman-bindi-headscarf
+  - in-020-2021-tikri-women-farmers-tractor-trolley
 timeline:
   - date: "1955"
-    title: "A young lawyer joins the mill workers' union"
+    title: "A young lawyer joins the mill workers’ union"
     text: >-
-      Ela Bhatt joins the legal department of the Textile Labour Association in Ahmedabad, India's oldest textile
-      workers' union, founded in 1920 by Anasuya Sarabhai and Mahatma Gandhi.
+      Ela Bhatt joins the legal department of the Textile Labour Association in Ahmedabad, India’s oldest textile
+      workers’ union, founded in 1920 by Anasuya Sarabhai and Mahatma Gandhi.
   - date: "12 Apr 1972"
     title: "A union with no boss"
     text: >-
@@ -49,17 +48,17 @@ timeline:
   - date: "4 Mar 2014"
     title: "The Street Vendors Act"
     text: >-
-      India's Street Vendors (Protection of Livelihood and Regulation of Street Vending) Act receives assent,
-      protecting vendors' right to earn a living.
+      India’s Street Vendors (Protection of Livelihood and Regulation of Street Vending) Act receives assent,
+      protecting vendors’ right to earn a living.
   - date: "2 Nov 2022"
     title: "Ela Bhatt dies, SEWA turns 50"
     text: >-
-      Months after celebrating SEWA's 50th year with leaders from 18 states, its founder dies. Membership that year is
+      Months after celebrating SEWA’s 50th year with leaders from 18 states, its founder dies. Membership that year is
       25,32,846, up 18% on 2021.
   - date: "Oct 2026"
     title: "3.78 million members"
     text: >-
-      SEWA's website lists 3.78 million members in 20 states of India.
+      SEWA’s website lists 3.78 million members in 20 states of India.
 numbers:
   - figure: "10%"
     label: "Daily interest vegetable vendors paid moneylenders before SEWA Bank: ₹50 borrowed at dawn, ₹55 repaid at dusk"
@@ -80,14 +79,14 @@ numbers:
     label: "SEWA members today (3.78 million), in 20 states of India"
     source: "SEWA, official website"
     href: "https://www.sewa.org/"
-    date: "Accessed 24 Oct 2026"
+    date: "Oct 2026"
 stages:
   ideas: >-
     Women who work without an employer are still workers, so they deserve a union. SEWA joined that idea to the
-    Gandhian goal of a "second freedom", economic freedom after political freedom, and to a simple design: a union to
+    Gandhian goal of a “second freedom”, economic freedom after political freedom, and to a simple design: a union to
     fight for rights, and cooperatives so members own their trades.
   research: >-
-    SEWA began with fieldwork. Ela Bhatt went to see how laid-off mill workers' families were surviving and found women
+    SEWA began with fieldwork. Ela Bhatt went to see how laid-off mill workers’ families were surviving and found women
     sorting mill rags and stitching quilts to keep them going. Today SEWA tracks its members digitally and judges
     itself by eleven questions, from income and assets to childcare, leadership and self-reliance.
   consciousness: >-
@@ -96,7 +95,7 @@ stages:
     self-employed women and the ILO.
   action: >-
     It organised trade by trade, then built institutions members own: SEWA Bank in 1974 and cooperatives of health,
-    construction and waste workers. It went to court for vendors' right to their markets and to a seat at labour talks,
+    construction and waste workers. It went to court for vendors’ right to their markets and to a seat at labour talks,
     and lobbied for laws from the ILO Home Work Convention (1996) to the Street Vendors Act (2014).
 lessons:
   - title: "Organise people where they already are"
@@ -109,21 +108,21 @@ lessons:
       together: a savings circle, a cooperative, a mutual-aid fund, a shared library.
   - title: "Measure what people actually gain"
     text: >-
-      Borrow SEWA's yardstick. Count work, income, savings, childcare, leadership and confidence, not likes and turnout.
+      Borrow SEWA’s yardstick. Count work, income, savings, childcare, leadership and confidence, not likes and turnout.
       Publish your own questions and answer them in public every year.
 limits: >-
-  Fifty years on, India's workforce is still overwhelmingly informal: SEWA's own website puts the share at 93%. SEWA's
+  Fifty years on, India’s workforce is still overwhelmingly informal: SEWA’s own website puts the share at 93%. SEWA’s
   2022 membership was concentrated in Gujarat (11,27,622 of 25,32,846 members), and only 8% of its Gujarat members had
-  an e-Shram card, India's registration for unorganised workers. As of November 2022, India had not ratified the ILO
-  Home Work Convention SEWA campaigned for, and Indira Jaising, who argued SEWA's cases, wrote that the 2014 Street
-  Vendors Act ended only "one phase" of its work.
+  an e-Shram card, India’s registration for unorganised workers. As of November 2022, India had not ratified the ILO
+  Home Work Convention SEWA campaigned for, and Indira Jaising, who argued SEWA’s cases, wrote that the 2014 Street
+  Vendors Act ended only “one phase” of its work.
 tags: [union organising, India, Gujarat, informal work, cooperatives, labour, women workers, economic justice]
 sources:
   - label: "History"
     href: "https://www.sewa.org/about-us/history/"
-    publisher: "Self Employed Women's Association (SEWA)"
+    publisher: "Self Employed Women’s Association (SEWA)"
     date: "undated, accessed 24 Oct 2026"
-  - label: "Self Employed Women's Association: home page"
+  - label: "Self Employed Women’s Association: home page"
     href: "https://www.sewa.org/"
     publisher: "SEWA"
     date: "accessed 24 Oct 2026"
@@ -188,8 +187,8 @@ On 12 April 2022, Ela Bhatt celebrated SEWA's 50 years with leaders from 18 stat
 
 ## Why it matters for the Fourth Wave
 
-SEWA is proof that feminism can be infrastructure: a union card, a bank account, a cooperative, a seat at the table. It did not wait for anyone to recognise women's work. It organised the women and made recognition unavoidable.
+SEWA is proof that feminism can be infrastructure: a union card, a bank account, a cooperative, a seat at the table. It did not wait for anyone to recognise women’s work. It organised the women and made recognition unavoidable.
 
-For the Fourth Wave, that is a template. Much of our generation's work is informal too: gig shifts, freelancing, family businesses, creator work and unpaid care. The questions SEWA asked in 1972 still apply. Who is the employer? Who pays when you fall sick? Where do you save? Who speaks for you at the table?
+For the Fourth Wave, that is a template. Much of our generation’s work is informal too: gig shifts, freelancing, family businesses, creator work and unpaid care. The questions SEWA asked in 1972 still apply. Who is the employer? Who pays when you fall sick? Where do you save? Who speaks for you at the table?
 
 And SEWA judges itself by what members gain, not by headlines: more work, more income, food, health, childcare, housing, assets, leadership and self-reliance. That is a scoreboard worth borrowing. Hope first, receipts always.

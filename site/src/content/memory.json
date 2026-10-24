@@ -51,13 +51,14 @@
     "date": "1889",
     "year": 1889,
     "title": "Pandita Ramabai opens Sharada Sadan, a home and school for widows",
-    "text": "Pandita Ramabai was the first woman in India to earn the titles 'Pandita' and 'Sarasvati'. In 1889 she opened Sharada Sadan, where widowed girls and women could live and study. It began in Bombay and later moved to Pune.",
+    "text": "Pandita Ramabai was the first woman in India to earn the titles 'Pandita' and 'Sarasvati'. In 1889 she opened Sharada Sadan, where widowed girls and women could live and study. It opened in Bombay, in Chowpatty, and later moved to Poona (Pune).",
     "why": "Shelter, schooling and a route to independence under one roof, paid for partly with money she raised abroad. It is an early Indian model of a feminist organisation that both serves people and campaigns.",
-    "place": "Bombay, later Pune",
+    "place": "Bombay, later Poona (Pune)",
     "region": "India",
     "tag": "Education",
     "sources": [
       { "label": "Women's History Month 2020: Pandita Ramabai Sarasvati", "href": "https://blogs.soas.ac.uk/archives/?p=5581", "publisher": "SOAS Archives & Special Collections", "date": "23 Mar 2020" },
+      { "label": "Pandita Ramabai", "href": "https://artsandculture.google.com/story/4wVx8_4U248xIQ", "publisher": "Zubaan, on Google Arts & Culture", "date": "accessed 24 Oct 2026" },
       { "label": "Pandita Ramabai", "href": "https://en.wikipedia.org/wiki/Pandita_Ramabai", "publisher": "Wikipedia", "date": "rev. 1 Sep 2026" }
     ]
   },
@@ -96,12 +97,14 @@
     "date": "19 March 1911",
     "year": 1911,
     "title": "The first International Women's Day",
-    "text": "A year after socialist women meeting in Copenhagen agreed to hold an international women's day, the first celebrations took place in several European countries and the US. Marchers demanded the vote, the right to work and an end to discrimination at work.",
+    "text": "A year after socialist women meeting in Copenhagen agreed to hold an international women's day, the first celebrations took place on 19 March 1911 in Austria, Denmark, Germany and Switzerland, building on a US National Woman's Day first held in 1909. Marchers demanded the vote, the right to work and an end to discrimination at work.",
     "why": "International Women's Day began as a working women's protest, not a branding day. Worth remembering every 8 March.",
-    "place": "Europe and the US",
+    "place": "Austria, Denmark, Germany and Switzerland",
     "region": "Global",
     "tag": "Street",
     "sources": [
+      { "label": "International Women's Day: history (UN WomenWatch)", "href": "https://www.un.org/womenwatch/daw/news/womday97.htm", "publisher": "United Nations", "date": "accessed 24 Oct 2026" },
+      { "label": "International Women's Day", "href": "https://www.britannica.com/topic/International-Womens-Day", "publisher": "Encyclopaedia Britannica", "date": "accessed 24 Oct 2026" },
       { "label": "Background: International Women's Day", "href": "https://www.un.org/en/observances/womens-day/background", "publisher": "United Nations", "date": "accessed 24 Oct 2026" }
     ]
   },
@@ -415,14 +418,15 @@
     "date": "9 December 2013",
     "year": 2013,
     "title": "The POSH Act turns the Vishaka rules into law",
-    "text": "The Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, passed in April 2013, came into force. It made complaints committees at workplaces a legal duty and replaced the 1997 Vishaka guidelines.",
+    "text": "The Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, passed by Parliament in February 2013 and signed into law on 22 April, came into force. It made complaints committees at workplaces a legal duty and replaced the 1997 Vishaka guidelines.",
     "why": "It took 16 years to get from a grassroots worker's case to a statute. A win in court needs a follow-through campaign to become law.",
     "place": "India",
     "region": "India",
     "tag": "Law",
     "sources": [
       { "label": "Government notifies prevention of sexual harassment law; Act has come into force from 9 December 2013", "href": "https://www.barandbench.com/news/government-notifies-prevention-sexual-harassment-law-act-has-come-force-december-9-2013", "publisher": "Bar & Bench", "date": "12 Dec 2013" },
-      { "label": "Sexual Harassment of Women at Workplace Act, 2013", "href": "https://en.wikipedia.org/wiki/Sexual_Harassment_of_Women_at_Workplace_(Prevention,_Prohibition_and_Redressal)_Act,_2013", "publisher": "Wikipedia", "date": "rev. 26 Sep 2026" }
+      { "label": "Sexual Harassment of Women at Workplace Act, 2013", "href": "https://en.wikipedia.org/wiki/Sexual_Harassment_of_Women_at_Workplace_(Prevention,_Prohibition_and_Redressal)_Act,_2013", "publisher": "Wikipedia", "date": "rev. 26 Sep 2026" },
+      { "label": "The Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013: Act 14 of 2013, text of the Act", "href": "https://www.iimshillong.ac.in/wp-content/uploads/2022/01/shww-act.pdf", "publisher": "Government of India, copy hosted by IIM Shillong", "date": "assent 22 Apr 2013" }
     ]
   },
   {

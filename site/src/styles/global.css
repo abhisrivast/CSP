@@ -40,6 +40,8 @@ hr { border: 0; border-top: var(--rule); }
   position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }
+/* Netlify honeypots: bots read the HTML, people (and screen readers) should never meet the field. */
+.visually-hidden:has(input[name='bot-field']) { display: none !important; }
 
 /* ---------- layout ---------- */
 .wrap { width: 100%; max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
@@ -59,6 +61,9 @@ hr { border: 0; border-top: var(--rule); }
 .ground-green a:hover { color: var(--paper); }
 .ground-red { background: var(--red-ink); color: var(--paper-light); --text: var(--paper-light); --ink-soft: #FBE7E1; --muted: #F6D9D2; --line: var(--paper-light); }
 .ground-red a { color: var(--paper-light); }
+/* Buttons keep their own text colour on every ground (the ground link colours above would otherwise win). */
+.ground-ink a.btn, .ground-green a.btn, .ground-red a.btn,
+.ground-ink a.btn:hover, .ground-green a.btn:hover, .ground-red a.btn:hover { color: var(--btn-fg); }
 .ground-pink { background: var(--pink); color: var(--ink); --muted: #4A463F; }
 .ground-deep { background: var(--paper-deep); }
 .ground-light { background: var(--paper-light); }
@@ -138,6 +143,9 @@ hr { border: 0; border-top: var(--rule); }
   border-bottom: 3px solid var(--red); padding-bottom: 2px;
 }
 .link-arrow:hover { color: var(--red-ink); }
+/* A ≥44px touch target without changing the layout (the link itself is ~32px tall). */
+.link-arrow { position: relative; }
+.link-arrow::before { content: ''; position: absolute; inset: -8px -4px; }
 
 /* ---------- long-form prose (articles, case studies, manifesto) ---------- */
 .prose { font-family: var(--font-serif); font-size: clamp(1.12rem, 1.4vw, 1.25rem); line-height: 1.62; max-width: 68ch; }

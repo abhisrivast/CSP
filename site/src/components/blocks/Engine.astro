@@ -26,10 +26,14 @@ const STAGES = [
   .engine { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 3px solid var(--line); border-bottom: 3px solid var(--line); counter-reset: s; padding: 0; list-style: none; }
   .engine__stage { position: relative; display: grid; align-content: start; gap: 12px; padding: 24px clamp(16px, 2vw, 28px) 28px; border-left: 1px solid var(--line); }
   .engine__stage:first-child { border-left: 0; padding-left: 0; }
-  .engine__n span { color: var(--red); font-weight: 900; }
-  :global(.ground-ink) .engine__n span, :global(.ground-green) .engine__n span { color: var(--coral); }
+  .engine__n span { color: var(--red-ink); font-weight: 900; }
+  :global(.ground-ink) .engine__n span { color: var(--coral); }
+  :global(.ground-green) .engine__n span { color: var(--marigold); }
+  :global(.ground-pink) .engine__n span { color: var(--ink); }
+  :global(.ground-red) .engine__n span { color: var(--paper-light); }
   .engine__name { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(1.9rem, 2.9vw, 2.75rem); line-height: .88; min-height: 1.8em; hyphens: manual; }
   .engine__text { color: var(--ink-soft); font-size: .98rem; line-height: 1.45; }
+  :global(.ground-pink) .engine__text { color: var(--muted); } /* pink keeps the paper --ink-soft (3.9:1); its --muted is 5:1+ */
   .engine__out { margin-top: auto; padding-top: 10px; }
   .engine__out span { background: var(--marigold); color: var(--ink); padding: .15em .4em; }
   .engine__arrow {

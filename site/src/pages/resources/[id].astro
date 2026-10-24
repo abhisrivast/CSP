@@ -11,7 +11,7 @@ import ShareBar from '../../components/blocks/ShareBar.astro';
 import Card from '../../components/blocks/Card.astro';
 import JoinBand from '../../components/blocks/JoinBand.astro';
 import { articleNode, faqNode } from '../../lib/schema';
-import { getArticles, readingMinutes, relatedFor, isoDate, KIND_NOUN, type Article } from '../../components/resources/lib';
+import { getArticles, readingMinutes, relatedFor, isoDate, KIND_NOUN, SEO_TITLES, pagePhotoIds, cardPhotoOf, seedOf, type Article } from '../../components/resources/lib';
 
 export async function getStaticPaths() {
   const all = await getArticles();
@@ -25,6 +25,13 @@ const all = await getArticles();
 const path = `/resources/${entry.id}/`;
 const minutes = readingMinutes(entry);
 const related = relatedFor(entry, all, 3);
+// Read-next cards use each article's card photo, never one already on this page or on another card.
+const used = pagePhotoIds(entry);
+const relatedPics = related.map((r) => {
+  const id = cardPhotoOf(r, used, seedOf(entry.id));
+  if (id) used.add(id);
+  return id;
+});
 const toc = headings.filter((h) => h.depth === 2);
 const crumbs = [{ name: 'Resources', href: '/resources/' }, { name: d.title, href: path }];
 const image = `/og/resources-${entry.id}.png`;
@@ -41,7 +48,7 @@ const schema: object[] = [
 ];
 ---
 <Base
-  title={d.title}
+  title={SEO_TITLES[entry.id] ?? d.title}
   description={d.description}
   type="article"
   pageType="WebPage"
@@ -106,9 +113,9 @@ const schema: object[] = [
           <a class="link-arrow" href="/resources/">All guides and explainers <span aria-hidden="true">→</span></a>
         </div>
         <ul class="read-next__grid" role="list">
-          {related.map((r) => (
+          {related.map((r, k) => (
             <li>
-              <Card href={`/resources/${r.id}/`} title={r.data.title} kicker={r.data.kind} meta={[`${readingMinutes(r)} min`]} dek={r.data.description} photo={r.data.heroPhoto} tone={r.data.tone} aspect="4 / 3" />
+              <Card href={`/resources/${r.id}/`} title={r.data.title} kicker={r.data.kind} meta={[`${readingMinutes(r)} min`]} dek={r.data.description} photo={relatedPics[k]} tone={r.data.tone} aspect="4 / 3" />
             </li>
           ))}
         </ul>

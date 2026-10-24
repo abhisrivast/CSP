@@ -1,0 +1,63 @@
+---
+// A till-roll "data receipt": what a sign-up actually costs you, and what we never ask for.
+// Facts match the notices on the join, newsletter and manifesto forms (see /privacy/ section 02).
+export interface Props { tilt?: number }
+const { tilt = -2 } = Astro.props;
+const KEPT = [
+  { k: 'Email', v: 'to send what you ask for' },
+  { k: 'Age band', v: 'to keep under-18s safe' },
+  { k: 'First name', v: 'optional' },
+  { k: 'State or city', v: 'optional' },
+];
+const NEVER = ['Caste', 'Religion', 'Aadhaar or voter ID', 'Phone number', 'Home address', 'School or employer', 'Photos of you'];
+const ZERO = ['Sold to anyone', 'Shared with any party or candidate', 'Cookies or ad trackers'];
+---
+<figure class="drec" style={`--tilt:${tilt}deg`} aria-labelledby="drec-cap">
+  <div class="drec__paper">
+    <p class="drec__brand"><span>Cultural Shock Party</span><span class="drec__dot" aria-hidden="true">✶</span><span>Data receipt</span></p>
+    <p class="drec__sub">One sign-up · notice v1.0 · 24 Oct 2026</p>
+
+    <p class="drec__group">We keep</p>
+    <ul class="drec__list" role="list">
+      {KEPT.map((i) => <li><span class="drec__k">{i.k}</span><span class="drec__lead" aria-hidden="true"></span><span class="drec__v">{i.v}</span></li>)}
+    </ul>
+
+    <p class="drec__group">We never ask for</p>
+    <ul class="drec__list drec__list--never" role="list">
+      {NEVER.map((k) => <li><s class="drec__k">{k}</s><span class="drec__lead" aria-hidden="true"></span><span class="drec__v drec__x">not asked</span></li>)}
+    </ul>
+
+    <ul class="drec__total" role="list">
+      {ZERO.map((k) => <li><span>{k}</span><span class="drec__lead" aria-hidden="true"></span><span class="drec__zero">0</span></li>)}
+    </ul>
+    <p class="drec__thanks">Unsubscribe any time. Thank you for reading the small print.</p>
+  </div>
+  <figcaption id="drec-cap" class="visually-hidden">What Cultural Shock Party keeps when you sign up, and what it never asks for.</figcaption>
+</figure>
+
+<style>
+  .drec { transform: rotate(var(--tilt)); filter: drop-shadow(6px 8px 0 rgba(29, 28, 24, .18)); max-width: 420px; margin-inline: auto; }
+  .drec__paper {
+    background: var(--paper-light); color: var(--ink); padding: 26px 24px 40px; border-top: 8px solid var(--ink);
+    font-feature-settings: 'tnum' 1;
+    -webkit-mask: linear-gradient(#000 0 0) top / 100% calc(100% - 12px) no-repeat, radial-gradient(circle 8px at 50% 100%, transparent 7px, #000 8px) bottom / 18px 13px repeat-x;
+    mask: linear-gradient(#000 0 0) top / 100% calc(100% - 12px) no-repeat, radial-gradient(circle 8px at 50% 100%, transparent 7px, #000 8px) bottom / 18px 13px repeat-x;
+  }
+  .drec__brand { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 10px; font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: 1.55rem; line-height: 1; }
+  .drec__dot { color: var(--red); }
+  .drec__sub { margin-top: 6px; text-align: center; font-size: var(--fs-label); letter-spacing: .12em; text-transform: uppercase; font-weight: 700; color: var(--ink-soft); padding-bottom: 12px; border-bottom: 1.5px dashed var(--ink); }
+  .drec__group { margin-top: 14px; font-size: var(--fs-label); letter-spacing: .14em; text-transform: uppercase; font-weight: 800; color: var(--red-ink); }
+  .drec__list, .drec__total { display: grid; gap: 4px; margin-top: 6px; }
+  .drec__list li, .drec__total li { display: grid; grid-template-columns: auto minmax(12px, 1fr) auto; align-items: baseline; gap: 6px; font-size: .9rem; line-height: 1.3; }
+  .drec__k { font-weight: 700; }
+  .drec__lead { border-bottom: 2px dotted var(--line-soft); transform: translateY(-3px); }
+  .drec__v { color: var(--ink-soft); font-size: .82rem; text-align: right; }
+  .drec__list--never .drec__k { text-decoration-thickness: 2px; text-decoration-color: var(--red); color: var(--ink-soft); }
+  .drec__x { color: var(--red-ink); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; font-size: .7rem; }
+  .drec__total { margin-top: 14px; padding-top: 10px; border-top: 1.5px dashed var(--ink); }
+  .drec__total li { font-weight: 800; font-size: .92rem; }
+  .drec__zero { font-weight: 900; font-stretch: var(--display-stretch); font-size: 1.7rem; line-height: .9; color: var(--red-ink); }
+  .drec__thanks { margin-top: 14px; padding-top: 10px; border-top: 1.5px dashed var(--ink); text-align: center; font-family: var(--font-serif); font-style: italic; font-size: .95rem; color: var(--ink-soft); }
+  @media (max-width: 560px) { .drec { max-width: 340px; } }
+  @media (max-width: 420px) { .drec__paper { padding-inline: 16px; } .drec__v { font-size: .76rem; } }
+</style>

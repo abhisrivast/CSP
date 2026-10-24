@@ -21,7 +21,7 @@ faq:
   - q: "When will 33% reservation for women start in the Lok Sabha?"
     a: "Only after constituencies are redrawn using Census 2027 figures. PRS Legislative Research says that delimitation is unlikely to be finished before the 2029 general election, so the quota is not expected to apply in 2029."
   - q: "Does the Women's Reservation Act include SC, ST and OBC women?"
-    a: "It reserves one-third of the seats already set aside for Scheduled Castes and Scheduled Tribes for SC and ST women. It has no separate quota for women from Other Backward Classes, which some MPs asked for during the 2023 debate."
+    a: "It reserves one-third of the seats already set aside for Scheduled Castes and Scheduled Tribes for SC and ST women. It has no separate quota for women from Other Backward Classes, which a parliamentary committee on an earlier version of the bill had asked the government to consider."
   - q: "Why did the 131st Amendment Bill fail?"
     a: "A constitutional amendment needs two-thirds of the members present and voting. On 17 April 2026 the bill got 298 of 528 votes, short of the 352 it needed. Many opposition MPs said they backed the quota but objected to tying it to a new seat redrawing based on 2011 census figures."
   - q: "How long will women's reservation last?"
@@ -112,7 +112,7 @@ In plain words, it does five things:
 4. **It has an end date.** The reservation lasts 15 years from when it starts, and longer only if Parliament passes a law to extend it.
 5. **It waits for a census.** It starts after the first census taken once the law is in force, when a delimitation based on that census picks the seats.
 
-What it does not do matters too. It does not cover the Rajya Sabha or the state legislative councils, and it has no separate quota for women from Other Backward Classes (OBCs). MPs raised both points in the 2023 debate.
+What it does not do matters too. It does not cover the Rajya Sabha or the state legislative councils, and it has no separate quota for women from Other Backward Classes (OBCs). Parliamentary committees that studied earlier versions of the bill had asked for both to be considered, PRS Legislative Research notes.
 
 ## How did Parliament vote?
 
@@ -133,7 +133,7 @@ The President gave her assent on 28 September 2023. That ended a wait that began
   { date: '20–28 Sep 2023', title: 'Passed, almost unanimously', text: 'Lok Sabha 454–2, Rajya Sabha 214–0, and presidential assent on 28 September.', tag: 'Law', source: { label: 'Onmanorama (PTI), 29 Sep 2023', href: 'https://www.onmanorama.com/news/india/2023/09/29/womens-reservation-bill-becomes-law.html' } },
   { date: '16 Apr 2026', title: 'In force, on paper', text: 'The government notifies the Act into force. No seat can be reserved until the census and delimitation are done.', tag: 'Law', source: { label: 'LiveLaw, 17 Apr 2026', href: 'https://www.livelaw.in/top-stories/lok-sabha-rejects-constitution-131st-bill-2026-on-delimitation-530736' } },
   { date: '17 Apr 2026', title: 'A shortcut fails', text: 'The Constitution (131st Amendment) Bill, which would have redrawn seats on 2011 Census figures and started the quota soon after, gets 298 votes to 230: short of two-thirds.', tag: 'Parliament', source: { label: 'LiveLaw, 17 Apr 2026', href: 'https://www.livelaw.in/top-stories/lok-sabha-rejects-constitution-131st-bill-2026-on-delimitation-530736' } },
-  { date: '1 Mar 2027', title: 'The count that unlocks it', text: 'The reference date for Census 2027, with people counted in February 2027. Delimitation can only begin once the census figures are out.', tag: 'Next', source: { label: 'News on AIR, 1 Apr 2026', href: 'https://www.newsonair.gov.in/worlds-largest-and-first-digitallly-conducted-indias-census-2027-begins-today' } },
+  { date: '1 Mar 2027', title: 'The count it waits for', text: 'The reference date for Census 2027, with people counted in February 2027. Delimitation can only begin once the census figures are out.', tag: 'Next', source: { label: 'News on AIR, 1 Apr 2026', href: 'https://www.newsonair.gov.in/worlds-largest-and-first-digitallly-conducted-indias-census-2027-begins-today' } },
 ]} />
 
 ## Why is no seat reserved yet?
@@ -143,9 +143,32 @@ Because of two words in the law: **census** and **delimitation**.
 - **Census.** India's last full count was in 2011. Census 2027 began on 1 April 2026, and people are counted in February 2027.
 - **Delimitation** means redrawing the boundaries of constituencies so that each one has a similar number of people. The law says women's seats are picked during the first delimitation after that census. It is slow work: the last Delimitation Commission was set up in 2002 and its orders were finalised in 2008.
 
+<figure class="r-wide" aria-labelledby="tracker-title" style={{ margin: '2.4em 0', fontFamily: 'var(--font-sans)' }}>
+  <p class="label" id="tracker-title" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '6px 18px', paddingTop: '12px', borderTop: '3px solid var(--line)' }}><span>Quota tracker: the road to a reserved seat</span><span style={{ color: 'var(--muted)' }}>Status on 24 Oct 2026</span></p>
+  <ol role="list" style={{ listStyle: 'none', padding: 0, margin: '14px 0 0', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(168px, 100%), 1fr))', gap: '10px' }}>
+    {[
+      { n: '01', step: 'Parliament passes the law', when: '20–21 Sep 2023', status: 'Done', k: 'done' },
+      { n: '02', step: 'The law comes into force', when: '16 Apr 2026', status: 'Done', k: 'done' },
+      { n: '03', step: 'Census 2027 counts everyone', when: 'Began 1 Apr 2026; people counted Feb 2027', status: 'Under way', k: 'now' },
+      { n: '04', step: 'Seats are redrawn and women’s seats picked', when: 'Once census figures are published', status: 'Waiting', k: 'wait' },
+      { n: '05', step: 'First election with reserved seats', when: 'Not expected in 2029, says PRS', status: 'Waiting', k: 'wait' },
+    ].map((s) => (
+      <li style={{ margin: 0, display: 'grid', alignContent: 'start', gap: '8px', padding: '14px 14px 16px', background: s.k === 'done' ? 'var(--ink)' : s.k === 'now' ? 'var(--marigold)' : 'var(--paper-light)', color: s.k === 'done' ? 'var(--paper)' : 'var(--ink)', border: s.k === 'wait' ? '2px dashed var(--ink)' : '2px solid var(--ink)', boxShadow: s.k === 'now' ? '4px 4px 0 var(--ink)' : 'none' }}>
+        <span style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '8px' }}>
+          <span aria-hidden="true" style={{ fontWeight: 900, fontStretch: '62%', fontSize: '2.5rem', lineHeight: 0.8, color: s.k === 'done' ? 'var(--coral)' : s.k === 'now' ? 'var(--ink)' : 'var(--red-ink)' }}>{s.n}</span>
+          <span style={{ fontSize: '.7rem', fontWeight: 800, letterSpacing: '.12em', textTransform: 'uppercase', padding: '.25em .5em', border: '1.5px solid currentColor', background: s.k === 'now' ? 'var(--ink)' : 'transparent', color: s.k === 'now' ? 'var(--paper)' : 'inherit' }}>{s.k === 'done' ? '✓ ' : ''}{s.status}</span>
+        </span>
+        <span style={{ fontWeight: 800, fontStretch: '80%', fontSize: '1.12rem', lineHeight: 1.15 }}>{s.step}</span>
+        <span style={{ fontSize: '.9rem', lineHeight: 1.35, color: s.k === 'done' ? '#CFC6B4' : s.k === 'now' ? 'var(--ink)' : 'var(--ink-soft)' }}>{s.when}</span>
+      </li>
+    ))}
+  </ol>
+  <figcaption class="small" style={{ marginTop: '12px', color: 'var(--muted)' }}>Sources: All India Radio (Sep 2023); LiveLaw (17 Apr 2026); News on AIR (1 Apr 2026); PRS Legislative Research, The Delimitation Bill, 2026.</figcaption>
+</figure>
+
 The government brought the Act into force on 16 April 2026. The very next day, the Lok Sabha voted on a shortcut.
 
-<Receipt figure="298–230" label="Lok Sabha vote on the Constitution (131st Amendment) Bill, 17 April 2026. It needed two-thirds of the 528 members voting, which is 352, so it failed." source="LiveLaw" href="https://www.livelaw.in/top-stories/lok-sabha-rejects-constitution-131st-bill-2026-on-delimitation-530736" date="Apr 2026" tone="marigold" />
+<Receipt figure="298–230" label="Lok Sabha vote on the Constitution (131st Amendment) Bill, 17 April 2026. It needed two-thirds of the 528 members voting, which is 352, so it failed." source="LiveLaw" href="https://www.livelaw.in/top-stories/lok-sabha-rejects-constitution-131st-bill-2026-on-delimitation-530736" date="Apr 2026" tone="pink" />
 
 That bill would have enlarged the Lok Sabha to as many as 850 seats, allowed a redrawing on 2011 Census figures without waiting for 2027, and started the women's quota straight after. When it failed, the government withdrew the Delimitation Bill 2026 and the Union Territories Laws (Amendment) Bill 2026 that went with it (PRS lists the Delimitation Bill as infructuous).
 
@@ -190,8 +213,8 @@ The local quota is the best evidence we have that a reserved seat becomes a habi
 No, and we keep it that way. Almost every MP voted for the 2023 law; the parties disagree about how and when to start it. We don't take sides in that argument. Our demand is simple and the same for everyone in power: implement the one-third quota, publish the timetable, and count the women who stand, win and lead. If you want the bigger picture, our guide to [what the Fourth Wave of Feminism is](/resources/what-is-fourth-wave-feminism/) explains why representation is one of this generation's core demands, and [ten myths about feminism, with the receipts](/resources/feminism-myths-and-receipts/) takes on "women already have enough power".
 
 <PhotoPair>
-  <Photo id="063-india-we-want-policy-bw" tone="natural" aspect="1 / 1" caption="Illustrative photo: women at a rally with placards demanding policy change. Location not stated." widths={[360, 560, 800]} sizes="(min-width: 900px) 460px, 92vw" />
-  <Photo id="039-voting-is-my-superpower-sign" tone="marigold" aspect="1 / 1" caption="Illustrative photo: a hand-lettered sign. Location not stated." widths={[360, 560, 800]} sizes="(min-width: 900px) 460px, 92vw" />
+  <Photo id="063-india-we-want-policy-bw" tone="natural" aspect="1 / 1" caption="Illustrative photo: women at a rally with placards demanding policy change." widths={[360, 560, 800]} sizes="(min-width: 900px) 460px, 92vw" />
+  <Photo id="039-voting-is-my-superpower-sign" tone="marigold" aspect="1 / 1" caption="Illustrative photo: a hand-lettered sign." widths={[360, 560, 800]} sizes="(min-width: 900px) 460px, 92vw" />
 </PhotoPair>
 
 ## What you can do

@@ -1,0 +1,58 @@
+---
+// Calm, document-style hero for the trust pages: breadcrumbs, a document masthead (kind, version, date),
+// one H1, an italic standfirst, a plain-language lead and an optional aside (photo, receipt, stamp).
+import Breadcrumbs from '../ui/Breadcrumbs.astro';
+import TrustNav, { type TrustDoc } from './TrustNav.astro';
+
+export interface Props {
+  crumbs: { name: string; href: string }[];
+  label: string;               // "Privacy notice"
+  title: string;               // H1
+  sub?: string;                // italic serif line under the H1
+  lead: string;
+  meta?: string[];             // ["Version 1.0", "24 Oct 2026", "7 min read"]
+  current: TrustDoc;
+}
+const { crumbs, label, title, sub, lead, meta = [], current } = Astro.props;
+const hasAside = Astro.slots.has('aside');
+---
+<section class:list={['thero', 'grain', { 'thero--aside': hasAside }]}>
+  <div class="wrap thero__wrap">
+    <Breadcrumbs items={crumbs} />
+    <div class="thero__grid">
+      <div class="thero__text">
+        <p class="label-row label thero__meta"><span class="thero__kicker">{label}</span>{meta.map((m) => <span>{m}</span>)}</p>
+        <h1 class="thero__title">{title}</h1>
+        {sub && <p class="thero__sub">{sub}</p>}
+        <p class="thero__lead">{lead}</p>
+        <slot />
+      </div>
+      {hasAside && <div class="thero__aside"><slot name="aside" /></div>}
+    </div>
+    <TrustNav current={current} />
+  </div>
+</section>
+
+<style>
+  .thero { padding-block: clamp(24px, 3.6vw, 44px) 0; border-bottom: 3px solid var(--ink); overflow: hidden; }
+  .thero__wrap { position: relative; z-index: 2; display: grid; gap: clamp(24px, 4vw, 44px); }
+  .thero__grid { display: grid; gap: clamp(28px, 4vw, 56px); align-items: center; }
+  .thero--aside .thero__grid { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
+  .thero__text { display: grid; gap: 18px; align-content: start; }
+  .thero__kicker { color: var(--red-ink); }
+  .thero__title {
+    font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; line-height: .86; letter-spacing: -.012em;
+    font-size: clamp(2.8rem, 7.4vw, 6.4rem); max-width: 14ch; text-wrap: balance; overflow-wrap: normal; hyphens: manual;
+  }
+  .thero__sub { font-family: var(--font-serif); font-style: italic; font-weight: 500; font-size: clamp(1.5rem, 2.8vw, 2.25rem); line-height: 1.08; color: var(--red-ink); max-width: 22ch; letter-spacing: -.01em; }
+  .thero__lead { font-family: var(--font-serif); font-size: clamp(1.15rem, 1.5vw, 1.32rem); line-height: 1.5; color: var(--ink-soft); max-width: 48ch; }
+  .thero__aside { position: relative; justify-self: center; width: 100%; max-width: 540px; padding-bottom: 8px; }
+  @media (max-width: 900px) {
+    .thero--aside .thero__grid { grid-template-columns: 1fr; }
+    .thero__aside { justify-self: start; max-width: 480px; }
+  }
+  @media (max-width: 560px) {
+    .thero__kicker { flex-basis: 100%; }
+    .thero__meta > span:nth-child(2)::before { content: none; margin: 0; }
+  }
+</style>

@@ -2,7 +2,8 @@
 // /memory/: public memory. A sourced, filterable (CSS-only) timeline of 40 feminist milestones, India first.
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import PageHero from '../components/blocks/PageHero.astro';
+import CaptionHero from '../components/about/CaptionHero.astro';
+import Pic from '../components/about/Pic.astro';
 import SectionHead from '../components/ui/SectionHead.astro';
 import Photo from '../components/media/Photo.astro';
 import Annotation from '../components/ui/Annotation.astro';
@@ -77,6 +78,38 @@ const CAPTION: Record<string, string> = {
   'woman-farmer-2026': 'Illustrative photo: a woman farmer waters vegetable beds at Vellayani, Kerala.',
 };
 
+// Deep pages: every milestone with its own case study or article links straight to it (STRATEGY §5).
+const FOREMOTHERS = { href: '/resources/indian-feminists-history-forgot/', kind: 'Meet her', label: '12 Indian feminists your textbooks skipped' };
+const RESERVATION = { href: '/resources/womens-reservation-act-explained/', kind: 'Read the explainer', label: 'The Women’s Reservation Act' };
+const BHANWARI = { href: '/case-studies/bhanwari-devi-vishaka-posh/', kind: 'Read the case study', label: 'Bhanwari Devi, Vishaka and the POSH Act' };
+const METOO = { href: '/case-studies/metoo/', kind: 'Read the case study', label: '#MeToo, from 2006 to a global reckoning' };
+const MORE: Record<string, { href: string; kind: string; label: string }> = {
+  'phule-school-1848': { ...FOREMOTHERS, kind: 'Meet Savitribai Phule and Fatima Sheikh' },
+  'tarabai-shinde-1882': FOREMOTHERS,
+  'pandita-ramabai-1889': FOREMOTHERS,
+  'sultanas-dream-1905': { ...FOREMOTHERS, kind: 'Meet Rokeya Sakhawat Hossain' },
+  'aruna-asaf-ali-1942': FOREMOTHERS,
+  'constituent-assembly-1946': { ...FOREMOTHERS, kind: 'Meet Dakshayani Velayudhan' },
+  'udhr-hansa-mehta-1948': { ...FOREMOTHERS, kind: 'Meet Hansa Mehta' },
+  'sewa-1972': { href: '/case-studies/sewa-self-employed-women/', kind: 'Read the case study', label: 'SEWA: organising India’s self-employed women' },
+  'chipko-1973': { ...FOREMOTHERS, kind: 'Meet Gaura Devi' },
+  'iceland-strikes-1975-2023': { href: '/case-studies/iceland-womens-strikes/', kind: 'Read the case study', label: 'Iceland’s women’s strikes, 1975 to now' },
+  'local-reservation-1993': RESERVATION,
+  'vishaka-1997': BHANWARI,
+  'delhi-protests-2012': { href: '/case-studies/delhi-2012-justice-verma/', kind: 'Read the case study', label: 'Delhi 2012: from protest to the Justice Verma Committee' },
+  'posh-act-2013': BHANWARI,
+  'ni-una-menos-2015': { href: '/case-studies/ni-una-menos/', kind: 'Read the case study', label: 'Ni Una Menos' },
+  'pinjra-tod-2015': { href: '/case-studies/pinjra-tod/', kind: 'Read the case study', label: 'Pinjra Tod: break the cage' },
+  'metoo-2017': METOO,
+  'metoo-india-2018': METOO,
+  'woman-life-freedom-2022': { href: '/case-studies/woman-life-freedom/', kind: 'Read the case study', label: 'Woman, Life, Freedom' },
+  'womens-reservation-act-2023': RESERVATION,
+  'reclaim-the-night-2024': { href: '/case-studies/reclaim-the-night-bengal-2024/', kind: 'Read the case study', label: 'Reclaim the Night: Bengal, August 2024' },
+  'reservation-in-force-2026': { ...RESERVATION, kind: 'What’s stalled, what’s next' },
+};
+const nDeep = items.filter((m) => MORE[m.id]).length;
+const nCases = (await getCollection('caseStudies')).length;
+
 const wall = [
   { id: '1908-jane-austen-suffrage-banner', caption: 'A suffrage banner honouring Jane Austen, painted silk, by Mary Lowndes, 1908 (The Women’s Library, LSE).', tilt: -1.5 },
   { id: 'jai-jagat-half-the-world-sticker', caption: '“We are half of the world, we demand half of the land”: a women’s land-rights sticker in Hindi and English, Gwalior, 2018.', tilt: 1 },
@@ -111,21 +144,23 @@ const schema = [
 ];
 ---
 <Base title={title} description={description} pageType="CollectionPage" breadcrumbs={crumbs} schema={schema} image="/og/memory.png" imageAlt="The struggles that brought us here: public memory, Cultural Shock Party">
-  <PageHero
+  <CaptionHero
     label="Public memory"
     title="The struggles that brought us here"
     lead={`A sourced timeline of feminist history in India and the world, from a girls’ school in Pune in ${first} to the fight over women’s reservation in ${last}. ${total} milestones, every one with its receipts.`}
     crumbs={crumbs}
-    photo="2012-delhi-raisina-hill-protest-crowd"
+    photo="in-015-2020-delhi-shaheen-bagh-fatima-sheikh-savitribai-phul"
     tone="natural"
-    photoPosition="62% 50%"
+    photoPosition="28% 50%"
+    caption="Memory, in use: a pavement library at the Shaheen Bagh sit-in, New Delhi, named after Fatima Sheikh and Savitribai Phule. 28 January 2020."
+    alt="Hand-made yellow posters on a green tin wall read Let’s read at the Fatima Sheikh Savitribai Phule Library and We the people, beside a portrait of B. R. Ambedkar; a man sits reading below."
     meta={[`${total} milestones`, 'Updated 24 Oct 2026']}
   >
     <div class="hero-ctas">
       <a class="btn" href="#era-1">Start in {first} <span class="arrow" aria-hidden="true">↓</span></a>
       <a class="link-arrow" href="#add">Add to the archive <span aria-hidden="true">→</span></a>
     </div>
-  </PageHero>
+  </CaptionHero>
 
   <!-- Why public memory -->
   <section class="section ground-light intro" aria-labelledby="intro-title">
@@ -152,7 +187,7 @@ const schema = [
           <Annotation text="“If justice is sexist, let memory be feminist”" arrow="down" top="-74px" left="3%" width="24ch" tilt={-3} />
         </div>
         <div class="intro__pic intro__pic--2">
-          <Photo id="in-015-2020-delhi-shaheen-bagh-fatima-sheikh-savitribai-phul" aspect="4 / 3" caption="A pavement library named after Fatima Sheikh and Savitribai Phule, at the Shaheen Bagh sit-in, New Delhi, 28 January 2020." sizes="(min-width: 900px) 26vw, 70vw" widths={[320, 480, 640]} tilt={2.5} frame />
+          <Pic id="1911-london-coronation-procession-aerial" tone="natural" aspect="4 / 3" position="70% 40%" caption="They kept count: ‘690 Imprisonments to Win Freedom for Women’, on a banner at the Women’s Coronation Procession, London, 17 June 1911 (LSE Library postcard)." alt="A sepia postcard of a suffrage procession: women in white march past a tall banner reading 690 Imprisonments to Win Freedom for Women." sizes="(min-width: 900px) 26vw, 70vw" widths={[320, 480, 640]} tilt={2.5} frame />
         </div>
         <div class="intro__stamp"><Stamp text="Sourced" sub="Checked Oct 2026" tilt={-10} round /></div>
       </div>
@@ -203,7 +238,7 @@ const schema = [
             <>
               <ol class="era__list" role="list" start={indexOf.get(c.items[0].id)}>
                 {c.items.map((m) => (
-                  <Milestone m={m} n={indexOf.get(m.id) ?? 0} total={total} photoNote={LATER[m.id]} caption={CAPTION[m.id]} />
+                  <Milestone m={m} n={indexOf.get(m.id) ?? 0} total={total} photoNote={LATER[m.id]} caption={CAPTION[m.id]} more={MORE[m.id]} />
                 ))}
               </ol>
               {c.after?.kind === 'photo' && (
@@ -233,6 +268,37 @@ const schema = [
       </section>
     ))}
   </div>
+
+  <!-- Go deeper: the hub links down to the case studies and the foremothers guide -->
+  <section class="section ground-pink deeper" aria-labelledby="deeper-title">
+    <div class="wrap">
+      <div class="deeper__head">
+        <p class="label deeper__kicker">Go deeper</p>
+        <h2 class="h2" id="deeper-title">The long version of the story</h2>
+        <p class="deeper__lead">{nDeep} of the {total} milestones above have a full case study or guide of their own. Start with these two.</p>
+      </div>
+      <ul class="deeper__grid" role="list">
+        <li>
+          <a class="deeper__card" href="/case-studies/">
+            <span class="deeper__big" aria-hidden="true">{nCases}</span>
+            <span class="label deeper__kind">Case studies</span>
+            <span class="deeper__title">What movements teach us</span>
+            <span class="deeper__text">From Delhi 2012 and Bhanwari Devi to Iceland’s strikes and Ni Una Menos: how each movement worked, what changed, and three lessons from each.</span>
+            <span class="deeper__go">Read the {nCases} case studies <span aria-hidden="true">→</span></span>
+          </a>
+        </li>
+        <li>
+          <a class="deeper__card deeper__card--ink" href="/resources/indian-feminists-history-forgot/">
+            <span class="deeper__big" aria-hidden="true">12</span>
+            <span class="label deeper__kind">Foremothers</span>
+            <span class="deeper__title">12 Indian feminists your textbooks skipped</span>
+            <span class="deeper__text">From Savitribai Phule and Tarabai Shinde to Hansa Mehta, Ela Bhatt and Bhanwari Devi, in plain words and with sources.</span>
+            <span class="deeper__go">Meet the 12 <span aria-hidden="true">→</span></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
 
   <!-- Archive wall -->
   <TornEdge color="var(--ink)" seed={1} />
@@ -345,6 +411,35 @@ const schema = [
   .interlude--quote :global(.pull) { max-width: 920px; width: 100%; }
   .interlude--quote :global(.pull blockquote) { max-width: 22em; }
 
+  /* go deeper */
+  .deeper__head { display: grid; gap: 12px; max-width: 46rem; margin-bottom: clamp(24px, 4vw, 40px); }
+  .deeper__head .h2 { max-width: 15ch; text-wrap: balance; }
+  .deeper__kicker { color: var(--ink); padding-top: 12px; border-top: 3px solid var(--ink); }
+  .deeper__lead { font-family: var(--font-serif); font-size: clamp(1.2rem, 1.8vw, 1.45rem); line-height: 1.35; max-width: 40ch; }
+  .deeper__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(18px, 3vw, 36px); }
+  .deeper__card {
+    position: relative; display: grid; gap: 10px; align-content: start; height: 100%; overflow: hidden;
+    padding: clamp(20px, 3vw, 34px); padding-right: clamp(120px, 16vw, 210px);
+    background: var(--paper-light); color: var(--ink); border: 3px solid var(--ink); box-shadow: 8px 8px 0 var(--ink);
+    text-decoration: none; transition: transform .15s var(--ease), box-shadow .15s var(--ease);
+  }
+  .deeper__card--ink { background: var(--ink); color: var(--paper); box-shadow: 8px 8px 0 var(--red-ink); }
+  .deeper__big {
+    position: absolute; right: clamp(14px, 2vw, 26px); top: 50%; transform: translateY(-50%);
+    font-weight: 900; font-stretch: var(--display-stretch); font-size: clamp(6rem, 13vw, 11rem); line-height: .78; letter-spacing: -.03em; color: var(--red);
+  }
+  .deeper__card--ink .deeper__big { color: var(--coral); }
+  .deeper__kind { color: var(--red-ink); }
+  .deeper__card--ink .deeper__kind { color: var(--marigold); }
+  .deeper__title { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: .9; text-wrap: balance; }
+  .deeper__text { font-family: var(--font-serif); font-size: 1.08rem; line-height: 1.45; max-width: 38ch; }
+  .deeper__go { margin-top: 6px; font-weight: 800; font-size: .98rem; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .18em; text-decoration-color: var(--red); }
+  .deeper__card--ink .deeper__go { text-decoration-color: var(--marigold); }
+  .deeper__card:hover { transform: translate(-2px, -2px); box-shadow: 11px 11px 0 var(--ink); }
+  .deeper__card--ink:hover { box-shadow: 11px 11px 0 var(--red-ink); color: var(--paper); }
+  .deeper__card:not(.deeper__card--ink):hover { color: var(--ink); }
+  @media (prefers-reduced-motion: reduce) { .deeper__card { transition: none; } .deeper__card:hover { transform: none; } }
+
   /* archive wall */
   .wall-sec__inner { position: relative; z-index: 2; }
   .wall-sec__credit { margin-top: 10px; color: var(--ink-soft); }
@@ -370,6 +465,10 @@ const schema = [
   }
   @media (max-width: 640px) {
     .interlude__row { grid-template-columns: minmax(0, 1fr); }
+    .deeper__grid { grid-template-columns: minmax(0, 1fr); }
+    .deeper__card { padding-right: clamp(20px, 3vw, 34px); padding-top: 88px; box-shadow: 5px 5px 0 var(--ink); }
+    .deeper__card--ink { box-shadow: 5px 5px 0 var(--red-ink); }
+    .deeper__big { top: 18px; right: auto; left: 18px; transform: none; font-size: 5rem; }
   }
   @media (max-width: 900px) {
     .mf-bar { position: static; }

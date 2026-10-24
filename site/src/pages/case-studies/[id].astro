@@ -18,12 +18,15 @@ import StagePanels from '../../components/cases/StagePanels.astro';
 import CaseLessons from '../../components/cases/CaseLessons.astro';
 import CaseGallery from '../../components/cases/CaseGallery.astro';
 import CaseNav from '../../components/cases/CaseNav.astro';
+import CaseCard from '../../components/cases/CaseCard.astro';
 import { articleNode } from '../../lib/schema';
 import { SITE } from '../../data/site';
 import {
   type CaseEntry, sortCases, caseNo, heroOf, galleryOf, splitBody, metaDescription, relatedCases, lever,
-  fmtDate, isoDate, heroTone, honestCaption, isStock, isOwn, photoYear,
+  fmtDate, isoDate, shortPlace, heroTone, honestCaption, isStock, isOwn, photoYear, posterOf, cardPicOf, railEligible,
+  ILLUSTRATIVE_NOTE, CASE_ARTICLES, CASE_MEMORY, SEO_TITLES,
 } from '../../components/cases/case-utils';
+import { getArticles, cardPhotoOf, readingMinutes, seedOf } from '../../components/resources/lib';
 
 export async function getStaticPaths() {
   const all = sortCases(await getCollection('caseStudies'));
@@ -39,13 +42,17 @@ const crumbs = [{ name: 'Case studies', href: '/case-studies/' }, { name: d.titl
 const description = metaDescription(entry);
 const published = isoDate(d.updated);
 
-// Photos: hero, then the gallery split between the reading column's margin and the photo wall.
+// Photos: hero (or a typographic poster when the case has no photo of its own), then the gallery split between
+// the reading column's margin and the photo wall. Only this movement's own photos, its own places and marked
+// illustrative photos ride beside the story; other movements' photos go to the wall, under a heading that says so.
 const hero = heroOf(entry);
+const poster = posterOf(entry);
 const gallery = galleryOf(entry, hero?.id);
-// Up to two photos ride alongside the reading column, keeping at least two for the photo wall when possible.
-const marginCount = gallery.length >= 4 ? 2 : gallery.length >= 2 ? 1 : 0;
-const margin = gallery.slice(0, marginCount);
-let pool = gallery.slice(marginCount);
+const eligible = gallery.filter((p) => railEligible(p, entry.id));
+let marginCount = Math.min(2, eligible.length);
+while (marginCount > 0 && gallery.length >= 3 && gallery.length - marginCount < 2) marginCount--;
+const margin = eligible.slice(0, marginCount);
+let pool = gallery.filter((p) => !margin.includes(p));
 // Documentary photos of this movement whose year matches a timeline event sit beside that event,
 // as long as the wall keeps two or more.
 const tlPhoto = new Map<number, string>();
@@ -55,6 +62,8 @@ d.timeline.forEach((t, k) => {
   if (hit && pool.length > 2) { tlPhoto.set(k, hit.id); pool = pool.filter((p) => p.id !== hit.id); }
 });
 const wall = pool;
+const ownOnPage = [hero, ...gallery].some((p) => !!p && !isStock(p) && isOwn(p, entry.id));
+const railCaption = (p: (typeof gallery)[number]) => honestCaption(p, entry.id) || ILLUSTRATIVE_NOTE;
 
 // Body: content note + the three H2 sections (Context / The story / Why it matters for the Fourth Wave).
 const html = entry.rendered?.html;
@@ -82,7 +91,22 @@ const prevC = all.length > 1 ? all[(i - 1 + all.length) % all.length] : undefine
 const nextC = all.length > 2 ? all[(i + 1) % all.length] : undefined;
 const nav = (c?: CaseEntry) => c && { href: `/case-studies/${c.id}/`, no: caseNo(c, all), title: c.data.title, place: c.data.place };
 const related = relatedCases(entry, all, [prevC?.id, nextC?.id].filter(Boolean) as string[]);
-const cardPhoto = (c: CaseEntry) => heroOf(c)?.id;
+// Cards never repeat a photo already on this page, or one another.
+const used = new Set<string>([hero?.id, ...gallery.map((p) => p.id)].filter(Boolean) as string[]);
+const relatedPics = related.map((c) => {
+  const pic = cardPicOf(c, used, seedOf(entry.id));
+  if (pic.photo) used.add(pic.photo.id);
+  return pic;
+});
+// Topic cluster: two Journal reads and this movement's milestone on the public-memory timeline.
+const articles = await getArticles();
+const reads = (CASE_ARTICLES[entry.id] ?? []).map((id) => articles.find((a) => a.id === id)).filter((a) => !!a).slice(0, 2);
+const readPics = reads.map((a) => {
+  const id = cardPhotoOf(a, used, seedOf(entry.id));
+  if (id) used.add(id);
+  return id;
+});
+const milestone = CASE_MEMORY[entry.id];
 
 const rows = [
   { k: 'Case file', v: Number(no) <= all.length ? `${no} of ${all.length}` : no },
@@ -92,14 +116,14 @@ const rows = [
   ...(lever(entry) ? [{ k: 'Main lever', v: lever(entry)! }] : []),
   { k: 'Updated', v: fmtDate(d.updated) },
   { k: 'Sources', v: `${d.sources.length} cited, with dates`, href: '#sources' },
-  { k: 'Additional funding', v: "None. Research by CSP's Receipts Desk" },
+  { k: 'Additional funding', v: 'None. Research by CSP’s Receipts Desk' },
 ];
 const receiptTones = ['paper', 'marigold', 'pink', 'ink'] as const;
 const tilts = [-1.2, 0.8, -0.5, 1.1];
 const lessonsTitle = d.lessons.length === 3 ? 'Three lessons for CSP' : `${d.lessons.length} lessons for CSP`;
 ---
 <Base
-  title={d.title}
+  title={SEO_TITLES[entry.id] ?? d.title}
   description={description}
   image={`/og/case-${entry.id}.png`}
   imageAlt={`${d.title}: a Cultural Shock Party case study`}
@@ -118,7 +142,7 @@ const lessonsTitle = d.lessons.length === 3 ? 'Three lessons for CSP' : `${d.les
 >
   {body?.note && <ContentNote text={body.note} />}
 
-  <CaseHero caseId={entry.id} no={no} title={d.title} dek={d.dek} place={d.place} region={d.region} years={d.years} photo={hero} tone={d.tone} crumbs={crumbs} />
+  <CaseHero caseId={entry.id} no={no} title={d.title} dek={d.dek} place={d.place} region={d.region} years={d.years} photo={hero} poster={poster} tone={d.tone} crumbs={crumbs} />
 
   <CaseDossier rows={rows} summary={d.summary} contents={blocks.map((b) => ({ id: b.id, label: b.label }))} />
 
@@ -136,7 +160,7 @@ const lessonsTitle = d.lessons.length === 3 ? 'Three lessons for CSP' : `${d.les
                   <div class="prose story__prose" set:html={s.html} />
                   {margin[k] && (
                     <div class="story__inline">
-                      <Photo id={margin[k].id} tone={heroTone(margin[k], d.tone)} caption={honestCaption(margin[k], entry.id)} tape={k % 2 ? 'tr' : 'tl'} sizes="92vw" widths={[360, 560, 720]} />
+                      <Photo id={margin[k].id} tone={heroTone(margin[k], d.tone)} caption={railCaption(margin[k])} tape={k % 2 ? 'tr' : 'tl'} sizes="92vw" widths={[360, 560, 720]} />
                     </div>
                   )}
                 </>
@@ -150,7 +174,7 @@ const lessonsTitle = d.lessons.length === 3 ? 'Three lessons for CSP' : `${d.les
           <aside class="story__rail" aria-label="Photos">
             <div class="story__rail-inner">
               {margin.map((m, k) => (
-                <Photo id={m.id} tone={heroTone(m, d.tone)} caption={honestCaption(m, entry.id)} tape={k % 2 ? 'tr' : 'tl'} tilt={k % 2 ? 1.2 : -1.5} sizes="360px" widths={[360, 560, 720]} />
+                <Photo id={m.id} tone={heroTone(m, d.tone)} caption={railCaption(m)} tape={k % 2 ? 'tr' : 'tl'} tilt={k % 2 ? 1.2 : -1.5} sizes="360px" widths={[360, 560, 720]} />
               ))}
             </div>
           </aside>
@@ -179,7 +203,7 @@ const lessonsTitle = d.lessons.length === 3 ? 'Three lessons for CSP' : `${d.les
   <section class="section ground-ink grain how" id="how" aria-labelledby="how-title">
     <div class="wrap how__inner">
       <SectionHead num={num('how')} label="How they did it" title="How they did it" id="how-title" />
-      <p class="lead how__lead">Mapped onto CSP's engine: ideas into research, research into public consciousness, public consciousness into collective action. <a href="/what-we-do/">How our engine works</a>.</p>
+      <p class="lead how__lead">Mapped onto CSP’s engine: ideas into research, research into public consciousness, public consciousness into collective action. <a href="/what-we-do/">How our engine works</a>.</p>
       <StagePanels stages={d.stages} />
     </div>
   </section>
@@ -203,7 +227,7 @@ const lessonsTitle = d.lessons.length === 3 ? 'Three lessons for CSP' : `${d.les
         <SectionHead num={num('limits')} label="Limits and critiques" title="Limits and critiques" id="limits-title" />
         <div class="limits__panel">
           <p class="limits__text">{d.limits}</p>
-          <p class="label limits__note">We publish what didn't work, too. Movements learn faster from honest records.</p>
+          <p class="label limits__note">We publish what didn’t work, too. Movements learn faster from honest records.</p>
         </div>
       </div>
     </section>
@@ -221,13 +245,17 @@ const lessonsTitle = d.lessons.length === 3 ? 'Three lessons for CSP' : `${d.les
   {wall.length > 0 && (
     <section class="section" id="gallery" aria-labelledby="gallery-title">
       <div class="wrap">
-        <SectionHead num={num('gallery')} label="In pictures" title="From the record" id="gallery-title" lead="Captions say what each photo shows, where and when. Illustrative photos are marked." />
+        {ownOnPage ? (
+          <SectionHead num={num('gallery')} label="In pictures" title="From the record" id="gallery-title" lead="Each caption says what the photo shows, where and when." />
+        ) : (
+          <SectionHead num={num('gallery')} label="In pictures" title="Around the case" id="gallery-title" lead="We have no licensed photos of the people or moments in this case yet. These show the places where it happened, or the same demands elsewhere, each with its real caption: what, where and when." />
+        )}
         <CaseGallery photos={wall} tone={d.tone} caseId={entry.id} />
       </div>
     </section>
   )}
 
-  <section class="section section--tight" id="sources-wrap" aria-label="Sources">
+  <section class="section section--tight" id="sources" aria-label="Sources">
     <div class="wrap wrap--narrow">
       <Sources sources={d.sources} id="sources" title={`${num('sources')} / How we know: ${d.sources.length} sources`} />
       <p class="small muted sources-foot">Last checked {fmtDate(d.updated)}. Spotted an error or a better source? <a href="/contact/">Tell us</a> and we will correct it in public. Photo credits sit under each photo and on our <a href="/credits/">image credits</a> page.</p>
@@ -242,9 +270,25 @@ const lessonsTitle = d.lessons.length === 3 ? 'Three lessons for CSP' : `${d.les
         <div class="related">
           <p class="label related__label">Related cases</p>
           <div class="related__grid">
-            {related.map((c) => (
-              <Card href={`/case-studies/${c.id}/`} title={c.data.title} kicker={`Case ${caseNo(c, all)}`} meta={[c.data.place, c.data.years]} dek={c.data.dek} photo={cardPhoto(c)} tone={c.data.tone === 'natural' ? 'ink' : c.data.tone} />
+            {related.map((c, k) => (
+              <CaseCard href={`/case-studies/${c.id}/`} title={c.data.title} kicker={`Case ${caseNo(c, all)}`} meta={[shortPlace(c), c.data.years]} dek={c.data.dek} pic={relatedPics[k]} tone={c.data.tone === 'natural' ? 'ink' : c.data.tone} />
             ))}
+          </div>
+        </div>
+      )}
+      {reads.length > 0 && (
+        <div class="related related--reads">
+          <p class="label related__label">Read alongside</p>
+          <div class="related__grid">
+            {reads.map((a, k) => (
+              <Card href={`/resources/${a.id}/`} title={a.data.title} kicker={a.data.kind} meta={[`${readingMinutes(a)} min`]} dek={a.data.description} photo={readPics[k]} tone={a.data.tone} />
+            ))}
+            <a class="memory-link ground-ink grain" href={milestone ? `/memory/#${milestone}` : '/memory/'}>
+              <span class="label memory-link__kicker">Public memory</span>
+              <span class="memory-link__title">{milestone ? 'See it on the timeline' : 'The timeline it belongs to'}</span>
+              <span class="memory-link__text">{milestone ? 'Where this movement sits among the struggles that brought us here, from 1848 to now.' : 'The struggles that brought us here, from 1848 to now: a sourced timeline, India first.'}</span>
+              <span class="memory-link__arrow" aria-hidden="true">→</span>
+            </a>
           </div>
         </div>
       )}
@@ -255,12 +299,12 @@ const lessonsTitle = d.lessons.length === 3 ? 'Three lessons for CSP' : `${d.les
 
   <div class="join-fix"><JoinBand
     title="Every movement here started small."
-    text="A reading circle, a group chat, a few friends who decided to count. Start where you are: read, share, sign the manifesto. Go bigger when you're ready."
+    text="A reading circle, a group chat, a few friends who decided to count. Start where you are: read, share, sign the manifesto. Go bigger when you’re ready."
   /></div>
 </Base>
 
 <style>
-  .story { padding-top: clamp(2.5rem, 6vw, 4.5rem); }
+  .story { padding-top: clamp(2.5rem, 6vw, 4.5rem); overflow-x: clip; }
   .story__label { margin-bottom: 8px; }
   .story__grid { display: grid; grid-template-columns: minmax(0, 68ch); gap: clamp(24px, 5vw, 80px); align-items: start; }
   .story__grid--rail { grid-template-columns: minmax(0, 68ch) minmax(240px, 360px); }
@@ -268,6 +312,8 @@ const lessonsTitle = d.lessons.length === 3 ? 'Three lessons for CSP' : `${d.les
   .story__rail { align-self: stretch; }
   .story__rail-inner { position: sticky; top: 96px; display: grid; gap: 44px; padding-top: clamp(3rem, 6vw, 5.4rem); }
   .story__inline { display: none; }
+  /* Footnote numbers must not push their line away from the next one. */
+  .story :global(.prose sup), .why__body :global(sup) { line-height: 0; }
   .why { margin-top: clamp(2.5rem, 6vw, 4.5rem); padding: clamp(24px, 4vw, 48px); max-width: 980px; display: grid; gap: 16px; }
   .why__kicker { color: var(--ink); }
   .why__title { font-size: clamp(2rem, 4.4vw, 3.6rem); max-width: 18ch; }
@@ -293,13 +339,25 @@ const lessonsTitle = d.lessons.length === 3 ? 'Three lessons for CSP' : `${d.les
   .lessons-wrap { position: relative; z-index: 2; }
 
   .sources-foot { margin-top: 18px; }
-  #sources-wrap :global(.sources) { margin-top: 10px; }
+  #sources :global(.sources) { margin-top: 10px; }
+  #sources { scroll-margin-top: 90px; }
 
   .more__inner { display: grid; gap: clamp(32px, 5vw, 56px); }
   .related { display: grid; gap: 20px; }
   .related__label { padding-top: 12px; border-top: 3px solid var(--line); }
   .related__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 36px); }
   .more__all { margin-top: -12px; }
+  .memory-link {
+    position: relative; display: grid; align-content: end; gap: 10px; min-height: 260px; padding: clamp(20px, 2.6vw, 30px);
+    color: var(--paper); text-decoration: none; border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--red);
+  }
+  .memory-link > * { position: relative; z-index: 2; }
+  .memory-link__kicker { color: var(--coral); }
+  .memory-link__title { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(2.2rem, 3.6vw, 3.2rem); line-height: .9; }
+  .memory-link__text { font-family: var(--font-serif); font-size: 1.08rem; line-height: 1.45; max-width: 32ch; color: var(--paper-light); }
+  .memory-link__arrow { position: absolute; top: 18px; right: 22px; font-size: 2.4rem; font-weight: 900; color: var(--marigold); }
+  .memory-link:hover .memory-link__title { text-decoration: underline; text-decoration-color: var(--marigold); text-decoration-thickness: 4px; }
+  .memory-link:focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
   /* Photo-in-fixed-box fill (see report: shared Photo leaves <picture> at auto height). */
   .related__grid :global(.photo--fixed .photo__img picture), #timeline :global(.photo--fixed .photo__img picture) { display: block; height: 100%; }
   /* Shared JoinBand: .ground-green a overrides the paper button's ink text. */
@@ -314,6 +372,9 @@ const lessonsTitle = d.lessons.length === 3 ? 'Three lessons for CSP' : `${d.les
   }
   @media (max-width: 860px) {
     .limits { grid-template-columns: 1fr; }
+  }
+  /* Both grids hold three cards: stay three-up on tablets so the third card is never left alone on a row. */
+  @media (max-width: 680px) {
     .related__grid { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 600px) {

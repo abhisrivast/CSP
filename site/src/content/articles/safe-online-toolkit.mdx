@@ -117,16 +117,28 @@ Different names, same idea: someone uses your image, body or details to frighten
 
 ## What should I do in the first hour?
 
-Breathe first. You have not done anything wrong, and you do not have to fix this alone. Then, in this order:
+Breathe first. You have not done anything wrong, and you do not have to fix this alone. Then work through these six steps, in this order.
 
-1. **Don't reply, don't bargain, don't pay.** Don't send anything more either. Stop all contact, but don't delete the chat yet.
-2. **Save the proof.** Take screenshots that show the post or message, the username or profile link, the date and the time. Copy the links into a note. Save threatening messages and call logs.
-3. **Don't forward the image itself**, not even to friends who want to help. Describe it and share the link instead.
-4. **Report it on the platform** using the report button. Choose the option for nudity, sharing private images or impersonation, and keep any reference number.
-5. **Report it to the police online** at cybercrime.gov.in, or call 1930. In danger right now? Call 112.
-6. **Tell one person you trust**, and ask them to sit with you while you do the rest.
+<figure class="r-wide ground-ink" aria-labelledby="hour-title" style={{ margin: '2em 0 2.4em', padding: 'clamp(20px, 3.4vw, 34px)', borderLeft: '10px solid var(--pink)', fontFamily: 'var(--font-sans)' }}>
+  <p id="hour-title" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', justifyContent: 'space-between', gap: '6px 18px', fontWeight: 900, fontStretch: '62%', textTransform: 'uppercase', fontSize: 'clamp(1.9rem, 3.6vw, 2.7rem)', lineHeight: 0.9, color: 'var(--paper)' }}><span>The first hour</span><span class="label" style={{ fontStretch: '100%', color: 'var(--marigold)' }}>Screenshot this list</span></p>
+  <ol role="list" style={{ listStyle: 'none', padding: 0, margin: '18px 0 0', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(250px, 100%), 1fr))', gap: '10px' }}>
+    {[
+      ['Stop', <><strong>Don't reply, bargain or pay,</strong> and don't send anything more. Stop all contact, but don't delete the chat yet.</>],
+      ['Save', <><strong>Save the proof.</strong> Screenshots that show the post or message, the username or profile link, the date and the time. Copy the links into a note. Keep threats and call logs.</>],
+      ['No forwards', <><strong>Don't forward the image itself,</strong> not even to friends who want to help. Describe it and share the link instead.</>],
+      ['Flag', <><strong>Report it on the platform</strong> with the report button. Choose nudity, sharing private images or impersonation, and keep any reference number.</>],
+      ['Report', <><strong>Report it to the police online</strong> at cybercrime.gov.in, or call 1930. In danger right now? Call 112.</>],
+      ['Tell', <><strong>Tell one person you trust,</strong> and ask them to sit with you while you do the rest.</>],
+    ].map(([verb, text], i) => (
+      <li style={{ margin: 0, display: 'grid', alignContent: 'start', gap: '8px', padding: '14px 16px 16px', border: '1.5px solid #5A554D', background: 'rgba(251, 247, 238, .04)' }}>
+        <span style={{ display: 'flex', alignItems: 'baseline', gap: '12px' }}><span aria-hidden="true" style={{ fontSize: '.78rem', fontWeight: 800, letterSpacing: '.14em', color: 'var(--marigold)' }}>{String(i + 1).padStart(2, '0')}</span><span style={{ fontWeight: 900, fontStretch: '62%', textTransform: 'uppercase', fontSize: 'clamp(2.2rem, 3.6vw, 2.9rem)', lineHeight: 0.85, color: 'var(--pink)' }}>{verb}</span></span>
+        <span style={{ fontSize: '.98rem', lineHeight: 1.45, color: '#E9E1D0' }}>{text}</span>
+      </li>
+    ))}
+  </ol>
+</figure>
 
-<Photo id="080-writing-in-notebook-desk" tone="natural" aspect="16 / 9" position="50% 60%" caption="Illustrative photo. Write it all down: what happened, where, when, and every report you make." widths={[480, 720, 960]} sizes="(min-width: 1000px) 1000px, 92vw" />
+<Photo id="080-writing-in-notebook-desk" tone="pink" aspect="2 / 1" position="50% 60%" caption="Illustrative photo. Write it all down: what happened, where, when, and every report you make." widths={[480, 720, 960]} sizes="(min-width: 1000px) 1000px, 92vw" />
 
 <Receipt figure="2 hours" label="the time platforms in India have to remove or disable intimate, nude or sexual images, impersonation and morphed images after a complaint by you or someone acting for you. It was 24 hours before." source="MeitY, IT Amendment Rules 2026 FAQ" href="https://www.meity.gov.in/static/uploads/2025/10/065b6deb585441b5ccdf8be42502a49c.pdf" date="In force 20 Feb 2026" tone="red" />
 
@@ -134,28 +146,34 @@ Breathe first. You have not done anything wrong, and you do not have to fix this
 
 You can use every route below at once. Using one does not stop you using another.
 
-### 1. On the platform
-
-Report the post, the account and any copies. Platforms must publish the name and contact details of a Grievance Officer; if the report button gets you nowhere, write to that officer and note the date and time. If you are unhappy with the answer, you can appeal to the government's Grievance Appellate Committee.
-
-### 2. To the cyber police: cybercrime.gov.in or 1930
-
-The [National Cyber Crime Reporting Portal](https://cybercrime.gov.in/) is run by the Ministry of Home Affairs and has a section for crimes against women and children. Attach your screenshots and links. The 1930 helpline takes cyber crime reports by phone. MeitY's procedure for non-consensual intimate images also lists your local police station.
-
-### 3. Stop it spreading: StopNCII and Take It Down
-
-- **[StopNCII.org](https://stopncii.org/faq/)** is for intimate images of you taken when you were **18 or over**. It makes a digital fingerprint, called a hash, of the image on your own phone; only the hash is shared, so partner platforms can block copies. The image never leaves your device. It came to India in December 2021.
-- **[Take It Down](https://takeitdown.ncmec.org/)** does the same for images taken when you were **under 18**. It is free, you can stay anonymous, and it is run by the US National Center for Missing & Exploited Children.
-
-Neither works inside encrypted chats such as WhatsApp messages, so report those to the cyber police too.
-
-### 4. Get support: One Stop Centres, 181 and 14490
-
-[One Stop Centres](/resources/glossary/#one-stop-centre) help with complaints, counselling and legal aid, and MeitY lists them as a reporting route; find your nearest one on the government's Mission Shakti portal. The National Women Helpline, 181, is there for help and advice. Women over 18 can also call the NCW's 24×7 helpline on 14490 for counselling and referral to the police, legal services and One Stop Centres.
-
-### 5. File a police complaint
-
-You can go to any police station, ideally with a friend and your printed evidence. Ask for a written acknowledgement of your complaint.
+<div class="r-wide" style={{ margin: '1.6em 0 2.4em', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(340px, 100%), 1fr))', gap: '16px', fontFamily: 'var(--font-sans)' }}>
+  {[
+    { n: '01', t: 'On the platform', body: <>Report the post, the account and any copies. Platforms must publish the name and contact details of a <strong>Grievance Officer</strong>: if the report button gets you nowhere, write to that officer and note the date and time. Unhappy with the answer? You can appeal to the government's Grievance Appellate Committee.</> },
+    { n: '02', t: 'Cyber police: cybercrime.gov.in or 1930', body: <>The <a href="https://cybercrime.gov.in/" rel="noopener">National Cyber Crime Reporting Portal</a>, run by the Ministry of Home Affairs, has a section for crimes against women and children. Attach your screenshots and links, or call <strong>1930</strong> to report by phone.</> },
+    { n: '03', t: 'Stop it spreading', wide: true },
+    { n: '04', t: 'Support: One Stop Centres, 181, 14490', body: <><a href="/resources/glossary/#one-stop-centre">One Stop Centres</a> help with complaints, counselling and legal aid; find your nearest one on the government's Mission Shakti portal. The National Women Helpline is <strong>181</strong>. Women over 18 can call the NCW's 24×7 helpline on <strong>14490</strong> for counselling and referral to the police, legal services and One Stop Centres.</> },
+    { n: '05', t: 'A police station', body: <>You can go to any police station, ideally with a friend and your printed evidence. MeitY's procedure for intimate images lists your local police station as a route. Ask for a written acknowledgement of your complaint.</> },
+  ].map((r) => (
+    <section aria-labelledby={`route-${r.n}`} style={{ gridColumn: r.wide ? '1 / -1' : 'auto', display: 'grid', alignContent: 'start', gap: '10px', padding: '18px 20px 20px', background: r.wide ? 'var(--ink)' : 'var(--paper-light)', color: r.wide ? 'var(--paper)' : 'var(--ink)', border: '2px solid var(--ink)', boxShadow: r.wide ? '6px 6px 0 var(--pink)' : '4px 4px 0 var(--ink)' }}>
+      <p class="label" style={{ color: r.wide ? 'var(--marigold)' : 'var(--red-ink)' }}>Route {r.n}</p>
+      <h3 id={`route-${r.n}`} style={{ margin: 0, fontFamily: 'var(--font-sans)', fontWeight: 900, fontStretch: '62%', textTransform: 'uppercase', fontSize: 'clamp(1.6rem, 2.8vw, 2.1rem)', lineHeight: 0.92, color: 'inherit' }}>{r.t}</h3>
+      {r.body && <p style={{ margin: 0, fontSize: '1rem', lineHeight: 1.5 }}>{r.body}</p>}
+      {r.wide && (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(340px, 100%), 1fr))', gap: '12px' }}>
+          <div style={{ padding: '14px 16px 16px', background: 'var(--pink)', color: 'var(--ink)' }}>
+            <p style={{ fontWeight: 900, fontStretch: '62%', textTransform: 'uppercase', fontSize: '1.9rem', lineHeight: 0.9 }}>18 or over in the image?</p>
+            <p style={{ marginTop: '8px', fontSize: '1rem', lineHeight: 1.5 }}>Use <a href="https://stopncii.org/faq/" rel="noopener" style={{ color: 'var(--ink)', fontWeight: 800 }}>StopNCII.org</a>. It makes a digital fingerprint, called a hash, of the image on your own phone. Only the hash is shared, so partner platforms can block copies; the image never leaves your device. It came to India in December 2021.</p>
+          </div>
+          <div style={{ padding: '14px 16px 16px', background: 'var(--marigold)', color: 'var(--ink)' }}>
+            <p style={{ fontWeight: 900, fontStretch: '62%', textTransform: 'uppercase', fontSize: '1.9rem', lineHeight: 0.9 }}>Under 18 in the image?</p>
+            <p style={{ marginTop: '8px', fontSize: '1rem', lineHeight: 1.5 }}>Use <a href="https://takeitdown.ncmec.org/" rel="noopener" style={{ color: 'var(--ink)', fontWeight: 800 }}>Take It Down</a>. It does the same for images taken when you were under 18. It is free, you can stay anonymous, and it is run by the US National Center for Missing & Exploited Children.</p>
+          </div>
+          <p style={{ gridColumn: '1 / -1', fontSize: '.95rem', lineHeight: 1.45, color: '#CFC6B4' }}>Neither tool works inside encrypted chats such as WhatsApp messages, so report those to the cyber police too.</p>
+        </div>
+      )}
+    </section>
+  ))}
+</div>
 
 ## What does the law say?
 
@@ -193,14 +211,23 @@ The IT Rules were tightened on 20 February 2026. Platforms must label AI-generat
 
 You should not have to do any of this; the people who abuse and the platforms that profit should change. But these steps make it much harder for anyone to get in, follow you or find you.
 
-- **Turn on two-step verification** for your email, Instagram, WhatsApp (set a two-step PIN), Snapchat and X. Use an authenticator app or passkey where you can.
-- **Use a different password for every account.** A password manager remembers them for you. Never share a one-time password (OTP) with anyone.
-- **Check where you are logged in.** Every big app has a "devices" or "where you're logged in" page. Remove anything you don't recognise, and check which apps have access to your accounts.
-- **Switch off live location.** Check location sharing on Maps and Snap Map, and remove location data from photos before you post.
-- **Choose who can reach you.** Limit who can tag, mention or message you and who can add you to groups. Make your profile private and hide your friends list if you want to.
-- **Clean up old posts** that show your address, college, workplace or daily routine.
-- **Search for yourself now and then**, including a reverse image search of your profile photos.
-- **Keep your recovery details current**, and store backup codes somewhere offline.
+<figure class="r-wide" aria-labelledby="lock-title" style={{ margin: '1.8em 0 2.4em', padding: 'clamp(18px, 3vw, 30px)', background: 'var(--paper-light)', border: '2px dashed var(--ink)', borderRadius: '14px', boxShadow: '6px 6px 0 var(--pink)', fontFamily: 'var(--font-sans)' }}>
+  <p style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', justifyContent: 'space-between', gap: '4px 18px' }}><span id="lock-title" style={{ fontWeight: 900, fontStretch: '62%', textTransform: 'uppercase', fontSize: 'clamp(1.9rem, 3.6vw, 2.6rem)', lineHeight: 0.9 }}>Lock-down checklist</span><span class="hand" style={{ fontSize: 'clamp(1.35rem, 2.4vw, 1.7rem)', color: 'var(--red-ink)', transform: 'rotate(-2deg)' }}>one a day is plenty</span></p>
+  <ul role="list" style={{ listStyle: 'none', padding: 0, margin: '16px 0 0', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(320px, 100%), 1fr))', gap: '0 28px' }}>
+    {[
+      ['Turn on two-step verification', 'for your email, Instagram, WhatsApp (set a two-step PIN), Snapchat and X. Use an authenticator app or passkey where you can.'],
+      ['Use a different password for every account.', 'A password manager remembers them for you. Never share a one-time password (OTP) with anyone.'],
+      ['Check where you are logged in.', 'Every big app has a “devices” or “where you’re logged in” page. Remove anything you don’t recognise, and check which apps can access your accounts.'],
+      ['Switch off live location.', 'Check location sharing on Maps and Snap Map, and remove location data from photos before you post.'],
+      ['Choose who can reach you.', 'Limit who can tag, mention or message you and who can add you to groups. Make your profile private and hide your friends list if you want to.'],
+      ['Clean up old posts', 'that show your address, college, workplace or daily routine.'],
+      ['Search for yourself now and then,', 'including a reverse image search of your profile photos.'],
+      ['Keep your recovery details current,', 'and store backup codes somewhere offline.'],
+    ].map(([b, t]) => (
+      <li style={{ margin: 0, display: 'grid', gridTemplateColumns: '26px minmax(0, 1fr)', gap: '12px', alignItems: 'start', padding: '12px 0', borderTop: '1.5px dashed var(--line-soft)', fontSize: '1rem', lineHeight: 1.45 }}><span aria-hidden="true" style={{ width: '22px', height: '22px', marginTop: '1px', border: '2.5px solid var(--ink)', borderRadius: '3px', background: 'var(--paper)' }}></span><span><strong style={{ fontWeight: 800 }}>{b}</strong> {t}</span></li>
+    ))}
+  </ul>
+</figure>
 
 ## How can friends help?
 
@@ -213,7 +240,7 @@ If a friend tells you, your first words matter more than anything else.
 5. **Never share, save or comment on the image**, even to defend them. Ask others in the group to report it and delete it.
 6. **Go with them** to the police station or One Stop Centre, and check in again the next day. If they are struggling, Tele-MANAS on 14416 is free and confidential.
 
-<ChatScript n="01" chat="DM" situation="Late at night, a friend tells you a fake nude of her is going round a class group." lines={[
+<ChatScript chat="DM" situation="Late at night, a friend tells you a fake nude of her is going round a class group." lines={[
   { from: 'them', text: 'someone made a fake pic of me and it’s in the batch group. i can’t go to college tomorrow' },
   { from: 'you', text: 'I’m so sorry. This is not your fault, and it’s fake. I’m here.' },
   { from: 'them', text: 'everyone has seen it' },
@@ -221,7 +248,7 @@ If a friend tells you, your first words matter more than anything else.
 ]} why="It believes her first, puts the blame where it belongs and turns panic into a short, shared to-do list." />
 
 <PhotoPair>
-  <Photo id="088-three-women-hijabs-embrace" tone="pink" aspect="4 / 3" caption="Illustrative photo." widths={[360, 560, 800]} sizes="(min-width: 900px) 460px, 92vw" />
+  <Photo id="088-three-women-hijabs-embrace" tone="pink" aspect="4 / 3" caption="Illustrative photo: friends hold each other close." widths={[360, 560, 800]} sizes="(min-width: 900px) 460px, 92vw" />
   <Photo id="2025-vienna-no-means-no-graffiti" tone="natural" aspect="4 / 3" caption="'No means No' graffiti on a housing estate in Vienna, photographed 21 September 2025." widths={[360, 560, 800]} sizes="(min-width: 900px) 460px, 92vw" />
 </PhotoPair>
 

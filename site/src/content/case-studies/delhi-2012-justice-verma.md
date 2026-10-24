@@ -4,7 +4,7 @@ dek: >-
   Students filled Raisina Hill in the December cold. A committee read about 80,000 suggestions in a month.
   Ninety-five days after the attack, Parliament had changed the law.
 summary: >-
-  After the gang rape and murder of Jyoti Singh on a Delhi bus in December 2012, student-led protests led to the Justice Verma Committee and a new law in 2013. The committee reported in 29 days after about 80,000 public suggestions; its call to end the marital-rape exception is still unmet.
+  After the gang rape and murder of Jyoti Singh on a Delhi bus in December 2012, student-led protests led to the Justice Verma Committee and a new law in 2013. The committee reported in 31 days after about 80,000 public suggestions; its call to end the marital-rape exception is still unmet.
 place: "New Delhi, India"
 region: India
 years: "2012–2013, and still unfinished"
@@ -36,7 +36,7 @@ timeline:
       The government asks Justice J. S. Verma, Justice Leila Seth and Gopal Subramanium to propose changes to
       criminal law within a month.
   - date: "23 Jan 2013"
-    title: "The report lands in 29 days"
+    title: "The report lands in 31 days"
     text: >-
       After about 80,000 suggestions, the committee blames failures of government and policing, rejects the death
       penalty for rape and says marriage is not irrevocable consent.
@@ -60,7 +60,7 @@ timeline:
       Challenges to the marital-rape exception are listed for final hearing, as reported by SC Observer. The
       Verma Committee’s biggest unfinished demand is back in court.
 numbers:
-  - figure: "29 days"
+  - figure: "31 days"
     label: "From setting up the Justice Verma Committee (23 Dec 2012) to its report (23 Jan 2013)"
     source: "PRS Legislative Research, Justice Verma Committee Report Summary"
     href: "https://prsindia.org/policy/report-summaries/justice-verma-committee-report-summary"
@@ -87,7 +87,7 @@ stages:
     no death penalty for rape, and the principle that marriage is not irrevocable consent.
   research: >-
     Three people with a one-month deadline asked the whole country for evidence and got about 80,000 suggestions,
-    from women’s groups, lawyers, students and people abroad. They answered with a 631-page report in 29 days.
+    from women’s groups, lawyers, students and people abroad. They answered with a 631-page report in 31 days.
   consciousness: >-
     Candlelight vigils, black clothes, black cloth over mouths and black dots on profile pictures carried the anger
     from Delhi to Kolkata, Bengaluru, Mumbai, Chennai and beyond. In 2015 her mother said her daughter’s name at a
@@ -176,7 +176,7 @@ When Jyoti died, the grief went national. Vigils lit up Kolkata, Bengaluru, Chen
 
 On 23 December, the government handed the problem to three people: Justice J. S. Verma, a former Chief Justice of India; Justice Leila Seth, a former High Court judge; and Gopal Subramanium, a former Solicitor General. Deadline: one month.<sup><a class="fn-ref" href="#src-1" aria-label="Source 1">1</a></sup>
 
-They threw the doors open. About 80,000 suggestions arrived, from women's groups, students, lawyers and people abroad.<sup><a class="fn-ref" href="#src-3" aria-label="Source 3">3</a></sup> Twenty-nine days later, on 23 January 2013, they handed over a 631-page report.<sup><a class="fn-ref" href="#src-1" aria-label="Source 1">1</a></sup><sup><a class="fn-ref" href="#src-3" aria-label="Source 3">3</a></sup>
+They threw the doors open. About 80,000 suggestions arrived, from women's groups, students, lawyers and people abroad.<sup><a class="fn-ref" href="#src-3" aria-label="Source 3">3</a></sup> A month to the day after they were appointed, on 23 January 2013, they handed over a 631-page report.<sup><a class="fn-ref" href="#src-1" aria-label="Source 1">1</a></sup><sup><a class="fn-ref" href="#src-3" aria-label="Source 3">3</a></sup>
 
 It did not say what the angriest TV debates wanted. It said the root cause was a failure of governance and policing. It said no to the death penalty for rape. It said marriage cannot mean permanent consent, so the marital-rape exception had to go. It said soldiers accused of sexual offences should not be shielded by the need for government permission to prosecute. And it asked for police reform and an end to the "two-finger test".<sup><a class="fn-ref" href="#src-1" aria-label="Source 1">1</a></sup>
 
@@ -198,6 +198,6 @@ And the street kept the memory. In August 2024, after a trainee doctor was raped
 
 Delhi 2012 proves the thing every organiser needs to believe: public anger can become law, and fast, when someone turns it into evidence and drafts.
 
-It also shows the catch. The committee's boldest ideas (consent inside marriage, accountability for the armed forces, no quick-fix executions) were the easiest for power to drop. Crowds move on faster than laws do.
+It also shows the catch. The committee’s boldest ideas (consent inside marriage, accountability for the armed forces, no quick-fix executions) were the easiest for power to drop. Crowds move on faster than laws do.
 
 So here is the job. Keep the receipts. Keep a public tracker of every Verma recommendation: adopted, diluted or ignored. Publish plain explainers in English and Hindi before the 18 November hearing. And hold on to the frame those students carried up Raisina Hill: safety is a right, not a curfew.

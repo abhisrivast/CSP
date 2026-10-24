@@ -40,7 +40,8 @@ const jsonLd = JSON.stringify(graph(nodes)).replace(/</g, '\\u003c');
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{fullTitle}</title>
 <meta name="description" content={p.description} />
-<link rel="canonical" href={canonical} />
+{/* Noindex pages (404, thanks) get no canonical: Netlify serves 404.html for every missing URL. */}
+{!p.noindex && <link rel="canonical" href={canonical} />}
 {p.noindex && <meta name="robots" content="noindex, follow" />}
 <meta name="theme-color" content={SITE.themeColor} />
 <meta name="color-scheme" content="light" />

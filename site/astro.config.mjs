@@ -48,7 +48,8 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
-      filter: (page) => !page.includes('/admin/') && !page.endsWith('/404/'),
+      // noindex pages stay out of the sitemap (a submitted noindex URL is flagged in Search Console)
+      filter: (page) => !page.includes('/admin/') && !page.endsWith('/404/') && !page.endsWith('/thanks/'),
     }),
     mdx(),
     pruneUnusedImages,

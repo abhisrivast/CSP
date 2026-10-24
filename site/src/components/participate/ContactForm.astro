@@ -1,47 +1,76 @@
 ---
-// The one contact form (Netlify Forms, name="contact"). Minimum data: a name, an email, a topic, a message.
+// The one contact form (Netlify Forms, name="contact"). Age band first (under-18s are routed to helplines and
+// free resources, not into our inbox), then the minimum: a name, an email, a topic, a message, and an explicit,
+// unticked consent box naming the purpose (STRATEGY §11, §13).
 // Topic links elsewhere on the page are plain #contact-form anchors; with JS they also pre-select the topic,
 // and /contact/?topic=press#contact-form works from other pages.
 import { TOPICS } from './contact-topics';
 ---
 <form class="cform" id="contact-form-el" name="contact" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field" data-contact-form>
   <input type="hidden" name="form-name" value="contact" />
-  <input type="hidden" name="notice_version" value="contact-notice-v1.0-2026-10-24" />
+  <input type="hidden" name="notice_version" value="contact-notice-v1.1-2026-10-24" />
   <p class="visually-hidden"><label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
 
-  <div class="cform__row">
-    <div class="field">
-      <label for="c-name">What should we call you?</label>
-      <input class="input" id="c-name" name="name" type="text" autocomplete="name" maxlength="80" required />
+  <fieldset class="cform__age">
+    <legend class="cform__legend"><span class="cform__step" aria-hidden="true">1</span> How old are you?</legend>
+    <div class="cages">
+      <label class="cage"><input type="radio" name="age_band" value="18-plus" required /><span>18 or over</span></label>
+      <label class="cage"><input type="radio" name="age_band" value="under-18" /><span>Under 18</span></label>
     </div>
-    <div class="field">
-      <label for="c-email">Email</label>
-      <input class="input" id="c-email" name="email" type="email" autocomplete="email" inputmode="email" required />
+    <p class="hint cform__age-hint">Under 18? Please don’t fill in the rest. We don’t keep messages from under-18s, so we delete any we receive.</p>
+  </fieldset>
+
+  <div class="cminor" data-cminor hidden role="status" aria-live="polite">
+    <p class="cminor__title">You don’t need to write to us to use anything here.</p>
+    <p>If you, or another child, are in danger or being hurt, call <a href="tel:1098"><strong>1098</strong></a>, the Child Helpline, or <a href="tel:112"><strong>112</strong></a> in an emergency. Don’t wait for us.</p>
+    <p>Worried about something at CSP? Tell a parent, guardian or teacher, and ask them to write to us on our <a href="/safeguarding/#concern">safeguarding route</a>.</p>
+    <ul class="cminor__links" role="list">
+      <li><a href="/resources/">Read our free guides <span aria-hidden="true">→</span></a></li>
+      <li><a href="/safeguarding/#under-18">How we keep under-18s safe <span aria-hidden="true">→</span></a></li>
+    </ul>
+  </div>
+
+  <fieldset class="cform__adult" data-cadult>
+    <legend class="cform__legend"><span class="cform__step" aria-hidden="true">2</span> Your message</legend>
+
+    <div class="cform__row">
+      <div class="field">
+        <label for="c-name">What should we call you?</label>
+        <input class="input" id="c-name" name="name" type="text" autocomplete="name" maxlength="80" required />
+      </div>
+      <div class="field">
+        <label for="c-email">Email</label>
+        <input class="input" id="c-email" name="email" type="email" autocomplete="email" inputmode="email" required />
+      </div>
     </div>
-  </div>
 
-  <div class="field">
-    <label for="c-topic">What is it about?</label>
-    <select class="select" id="c-topic" name="topic" required aria-describedby="c-topic-hint">
-      <option value="">Choose a topic</option>
-      {TOPICS.map((t) => <option value={t.v}>{t.l}</option>)}
-    </select>
-    <p class="hint cform__topic-hint" id="c-topic-hint" aria-live="polite" data-topic-hint>Choosing the right topic gets your message to the right person faster.</p>
-  </div>
+    <div class="field">
+      <label for="c-topic">What is it about?</label>
+      <select class="select" id="c-topic" name="topic" required aria-describedby="c-topic-hint">
+        <option value="">Choose a topic</option>
+        {TOPICS.map((t) => <option value={t.v}>{t.l}</option>)}
+      </select>
+      <p class="hint cform__topic-hint" id="c-topic-hint" aria-live="polite" data-topic-hint>Choosing the right topic gets your message to the right person faster.</p>
+    </div>
 
-  <div class="field">
-    <label for="c-message">Your message</label>
-    <textarea class="textarea" id="c-message" name="message" rows="7" maxlength="4000" required aria-describedby="c-message-hint"></textarea>
-    <p class="hint" id="c-message-hint">Please don’t include anyone else’s personal details, or any address or phone number.</p>
-  </div>
+    <div class="field">
+      <label for="c-message">Your message</label>
+      <textarea class="textarea" id="c-message" name="message" rows="7" maxlength="4000" required aria-describedby="c-message-hint"></textarea>
+      <p class="hint" id="c-message-hint">Please don’t include anyone else’s personal details, or any address or phone number.</p>
+    </div>
 
-  <p class="cform__consent">We’ll use your name, email and message only to reply to you, and delete them after 6 months. <a href="/privacy/">Privacy notice</a></p>
+    <label class="check cform__consent">
+      <input type="checkbox" name="consent" value="yes" required />
+      <span>I agree that Cultural Shock Party may use my name, email and message to reply to me, and will delete them after 6 months. <a href="/privacy/#forms">Privacy notice</a></span>
+    </label>
 
-  <button class="btn cform__submit" type="submit">Send message <span class="arrow" aria-hidden="true">→</span></button>
+    <button class="btn cform__submit" type="submit">Send message <span class="arrow" aria-hidden="true">→</span></button>
+  </fieldset>
 </form>
 
 <script>
   // Pre-select the topic from route links (data-topic) and from ?topic= in the URL; show the matching hint.
+  // Route under-18s to helplines and free resources, and switch the rest of the form off for them.
   import { TOPICS } from './contact-topics';
   const form = document.querySelector<HTMLFormElement>('form[data-contact-form]');
   const select = form?.querySelector<HTMLSelectElement>('select[name="topic"]');
@@ -56,10 +85,52 @@ import { TOPICS } from './contact-topics';
       a.addEventListener('click', () => { pick(a.dataset.topic ?? null); }),
     );
   }
+  const adult = form?.querySelector<HTMLFieldSetElement>('[data-cadult]');
+  const minor = form?.querySelector<HTMLElement>('[data-cminor]');
+  if (form && adult && minor) {
+    const update = () => {
+      const isMinor = form.querySelector<HTMLInputElement>('input[name="age_band"]:checked')?.value === 'under-18';
+      adult.disabled = isMinor;
+      minor.hidden = !isMinor;
+      form.classList.toggle('is-minor', isMinor);
+    };
+    form.addEventListener('change', (e) => { if ((e.target as HTMLInputElement).name === 'age_band') update(); });
+    update();
+  }
 </script>
 
 <style>
-  .cform { display: grid; gap: 20px; padding: clamp(20px, 3vw, 38px); background: var(--paper-light); border: 3px solid var(--ink); box-shadow: 8px 8px 0 var(--ink); }
+  .cform { display: grid; gap: 22px; padding: clamp(20px, 3vw, 38px); background: var(--paper-light); border: 3px solid var(--ink); box-shadow: 8px 8px 0 var(--ink); }
+  .cform fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+  .cform__legend { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-weight: 900; font-stretch: var(--head-stretch); font-size: 1.3rem; line-height: 1.1; }
+  .cform__step { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--red-ink); color: var(--paper-light); font-size: .95rem; font-stretch: 100%; flex: none; }
+
+  .cages { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .cage { position: relative; }
+  .cage input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+  .cage span {
+    display: grid; place-items: center; min-height: 54px; padding: 10px; text-align: center; border: 2px solid var(--ink); background: var(--paper);
+    font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(1.2rem, 1.9vw, 1.5rem); line-height: .95;
+    transition: background .15s var(--ease), color .15s var(--ease);
+  }
+  .cage input:hover + span { background: var(--paper-deep); }
+  .cage input:checked + span { background: var(--ink); color: var(--paper-light); box-shadow: 3px 3px 0 var(--red); }
+  .cage input:focus-visible + span { outline: 3px solid var(--red-ink); outline-offset: 3px; }
+  .cform__age-hint { margin-top: 10px; }
+  .is-minor .cform__age-hint { display: none; }
+
+  .cminor { display: grid; gap: 10px; padding: 18px 20px; background: var(--marigold); color: var(--ink); border: 2px solid var(--ink); font-size: .98rem; line-height: 1.45; }
+  .cminor[hidden] { display: none; }
+  .cminor a { color: var(--ink); font-weight: 800; text-decoration-thickness: 2px; }
+  .cminor__title { font-weight: 900; font-stretch: var(--head-stretch); font-size: 1.3rem; line-height: 1.1; }
+  .cminor__links { display: grid; gap: 2px; }
+  .cminor__links a { display: inline-flex; gap: .35em; min-height: 44px; align-items: center; }
+
+  .cform__adult { display: grid; gap: 20px; padding-top: 20px !important; border-top: 1px solid var(--line-soft) !important; transition: opacity .2s var(--ease); }
+  .cform__adult:disabled { opacity: .38; }
+  /* A floated legend sits inside the fieldset, so the rule runs above it instead of through it. */
+  .cform__adult > .cform__legend { float: left; width: 100%; margin-bottom: 0; }
+  .cform__adult > .cform__legend + * { clear: both; }
   .cform__row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .cform .hint { font-size: .86rem; line-height: 1.45; color: var(--muted); }
   .cform__topic-hint { min-height: 2.9em; }
@@ -68,6 +139,8 @@ import { TOPICS } from './contact-topics';
   @media (max-width: 560px) {
     .cform { box-shadow: 5px 5px 0 var(--ink); padding: 18px 16px; }
     .cform__row { grid-template-columns: 1fr; }
+    .cages { gap: 6px; }
+    .cage span { min-height: 52px; font-size: 1.12rem; }
     .cform__submit { width: 100%; justify-content: center; }
   }
 </style>

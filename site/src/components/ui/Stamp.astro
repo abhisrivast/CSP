@@ -13,7 +13,11 @@ const { text, sub, tilt = -8, color = 'red', round = false, decorative = true } 
     --c: var(--red-ink); display: inline-grid; justify-items: center; gap: 2px; padding: .4em .8em .35em;
     border: 3px solid var(--c); outline: 1.5px solid var(--c); outline-offset: 3px; color: var(--c);
     transform: rotate(var(--tilt)); font-weight: 900; font-stretch: 80%; text-transform: uppercase; letter-spacing: .1em; line-height: 1;
-    -webkit-mask: url('/textures/distress.png') center / 120px; mask: url('/textures/distress.png') center / 120px;
+    /* Distress: the full texture wears the frame. Over the lettering (the content box) a second, offset copy and a
+       half-ink floor are added, so a speck only shows where both copies have one, and then only half-faded:
+       letters look stamped but never lose a stroke, however small the type. */
+    -webkit-mask: url('/textures/distress.png') center / 120px, url('/textures/distress.png') 37px 61px / 120px content-box, linear-gradient(rgb(0 0 0 / .5) 0 0) content-box;
+    mask: url('/textures/distress.png') center / 120px, url('/textures/distress.png') 37px 61px / 120px content-box, linear-gradient(rgb(0 0 0 / .5) 0 0) content-box;
   }
   .stamp__text { font-size: 1.05rem; }
   .stamp__sub { font-size: .62rem; letter-spacing: .18em; }

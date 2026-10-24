@@ -1,0 +1,27 @@
+---
+// Your rights as large typographic tiles: the verb, what it means, and the law that gives it to you.
+export interface Props { rights: { verb: string; text: string; law: string }[] }
+const { rights } = Astro.props;
+---
+<ul class="rights" role="list">
+  {rights.map((r, i) => (
+    <li class="right">
+      <p class="right__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</p>
+      <h3 class="right__verb">{r.verb}</h3>
+      <p class="right__text">{r.text}</p>
+      <p class="right__law">{r.law}</p>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .rights { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 3px solid var(--ink); border-left: 1px solid var(--ink); font-family: var(--font-sans); }
+  .right { display: grid; grid-template-rows: auto auto 1fr auto; gap: 8px; padding: 16px 18px 18px; border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); background: var(--paper-light); }
+  .right__n { font-size: var(--fs-label); font-weight: 800; letter-spacing: .14em; color: var(--red-ink); }
+  .right__verb { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(1.9rem, 2.8vw, 2.4rem); line-height: .86; margin: 0 !important; }
+  .right__text { font-family: var(--font-serif); font-size: 1.02rem; line-height: 1.45; color: var(--ink); }
+  .right__law { font-size: .78rem; font-weight: 700; letter-spacing: .04em; color: var(--ink-soft); padding-top: 8px; border-top: 1px dashed var(--line-soft); }
+  .right:nth-child(6n + 1) .right__verb, .right:nth-child(6n + 5) .right__verb { color: var(--red-ink); }
+  @media (max-width: 900px) { .rights { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 480px) { .rights { grid-template-columns: 1fr; } }
+</style>

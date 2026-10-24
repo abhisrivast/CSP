@@ -54,7 +54,7 @@ const yearOf = (e: TimelineEvent) => e.year ?? e.date.match(/\d{4}/)?.[0] ?? e.d
   .timeline--dense .tl__photo { display: none; }
   .timeline--dense .tl__year { font-size: clamp(2.4rem, 5vw, 3.8rem); }
   @media (max-width: 900px) {
-    .tl { grid-template-columns: 1fr; gap: 12px; }
+    .tl, .timeline--dense .tl { grid-template-columns: 1fr; gap: 12px; }
     .tl__marker { position: static; grid-template-columns: auto auto; justify-content: start; align-items: end; gap: 14px; }
     .tl__photo { max-width: 420px; }
   }

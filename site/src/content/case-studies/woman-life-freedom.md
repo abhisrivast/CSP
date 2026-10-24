@@ -111,7 +111,7 @@ lessons:
 limits: >-
   The cost has been brutal: hundreds killed, thousands detained, executions and death sentences, including against
   women activists. Mandatory hijab is still the law, enforced with cameras and the morality police, and a harsher
-  “Hijab and Chastity” law was approved in 2024. Iran still has no domestic violence law, and a married woman needs her
+  “Hijab and Chastity” law was approved in 2024, though its implementation was put on hold that December. Iran still has no domestic violence law, and a married woman needs her
   husband’s permission to get a passport. The death tolls also disagree (551, “more than 500”, 377 identified by name),
   a reminder to publish ranges and methods. Solidarity abroad cannot substitute for change inside the country.
 tags: [Iran, Uprising and global solidarity, "Kurdish women’s movement", diaspora, documentation, slogans, human rights]
@@ -179,7 +179,7 @@ A song carried what the streets could not. Shervin Hajipour released "Baraye" on
 
 By the first anniversary, rights groups based outside Iran counted more than 500 people killed, including at least 70 minors. Seven people had been executed after protest-related convictions.<sup><a class="fn-ref" href="#src-4" aria-label="Source 4">4</a></sup> Before a mass pardon in February 2023, an estimated 19,262 people had been arrested across at least 134 cities and towns and 132 universities.<sup><a class="fn-ref" href="#src-3" aria-label="Source 3">3</a></sup>
 
-The morality police returned. Smart cameras were set to spot uncovered hair in streets and cars. Hijab stayed mandatory.<sup><a class="fn-ref" href="#src-4" aria-label="Source 4">4</a></sup> In September 2024, Iran's Guardian Council approved a harsher "Hijab and Chastity" law, with more fines, longer prison terms and limits on jobs and education.<sup><a class="fn-ref" href="#src-5" aria-label="Source 5">5</a></sup>
+The morality police returned. Smart cameras were set to spot uncovered hair in streets and cars. Hijab stayed mandatory.<sup><a class="fn-ref" href="#src-4" aria-label="Source 4">4</a></sup> In September 2024, Iran's Guardian Council approved a harsher "Hijab and Chastity" law, with more fines, longer prison terms and limits on jobs and education.<sup><a class="fn-ref" href="#src-5" aria-label="Source 5">5</a></sup> Its implementation was put on hold in December 2024, when the Supreme National Security Council advised against enacting it. In May 2025, parliament's speaker said the council had told parliament in writing not to enact it "for the time being" ([Rudaw, 25 May 2025](https://www.rudaw.net/english/middleeast/iran/25052025)).
 
 ### Taking the record to the world
 
@@ -191,8 +191,8 @@ Then, on 16 September 2026, Amnesty International published a report of about 1,
 
 ## Why it matters for the Fourth Wave
 
-Woman, Life, Freedom is one of the clearest proofs this decade that a feminist slogan can carry a whole country's demand for freedom. Not a list of grievances: three affirmative words, with women's lives at the centre.
+Woman, Life, Freedom is one of the clearest proofs this decade that a feminist slogan can carry a whole country’s demand for freedom. Not a list of grievances: three affirmative words, with women’s lives at the centre.
 
-It also teaches the ethics of solidarity. When people inside a country risk prison or worse for being seen, the job of everyone outside is to amplify without exposing. Credit the Kurdish women's movement the words came from. Share murals, typography and verified reports, not faces. Push your own institutions to act on UN findings.
+It also teaches the ethics of solidarity. When people inside a country risk prison or worse for being seen, the job of everyone outside is to amplify without exposing. Credit the Kurdish women’s movement the words came from. Share murals, typography and verified reports, not faces. Push your own institutions to act on UN findings.
 
 And it shows why documentation is a feminist act. Counts, dates, names of officials, methods published in the open: that is how a movement makes sure that what was done can never be quietly forgotten.

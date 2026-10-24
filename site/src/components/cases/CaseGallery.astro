@@ -1,17 +1,19 @@
 ---
-// Photo wall for a case study. Documentary photos stay in natural colour with their real caption;
-// stock photos are duotoned and labelled illustrative.
+// Photo wall for a case study. Documentary photos stay in natural colour with their real caption (what, where,
+// when). Illustrative stock photos are duotoned, carry a ◦ mark instead of a caption, and are explained once.
 import Photo from '../media/Photo.astro';
 import type { PhotoMeta, Tone } from '../../lib/photos';
-import { heroTone, honestCaption } from './case-utils';
+import { heroTone, honestCaption, isIllustrative } from './case-utils';
 
 export interface Props { photos: PhotoMeta[]; tone: Tone; caseId?: string }
 const { photos, tone, caseId } = Astro.props;
 const cols = Math.min(photos.length, 3);
+const anyStock = photos.some(isIllustrative);
 ---
+{anyStock && <p class="cgal__key"><span class="cgal__mark" aria-hidden="true">◦</span> Photos marked ◦ are illustrative stock: they do not show this movement or a specific event.</p>}
 <ul class="cgal" role="list" style={`--cols:${cols}`}>
   {photos.map((p, i) => (
-    <li class:list={['cgal__item', { 'cgal__item--tilt': i % 3 === 1 }]}>
+    <li class:list={['cgal__item', { 'cgal__item--tilt': i % 3 === 1, 'cgal__item--stock': isIllustrative(p) }]}>
       <Photo
         id={p.id}
         tone={heroTone(p, tone)}
@@ -20,13 +22,22 @@ const cols = Math.min(photos.length, 3);
         widths={[360, 560, 800]}
         frame={i % 3 === 1}
       />
+      {isIllustrative(p) && <span class="cgal__badge"><span aria-hidden="true">◦</span><span class="visually-hidden">Illustrative stock photo</span></span>}
     </li>
   ))}
 </ul>
 
 <style>
+  .cgal__key { display: flex; gap: .5em; align-items: baseline; margin: -8px 0 clamp(18px, 2.4vw, 28px); font-size: .9rem; color: var(--ink-soft); max-width: 70ch; }
+  .cgal__mark { font-weight: 900; font-size: 1.2rem; color: var(--red-ink); }
   .cgal { columns: var(--cols) 260px; column-gap: clamp(18px, 2.6vw, 36px); }
-  .cgal__item { break-inside: avoid; margin-bottom: clamp(22px, 3vw, 40px); }
+  .cgal__item { position: relative; break-inside: avoid; margin-bottom: clamp(22px, 3vw, 40px); }
   .cgal__item--tilt { transform: rotate(-1deg); }
   .cgal__item :global(figcaption) { font-size: .82rem; }
+  .cgal__badge {
+    position: absolute; z-index: 3; top: 10px; left: 10px; display: grid; place-items: center; width: 30px; height: 30px;
+    border-radius: 50%; background: var(--paper-light); color: var(--red-ink); border: 2px solid var(--ink);
+    font-weight: 900; font-size: 1.15rem; line-height: 1;
+  }
+  .cgal__item--tilt .cgal__badge { top: 20px; left: 20px; }
 </style>

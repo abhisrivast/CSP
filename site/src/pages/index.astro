@@ -1,45 +1,99 @@
 ---
-// TEMPORARY component smoke test; replaced by the real homepage.
+// Homepage: poster where it argues, journal where people read. Sections follow docs/STRATEGY.md and the home brief.
+import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import SectionHead from '../components/ui/SectionHead.astro';
-import Engine from '../components/blocks/Engine.astro';
-import Receipt from '../components/ui/Receipt.astro';
-import Placard from '../components/ui/Placard.astro';
-import PullQuote from '../components/ui/PullQuote.astro';
-import Ticker from '../components/ui/Ticker.astro';
-import Stamp from '../components/ui/Stamp.astro';
-import Annotation from '../components/ui/Annotation.astro';
-import Timeline from '../components/blocks/Timeline.astro';
-import JoinBand from '../components/blocks/JoinBand.astro';
-import PageHero from '../components/blocks/PageHero.astro';
-import Faq from '../components/ui/Faq.astro';
 import TornEdge from '../components/ui/TornEdge.astro';
+import JoinBand from '../components/blocks/JoinBand.astro';
+import HomeHero from '../components/home/HomeHero.astro';
+import Dispatch from '../components/home/Dispatch.astro';
+import WhatIs from '../components/home/WhatIs.astro';
+import WhyNow from '../components/home/WhyNow.astro';
+import Agree from '../components/home/Agree.astro';
+import PhotoWall from '../components/home/PhotoWall.astro';
+import Programmes from '../components/home/Programmes.astro';
+import MemoryStrip from '../components/home/MemoryStrip.astro';
+import CaseFiles from '../components/home/CaseFiles.astro';
+import Founder from '../components/home/Founder.astro';
+import MetroLadder from '../components/home/MetroLadder.astro';
+import Journal from '../components/home/Journal.astro';
+import Allies from '../components/home/Allies.astro';
+import FaqTeaser from '../components/home/FaqTeaser.astro';
+import { MANIFESTO_VERSION, MANIFESTO_DATE, MANIFESTO_DATE_LABEL } from '../components/about/manifesto';
+
+const title = 'Cultural Shock Party | Fourth Wave feminist movement';
+const description =
+  'Cultural Shock Party is a Fourth Wave feminist movement founded in India in 2026, turning ideas into research, public consciousness and collective action.';
+
+const memory = await getCollection('memory');
+const years = memory.map((m) => m.data.year);
+const short = (iso: string) => new Date(iso).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
+
+const dispatch = [
+  { tag: 'New', title: `Manifesto v${MANIFESTO_VERSION} is open for consultation`, href: '/manifesto/', date: short(MANIFESTO_DATE), iso: MANIFESTO_DATE },
+  { tag: 'Guide', title: 'What is the Fourth Wave? A plain-language guide', href: '/resources/what-is-fourth-wave-feminism/' },
+  { tag: 'Case 01', title: 'Delhi 2012: from protest to the Justice Verma Committee', href: '/case-studies/delhi-2012-justice-verma/' },
+  { tag: 'Memory', title: `${memory.length} milestones, ${Math.min(...years)}–${Math.max(...years)}`, href: '/memory/' },
+  { tag: 'Data', title: 'Care is work: India’s 289-minute gap', href: '/resources/care-is-work/' },
+];
 ---
-<Base title="Cultural Shock Party | Fourth Wave feminist movement" titleRaw description="Smoke test.">
-  <PageHero label="Component test" title="We are building the Fourth Wave" lead="Ideas into research. Research into public consciousness. Public consciousness into collective political action." crumbs={[{ name: 'Test', href: '/' }]} />
-  <section class="section"><div class="wrap">
-    <SectionHead num="01" label="The engine" title="From ideas to power" lead="Four stages, one movement." />
-    <Engine />
-  </div></section>
-  <Ticker items={['Hope first', 'Receipts always', 'Bring a friend', 'Yes, boys too']} />
-  <section class="section"><div class="wrap" style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;position:relative">
-    <Receipt figure="1 in 3" label="women worldwide experience physical or sexual violence in their lifetime" source="WHO, Violence against women prevalence estimates" href="https://www.who.int" date="2021" tilt={-1.5} />
-    <Receipt figure="13.6%" label="of Lok Sabha MPs elected in 2024 are women" source="Test source" href="https://example.org" date="2024" tone="ink" />
-    <Receipt figure="131" label="India's rank in the Global Gender Gap Index" source="WEF" href="https://www.weforum.org" date="2025" tone="marigold" tilt={1.5} />
-    <Annotation text="every number gets a source" top="-20px" right="10%" arrow="down" />
-  </div></section>
-  <section class="section ground-ink grain"><div class="wrap" style="display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center;position:relative;z-index:2">
-    <PullQuote quote="The defect was in the world, never in the womb." by="Test attribution" role="Founder" size="l" />
-    <div style="display:grid;gap:30px;justify-items:center"><Placard text="Smash the patriarchy, gently" color="pink" stick /><Stamp text="Sourced" sub="Oct 2026" /><Placard text="Hope first" shape="sticker" color="marigold" tilt={4} /></div>
-  </div></section>
-  <TornEdge color="var(--paper)" />
-  <section class="section"><div class="wrap">
-    <SectionHead num="02" label="Public memory" title="The struggles that brought us here" />
-    <Timeline events={[{ date: '1 Jan 1848', title: 'Savitribai and Jyotirao Phule open a girls’ school in Pune', text: 'Test text for the timeline item.', place: 'Pune', tag: 'India' }, { date: '1975', title: 'Iceland’s women strike', text: '90% of women stop work.', place: 'Reykjavík', tag: 'Global' }]} />
-  </div></section>
-  <section class="section"><div class="wrap wrap--narrow">
-    <Faq q="Is Cultural Shock Party a political party?" open><p>Not in the electoral sense.</p><p>More text here.</p></Faq>
-    <Faq q="Can boys join?"><p>Yes.</p></Faq>
-  </div></section>
-  <JoinBand />
+<Base title={title} titleRaw description={description} pageType="WebPage" image="/og/default.png" imageAlt="We're building the Fourth Wave. Cultural Shock Party, a Fourth Wave feminist movement">
+  <div class="home">
+    <HomeHero />
+    <TornEdge color="var(--ink)" seed={1} />
+    <Dispatch items={dispatch} date={MANIFESTO_DATE_LABEL} iso={MANIFESTO_DATE} />
+    <TornEdge color="var(--paper)" seed={2} />
+    <WhatIs />
+    <TornEdge color="var(--paper-deep)" seed={3} />
+    <WhyNow />
+    <TornEdge color="var(--red-ink)" seed={1} />
+    <Agree />
+    <TornEdge color="var(--ink)" seed={2} />
+    <PhotoWall />
+    <TornEdge color="var(--paper)" seed={3} />
+    <Programmes />
+    <TornEdge color="var(--paper-deep)" seed={1} />
+    <MemoryStrip />
+    <TornEdge color="var(--paper)" seed={2} />
+    <CaseFiles />
+    <TornEdge color="var(--green)" seed={3} />
+    <Founder />
+    <TornEdge color="var(--paper)" seed={1} />
+    <MetroLadder />
+    <TornEdge color="var(--paper-light)" seed={2} />
+    <Journal />
+    <TornEdge color="var(--pink)" seed={3} />
+    <Allies />
+    <TornEdge color="var(--paper)" seed={1} />
+    <FaqTeaser />
+    <TornEdge color="var(--red-ink)" seed={2} />
+    <JoinBand
+      ground="red"
+      title="We’re new. Come and build it with us."
+      text="Joining is free and takes a minute. Start small: read, share, sign the manifesto. Go big when you’re ready."
+      primary={{ label: 'Join the movement', href: '/join/' }}
+      secondary={{ label: 'See the six programmes', href: '/what-we-do/' }}
+      next={{ kicker: 'Start here', label: 'The Fourth Wave Manifesto', href: '/manifesto/', dek: 'Twelve positions, draft v1.0, open for consultation. Read it, then add your name.' }}
+      placard="The next wave is us"
+    />
+  </div>
 </Base>
+
+<style>
+  /* Small section numbers: the shared SectionHead uses --red (a large-type colour); on light grounds use the
+     text red so the number passes 4.5:1, and ink on pink. */
+  .home :global(.section:not(.ground-ink):not(.ground-green):not(.ground-red):not(.ground-pink) .section-head__num) { color: var(--red-ink); }
+  .home :global(.ground-pink .section-head__num) { color: var(--ink); }
+  .home :global(.torn) { position: relative; z-index: 3; }
+  /* Fixed-aspect photos: make the <picture> fill the frame so crops never leave an empty band
+     (the shared Photo only does this for taped photos). */
+  .home :global(.photo--fixed .photo__img picture) { display: block; height: 100%; }
+  .home :global(.section) { padding-block: clamp(3.25rem, 7.5vw, 6.25rem); }
+  /* global.css colours every link on ink/green/red grounds, which also repaints .btn text
+     (e.g. paper button with paper text on red). Buttons keep their own colours here. */
+  .home :global(:is(.ground-ink, .ground-green, .ground-red) a.btn) { color: var(--btn-fg); }
+  /* Standalone text links get a 44px-tall touch area (STRATEGY §8) without changing how they look. */
+  .home :global(:is(.link-arrow, .stop__link, .allies__more, .decode > a, .hero__key a, .progs__note a)) { position: relative; }
+  .home :global(:is(.link-arrow, .stop__link, .allies__more, .decode > a, .hero__key a, .progs__note a)::before) { content: ''; position: absolute; inset: -10px -4px; }
+  /* Phones: keep a focused link clear of the sticky "Join" button when the browser scrolls it into view. */
+  @media (max-width: 720px) { :global(html) { scroll-padding-bottom: 84px; } }
+</style>

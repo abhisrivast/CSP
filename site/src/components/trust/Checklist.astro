@@ -1,0 +1,29 @@
+---
+// "What we've built in": a ruled two-column checklist. Each item has a short name, what it means for you, and a WCAG ref.
+export interface Props { items: { t: string; d: string; ref?: string }[] }
+const { items } = Astro.props;
+---
+<ul class="chk" role="list">
+  {items.map((it) => (
+    <li class="chk__item">
+      <span class="chk__box" aria-hidden="true">✓</span>
+      <div class="chk__body">
+        <p class="chk__t">{it.t}</p>
+        <p class="chk__d" set:html={it.d} />
+        {it.ref && <p class="chk__ref">{it.ref}</p>}
+      </div>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .chk { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(20px, 3vw, 40px); font-family: var(--font-sans); border-top: 3px solid var(--ink); }
+  .chk__item { display: grid; grid-template-columns: 34px 1fr; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--line-soft); }
+  .chk__box { display: grid; place-items: center; width: 34px; height: 34px; border: 2.5px solid var(--ink); background: var(--marigold); font-weight: 900; font-size: 1.1rem; line-height: 1; transform: rotate(-3deg); }
+  .chk__body { display: grid; gap: 4px; align-content: start; }
+  .chk__t { font-weight: 850; font-stretch: var(--head-stretch); font-size: 1.15rem; line-height: 1.15; }
+  .chk__d { font-family: var(--font-serif); font-size: 1.02rem; line-height: 1.48; color: var(--ink-soft); }
+  .chk__d :global(a) { color: var(--red-ink); }
+  .chk__ref { font-size: .74rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  @media (max-width: 760px) { .chk { grid-template-columns: 1fr; } }
+</style>

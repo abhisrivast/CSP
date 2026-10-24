@@ -1,0 +1,69 @@
+---
+// Case-study card. Same editorial shape as blocks/Card, plus honest picture rules: a photo of another place or
+// event carries a small "Photo: <where>" tag, and a case with no photo of its own shows its typographic poster.
+import Photo from '../media/Photo.astro';
+import CasePoster from './CasePoster.astro';
+import type { Tone } from '../../lib/photos';
+import type { CardPic } from './case-utils';
+
+export interface Props {
+  href: string;
+  title: string;
+  kicker?: string;
+  meta?: string[];
+  dek?: string;
+  pic: CardPic;
+  tone?: Tone;
+  aspect?: string;
+  size?: 'm' | 'l';
+  headingLevel?: 'h2' | 'h3';
+}
+const { href, title, kicker, meta = [], dek, pic, tone = 'red', aspect = '3 / 2', size = 'm', headingLevel: H = 'h3' } = Astro.props;
+const sizes = size === 'l' ? '(min-width: 900px) 60vw, 92vw' : '(min-width: 900px) 30vw, 92vw';
+---
+<article class:list={['ccard', `ccard--${size}`]}>
+  {pic.photo && (
+    <div class="ccard__pic">
+      <Photo id={pic.photo.id} tone={tone} aspect={aspect} caption={false} sizes={sizes} widths={[360, 560, 800, 1100]} />
+      {pic.note && <span class="ccard__note">Photo: {pic.note}</span>}
+    </div>
+  )}
+  {!pic.photo && pic.poster && <div class="ccard__pic"><CasePoster poster={pic.poster} aspect={aspect} /></div>}
+  <div class="ccard__body">
+    <p class="label ccard__meta"><span class="ccard__meta-in">{kicker && <span class="ccard__kicker">{kicker}</span>}{meta.map((m) => <span>{m}</span>)}</span></p>
+    <H class="ccard__title"><a href={href}>{title}</a></H>
+    {dek && <p class="ccard__dek">{dek}</p>}
+  </div>
+</article>
+
+<style>
+  .ccard { position: relative; display: grid; gap: 14px; align-content: start; }
+  .ccard__pic { position: relative; }
+  .ccard__pic :global(.photo--fixed .photo__img picture) { display: block; height: 100%; }
+  .ccard__note {
+    position: absolute; z-index: 3; left: 0; bottom: 0; max-width: calc(100% - 16px); padding: 5px 9px 4px;
+    background: var(--paper-light); color: var(--ink); font-size: .72rem; font-weight: 700; line-height: 1.25; letter-spacing: .01em;
+    border-top: 2px solid var(--ink); border-right: 2px solid var(--ink);
+  }
+  .ccard__body { display: grid; gap: 10px; }
+  .ccard__kicker { color: var(--red-ink); }
+  /* Separators sit before each item and are clipped at the start of a line, so a wrapped line never opens with "/". */
+  .ccard__meta { overflow: hidden; }
+  .ccard__meta-in { display: flex; flex-wrap: wrap; row-gap: .35rem; margin-left: -1.9rem; }
+  .ccard__meta-in > span::before { content: '/'; display: inline-block; width: 1.9rem; text-align: center; opacity: .5; color: var(--ink); }
+  .ccard__title { font-weight: 900; font-stretch: var(--head-stretch); font-size: clamp(1.35rem, 2.1vw, 1.75rem); line-height: 1.02; text-transform: none; }
+  .ccard--l .ccard__title { font-size: clamp(1.9rem, 3.4vw, 3rem); font-stretch: var(--display-stretch); text-transform: uppercase; line-height: .92; }
+  .ccard__title a { color: inherit; text-decoration: none; }
+  .ccard__title a::after { content: ''; position: absolute; inset: 0; z-index: 4; }
+  .ccard__title a:focus-visible { outline: none; box-shadow: none; }
+  .ccard:has(a:focus-visible) { outline: 3px solid var(--ink); outline-offset: 6px; }
+  .ccard:hover .ccard__title a { text-decoration: underline; text-decoration-color: var(--red); text-decoration-thickness: 3px; }
+  .ccard :global(.photo__img img) { transition: transform .5s var(--ease); }
+  .ccard:hover :global(.photo__img img) { transform: scale(1.03); }
+  .ccard:hover :global(.cposter__frame) { transform: rotate(-.6deg); }
+  .ccard :global(.cposter__frame) { transition: transform .3s var(--ease); }
+  .ccard__dek { color: var(--ink-soft); font-size: .98rem; line-height: 1.45; }
+  @media (prefers-reduced-motion: reduce) {
+    .ccard:hover :global(.photo__img img), .ccard:hover :global(.cposter__frame) { transform: none; }
+  }
+</style>

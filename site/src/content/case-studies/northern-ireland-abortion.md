@@ -10,13 +10,12 @@ region: Europe
 years: "2015–2020, services to 2024"
 start: 2015
 order: 11
-heroPhoto: 2018-dublin-castle-repeal-result-a
+heroPhoto: belfast-city-hall-international-womens-day-window
 tone: pink
 gallery:
-  - belfast-city-hall-international-womens-day-window
-  - 2018-dublin-castle-repeal-result-d
-  - 2018-dublin-castle-repeal-result-c
-  - 2016-lodz-black-march-a
+  - 1914-lisburn-lilian-metge-hunger-strike-medal
+  - 2018-dublin-castle-repeal-result-a
+  - 011-belfast-welcome-mural-corner
   - 040-my-body-my-choice-bw
 timeline:
   - date: "Nov 2015"
@@ -43,8 +42,9 @@ timeline:
   - date: "24 Jul 2019"
     title: "One amendment"
     text: >-
-      The Northern Ireland (Executive Formation etc) Act becomes law, carrying Stella Creasy MP’s amendment: if no
-      Executive returns by 21 October, the UK must implement CEDAW’s recommendations.
+      The Northern Ireland (Executive Formation etc) Act becomes law, carrying Stella Creasy MP’s amendment, new
+      clause 10, passed by MPs on 9 July: if no Executive returns by 21 October, the UK must implement CEDAW’s
+      recommendations.
   - date: "22 Oct 2019"
     title: "Midnight passes"
     text: >-
@@ -146,6 +146,10 @@ sources:
     href: "https://en.wikipedia.org/wiki/Thirty-sixth_Amendment_of_the_Constitution_of_Ireland"
     publisher: "Wikipedia"
     date: "accessed 24 Oct 2026"
+  - label: "Northern Ireland (Executive Formation) Bill, new clause 10 (moved by Stella Creasy): Commons division 428"
+    href: "https://votes.theyworkforyou.com/decisions/division/commons/2019-07-09/428"
+    publisher: "TheyWorkForYou, from the House of Commons division record"
+    date: "9 Jul 2019"
 updated: 2026-10-24
 ---
 
@@ -181,11 +185,11 @@ Campaigners had also gone to Geneva. In February 2018, the UN Committee on the E
 
 Then Ireland voted. On 25 May 2018, voters in the Republic of Ireland repealed their constitutional ban on abortion, with 66.4% voting yes.<sup><a class="fn-ref" href="#src-7" aria-label="Source 7">7</a></sup> Women in Repeal jumpers celebrated at Dublin Castle. The UK government's answer for Northern Ireland was that abortion there was a devolved matter, and it would not step in.<sup><a class="fn-ref" href="#src-7" aria-label="Source 7">7</a></sup>
 
-Now there were two authoritative findings on the table, one from the UK's highest court and one from a UN treaty body, and a neighbour that had just voted for change.
+Now there were two authoritative findings on the table, one from the UK’s highest court and one from a UN treaty body, and a neighbour that had just voted for change.
 
 ### The lever in another parliament
 
-With Stormont empty, power over Northern Ireland sat in Westminster. In July 2019, MPs were passing a bill to extend the deadline for restoring the Executive. Stella Creasy MP added an amendment: if no Executive was back by 21 October 2019, the UK government had to implement the CEDAW recommendations, and sections 58 and 59 of the 1861 Act would be repealed for Northern Ireland.<sup><a class="fn-ref" href="#src-3" aria-label="Source 3">3</a></sup><sup><a class="fn-ref" href="#src-4" aria-label="Source 4">4</a></sup> The Act became law on 24 July 2019.<sup><a class="fn-ref" href="#src-3" aria-label="Source 3">3</a></sup>
+With Stormont empty, power over Northern Ireland sat in Westminster. In July 2019, MPs were passing a bill to extend the deadline for restoring the Executive. Stella Creasy MP moved an amendment, new clause 10, and on 9 July MPs passed it by 331 votes to 99: if no Executive was back by 21 October 2019, the UK government had to implement the CEDAW recommendations.<sup><a class="fn-ref" href="#src-8" aria-label="Source 8">8</a></sup> Sections 58 and 59 of the 1861 Act would then be repealed for Northern Ireland.<sup><a class="fn-ref" href="#src-3" aria-label="Source 3">3</a></sup><sup><a class="fn-ref" href="#src-4" aria-label="Source 4">4</a></sup> The Act became law on 24 July 2019.<sup><a class="fn-ref" href="#src-3" aria-label="Source 3">3</a></sup>
 
 In October, a Belfast High Court judge ruled the old law breached human-rights law, but made no formal declaration, because the Act was about to take effect.<sup><a class="fn-ref" href="#src-3" aria-label="Source 3">3</a></sup> At midnight on 21 October, the deadline passed with no Executive. Abortion was decriminalised.<sup><a class="fn-ref" href="#src-3" aria-label="Source 3">3</a></sup>
 

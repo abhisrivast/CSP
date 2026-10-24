@@ -1,0 +1,53 @@
+---
+// The shared PageHero layout (oversized H1 overlapping a documentary photo), with a short, true caption and a
+// clean credit line via Pic, instead of the raw registry caption. Used by /what-we-do/ and /memory/.
+import Breadcrumbs from '../ui/Breadcrumbs.astro';
+import Pic from './Pic.astro';
+import type { Tone } from '../../lib/photos';
+
+export interface Props {
+  label: string;
+  title: string;
+  lead?: string;
+  crumbs: { name: string; href: string }[];
+  photo: string;
+  tone?: Tone;
+  photoPosition?: string;
+  caption: string;
+  alt?: string;
+  meta?: string[];
+  aspect?: string;              // photo box, default 4 / 5 (portrait); a landscape source can use 1 / 1
+}
+const { label, title, lead, crumbs, photo, tone = 'red', photoPosition, caption, alt, meta = [], aspect = '4 / 5' } = Astro.props;
+---
+<section class="chero grain">
+  <div class="wrap chero__inner">
+    <Breadcrumbs items={crumbs} />
+    <div class="chero__text">
+      <p class="label-row label"><span class="chero__kicker">{label}</span>{meta.map((m) => <span>{m}</span>)}</p>
+      <h1 class="h1 chero__title">{title}</h1>
+      {lead && <p class="lead chero__lead">{lead}</p>}
+      <slot />
+    </div>
+    <div class="chero__photo">
+      <Pic id={photo} tone={tone} alt={alt} aspect={aspect} position={photoPosition} priority caption={caption} tape="tr"
+        sizes="(min-width: 900px) 42vw, 92vw" widths={[480, 720, 960, 1280]} />
+    </div>
+  </div>
+</section>
+
+<style>
+  .chero { padding-block: clamp(28px, 4vw, 48px) clamp(48px, 8vw, 96px); border-bottom: var(--rule); overflow: hidden; background: var(--paper); }
+  .chero__inner { position: relative; z-index: 2; display: grid; gap: 24px; grid-template-columns: 1.25fr 1fr; grid-template-areas: 'crumbs crumbs' 'text photo'; align-items: end; }
+  .chero__inner > :global(.crumbs) { grid-area: crumbs; }
+  .chero__text { grid-area: text; display: grid; gap: 20px; position: relative; z-index: 3; }
+  .chero__kicker { color: var(--red-ink); }
+  /* headline overlaps the photograph; a paper keyline keeps it legible where it crosses the image */
+  .chero__title { max-width: 14ch; margin-right: -22%; text-wrap: balance; -webkit-text-stroke: .06em var(--paper); paint-order: stroke fill; }
+  .chero__photo { grid-area: photo; position: relative; z-index: 1; }
+  @media (max-width: 900px) {
+    .chero__inner { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'crumbs' 'text' 'photo'; }
+    .chero__title { margin-right: 0; }
+    .chero__photo { max-width: 520px; }
+  }
+</style>

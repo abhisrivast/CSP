@@ -1,0 +1,59 @@
+---
+// Two-column reading layout for trust documents: a sticky, numbered "On this page" index on wide screens
+// (a collapsible list on phones) and a calm single reading column.
+export interface Props {
+  toc: { id: string; n: string; title: string }[];
+  updated?: string;            // shown under the index, e.g. "Last reviewed 24 October 2026"
+}
+const { toc, updated } = Astro.props;
+---
+<div class="wrap doc">
+  <aside class="doc__side">
+    <nav class="doc__toc" aria-label="On this page">
+      <p class="label doc__toc-title">On this page</p>
+      <ol role="list">
+        {toc.map((t) => <li><a href={`#${t.id}`}><span class="doc__toc-n" aria-hidden="true">{t.n}</span><span>{t.title}</span></a></li>)}
+      </ol>
+      {updated && <p class="doc__updated small">{updated}</p>}
+    </nav>
+  </aside>
+  <details class="doc__toc-m">
+    <summary><span class="label">On this page</span><span class="doc__toc-m-count">{toc.length} sections</span></summary>
+    <nav aria-label="On this page">
+      <ol role="list">
+        {toc.map((t) => <li><a href={`#${t.id}`}><span class="doc__toc-n" aria-hidden="true">{t.n}</span><span>{t.title}</span></a></li>)}
+      </ol>
+    </nav>
+  </details>
+  <div class="doc__body">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .doc { display: grid; grid-template-columns: minmax(200px, 3fr) minmax(0, 9fr); gap: clamp(28px, 5vw, 80px); padding-block: clamp(40px, 6vw, 80px) clamp(56px, 8vw, 110px); }
+  .doc__side { position: relative; }
+  .doc__toc { position: sticky; top: 96px; display: grid; gap: 12px; padding-top: 12px; border-top: 3px solid var(--ink); }
+  .doc__toc ol, .doc__toc-m ol { display: grid; }
+  .doc__toc a, .doc__toc-m a {
+    display: grid; grid-template-columns: 2.2em 1fr; gap: 6px; align-items: baseline; padding: 7px 0; min-height: 36px;
+    border-bottom: 1px solid var(--line-soft); color: var(--ink); text-decoration: none; font-size: .92rem; font-weight: 650; line-height: 1.3;
+  }
+  .doc__toc a:hover, .doc__toc-m a:hover { color: var(--red-ink); }
+  .doc__toc-n { font-weight: 900; font-stretch: var(--display-stretch); font-size: 1.1rem; color: var(--red-ink); line-height: 1; }
+  .doc__updated { color: var(--muted); padding-top: 4px; }
+  .doc__toc-m { display: none; }
+  .doc__body { min-width: 0; display: grid; gap: clamp(48px, 6vw, 80px); align-content: start; }
+  @media (max-width: 960px) {
+    .doc { grid-template-columns: 1fr; gap: 28px; }
+    .doc__side { display: none; }
+    .doc__toc-m { display: block; border-block: 3px solid var(--ink); background: var(--paper-light); }
+    .doc__toc-m summary { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 52px; padding: 0 14px; cursor: pointer; list-style: none; }
+    .doc__toc-m summary::-webkit-details-marker { display: none; }
+    .doc__toc-m summary::after { content: '+'; font-weight: 900; font-size: 1.5rem; line-height: 1; }
+    .doc__toc-m[open] summary::after { content: '–'; }
+    .doc__toc-m-count { margin-left: auto; font-size: .85rem; color: var(--muted); }
+    .doc__toc-m nav { padding: 0 14px 10px; }
+    .doc__toc-m a { min-height: 44px; align-items: center; }
+  }
+</style>

@@ -67,7 +67,7 @@
     "order": 8,
     "q": "Where is Cultural Shock Party based, and does it work outside India?",
     "a": "Cultural Shock Party was founded in India and most of its work is about India, but anyone, anywhere, can read, share and learn from it.",
-    "more": "Supporters outside India are welcome to read, share and translate our work and to get the newsletter. Indian law does not let us accept money from foreign citizens or organisations, so please support feminist groups where you live too.",
+    "more": "Supporters outside India are welcome to read, share and translate our work and to get the newsletter. We take no foreign money, by choice, so please support feminist groups where you live too.",
     "link": { "label": "Ways to take part from anywhere", "href": "/join/#ladder" }
   },
   {
@@ -76,7 +76,7 @@
     "order": 9,
     "q": "Who funds Cultural Shock Party?",
     "a": "Nobody, yet: Cultural Shock Party is run by volunteers, does not accept donations and takes no foreign money.",
-    "more": "Before we accept a single rupee, we will publish a funding policy, and then who gives, by category and total. India’s Foreign Contribution (Regulation) Act 2010 bars organisations of a political nature from accepting foreign contributions.",
+    "more": "Before we accept a single rupee, we will publish a funding policy, and then who gives, by category and total. We take no foreign money, by choice. Under India’s Foreign Contribution (Regulation) Act 2010, an organisation needs FCRA registration or permission to accept foreign contributions, and political parties and organisations the government declares “of a political nature” may not accept them at all (sections 3, 5 and 11).",
     "link": { "label": "Our independence and funding commitments", "href": "/about/#independence" }
   },
   {
@@ -85,7 +85,7 @@
     "order": 10,
     "q": "Can I donate to Cultural Shock Party?",
     "a": "Not yet. Cultural Shock Party does not accept donations, which is why there is no Donate button on this site.",
-    "more": "If that changes, we will publish a funding policy first. If you live outside India: thank you, but Indian law (FCRA) does not let us accept money from foreign citizens, including OCI and PIO card holders, or from foreign organisations. The most useful thing anyone can give today is time.",
+    "more": "If that changes, we will publish a funding policy first. If you live outside India: thank you, but we take no foreign money, by choice. That includes money from foreign citizens, including OCI cardholders, and from foreign organisations; without FCRA registration, Indian law would not let us accept it anyway. The most useful thing anyone can give today is time.",
     "link": { "label": "Ways to help that cost nothing", "href": "/join/#no-signup" }
   },
   {
@@ -212,7 +212,7 @@
     "order": 24,
     "q": "What is the Fourth Wave of Feminism?",
     "a": "The Fourth Wave is the feminism that grew up on phones and on the street from about 2012: hashtags, survivor testimony and mass protest against sexual violence, harassment and online abuse.",
-    "more": "It is a label used more by journalists and activists than by scholars, and it has no founder and no official start date. India helped shape it, from the Delhi protests of December 2012 to Reclaim the Night in West Bengal in 2024.",
+    "more": "Well-known examples include #MeToo, Ni Una Menos in Argentina and Las Tesis in Chile. India helped shape it too, from the Delhi protests of December 2012 to Reclaim the Night in West Bengal in 2024. It is a label used more by journalists and activists than by scholars, with no founder and no official start date.",
     "link": { "label": "What is the Fourth Wave? A plain-language guide", "href": "/resources/what-is-fourth-wave-feminism/" }
   },
   {
@@ -231,7 +231,7 @@
     "q": "How is the Fourth Wave different from earlier waves of feminism?",
     "a": "It adds three things to what earlier waves won: technology as both a tool and a battleground, survivor testimony at scale, and intersectionality as a starting point rather than an afterthought.",
     "more": "Very roughly, the first wave (19th century to the 1920s) fought for the vote and legal rights; the second (late 1960s to the 1980s) for equality at work and reproductive rights; the third (1990s and 2000s) for many identities and voices. The labels are a Western shorthand, and India’s own history does not fit them neatly.",
-    "link": { "label": "The waves, compared", "href": "/resources/what-is-fourth-wave-feminism/" }
+    "link": { "label": "What is actually new about the Fourth Wave", "href": "/resources/what-is-fourth-wave-feminism/#what-is-actually-new-about-it" }
   },
   {
     "id": "fifth-wave",
@@ -258,7 +258,7 @@
     "q": "Is feminism anti-men?",
     "a": "No. Feminism is about equal rights and freedom for people of every gender, and that includes freeing boys and men from rigid ideas of what a “real man” has to be.",
     "more": "Most men already agree with the basic idea: in a 30-country study, 62% of men said gender equality was important to them personally. The problem is an online industry, the manosphere, that profits from turning boys against girls. It is not boys themselves.",
-    "link": { "label": "Ten myths about feminism, and the receipts", "href": "/resources/feminism-myths-and-receipts/" }
+    "link": { "label": "Myth: feminism means hating men. The receipts", "href": "/resources/feminism-myths-and-receipts/#myth-feminism-means-hating-men" }
   },
   {
     "id": "can-men-be-feminists",

@@ -23,7 +23,8 @@ export function orgNode() {
     founder: { '@id': FOUNDER_ID },
     areaServed: SITE.base, // CONFIRM
     knowsAbout: ['Fourth-wave feminism', 'Feminist politics', 'Gender equality', 'Public memory', 'Political research', 'Collective action'],
-    sameAs: liveSocials().map((s) => s.href),
+    // Omitted while CSP has no confirmed social accounts (an empty sameAs says nothing).
+    ...(liveSocials().length ? { sameAs: liveSocials().map((s) => s.href) } : {}),
   };
 }
 

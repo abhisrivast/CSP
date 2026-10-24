@@ -36,5 +36,7 @@ const { items, minutes, title = 'In 30 seconds' } = Astro.props;
   .tldr__list li + li { border-top: 1.5px dashed var(--line-soft); }
   .tldr__n { font-weight: 900; font-stretch: var(--display-stretch); font-size: 1.6rem; line-height: .8; color: var(--red); }
   .tldr__stamp { position: absolute; right: 18px; top: 12px; }
+  /* The stamp sits over the dashed rule: give it the receipt's paper so the rule never runs through the letters. */
+  .tldr__stamp :global(.stamp) { background: var(--paper-light); }
   @media (max-width: 560px) { .tldr__head { padding-right: 104px; } .tldr__stamp { right: 8px; top: 14px; transform: scale(.82); transform-origin: top right; } }
 </style>

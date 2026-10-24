@@ -15,7 +15,7 @@ import QA from '../components/participate/QA.astro';
 import type { Tone } from '../lib/photos';
 
 const path = '/contact/';
-const title = 'Contact us: press, partnerships, schools and safeguarding';
+const title = 'Contact us: press, partners, schools';
 const description =
   'Contact Cultural Shock Party, a Fourth Wave feminist movement: one form for questions, press, partners, schools and safeguarding. Helplines come first.';
 const crumbs = [{ name: 'Contact', href: path }];
@@ -23,6 +23,7 @@ const crumbs = [{ name: 'Contact', href: path }];
 const ROUTES: {
   id: string; title: string; who: string; include: string[]; note?: string; topic: string; cta: string;
   photo?: { id: string; tone: Tone; alt: string; position?: string }; ground?: 'paper' | 'marigold' | 'pink';
+  big?: { figure: string; unit: string; text: string };
 }[] = [
   {
     id: 'route-general', title: 'General questions', topic: 'general', cta: 'Ask a question',
@@ -61,7 +62,8 @@ const ROUTES: {
     id: 'route-data', title: 'Your data', topic: 'data', cta: 'Ask about your data', ground: 'marigold',
     who: 'See what we hold about you, correct it, delete it, or withdraw your consent.',
     include: ['The email you signed up with', 'What you’d like us to do'],
-    note: 'We reply to data requests within 30 days at the latest. If you’re not satisfied, you can complain to the Data Protection Board of India.',
+    big: { figure: '30', unit: 'days', text: 'at the latest to answer a data request' },
+    note: 'Not happy with our answer? From 13 May 2027 you can also complain to the Data Protection Board of India (it had no members appointed as of October 2026; see our privacy notice).',
   },
 ];
 
@@ -170,7 +172,7 @@ const faqItems = faqIds.map((id) => faq.find((e) => e.data.id === id)!.data);
   <section class="section before" aria-labelledby="before-title">
     <div class="wrap before__grid">
       <div class="before__head">
-        <SectionHead num="03" label="Before you write" id="before-title" title="Already answered" lead="What journalists, partners and new groups ask us most. All 45 answers are on the FAQ." />
+        <SectionHead num="03" label="Before you write" id="before-title" title="Already answered" lead="Answers to the questions journalists, partners and new groups are likely to ask. All 45 answers are on the FAQ." />
         <a class="btn btn--ink" href="/faq/">Read the FAQ <span class="arrow" aria-hidden="true">→</span></a>
       </div>
       <div>
@@ -235,8 +237,10 @@ const faqItems = faqIds.map((id) => faq.find((e) => e.data.id === id)!.data);
   .before__grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: clamp(28px, 5vw, 80px); align-items: start; }
   .before__head { position: sticky; top: 96px; display: grid; gap: 4px; justify-items: start; }
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1140px) {
     .routes__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 1000px) {
     .safe__inner { grid-template-columns: 1fr; }
   }
   @media (max-width: 900px) {

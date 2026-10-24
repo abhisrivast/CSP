@@ -4,8 +4,9 @@
 import Photo from '../media/Photo.astro';
 import Breadcrumbs from '../ui/Breadcrumbs.astro';
 import Annotation from '../ui/Annotation.astro';
+import CasePoster from './CasePoster.astro';
 import type { PhotoMeta, Tone } from '../../lib/photos';
-import { heroTone, honestCaption, isOwn, photoDate } from './case-utils';
+import { heroTone, honestCaption, isOwn, isStock, photoDate, HERO_NOTES, ILLUSTRATIVE_NOTE, type Poster } from './case-utils';
 
 export interface Props {
   caseId: string;
@@ -16,23 +17,31 @@ export interface Props {
   region: string;
   years: string;
   photo?: PhotoMeta;
+  poster?: Poster;
   tone: Tone;
   crumbs: { name: string; href: string }[];
 }
-const { caseId, no, title, dek, place, region, years, photo, tone, crumbs } = Astro.props;
+const { caseId, no, title, dek, place, region, years, photo, poster, tone, crumbs } = Astro.props;
 const portrait = photo?.orientation === 'portrait';
 const date = photo ? photoDate(photo) : undefined;
-const note = photo && date ? (isOwn(photo, caseId) ? `This photo: ${date}` : `Photographed ${date}`) : undefined;
+// The handwritten note only dates a photo of this very movement. A related place or moment gets a plain
+// "where, and not what" note; anything else relies on its caption.
+const own = !!photo && !isStock(photo) && isOwn(photo, caseId);
+const note = photo ? (own ? (date ? `This photo: ${date}` : undefined) : HERO_NOTES[caseId]) : undefined;
+const caption = photo ? honestCaption(photo, caseId) || ILLUSTRATIVE_NOTE : '';
 const size = title.length > 52 ? 'xl' : title.length > 30 ? 'l' : 'm';
+// A long single word ("Decriminalising") cannot wrap, so it sets the type size when the photo sits alongside.
+const longWord = Math.max(...title.split(/\s+/).map((w) => w.length));
+const tight = portrait && longWord >= 12;
 ---
-<section class:list={['chero', { 'chero--split': portrait, 'chero--nophoto': !photo }]}>
+<section class:list={['chero', { 'chero--split': portrait, 'chero--nophoto': !photo && !poster, 'chero--poster': !photo && !!poster }]}>
   <div class="wrap chero__inner">
     <Breadcrumbs items={crumbs} />
     <div class="chero__head">
       <p class="chero__no" aria-hidden="true"><span class="label">Case</span><span class="chero__digits">{no}</span></p>
       <div class="chero__text">
-        <p class="label-row label chero__kicker"><span class="red-ink">Case study {no}</span><span>{region}</span><span>{years}</span></p>
-        <h1 class:list={['h1', 'chero__title', `chero__title--${size}`]}>{title}</h1>
+        <p class="label chero__kicker"><span class="chero__kicker-in"><span class="red-ink">Case study {no}</span><span>{region}</span><span>{years}</span></span></p>
+        <h1 class:list={['h1', 'chero__title', `chero__title--${size}`, { 'chero__title--tight': tight }]}>{title}</h1>
         <p class="chero__dek">{dek}</p>
         <p class="label chero__place"><span aria-hidden="true">◉</span> {place}</p>
       </div>
@@ -42,13 +51,18 @@ const size = title.length > 52 ? 'xl' : title.length > 30 ? 'l' : 'm';
         <Photo
           id={photo.id}
           tone={heroTone(photo, tone)}
-          caption={honestCaption(photo, caseId)}
+          caption={caption}
           aspect={portrait ? '4 / 5' : '3 / 2'}
           priority
           sizes={portrait ? '(min-width: 900px) 40vw, 92vw' : '(min-width: 1320px) 1240px, 94vw'}
           widths={portrait ? [400, 600, 800, 1000] : [480, 720, 960, 1280, 1600]}
         />
-        {note && <Annotation text={note} arrow="down" top="-58px" right="3%" tilt={-5} width="34ch" />}
+        {note && <Annotation text={note} arrow="down" top="-58px" right="3%" tilt={-4} width="44ch" />}
+      </div>
+    )}
+    {!photo && poster && (
+      <div class="chero__photo chero__poster">
+        <CasePoster poster={poster} size="hero" />
       </div>
     )}
   </div>
@@ -68,11 +82,18 @@ const size = title.length > 52 ? 'xl' : title.length > 30 ? 'l' : 'm';
   .chero__title { text-wrap: balance; max-width: 15ch; hyphens: manual; }
   .chero__title--l { font-size: clamp(2.6rem, 6.6vw, 6rem); max-width: 18ch; }
   .chero__title--xl { font-size: clamp(2.3rem, 5.2vw, 4.8rem); max-width: 22ch; }
+  .chero__title--tight { font-size: clamp(2.3rem, 4.1vw, 3.9rem); }
+  .chero__head, .chero__text { min-width: 0; }
   .chero__dek { font-family: var(--font-serif); font-size: clamp(1.2rem, 1.9vw, 1.6rem); line-height: 1.35; max-width: 40ch; color: var(--ink-soft); }
   .chero__place { color: var(--ink-soft); }
+  /* Separators are clipped at the start of a wrapped line, so no line opens with "/". */
+  .chero__kicker { overflow: hidden; }
+  .chero__kicker-in { display: flex; flex-wrap: wrap; row-gap: .35rem; margin-left: -1.9rem; }
+  .chero__kicker-in > span::before { content: '/'; display: inline-block; width: 1.9rem; text-align: center; opacity: .5; color: var(--ink); }
   .chero__photo { position: relative; margin-top: clamp(30px, 4vw, 48px); }
   .chero__photo :global(figcaption) { max-width: 80ch; }
   .chero__photo :global(.photo--fixed .photo__img picture) { display: block; height: 100%; }
+  .chero__poster { margin-top: clamp(24px, 3vw, 40px); }
 
   /* portrait photos: beside the headline */
   .chero--split .chero__inner { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); column-gap: clamp(24px, 4vw, 56px); }
@@ -93,5 +114,6 @@ const size = title.length > 52 ? 'xl' : title.length > 30 ? 'l' : 'm';
     .chero__no { grid-auto-flow: column; align-items: end; justify-content: start; gap: 10px; }
     .chero__digits { font-size: clamp(4.6rem, 26vw, 7rem); }
     .chero__photo { margin-top: 58px; }
+    .chero__poster { margin-top: 26px; }
   }
 </style>

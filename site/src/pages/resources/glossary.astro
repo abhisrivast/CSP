@@ -9,7 +9,7 @@ import Placard from '../../components/ui/Placard.astro';
 import Card from '../../components/blocks/Card.astro';
 import JoinBand from '../../components/blocks/JoinBand.astro';
 import { definedTermSetNode } from '../../lib/schema';
-import { getArticles, readingMinutes } from '../../components/resources/lib';
+import { getArticles, readingMinutes, cardPhotoOf, seedOf } from '../../components/resources/lib';
 
 const terms = (await getCollection('glossary')).sort((a, b) => a.data.term.localeCompare(b.data.term, 'en'));
 const byId = new Map(terms.map((t) => [t.id, t]));
@@ -38,9 +38,16 @@ for (const [key, val] of Object.entries(INTERLUDES)) {
 const articles = await getArticles();
 const READ_IDS = ['what-is-fourth-wave-feminism', 'intersectional-feminism-explained', 'feminism-myths-and-receipts', 'boys-men-and-the-manosphere'];
 const reads = READ_IDS.map((id) => articles.find((a) => a.id === id)).filter(Boolean) as typeof articles;
+// Card photos for the reads, avoiding the hero and interlude photos already on this page.
+const used = new Set<string>(['in-052-west-bengal-woman-eyes-over-bengali-book', ...Object.values(INTERLUDES).map((i) => i.id)]);
+const readPics = reads.map((r) => {
+  const id = cardPhotoOf(r, used, seedOf('glossary'));
+  if (id) used.add(id);
+  return id;
+});
 
 const path = '/resources/glossary/';
-const title = 'Feminist glossary: plain words, no jargon';
+const title = 'Feminist glossary: plain words';
 const description = `What does intersectionality mean? What is patriarchy, POSH or consent? ${terms.length} feminist terms explained in plain words, with Hindi, examples and sources.`;
 const schema = [definedTermSetNode(path, 'Feminist glossary (Cultural Shock Party)', terms.map((t) => ({ id: t.id, term: t.data.term, definition: t.data.definition })))];
 const hindiCount = terms.filter((t) => t.data.hindi).length;
@@ -80,8 +87,8 @@ const hindiCount = terms.filter((t) => t.data.hindi).length;
           <section class="g-group" id={`letter-${letter.toLowerCase()}`} aria-labelledby={`h-${letter.toLowerCase()}`}>
             <h2 class="g-letter" id={`h-${letter.toLowerCase()}`}><span aria-hidden="true">{letter}</span><span class="visually-hidden">Terms starting with {letter}</span></h2>
             <div class="g-grid">
-              {list.map((t) => (
-                <article class="term" id={t.id} aria-labelledby={`t-${t.id}`}>
+              {list.map((t, i) => (
+                <article class:list={['term', { 'term--wide': list.length % 2 === 1 && i === list.length - 1 }]} id={t.id} aria-labelledby={`t-${t.id}`}>
                   <header class="term__head">
                     <h3 class="term__name" id={`t-${t.id}`}>{t.data.term}</h3>
                     {t.data.hindi && <p class="term__hi"><span class="visually-hidden">In Hindi: </span><span lang="hi">{t.data.hindi}</span></p>}
@@ -119,6 +126,7 @@ const hindiCount = terms.filter((t) => t.data.hindi).length;
           })()}
         </>
       ))}
+      <p class="g-legal small"><strong>Not legal advice.</strong> Definitions of laws here are plain-language information, not legal advice. Each card links to the source we checked; for anything that affects you, read the law itself or ask a lawyer. Checked 24 October 2026.</p>
     </div>
   </div>
 
@@ -128,8 +136,8 @@ const hindiCount = terms.filter((t) => t.data.hindi).length;
         <p class="label g-reads__label">Words in action</p>
         <h2 class="h2" id="reads-title">Now read them <span class="red">in a sentence</span></h2>
         <ul class="g-reads__grid" role="list">
-          {reads.map((r) => (
-            <li><Card href={`/resources/${r.id}/`} title={r.data.title} kicker={r.data.kind} meta={[`${readingMinutes(r)} min`]} photo={r.data.heroPhoto} tone={r.data.tone} aspect="4 / 3" /></li>
+          {reads.map((r, k) => (
+            <li><Card href={`/resources/${r.id}/`} title={r.data.title} kicker={r.data.kind} meta={[`${readingMinutes(r)} min`]} photo={readPics[k]} tone={r.data.tone} aspect="4 / 3" /></li>
           ))}
         </ul>
         <a class="link-arrow" href="/resources/">Every guide in the Journal <span aria-hidden="true">→</span></a>
@@ -150,7 +158,8 @@ const hindiCount = terms.filter((t) => t.data.hindi).length;
   .az { position: sticky; top: 71px; z-index: 30; background: var(--ink); color: var(--paper); border-bottom: 3px solid var(--red); }
   .az__inner { display: flex; align-items: center; gap: 14px; }
   .az__label { flex: none; color: var(--coral); }
-  .az__list { display: flex; flex: 1; justify-content: space-between; overflow-x: auto; scrollbar-width: none; }
+  .az__list { display: flex; flex: 1; justify-content: space-between; overflow-x: auto; scrollbar-width: none; scroll-snap-type: x proximity; }
+  .az__list li { scroll-snap-align: start; }
   .az__list::-webkit-scrollbar { display: none; }
   .az__list a, .az__off {
     display: grid; place-items: center; min-width: 32px; min-height: 48px; font-weight: 900; font-stretch: var(--display-stretch);
@@ -162,7 +171,13 @@ const hindiCount = terms.filter((t) => t.data.hindi).length;
   .az__off { color: #8C8475; }
   @media (max-width: 700px) {
     .az__label { display: none; }
-    .az__list { justify-content: flex-start; gap: 2px; }
+    /* letters scroll sideways: fade the right edge so the bar visibly continues, and leave room to scroll clear of it */
+    .az__inner { position: relative; }
+    .az__inner::after {
+      content: ''; position: absolute; top: 0; bottom: 0; right: 0; width: 64px; pointer-events: none;
+      background: linear-gradient(90deg, rgba(29, 28, 24, 0), var(--ink) 70%);
+    }
+    .az__list { justify-content: flex-start; gap: 2px; padding-right: 48px; }
     .az__list a, .az__off { min-width: 34px; font-size: 1.35rem; }
     .az__off { display: none; }
   }
@@ -173,6 +188,15 @@ const hindiCount = terms.filter((t) => t.data.hindi).length;
   .g-group { display: grid; grid-template-columns: minmax(90px, 200px) minmax(0, 1fr); gap: 0 clamp(18px, 3vw, 40px); padding-top: 18px; margin-top: clamp(24px, 4vw, 44px); border-top: var(--rule); scroll-margin-top: 130px; }
   .g-letter { font-weight: 900; font-stretch: var(--display-stretch); font-size: clamp(5rem, 12vw, 10rem); line-height: .78; color: var(--red); position: sticky; top: 140px; align-self: start; }
   .g-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: start; }
+  /* the last card of an odd-numbered group spans the row: term on the left, definition on the right */
+  .term--wide { grid-column: 1 / -1; }
+  @media (min-width: 701px) {
+    .term--wide { grid-template-columns: minmax(180px, .75fr) minmax(0, 2fr); column-gap: clamp(20px, 3vw, 40px); align-items: start; }
+    .term--wide > :not(.term__head):not(.term__anchor) { grid-column: 2; max-width: 68ch; }
+    .term--wide .term__head { grid-column: 1; grid-row: 1 / span 5; flex-direction: column; align-items: start; }
+  }
+  .g-legal { max-width: 70ch; margin-top: clamp(36px, 5vw, 56px); padding: 14px 16px; border: 2px solid var(--ink); border-left-width: 8px; border-left-color: var(--marigold); background: var(--paper-light); color: var(--ink-soft); }
+  .g-legal strong { color: var(--ink); }
 
   .term {
     position: relative; display: grid; gap: 10px; padding: 18px 20px 18px; background: var(--paper-light); border: 2px solid var(--ink);

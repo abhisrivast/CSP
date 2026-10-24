@@ -55,6 +55,14 @@ sources:
     href: "https://en.wikipedia.org/wiki/Pandita_Ramabai"
     publisher: "Wikipedia"
     date: "accessed 24 Oct 2026"
+  - label: "Opening of the Sharada Sadan (report from The Times of India, 13 March 1889)"
+    href: "https://scalar.lehigh.edu/visions-of-america/opening-of-the-sharada-sadan"
+    publisher: "Visions of America, Lehigh University"
+    date: "accessed 24 Oct 2026"
+  - label: "Pandita Ramabai's story (Sharada Sadan moved to Poona in 1890)"
+    href: "https://mukti.org.nz/pandita-ramabai/"
+    publisher: "Mukti Mission New Zealand"
+    date: "accessed 24 Oct 2026"
   - label: "Sultana's Dream by Rokeya Sakhawat Hossain (review)"
     href: "https://strangehorizons.com/wordpress/non-fiction/reviews/sultanas-dream-by-rokeya-sakhawat-hossain/"
     publisher: "Strange Horizons"
@@ -141,6 +149,7 @@ import Timeline from '../../components/blocks/Timeline.astro';
 import ReceiptRow from '../../components/resources/ReceiptRow.astro';
 import PhotoPair from '../../components/resources/PhotoPair.astro';
 
+
 export const NAMES = ['Savitribai Phule', 'Fatima Sheikh', 'Tarabai Shinde', 'Pandita Ramabai', 'Rokeya Sakhawat Hossain', 'Kamaladevi Chattopadhyay', 'Aruna Asaf Ali', 'Dakshayani Velayudhan', 'Hansa Mehta', 'Ela Bhatt', 'Gaura Devi', 'Bhanwari Devi'];
 
 Indian feminism has a long, home-grown history, and these 12 women are a good place to start: Savitribai Phule, Fatima Sheikh, Tarabai Shinde, Pandita Ramabai, Rokeya Sakhawat Hossain, Kamaladevi Chattopadhyay, Aruna Asaf Ali, Dakshayani Velayudhan, Hansa Mehta, Ela Bhatt, Gaura Devi and Bhanwari Devi. Between 1848 and 1997 they opened schools, wrote back to the men who blamed women, helped write the Constitution, organised workers and saved forests. Here is what each of them did, when, and how we know.
@@ -151,7 +160,7 @@ This is not a ranking, and it is nowhere near complete. Think of it as twelve do
   <p class="label" id="names-title" style={{ color: 'var(--marigold)' }}>Twelve names to say out loud</p>
   <ol role="list" style={{ listStyle: 'none', padding: 0, margin: '16px 0 0', display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', gap: '6px 20px' }}>
     {NAMES.map((n, i) => (
-      <li style={{ margin: 0, display: 'inline-flex', alignItems: 'baseline', gap: '7px' }}><span style={{ fontSize: '.78rem', fontWeight: 700, letterSpacing: '.1em', color: '#B9B0A0' }}>{String(i + 1).padStart(2, '0')}</span><span style={{ fontWeight: 900, fontStretch: '62%', textTransform: 'uppercase', letterSpacing: '-.01em', fontSize: 'clamp(1.9rem, 5.2vw, 3.7rem)', lineHeight: 0.95, color: ['var(--paper)', 'var(--coral)', 'var(--marigold)'][i % 3] }}>{n}</span></li>
+      <li style={{ margin: 0, display: 'inline-flex', alignItems: 'baseline', gap: '7px' }}><span style={{ fontSize: '.78rem', fontWeight: 700, letterSpacing: '.1em', color: '#CFC6B4' }}>{String(i + 1).padStart(2, '0')}</span><span style={{ fontWeight: 900, fontStretch: '62%', textTransform: 'uppercase', letterSpacing: '-.01em', fontSize: 'clamp(1.9rem, 5.2vw, 3.7rem)', lineHeight: 0.95, color: ['var(--paper)', 'var(--coral)', 'var(--marigold)'][i % 3] }}>{n}</span></li>
     ))}
   </ol>
   <figcaption style={{ marginTop: '18px', fontSize: '.92rem', color: '#CFC6B4' }}>From a classroom in Pune in 1848 to the Supreme Court in 1997. Read on for who each of them was.</figcaption>
@@ -165,7 +174,7 @@ That is why remembering them is political, not nostalgic. Every one of them used
 
 <PhotoPair>
   <Photo id="in-024-2017-rajni-tilak-savitribai-phule-poems" tone="natural" aspect="4 / 5" position="50% 40%" caption="Rajni Tilak holds her translation of Savitribai Phule’s poems at Savitribai Phule Pune University, 20 December 2017." widths={[360, 560, 800]} sizes="(min-width: 900px) 440px, 92vw" />
-  <Photo id="in-023-2018-asha-kowtal-dalit-womens-rights-microphone" tone="natural" aspect="4 / 5" position="62% 40%" caption="Dalit women’s rights activist Asha Kowtal speaks in front of a painted portrait of Savitribai Phule, 14 April 2018." widths={[360, 560, 800]} sizes="(min-width: 900px) 440px, 92vw" />
+  <Photo id="in-015-2020-delhi-shaheen-bagh-fatima-sheikh-savitribai-phul" tone="natural" aspect="4 / 5" position="72% 50%" caption="A pop-up library named after Fatima Sheikh and Savitribai Phule, set up in a bus stop during the Shaheen Bagh sit-in, New Delhi, 28 January 2020." widths={[360, 560, 800]} sizes="(min-width: 900px) 440px, 92vw" />
 </PhotoPair>
 
 ## Who opened the first doors?
@@ -176,13 +185,15 @@ That is why remembering them is political, not nostalgic. Every one of them used
   { date: 'January 1848', year: '1848', place: 'Pune', tag: 'Education', title: 'Savitribai Phule (1831–1897)', text: 'With Jyotirao Phule and Sagunabai Kshirsagar, she opened a girls’ school at Bhide Wada, one of the first started by Indians. By 1851 the Phules ran three girls’ schools. She published a book of poems, Kavya Phule, in 1854, and died in 1897 of plague caught while caring for a patient.', source: { label: 'Wikipedia: Savitribai Phule', href: 'https://en.wikipedia.org/wiki/Savitribai_Phule' } },
   { date: '1850s', year: '1856', place: 'Pune', tag: 'Education', title: 'Fatima Sheikh (19th century)', text: 'Remembered as Savitribai’s fellow teacher and as one of India’s first Muslim women teachers, she taught girls in Pune alongside the Phules, and Savitribai mentions her in a letter of 1856. The surviving records are thin, and her story was publicly questioned in January 2025: a reminder that memory needs archives.', source: { label: 'Alt News, 29 Jan 2025', href: 'https://www.altnews.in/activist-dilip-mandals-claim-that-fatima-sheikh-is-a-non-existent-character-is-a-travesty-of-historical-truth/' } },
   { date: '1882', year: '1882', place: 'Pune', tag: 'Writing', title: 'Tarabai Shinde (c. 1850–1910)', text: 'Written after a Pune newspaper’s coverage of a young widow’s trial, her Marathi pamphlet Stri Purush Tulana (A Comparison of Women and Men) turned the blame around: every fault men pinned on women, she argued, men had too. Only 500 copies were printed. After a hostile reception she never published again, and the text was not republished until 1975.', source: { label: 'Wikipedia: Tarabai Shinde', href: 'https://en.wikipedia.org/wiki/Tarabai_Shinde' } },
-  { date: '1889', year: '1889', tag: 'Shelter', title: 'Pandita Ramabai (1858–1922)', text: 'A Sanskrit scholar who earned the titles Pandita and Sarasvati in 1878, she wrote The High-Caste Hindu Woman (1887) and in 1889 opened Sharada Sadan, a home and school where widowed girls and women could live and study. Sources disagree on whether it opened in Bombay or Pune.', source: { label: 'SOAS Archives, 23 Mar 2020', href: 'https://blogs.soas.ac.uk/archives/?p=5581' } },
+  { date: 'March 1889', year: '1889', place: 'Bombay, then Poona', tag: 'Shelter', title: 'Pandita Ramabai (1858–1922)', text: 'A Sanskrit scholar who earned the titles Pandita and Sarasvati in 1878, she wrote The High-Caste Hindu Woman (1887) and in March 1889 opened Sharada Sadan, a home and school where widowed girls and women could live and study. It opened behind Wilson College in Chowpatty, Bombay, and moved to Poona (Pune) in 1890.', source: { label: 'The Times of India, 13 Mar 1889', href: 'https://scalar.lehigh.edu/visions-of-america/opening-of-the-sharada-sadan' } },
   { date: '1905', year: '1905', place: 'Bengal', tag: 'Imagination', title: 'Rokeya Sakhawat Hossain (1880–1932)', text: 'Her story Sultana’s Dream, first published in The Indian Ladies’ Magazine in Madras, imagines Ladyland, where women run everything and men are kept indoors. It is among the earliest known Indian science fiction in English. In 1909 she opened a girls’ school in Bhagalpur, which moved to Calcutta in 1911.', source: { label: 'Strange Horizons, 30 Sep 2013', href: 'https://strangehorizons.com/wordpress/non-fiction/reviews/sultanas-dream-by-rokeya-sakhawat-hossain/' } },
 ]} />
 
 ## Who took feminism onto the streets and into the Constitution?
 
 **1926 to 1950.** The next generation moved into public space: beaches, maidans, assemblies and, in the end, the United Nations.
+
+<Photo id="in-046-1930-salt-march-gandhi-sarojini-naidu" tone="natural" aspect="16 / 10" position="50% 24%" caption="Sarojini Naidu walks beside Mahatma Gandhi on the Salt March, 1930 (Agence Meurisse, dated 23 April 1930). That April, Kamaladevi Chattopadhyay led women to make salt on Chowpatty beach." widths={[480, 720, 960, 1200]} sizes="(min-width: 1000px) 960px, 92vw" />
 
 <Timeline dense startIndex={6} events={[
   { date: '6 April 1930', year: '1930', place: 'Bombay', tag: 'Street', title: 'Kamaladevi Chattopadhyay (1903–1988)', text: 'In 1926 she became the first woman to stand for a legislative seat in India, and lost by 55 votes. On 6 April 1930 she led women to Chowpatty beach to make salt in defiance of colonial law. After independence she helped rebuild India’s crafts economy, including the Central Cottage Industries Emporium and the Crafts Council of India.', source: { label: 'Live History India, 9 Aug 2017', href: 'https://www.livehistoryindia.com/story/people/the-chowpatty-satyagraha' } },
@@ -193,9 +204,7 @@ That is why remembering them is political, not nostalgic. Every one of them used
 
 <PullQuote quote="What we have asked for is social justice, economic justice, and political justice." by="Hansa Mehta" role="Constituent Assembly, 19 December 1946" href="https://www.constitutionofindia.net/debates/19-dec-1946/" />
 
-Mehta and Velayudhan helped write the document that, from 26 January 1950, gave every adult an equal vote. Seventy-six years later, women still use it.
-
-<Photo id="in-028-2026-assam-woman-inked-finger-after-voting" tone="natural" aspect="16 / 9" position="50% 74%" widths={[480, 720, 960, 1200]} sizes="(min-width: 1000px) 960px, 92vw" />
+Mehta and Velayudhan helped write the document that, from 26 January 1950, gave every adult an equal vote. Seventy-six years later, every woman who votes is using it.
 
 ## Who organised the markets, forests and workplaces?
 
@@ -209,7 +218,10 @@ Mehta and Velayudhan helped write the document that, from 26 January 1950, gave 
 
 Bhanwari Devi's story did not end in 1997: the Vishaka guidelines later became the POSH Act of 2013. Our case study [Bhanwari Devi, Vishaka and the POSH Act](/case-studies/bhanwari-devi-vishaka-posh/) tells it in full, and [SEWA: organising India's self-employed women](/case-studies/sewa-self-employed-women/) shows how Ela Bhatt's union grew.
 
-<Photo id="in-027-2017-cuddalore-women-self-help-group-circle" tone="natural" aspect="16 / 9" widths={[480, 720, 960, 1200]} sizes="(min-width: 1000px) 960px, 92vw" />
+<PhotoPair>
+  <Photo id="in-026-2008-rural-women-self-help-group-meeting" tone="natural" aspect="4 / 5" position="45% 50%" caption="Women at a self-help group meeting, where members save together and access micro-finance, 23 January 2008." widths={[360, 560, 800]} sizes="(min-width: 900px) 440px, 92vw" />
+  <Photo id="in-059-kerala-woman-farmer-watering-field" tone="natural" aspect="4 / 5" position="82% 50%" caption="A woman farmer waters vegetable beds at Vellayani, Kerala. Illustrative photo." widths={[360, 560, 800]} sizes="(min-width: 900px) 440px, 92vw" />
+</PhotoPair>
 
 ## Why does remembering them matter now?
 
@@ -228,7 +240,7 @@ Their stories also show something the word "wave" hides: Indian feminism has bee
   <Photo id="jai-jagat-half-the-world-sticker" tone="natural" aspect="4 / 3" position="50% 55%" caption="Memory in a slogan: ‘We are half of the world, we demand half of the land’, a women’s land-rights sticker in Hindi and English, Gwalior, 2018." widths={[360, 560, 800]} sizes="(min-width: 900px) 440px, 92vw" />
 </PhotoPair>
 
-<Placard text="Say her name out loud" color="pink" tilt={-3} size="m" decorative />
+<Placard text="Nobody starts from zero" color="pink" tilt={-3} size="m" decorative />
 
 ## What you can do
 
@@ -237,3 +249,6 @@ Their stories also show something the word "wave" hides: Indian feminism has bee
 3. **Read them in their own words.** Start with *Sultana's Dream* or *Stri Purush Tulana* from [the Fourth Wave reading (and watching) list](/resources/fourth-wave-reading-list/).
 4. **Ask your school or college** whether these women are taught, and suggest one for the next assembly, project or wall.
 5. **Make memory part of the manifesto.** Clause 8 of [the Fourth Wave Manifesto](/manifesto/) says memory is power. Read it, then [join us](/join/) if you are 18 or over.
+
+{/* Mobile fix: the shared dense Timeline keeps two columns below 700px (equal-specificity clash with the article template). */}
+<style>{`@media (max-width: 700px) { .article__prose .timeline--dense .tl { grid-template-columns: minmax(0, 1fr) !important; gap: 8px !important; } }`}</style>

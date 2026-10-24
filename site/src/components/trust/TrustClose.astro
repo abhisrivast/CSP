@@ -1,0 +1,71 @@
+---
+// Calm closing band for trust documents: one next step, plus the other trust documents as numbered links.
+// (Used instead of JoinBand: these pages end with help, not a recruitment ask.)
+import Placard from '../ui/Placard.astro';
+import type { TrustDoc } from './TrustNav.astro';
+
+export interface Props {
+  current: TrustDoc;
+  title: string;
+  text: string;
+  cta: { label: string; href: string };
+  placard?: string;
+}
+const { current, title, text, cta, placard } = Astro.props;
+const DOCS: { key: TrustDoc; label: string; href: string; line: string }[] = [
+  { key: 'privacy', label: 'Privacy notice', href: '/privacy/', line: 'What we collect, why, and your rights.' },
+  { key: 'safeguarding', label: 'Safeguarding', href: '/safeguarding/', line: 'How we keep children and adults safe.' },
+  { key: 'accessibility', label: 'Accessibility', href: '/accessibility/', line: 'How this site works for everyone.' },
+  { key: 'credits', label: 'Image credits', href: '/credits/', line: 'Every photo, its author and licence.' },
+];
+const others = DOCS.filter((d) => d.key !== current);
+---
+<section class="tclose ground-green grain" aria-labelledby="tclose-title">
+  <div class="wrap tclose__inner">
+    <div class="tclose__ask">
+      <h2 class="tclose__title" id="tclose-title">{title}</h2>
+      <p class="tclose__text">{text}</p>
+      <a class="tclose__btn" href={cta.href}>{cta.label} <span aria-hidden="true">→</span></a>
+      {placard && <div class="tclose__placard" aria-hidden="true"><Placard text={placard} color="marigold" shape="sticker" size="s" tilt={-5} decorative /></div>}
+    </div>
+    <nav class="tclose__docs" aria-label="Other trust documents">
+      <p class="label tclose__docs-title">Also in Trust</p>
+      <ul role="list">
+        {others.map((d) => (
+          <li><a href={d.href}><span class="tclose__doc">{d.label}</span><span class="tclose__line">{d.line}</span><span class="tclose__arrow" aria-hidden="true">→</span></a></li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</section>
+
+<style>
+  .tclose { padding-block: clamp(3rem, 7vw, 5.5rem); }
+  .tclose__inner { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 72px); align-items: start; }
+  .tclose__ask { display: grid; gap: 18px; justify-items: start; position: relative; }
+  .tclose__title { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(2.4rem, 5vw, 4.2rem); line-height: .88; max-width: 13ch; color: var(--paper); }
+  .tclose__text { font-family: var(--font-serif); font-size: clamp(1.1rem, 1.5vw, 1.3rem); line-height: 1.5; color: #DCD5C3; max-width: 44ch; }
+  .tclose .tclose__btn {
+    display: inline-flex; align-items: center; gap: .6em; min-height: 48px; padding: .7em 1.15em .62em;
+    background: var(--paper-light); color: var(--ink); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
+    font-weight: 800; font-stretch: 80%; font-size: 1.02rem; letter-spacing: .04em; text-transform: uppercase; text-decoration: none; line-height: 1.1;
+    transition: transform .15s var(--ease), box-shadow .15s var(--ease);
+  }
+  .tclose .tclose__btn:hover { color: var(--ink); transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
+  .tclose__placard { position: absolute; right: 0; top: -6px; }
+  .tclose__docs { border-top: 3px solid var(--paper); }
+  .tclose__docs-title { padding-block: 12px 4px; color: #DCD5C3; }
+  .tclose__docs a {
+    display: grid; grid-template-columns: 1fr auto; gap: 2px 16px; align-items: center; min-height: 64px; padding: 14px 0;
+    border-bottom: 1px solid rgba(243, 236, 220, .35); color: var(--paper); text-decoration: none;
+  }
+  .tclose__doc { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(1.6rem, 2.4vw, 2.1rem); line-height: .9; }
+  .tclose__line { grid-column: 1; font-size: .92rem; color: #DCD5C3; }
+  .tclose__arrow { grid-row: 1 / span 2; grid-column: 2; font-weight: 900; font-size: 1.4rem; color: var(--marigold); transition: transform .15s var(--ease); }
+  .tclose__docs a:hover .tclose__doc { color: var(--marigold); }
+  .tclose__docs a:hover .tclose__arrow { transform: translateX(4px); }
+  @media (max-width: 860px) {
+    .tclose__inner { grid-template-columns: 1fr; }
+    .tclose__placard { display: none; }
+  }
+</style>

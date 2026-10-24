@@ -1,0 +1,67 @@
+---
+// The India helpline block, exactly as docs/STRATEGY.md §13, laid out as a calm directory,
+// with the "check before you call" date and a source for every number.
+export interface Props { id?: string; title?: string; lead?: string; level?: 'h2' | 'h3'; checked?: string }
+const {
+  id = 'helplines',
+  title = 'Helplines first',
+  lead = 'If you or someone else is in danger, or needs to talk to someone now, these numbers are free in India. They answer faster than we can.',
+  level: H = 'h2',
+  checked = '24 October 2026',
+} = Astro.props;
+const LINES = [
+  { n: '112', what: 'Emergency', who: 'Police, fire and rescue, health.' },
+  { n: '181', what: 'National Women Helpline', who: '' },
+  { n: '14490', what: 'NCW 24×7 Women Helpline', who: 'For women over 18.' },
+  { n: '1930', what: 'Cyber crime', who: 'Or report at cybercrime.gov.in.', href: 'https://cybercrime.gov.in/' },
+  { n: '1098', what: 'Child Helpline', who: 'Free, day and night, for any child who needs help.' },
+  { n: '14416', what: 'Tele-MANAS mental health', who: 'Toll-free counselling.' },
+];
+---
+<section class="hl ground-ink" id={id} aria-labelledby={`${id}-title`}>
+  <div class="hl__head">
+    <H class="hl__title" id={`${id}-title`}>{title}</H>
+    <p class="hl__lead">{lead}</p>
+  </div>
+  <ul class="hl__list" role="list">
+    {LINES.map((l) => (
+      <li class="hl__item">
+        <a class="hl__call" href={`tel:${l.n}`}><span class="visually-hidden">Call </span><span class="hl__n">{l.n}</span></a>
+        <p class="hl__what">{l.what}</p>
+        {l.who && <p class="hl__who">{l.href ? <>Or report at <a href={l.href} rel="noopener">cybercrime.gov.in</a>.</> : l.who}</p>}
+      </li>
+    ))}
+  </ul>
+  <p class="hl__note">
+    Numbers checked {checked}; <strong>check before you call</strong>. Sources: <a href="https://www.ncw.gov.in/other-useful-helplines/" rel="noopener">National Commission for Women, other useful helplines</a> (112, 181, 14490, 1930, 1098) and <a href="https://static.pib.gov.in/WriteReadData/specificdocs/documents/2024/oct/doc20241013415701.pdf" rel="noopener">PIB, Tele-MANAS backgrounder, October 2024</a> (14416). This is information, not legal or medical advice.
+  </p>
+</section>
+
+<style>
+  .hl { display: grid; gap: 18px; padding: clamp(20px, 3vw, 34px); border-left: 10px solid var(--marigold); font-family: var(--font-sans); }
+  .hl__head { display: grid; gap: 8px; }
+  .hl__title { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(2rem, 3.6vw, 2.9rem); line-height: .9; color: var(--paper); }
+  .hl__lead { color: #CFC6B4; max-width: 58ch; font-size: 1rem; line-height: 1.5; }
+  .hl__list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1.5px solid #6B655C; }
+  .hl__item { display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto 1fr; gap: 2px 14px; padding: 14px 14px 14px 0; border-bottom: 1.5px solid #6B655C; align-items: start; }
+  .hl__item:not(:nth-child(3n + 1)) { padding-left: 14px; border-left: 1.5px solid #6B655C; }
+  .hl__call { grid-row: span 2; display: inline-grid; place-items: center; min-width: 3.6em; min-height: 48px; color: var(--marigold); text-decoration: none; }
+  .hl__call:hover .hl__n { color: var(--paper); text-decoration: underline; text-decoration-thickness: 3px; }
+  .hl__n { font-weight: 900; font-stretch: var(--display-stretch); font-size: clamp(2.2rem, 3vw, 2.7rem); line-height: .85; letter-spacing: .01em; }
+  .hl__what { font-weight: 800; font-size: .95rem; line-height: 1.25; color: var(--paper); }
+  .hl__who { font-size: .85rem; line-height: 1.35; color: #CFC6B4; }
+  .hl__who a { color: var(--coral); }
+  .hl__note { font-size: .84rem; line-height: 1.5; color: #CFC6B4; max-width: 90ch; }
+  .hl__note strong { color: var(--paper); }
+  .hl__note a { color: var(--coral); }
+  .hl__note a:hover, .hl__who a:hover { color: var(--paper); }
+  @media (max-width: 860px) {
+    .hl__list { grid-template-columns: 1fr 1fr; }
+    .hl__item:not(:nth-child(3n + 1)) { padding-left: 0; border-left: 0; }
+    .hl__item:nth-child(even) { padding-left: 14px; border-left: 1.5px solid #6B655C; }
+  }
+  @media (max-width: 440px) {
+    .hl__list { grid-template-columns: 1fr; }
+    .hl__item:nth-child(even) { padding-left: 0; border-left: 0; }
+  }
+</style>

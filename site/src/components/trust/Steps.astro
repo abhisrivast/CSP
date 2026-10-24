@@ -1,0 +1,28 @@
+---
+// A numbered "what happens next" sequence joined by a vertical rule. Each step: a short title and one or two lines.
+export interface Props { steps: { t: string; d: string }[]; label?: string }
+const { steps, label } = Astro.props;
+---
+<ol class="steps" role="list" aria-label={label}>
+  {steps.map((s, i) => (
+    <li class="step">
+      <span class="step__n" aria-hidden="true">{i + 1}</span>
+      <div class="step__body">
+        <p class="step__t">{s.t}</p>
+        <p class="step__d" set:html={s.d} />
+      </div>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .steps { display: grid; gap: 0; font-family: var(--font-sans); position: relative; }
+  .step { display: grid; grid-template-columns: 52px 1fr; gap: 16px; position: relative; padding-bottom: 22px; }
+  .step:not(:last-child)::before { content: ''; position: absolute; left: 25px; top: 48px; bottom: 0; width: 3px; background: var(--ink); }
+  .step__n { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--red-ink); color: var(--paper-light); font-weight: 900; font-stretch: var(--display-stretch); font-size: 1.9rem; line-height: 1; border: 3px solid var(--ink); }
+  .step__body { display: grid; gap: 4px; padding-top: 6px; }
+  .step__t { font-weight: 850; font-stretch: var(--head-stretch); font-size: 1.22rem; line-height: 1.15; }
+  .step__d { font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.5; color: var(--ink-soft); max-width: 60ch; }
+  .step__d :global(a) { color: var(--red-ink); }
+  .step__d :global(strong) { color: var(--ink); }
+</style>

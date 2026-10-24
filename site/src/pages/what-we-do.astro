@@ -1,7 +1,7 @@
 ---
 // /what-we-do/: the engine, the six programmes (STRATEGY §6, names fixed), the engagement ladder and our ground rules.
 import Base from '../layouts/Base.astro';
-import PageHero from '../components/blocks/PageHero.astro';
+import CaptionHero from '../components/about/CaptionHero.astro';
 import SectionHead from '../components/ui/SectionHead.astro';
 import Engine from '../components/blocks/Engine.astro';
 import Ticker from '../components/ui/Ticker.astro';
@@ -77,21 +77,24 @@ const schema = [
 ];
 ---
 <Base title={title} description={description} pageType="WebPage" breadcrumbs={crumbs} schema={schema} image="/og/what-we-do.png" imageAlt="What we do: from ideas to power. Cultural Shock Party">
-  <PageHero
+  <CaptionHero
     label="What we do"
     title="From ideas to power"
     lead="Six programmes, one engine: ideas into research, research into public consciousness, public consciousness into collective political action. We’re new, so here is what we’re building first, and the receipts as we go."
     crumbs={crumbs}
-    photo="in-022-2021-tikri-iwd-stage-woman-addressing-crowd"
+    photo="in-008-2024-kolkata-street-meeting-megaphones"
     tone="red"
-    photoPosition="52% 40%"
+    photoPosition="88% 50%"
+    aspect="1 / 1"
+    caption="Organising starts small: a street meeting and street play for justice in the RG Kar case, Sakherbazar, Kolkata, 15 October 2024."
+    alt="At night, women sit in rows on a Kolkata street for a protest meeting, while a speaker talks into a microphone under horn loudspeakers."
     meta={['6 programmes', 'All now building, 2026']}
   >
     <div class="hero-ctas">
       <a class="btn" href="#programmes">See the six programmes <span class="arrow" aria-hidden="true">↓</span></a>
       <a class="link-arrow" href="#ladder">Find your first step <span aria-hidden="true">→</span></a>
     </div>
-  </PageHero>
+  </CaptionHero>
 
   <!-- The engine, large, plus the programme index -->
   <section class="section ground-light engine-sec" id="engine" aria-labelledby="engine-title">
@@ -229,7 +232,7 @@ const schema = [
       { label: 'Start a reading circle', href: '/resources/how-to-join-or-start-a-feminist-group/' },
     ]}
     photos={[
-      { id: 'in-008-2024-kolkata-street-meeting-megaphones', tone: 'marigold', note: 'A street meeting and street play for justice in the RG Kar case, Sakherbazar, Kolkata, 15 October 2024.' },
+      { id: 'in-027-2017-cuddalore-women-self-help-group-circle', tone: 'marigold', note: 'Women meet in a circle at a self-help group meeting, Cuddalore District, Tamil Nadu, 29 August 2017.', alt: 'Women in saris sit in a wide circle on the floor of an open hall at a self-help group meeting.', position: '40% 60%' },
       { id: '2024-paris-8m-drums', tone: 'red', note: 'A women’s drum corps at the 8 March 2024 demonstration in Paris.' },
     ]}
   />
@@ -252,7 +255,7 @@ const schema = [
       { id: 'in-062-delhi-women-hindi-placard-apna-vada-pura-karo', tone: 'ink', note: 'A placard in Hindi and English, “keep your promise”, at a protest for policy change, December 2021.', position: '62% 40%' },
       { id: '042-whatever-youre-not-changing-bw', tone: 'red', note: 'Illustrative stock photo.' },
     ]}
-    annotate={{ text: '“keep your promise”', arrow: 'left', top: '30%', right: '-4%', color: 'red', width: '11ch', tilt: -6 }}
+    annotate={{ text: '“keep your promise”', arrow: 'up', top: '62%', right: '3%', color: 'red', width: '11ch', tilt: -6 }}
   >
     <div class="wrap watch">
       <p class="label watch__kicker">The reservation watch · where it stands</p>
@@ -264,7 +267,7 @@ const schema = [
     </div>
   </Programme>
 
-  <Ticker items={['Hope first', 'Receipts always', 'Start where you are']} tone="red" />
+  <Ticker items={['Hope first', 'Receipts always', 'Bring a friend']} tone="red" />
 
   <!-- Engagement ladder -->
   <section class="section ladder-sec" id="ladder" aria-labelledby="ladder-title">
@@ -279,14 +282,14 @@ const schema = [
   <section class="section ground-deep wont-sec" id="ground-rules" aria-labelledby="wont-title">
     <div class="wrap wont-sec__grid">
       <div class="wont-sec__head">
-        <SectionHead label="Ground rules" title="What we won’t do" id="wont-title" lead="Clear values, plural politics. Five lines we hold in every programme." />
+        <SectionHead label="Ground rules" title="What we won’t do" id="wont-title" lead="Clear values, plural politics. Five lines we hold in every programme." />
         <Placard text="Shock the culture, not people" color="pink" shape="sticker" tilt={4} decorative />
       </div>
       <WontDo items={refusals} />
     </div>
   </section>
 
-  <JoinBand />
+  <JoinBand placard="Pick a programme" />
 </Base>
 
 <style>
@@ -335,6 +338,7 @@ const schema = [
   .wont-sec__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(28px, 5vw, 80px); align-items: start; }
   .wont-sec__head { position: sticky; top: 100px; display: grid; gap: 10px; justify-items: start; }
   .wont-sec__head :global(.placard) { margin-left: 8px; }
+  .wont-sec__head :global(.section-head .h2) { text-wrap: balance; }
 
   @media (max-width: 1000px) {
     .tracker__grid { grid-template-columns: minmax(0, 1fr); }

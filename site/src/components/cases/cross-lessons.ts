@@ -62,7 +62,7 @@ export const CROSS_LESSONS: CrossLesson[] = [
   },
   {
     title: 'Protect your people',
-    text: 'Organisers have faced police complaints and prosecutions (Chile and Poland, 2020), arrests under anti-terror law (Pinjra Tod members, 2020), teargas on peaceful marches (Kenya, 2024) and deadly crackdowns (Iran, 2022 and 2026). Courage is not a safety plan.',
+    text: 'Organisers have faced police complaints and prosecutions (Chile and Poland, 2020), the arrest under anti-terror law of two Pinjra Tod members (2020; both granted bail in 2021, trial pending), teargas on peaceful marches (Kenya, 2024) and deadly crackdowns (Iran, 2022 and 2026). Courage is not a safety plan.',
     forCsp: 'Legal support, digital security and safeguarding are core infrastructure, budgeted from the start.',
     cases: ['pinjra-tod', 'las-tesis', 'poland-strajk-kobiet', 'end-femicide-kenya', 'woman-life-freedom'],
     photo: '086-clasped-hands-overhead',

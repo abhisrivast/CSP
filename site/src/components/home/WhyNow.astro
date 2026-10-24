@@ -1,0 +1,48 @@
+---
+// "Why now": four receipts, hope first. Figures and sources are in ./home.ts (all from research fact-checks).
+import SectionHead from '../ui/SectionHead.astro';
+import Receipt from '../ui/Receipt.astro';
+import Annotation from '../ui/Annotation.astro';
+import { RECEIPTS } from './home';
+---
+<section class="section why ground-deep" aria-labelledby="why-title">
+  <div class="wrap">
+    <div class="why__head">
+      <SectionHead num="02" label="Why now" id="why-title" lead="Parliament voted almost unanimously to reserve a third of Lok Sabha and state assembly seats for women. The numbers have not caught up yet. That gap is where a movement does its work. Here are the receipts.">
+        The door is <span class="why__open">open.</span>
+      </SectionHead>
+    </div>
+    <div class="why__grid">
+      {RECEIPTS.map((r) => (
+        <Receipt figure={r.figure} label={r.label} note={r.note} source={r.source} href={r.href} date={r.date} tone={r.tone} tilt={r.tilt} />
+      ))}
+      <Annotation text="every number has a source" arrow="right" top="-60px" left="0" tilt={-3} width="40ch" />
+    </div>
+    <p class="why__more">
+      <a class="link-arrow" href="/resources/womens-reservation-act-explained/">The Women’s Reservation Act, explained <span aria-hidden="true">→</span></a>
+      <a class="link-arrow" href="/resources/care-is-work/">Care is work: India’s 289-minute gap <span aria-hidden="true">→</span></a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .why__head :global(.section-head) { max-width: 980px; }
+  .why__open { color: var(--red); }
+  .why__grid { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(18px, 2.4vw, 30px); align-items: start; margin-top: 84px; }
+  .why__grid :global(.receipt__figure) { font-size: clamp(3.2rem, 5.4vw, 5rem); }
+  .why__grid > :global(.receipt:nth-child(2)) { margin-top: 26px; }
+  .why__grid > :global(.receipt:nth-child(4)) { margin-top: 14px; }
+  .why__grid :global(.annot .hand) { white-space: nowrap; }
+  .why__more { display: flex; flex-wrap: wrap; gap: 14px 32px; margin-top: clamp(32px, 5vw, 56px); }
+  @media (max-width: 1000px) {
+    .why__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 560px) {
+    .why__grid { grid-template-columns: 1fr; margin-top: 70px; gap: 16px; }
+    .why__grid > :global(.receipt) { margin-top: 0 !important; grid-template-columns: auto minmax(0, 1fr); column-gap: 14px; padding: 16px 16px 28px; }
+    .why__grid :global(.receipt__head), .why__grid :global(.receipt__note), .why__grid :global(.receipt__source) { grid-column: 1 / -1; }
+    .why__grid :global(.receipt__figure) { font-size: 2.9rem; align-self: start; }
+    .why__grid :global(.receipt__label) { font-size: .98rem; }
+    .why__grid :global(.receipt__note) { font-size: .86rem; }
+  }
+</style>

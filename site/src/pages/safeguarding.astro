@@ -1,0 +1,257 @@
+---
+// /safeguarding/ — Safeguarding policy (public version). India specifics from research/india-compliance.md §6.2, §7, §8
+// (POCSO ss.19–23, POSH Act with fact-check correction C7), audience.md §8.2 and compliance.md §4.5.
+// Helpline block exactly as docs/STRATEGY.md §13. No photos of children anywhere on this page.
+import Base from '../layouts/Base.astro';
+import TrustHero from '../components/trust/TrustHero.astro';
+import DocLayout from '../components/trust/DocLayout.astro';
+import DocSection from '../components/trust/DocSection.astro';
+import YesNever from '../components/trust/YesNever.astro';
+import Steps from '../components/trust/Steps.astro';
+import ContactCard from '../components/trust/ContactCard.astro';
+import TrustHelplines from '../components/trust/TrustHelplines.astro';
+import Checklist from '../components/trust/Checklist.astro';
+import TrustClose from '../components/trust/TrustClose.astro';
+import Photo from '../components/media/Photo.astro';
+import Placard from '../components/ui/Placard.astro';
+import Sources from '../components/blocks/Sources.astro';
+
+const path = '/safeguarding/';
+const crumbs = [{ name: 'Safeguarding', href: path }];
+const description =
+  'How Cultural Shock Party keeps children and adults safe: no sign-ups from under-18s, no one-to-one adult contact, POCSO reporting, and how to raise a concern.';
+const CONCERN = '/contact/?topic=safeguarding#contact-form';
+
+const TOC = [
+  { id: 'commitment', n: '01', title: 'Our commitment' },
+  { id: 'under-18', n: '02', title: 'Under 18: learn, don’t sign up' },
+  { id: 'pocso', n: '03', title: 'If a child is being harmed' },
+  { id: 'harassment', n: '04', title: 'Sexual harassment' },
+  { id: 'concern', n: '05', title: 'How to raise a concern' },
+  { id: 'helplines', n: '06', title: 'Helplines' },
+  { id: 'online', n: '07', title: 'Staying safe online' },
+  { id: 'scope', n: '08', title: 'Who this covers' },
+];
+
+const CHILD_STEPS = [
+  { t: 'Make the child safe', d: 'If a child is in danger right now, call <a href="tel:112">112</a> or the Child Helpline, <a href="tel:1098">1098</a>. Don’t wait for us.' },
+  { t: 'Report it to the police', d: 'Whoever at CSP receives the concern tells the police or the Special Juvenile Police Unit straight away, as the law requires. <strong>We never investigate first</strong>, and we never ask a child to repeat their story.' },
+  { t: 'Write it down, keep it locked', d: 'We record what was said and done, in the words used, with the date and time, and keep the record confidential.' },
+  { t: 'Protect, never expose', d: 'We never name or identify the child. Anyone in CSP who is involved steps back from all CSP activity while the police act.' },
+  { t: 'Support the people involved', d: 'We point the child and their family to support, such as the Child Helpline, and we check in with the person who told us.' },
+];
+
+const ONLINE = [
+  { t: 'Save the proof', d: 'Screenshot posts and messages with the link, date and time before you report or block anyone.' },
+  { t: 'Don’t reply, don’t pay', d: 'If someone threatens to share your images, don’t pay and don’t argue. It is not your fault. Report it.' },
+  { t: 'Report it fast', d: 'Since 20 February 2026, platforms in India must remove intimate, nude or morphed images, including deepfakes, within 2 hours of a complaint.<sup><a class="fn-ref" href="#src-6">6</a></sup> Report crime at <a href="https://cybercrime.gov.in/" rel="noopener">cybercrime.gov.in</a> or on 1930.' },
+  { t: 'Lock your accounts', d: 'Turn on two-step login, and check who can see your posts, your friends list and your location.' },
+];
+
+const SOURCES = [
+  { label: 'Protection of Children from Sexual Offences Act 2012, sections 19 to 23', href: 'https://vidhijudicial.com/sec-19-to-23-chapter-v-(procedure-for-reporting-of-cases)-the-protection-of-children-from-sexual-offences-act,-2012.html', publisher: 'Vidhi Judicial (text and summary)', date: 'opened 24 Oct 2026' },
+  { label: 'Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act 2013 (gazette copy)', href: 'https://www.iimshillong.ac.in/wp-content/uploads/2024/06/3.-Sexual-Harassment-of-Women-at-Workplace-Act-2013.pdf', publisher: 'Government of India, hosted by IIM Shillong', note: 'Sections 2(f), 2(o), 4 and 6.' },
+  { label: 'Supreme Court declines to interfere with Kerala High Court ruling that political parties are not POSH workplaces', href: 'https://www.scconline.com/blog/post/2025/09/17/supreme-court-kerala-hc-political-parties-not-workplace-posh-act-2013/', publisher: 'SCC Online', date: '17 Sep 2025' },
+  { label: 'SHe-Box: Sexual Harassment electronic Box', href: 'https://shebox.wcd.gov.in/', publisher: 'Ministry of Women and Child Development', date: 'opened 24 Oct 2026' },
+  { label: 'Digital Personal Data Protection Act 2023, section 9 (children)', href: 'https://www.meity.gov.in/static/uploads/2024/06/2bf1f0e9f04e6fb4f8fef35e82c42aa5.pdf', publisher: 'Ministry of Electronics and IT', date: '11 Aug 2023' },
+  { label: 'FAQs on the IT (Intermediary Guidelines) Amendment Rules 2026', href: 'https://www.meity.gov.in/static/uploads/2025/10/065b6deb585441b5ccdf8be42502a49c.pdf', publisher: 'Ministry of Electronics and IT', date: '10 Feb 2026' },
+  { label: 'Other useful helplines', href: 'https://www.ncw.gov.in/other-useful-helplines/', publisher: 'National Commission for Women', date: 'checked 24 Oct 2026' },
+  { label: 'Tele-MANAS backgrounder', href: 'https://static.pib.gov.in/WriteReadData/specificdocs/documents/2024/oct/doc20241013415701.pdf', publisher: 'Press Information Bureau', date: 'Oct 2024' },
+];
+---
+<Base
+  title="Safeguarding: how we keep people safe"
+  description={description}
+  pageType="WebPage"
+  breadcrumbs={crumbs}
+  modified="2026-10-24"
+>
+  <TrustHero
+    crumbs={crumbs}
+    current="safeguarding"
+    label="Safeguarding policy"
+    meta={['Version 1.0', '24 Oct 2026', '6 min read']}
+    title="Safeguarding"
+    sub="Safe to learn. Safe to speak up."
+    lead="Everyone who takes part in Cultural Shock Party, online or offline, has the right to be safe, respected and believed. This is how we protect children and adults, and what to do if you’re worried."
+  >
+    <p class="hero-actions">
+      <a class="btn btn--ink" href={CONCERN}>Raise a concern <span class="arrow" aria-hidden="true">→</span></a>
+      <a class="link-arrow" href="#helplines">Helplines <span aria-hidden="true">↓</span></a>
+    </p>
+    <div slot="aside" class="sg-art">
+      <Photo
+        id="085-stacked-hands-sweaters"
+        tone="green"
+        aspect="5 / 4"
+        alt="Seen from above, a circle of people in knitted sweaters stack their hands together."
+        caption={false}
+        priority
+        sizes="(min-width: 900px) 40vw, 92vw"
+        widths={[480, 720, 960, 1200]}
+        tape="tr"
+      />
+      <div class="sg-art__placard" aria-hidden="true"><Placard text="Safety is a right, not a curfew" color="marigold" size="m" tilt={-4} decorative /></div>
+    </div>
+  </TrustHero>
+
+  <section class="urgent ground-red" aria-labelledby="urgent-title">
+    <div class="wrap urgent__inner">
+      <h2 class="urgent__title" id="urgent-title">In danger right now?</h2>
+      <p class="urgent__text">Call <a href="tel:112"><strong>112</strong></a>. For a child, call <a href="tel:1098"><strong>1098</strong></a>. Don’t wait for an email from us.</p>
+      <a class="urgent__more" href="#helplines">All six helplines <span aria-hidden="true">↓</span></a>
+    </div>
+  </section>
+
+  <DocLayout toc={TOC} updated="Version 1.0 · published 24 October 2026">
+    <DocSection id="commitment" n="01" title="Our commitment">
+      <p class="sg-standfirst">“Safety is a right, not a curfew” is clause 4 of <a href="/manifesto/">our manifesto</a>. It starts with how we behave ourselves.</p>
+      <ol class="promises" role="list">
+        <li><span class="promises__n" aria-hidden="true">1</span><p><strong>Safety comes first,</strong> before our reputation, our plans or anyone’s feelings.</p></li>
+        <li><span class="promises__n" aria-hidden="true">2</span><p><strong>We take every concern seriously,</strong> and we never blame the person who raises it.</p></li>
+        <li><span class="promises__n" aria-hidden="true">3</span><p><strong>We keep concerns confidential,</strong> shared only with the people who need to know to keep someone safe.</p></li>
+        <li><span class="promises__n" aria-hidden="true">4</span><p><strong>We follow the law.</strong> We report child sexual abuse to the police, and we never try to investigate it ourselves first.</p></li>
+        <li><span class="promises__n" aria-hidden="true">5</span><p><strong>We never identify a survivor or a child,</strong> on this site or anywhere else.</p></li>
+      </ol>
+    </DocSection>
+
+    <DocSection id="under-18" n="02" title="Under 18: learn, don’t sign up">
+      <p>Young people are some of our sharpest readers, and everything on this site is free for them to read, share and print. What we don’t do is collect their details, or put them in contact with adults they don’t know. Indian law treats everyone under 18 as a child, and needs a parent’s or guardian’s verifiable consent before an organisation keeps a child’s data (DPDP Act 2023, section 9).<sup><a class="fn-ref" href="#src-5">5</a></sup></p>
+      <YesNever
+        id="u18"
+        yesTitle="Under 18? You can"
+        neverTitle="We never"
+        yes={[
+          'Read, share and print anything on this site, with no sign-up.',
+          'Use our explainers at school, with a teacher.',
+          'Come to a CSP event with a parent or guardian.',
+          'Send a manifesto suggestion without giving an email.',
+        ]}
+        never={[
+          'Take sign-ups or keep details from anyone under 18.',
+          'Let an adult in CSP message an under-18 one-to-one, online or offline.',
+          'Take, ask for or publish photos of anyone under 18.',
+          'Ask for the name of your school.',
+          'Let under-18s volunteer. Volunteering is for adults.',
+        ]}
+      />
+      <p>At any CSP activity where young people are present, at least two adults from CSP are there, and no adult is ever alone with a child. Teachers and parents can write to us about using our material through <a href="/contact/?topic=schools#contact-form">the contact form</a>; please don’t send pupils’ names or details.</p>
+    </DocSection>
+
+    <DocSection id="pocso" n="03" title="If a child is being harmed">
+      <div class="law">
+        <p class="label law__label">The law in India</p>
+        <p class="law__big">Anyone who knows, or suspects, that a child is being sexually abused <strong>must tell the police</strong> or the Special Juvenile Police Unit.</p>
+        <ul role="list" class="law__list">
+          <li><span>Section 19</span>The duty to report applies to every person, including a child.</li>
+          <li><span>Section 21</span>Not reporting can mean up to six months in prison, or up to a year for a person in charge of an institution who fails to report a subordinate.</li>
+          <li><span>Section 23</span>No report, in any media, may reveal a child victim’s identity: name, address, photo, family, school or neighbourhood.</li>
+        </ul>
+        <p class="law__src">Protection of Children from Sexual Offences (POCSO) Act 2012.<sup><a class="fn-ref" href="#src-1">1</a></sup> People who report in good faith are protected by the Act. This is information, not legal advice.</p>
+      </div>
+      <h3>What CSP does when a child may be at risk</h3>
+      <Steps steps={CHILD_STEPS} label="What CSP does when a child may be at risk" />
+    </DocSection>
+
+    <DocSection id="harassment" n="04" title="Sexual harassment">
+      <p>India’s POSH Act 2013 says that “employee” includes people working on a voluntary basis, and that a “workplace” includes a private society, trust or NGO carrying on commercial, professional, vocational, educational, entertainment, industrial, health or financial activities. An organisation with 10 or more workers must set up an Internal Committee; complaints about smaller ones go to the district’s Local Committee.<sup><a class="fn-ref" href="#src-2">2</a></sup></p>
+      <p>Courts have held that political parties are not POSH “workplaces”: the Kerala High Court in 2022, and the Supreme Court declined to interfere on 15 September 2025.<sup><a class="fn-ref" href="#src-3">3</a></sup> We are a movement, not a party, and a feminist movement shouldn’t hide behind a technicality. So we hold ourselves to the POSH standard anyway:</p>
+      <ul class="dsec-list">
+        <li>an <strong>Internal Committee</strong>, with at least one external member from a women’s organisation, as the Act requires;</li>
+        <li>a <strong>confidential route to complain</strong>, open to volunteers, team members and anyone harassed at a CSP event or in a CSP online space;</li>
+        <li><strong>no retaliation</strong> against anyone who complains, or who helps an inquiry.</li>
+      </ul>
+      <p>Until our Internal Committee is in place, raise it through <a href="#concern">the safeguarding route below</a>. You can also go to your district’s Local Committee, or, for harassment at your own workplace, use the government’s <a href="https://shebox.wcd.gov.in/" rel="noopener">SHe-Box portal</a>.<sup><a class="fn-ref" href="#src-4">4</a></sup></p>
+    </DocSection>
+
+    <DocSection id="concern" n="05" title="How to raise a concern">
+      <p>Worried about the safety of a child or an adult in connection with CSP? Something at an event, online, or in a message from someone in CSP? Tell us, even if you’re not sure.</p>
+      <ContactCard
+        id="dsl"
+        kicker="Raise a concern"
+        role="Safeguarding concerns"
+        cta={{ label: 'Raise a safeguarding concern', href: CONCERN }}
+        tone="marigold"
+      >
+        <p>We are appointing a Designated Safeguarding Lead, and we will name the role here. Until then, safeguarding concerns are read by our founder, who will report any harm to a child to the police straight away.</p>
+        <p>Use the contact form and choose <strong>Safeguarding concern</strong>. Use any name you like; we need an email to reply.</p>
+        <ul>
+          <li>What happened, when and where (online or offline)</li>
+          <li>How we can reach you safely</li>
+          <li>Please don’t name children or send images</li>
+        </ul>
+        <p>If your concern is about our founder or anyone else who leads CSP, you don’t have to come to us first. Go straight to the police, the Child Helpline (1098) or, for an adult, the NCW helpline (14490).</p>
+      </ContactCard>
+      <p class="dsec-note">If anyone is in danger now, don’t wait for a reply: call 112, or 1098 for a child.</p>
+    </DocSection>
+
+    <DocSection id="helplines" n="06" title="Helplines">
+      <TrustHelplines id="help" level="h3" title="Call these first" />
+    </DocSection>
+
+    <DocSection id="online" n="07" title="Staying safe online">
+      <p>Online abuse is real abuse. Our toolkit, <a href="/resources/safe-online-toolkit/">Safe online: deepfakes, doxxing and image-based abuse</a>, walks you through every step. The basics:</p>
+      <Checklist items={ONLINE} />
+      <h3>How CSP behaves online</h3>
+      <ul class="dsec-list">
+        <li>Our accounts never send private messages to under-18s.</li>
+        <li>We never publish exact meeting points for women’s gatherings. Details go only to people who have signed up, close to the time.</li>
+        <li>We never publish volunteers’ faces, full names or home towns without their written consent.</li>
+      </ul>
+    </DocSection>
+
+    <DocSection id="scope" n="08" title="Who this covers">
+      <p>This policy covers everyone who acts for Cultural Shock Party: our founder, team, volunteers and organisers, at events, online, and in every CSP group chat and account. Everyone who volunteers with us is asked to read it, and organisers are briefed on the duty to report.</p>
+      <p>This is <strong>version 1.0, published 24 October 2026</strong>. We review it at least once a year, and after any serious incident. How we handle personal data, including children’s, is in our <a href="/privacy/">privacy notice</a>.</p>
+      <p class="dsec-note">This page is information, not legal advice. Every law and number on it links to its source.</p>
+      <Sources sources={SOURCES} />
+    </DocSection>
+  </DocLayout>
+
+  <TrustClose
+    current="safeguarding"
+    title="Worried about someone?"
+    text="Tell us, even if you’re not sure. If anyone is in danger right now, call 112 first, or 1098 for a child."
+    cta={{ label: 'Raise a concern', href: CONCERN }}
+    placard="Believe. Report. Protect."
+  />
+</Base>
+
+<style>
+  .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; margin-top: 6px; }
+  .sg-art { position: relative; padding-bottom: 40px; }
+  .sg-art__placard { position: absolute; left: -28px; bottom: 0; z-index: 3; }
+  .sg-art__placard :global(.placard__text) { max-width: 10ch; }
+
+  .urgent { border-bottom: 3px solid var(--ink); }
+  .urgent__inner { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 28px; padding-block: 18px; }
+  .urgent__title { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(1.7rem, 3vw, 2.4rem); line-height: .9; }
+  .urgent__text { font-size: 1.05rem; line-height: 1.4; flex: 1 1 26ch; }
+  .urgent__text a { font-weight: 900; font-size: 1.25em; }
+  .urgent .urgent__more { font-weight: 800; font-stretch: 80%; text-transform: uppercase; letter-spacing: .05em; min-height: 44px; display: inline-flex; align-items: center; }
+
+  .sg-standfirst { font-size: clamp(1.25rem, 1.9vw, 1.55rem); line-height: 1.35; font-style: italic; }
+  .promises { display: grid; font-family: var(--font-sans); border-top: 1px solid var(--ink); }
+  .promises li { display: grid; grid-template-columns: 3.2rem 1fr; gap: 14px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid var(--ink); }
+  .promises__n { font-weight: 900; font-stretch: var(--display-stretch); font-size: 2.6rem; line-height: .8; color: var(--red); }
+  .promises p { font-size: clamp(1.08rem, 1.5vw, 1.28rem); line-height: 1.35; }
+  .promises strong { font-weight: 850; }
+
+  .law { background: var(--paper-light); border: 2px solid var(--ink); border-left: 12px solid var(--red-ink); padding: clamp(18px, 2.6vw, 28px); display: grid; gap: 14px; font-family: var(--font-sans); }
+  .law__label { color: var(--red-ink); }
+  .law__big { font-family: var(--font-serif); font-size: clamp(1.35rem, 2.2vw, 1.8rem); line-height: 1.25; letter-spacing: -.01em; max-width: 34ch; }
+  .law__big strong { font-weight: 700; background: linear-gradient(transparent 62%, var(--marigold) 62%); }
+  .law__list { display: grid; border-top: 1px solid var(--line-soft); }
+  .law__list li { display: grid; grid-template-columns: 7.5em 1fr; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line-soft); font-size: .98rem; line-height: 1.45; }
+  .law__list span { font-size: var(--fs-label); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; padding-top: 3px; }
+  .law__src { font-size: .86rem; color: var(--ink-soft); }
+  .law__src a { color: var(--red-ink); }
+
+  @media (max-width: 900px) {
+    .sg-art__placard { left: auto; right: 8px; }
+  }
+  @media (max-width: 560px) {
+    .law__list li { grid-template-columns: 1fr; gap: 2px; }
+    .sg-art__placard :global(.placard__text) { font-size: 1.2rem; }
+  }
+</style>

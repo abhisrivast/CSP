@@ -1,0 +1,104 @@
+---
+// Public memory strip: eight milestones from the memory collection, big years, archival thumbnails or a
+// typographic evidence card. Each links to its own anchor on /memory/.
+import { getCollection } from 'astro:content';
+import SectionHead from '../ui/SectionHead.astro';
+import Photo from '../media/Photo.astro';
+import { STRIP } from './home';
+
+const all = await getCollection('memory');
+const byId = new Map(all.map((e) => [e.data.id ?? e.id, e.data]));
+const items = STRIP.map((s) => ({ ...s, m: byId.get(s.id) })).filter((s) => s.m);
+const total = all.length;
+const first = Math.min(...all.map((e) => e.data.year));
+const last = Math.max(...all.map((e) => e.data.year));
+---
+<section class="section memstrip ground-deep" aria-labelledby="mem-title">
+  <div class="wrap">
+    <div class="memstrip__head">
+      <SectionHead num="06" label="Public memory" id="mem-title" lead={`Every right on our timeline was argued for by someone first. Eight of the ${total} milestones from ${first} to ${last}, each with its sources.`}>
+        Nobody starts <span class="memstrip__red">from zero</span>
+      </SectionHead>
+    </div>
+
+    <div class="memstrip__ruler" aria-hidden="true">
+      {items.map((s) => <span style={`--x:${((s.m!.year - first) / (last - first)) * 100}%`}></span>)}
+      <b class="memstrip__from">{first}</b><b class="memstrip__to">{last}</b>
+    </div>
+
+    <ol class="memstrip__list" role="list">
+      {items.map((s) => (
+        <li class="mile">
+          <a class="mile__link" href={`/memory/#${s.id}`}>
+            <span class="mile__year">{s.m!.year}</span>
+            {s.photo ? (
+              <span class="mile__pic">
+                <Photo id={s.photo} tone="ink" alt="" caption={false} aspect="4 / 3" widths={[240, 360, 480]} sizes="(min-width: 1100px) 260px, (min-width: 640px) 44vw, 44vw" />
+              </span>
+            ) : (
+              <span class:list={['mile__card', `mile__card--${s.ground ?? 'pink'}`]} aria-hidden="true">
+                <span class="mile__big" lang={s.card?.lang}>{s.card?.big}</span>
+                <span class="mile__small">{s.card?.small}</span>
+              </span>
+            )}
+            <span class="label-row label mile__meta"><span>{s.m!.date}</span></span>
+            <span class="mile__title">{s.m!.title}</span>
+            {s.note && <span class="mile__note">Pictured: {s.note}</span>}
+          </a>
+        </li>
+      ))}
+    </ol>
+    <p class="memstrip__cta">
+      <a class="btn btn--ink" href="/memory/">See all {total} milestones <span class="arrow" aria-hidden="true">→</span></a>
+      <span class="memstrip__aside">India and the world, {first} to {last}. Every entry has its sources.</span>
+    </p>
+  </div>
+</section>
+
+<style>
+  .memstrip__red { color: var(--red); white-space: nowrap; }
+  .memstrip__head :global(.section-head) { margin-bottom: 28px; }
+  .memstrip__ruler { position: relative; height: 42px; margin-bottom: 26px; border-bottom: 3px solid var(--ink); }
+  .memstrip__ruler span { position: absolute; left: var(--x); bottom: 0; width: 3px; height: 24px; background: var(--red-ink); transform: translateX(-50%); }
+  .memstrip__ruler b { position: absolute; top: 0; font-weight: 900; font-stretch: 80%; font-size: .8rem; letter-spacing: .1em; }
+  .memstrip__from { left: 0; }
+  .memstrip__to { right: 0; }
+
+  .memstrip__list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(26px, 3.2vw, 44px) clamp(16px, 2.2vw, 28px); }
+  .mile__link { display: grid; gap: 10px; align-content: start; color: var(--ink); text-decoration: none; height: 100%; }
+  .mile__year { font-weight: 900; font-stretch: var(--display-stretch); font-size: clamp(3rem, 5.4vw, 4.8rem); line-height: .78; color: var(--red-ink); letter-spacing: -.02em; }
+  .mile__pic, .mile__card { display: block; position: relative; }
+  .mile__pic :global(.photo__img) { border: 5px solid var(--paper-light); box-shadow: 3px 4px 0 rgba(29, 28, 24, .2); }
+  .mile__card {
+    --bg: var(--pink); --fg: var(--ink); aspect-ratio: 4 / 3; display: grid; align-content: center; gap: 6px; padding: 14px 16px;
+    background: var(--bg); color: var(--fg); border: 5px solid var(--paper-light); box-shadow: 3px 4px 0 rgba(29, 28, 24, .2);
+  }
+  .mile__card--marigold { --bg: var(--marigold); }
+  .mile__card--green { --bg: var(--green); --fg: var(--paper); }
+  .mile__card--ink { --bg: var(--ink); --fg: var(--paper); }
+  .mile__card--red { --bg: var(--red-ink); --fg: var(--paper-light); }
+  .mile__big { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(2.2rem, 3.6vw, 3.4rem); line-height: .86; }
+  .mile__small { font-size: .86rem; line-height: 1.3; font-weight: 600; max-width: 24ch; }
+  .mile__meta { color: var(--ink-soft); margin-top: 4px; }
+  .mile__title { font-weight: 800; font-stretch: 85%; font-size: 1.1rem; line-height: 1.18; }
+  .mile__note { font-size: .8rem; color: var(--ink-soft); line-height: 1.35; }
+  .mile__link:hover .mile__title { text-decoration: underline; text-decoration-color: var(--red); text-decoration-thickness: 2px; text-underline-offset: .15em; }
+  .mile__link:hover .mile__pic, .mile__link:hover .mile__card { transform: rotate(-1deg); transition: transform .2s var(--ease); }
+
+  .memstrip__cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; margin-top: clamp(36px, 5vw, 56px); }
+  .memstrip__aside { color: var(--ink-soft); }
+  @media (max-width: 1000px) { .memstrip__list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 420px) {
+    .memstrip__list { gap: 24px 12px; }
+    .mile__small { font-size: .76rem; }
+    .mile__big { font-size: 1.9rem; }
+    .mile__title { font-size: .98rem; }
+    .mile__card { padding: 10px; border-width: 4px; }
+  }
+  /* Narrow phones: a wordy card is taller than 4:3 allows, and aspect-ratio then widens it into the next column.
+     Let the card grow in height instead, keeping roughly the photos' 4:3 as a minimum. */
+  @media (max-width: 560px) {
+    .memstrip__list > :global(*), .mile__link { min-width: 0; }
+    .mile__card { aspect-ratio: auto; min-height: calc((100vw - 44px) / 2 * .75); }
+  }
+</style>

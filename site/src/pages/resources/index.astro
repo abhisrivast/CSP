@@ -1,6 +1,6 @@
 ---
 // /resources/ — "The Journal": the Blog / Resources hub. Masthead, cover story, contents, CSS-only filters
-// (radio + :has(), no JS), card grid, glossary teaser, memory + case-study links, newsletter, join.
+// (radio + :has(), no JS), card grid, glossary teaser, memory + case-study links, join (the footer carries the newsletter).
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Photo from '../../components/media/Photo.astro';
@@ -9,12 +9,10 @@ import SectionHead from '../../components/ui/SectionHead.astro';
 import Placard from '../../components/ui/Placard.astro';
 import Stamp from '../../components/ui/Stamp.astro';
 import Ticker from '../../components/ui/Ticker.astro';
-import NewsletterForm from '../../components/blocks/NewsletterForm.astro';
 import JoinBand from '../../components/blocks/JoinBand.astro';
-import TornEdge from '../../components/ui/TornEdge.astro';
 import { abs } from '../../lib/schema';
 import {
-  getArticles, readingMinutes, kindSlug, audienceKeys, AUDIENCES, KINDS, KIND_PLURAL, PILLAR_ID, splitTitle,
+  getArticles, readingMinutes, kindSlug, audienceKeys, AUDIENCES, KINDS, KIND_PLURAL, PILLAR_ID, splitTitle, cardPhotoOf,
 } from '../../components/resources/lib';
 
 const articles = await getArticles();
@@ -39,8 +37,8 @@ const teaser = [
   ...glossary.filter((g) => !TEASER_IDS.includes(g.id)),
 ].slice(0, 6) as typeof glossary;
 
-const title = 'Resources: guides, explainers and toolkits';
-const description = 'Free, plain-language guides, explainers and toolkits on feminism in India and the world: the Fourth Wave, consent, care work, safety online. Every number sourced.';
+const title = 'Resources: guides, explainers, toolkits';
+const description = 'Free, plain-language guides, explainers and toolkits on feminism in India and beyond: the Fourth Wave, consent, care work, online safety. Every number sourced.';
 const schema = [
   {
     '@type': 'ItemList',
@@ -50,13 +48,22 @@ const schema = [
     itemListElement: articles.map((a, i) => ({ '@type': 'ListItem', position: i + 1, url: abs(`/resources/${a.id}/`), name: a.data.title })),
   },
 ];
+// Photos on this page, in reading order, so nothing repeats: the cover story, the two "go deeper" doors, then one
+// card photo per article (never its hero, which the cover or the article itself already shows), then the strip.
+const DOORS = ['in-015-2020-delhi-shaheen-bagh-fatima-sheikh-savitribai-phul', '2018-dublin-castle-repeal-result-a'];
+const used = new Set<string>([cover?.data.heroPhoto, ...DOORS].filter(Boolean) as string[]);
+const cardPics = new Map(articles.map((a) => {
+  const id = cardPhotoOf(a, used);
+  if (id) used.add(id);
+  return [a.id, id] as const;
+}));
+const TONES = ['red', 'ink', 'pink', 'green', 'marigold'] as const;
+const TILTS = [-3, 2, -1.5, 2.5, -2];
 const STRIP = [
-  { id: '032-dc-floral-feminist-sign', tone: 'red', tilt: -3 },
-  { id: 'in-052-west-bengal-woman-eyes-over-bengali-book', tone: 'ink', tilt: 2 },
-  { id: '2024-paris-8m-drums', tone: 'pink', tilt: -1.5 },
-  { id: 'in-055-chennai-woman-reading-on-kerb', tone: 'green', tilt: 2.5 },
-  { id: 'in-030-2015-jantar-mantar-art-students-bilingual-placards', tone: 'marigold', tilt: -2 },
-] as const;
+  '032-dc-floral-feminist-sign', 'in-052-west-bengal-woman-eyes-over-bengali-book', '2024-paris-8m-drums',
+  'in-055-chennai-woman-reading-on-kerb', '077-zines-on-a-table', 'in-056-woman-in-blue-sari-reading-outdoors',
+  '017-vivas-y-libres-8m-sign', '081-library-card-catalogue-reader',
+].filter((id) => !used.has(id)).slice(0, 5).map((id, i) => ({ id, tone: TONES[i], tilt: TILTS[i] }));
 const [coverMain, coverTail] = cover ? splitTitle(cover.data.title) : ['', null];
 ---
 <Base title={title} description={description} pageType="CollectionPage" breadcrumbs={[{ name: 'Resources', href: '/resources/' }]} schema={schema} image="/og/resources.png" bodyClass="page-journal">
@@ -71,7 +78,7 @@ const [coverMain, coverTail] = cover ? splitTitle(cover.data.title) : ['', null]
         <span>Vol. 01 / Issue 01</span><span>October 2026</span><span>{total} {total === 1 ? 'read' : 'reads'}, all free</span><span>No sign-up needed</span>
       </p>
       <h1 class="masthead__h1">
-        <span class="masthead__title">The Journal</span>
+        <span class="masthead__title">The Journal</span>{' '}
         <span class="masthead__sub">Resources: guides, explainers and toolkits for the Fourth Wave</span>
       </h1>
       <div class="masthead__foot">
@@ -138,7 +145,7 @@ const [coverMain, coverTail] = cover ? splitTitle(cover.data.title) : ['', null]
     </div>
   </section>
 
-  <Ticker items={['Hope first', 'Receipts always', 'Start where you are', 'Send it to the group chat']} tone="ink" />
+  <Ticker items={['Hope first', 'Receipts always', 'Send it to the group chat']} tone="ink" />
 
   <!-- 03 find your read: CSS-only filters -->
   <section class="section find" id="find" aria-labelledby="find-title">
@@ -166,11 +173,11 @@ const [coverMain, coverTail] = cover ? splitTitle(cover.data.title) : ['', null]
         <ul class="find__grid" role="list">
           {articles.map((a) => (
             <li class="entry" data-kind={kindSlug(a.data.kind)} data-aud={audienceKeys(a.data.audience).join(' ')}>
-              <Card href={`/resources/${a.id}/`} title={a.data.title} kicker={a.data.kind} meta={[`${readingMinutes(a)} min`]} dek={a.data.description} photo={a.data.heroPhoto} tone={a.data.tone} aspect="3 / 2" />
+              <Card href={`/resources/${a.id}/`} title={a.data.title} kicker={a.data.kind} meta={[`${readingMinutes(a)} min`]} dek={a.data.description} photo={cardPics.get(a.id)} tone={a.data.tone} aspect="3 / 2" />
             </li>
           ))}
         </ul>
-        <p class="find__count label" aria-hidden="true">Showing <span class="find__num"></span> of {total}</p>
+        <p class="find__count label" aria-hidden="true">Showing <span class="find__num">{total}</span> of {total}</p>
         <p class="find__empty">Nothing in that mix yet: we're writing it. Try another filter, or read <a href={`/resources/${PILLAR_ID}/`}>the plain-language guide to the Fourth Wave</a>.</p>
       </div>
       <p class="find__teen small"><strong>Under 18?</strong> Everything in the Journal is free to read, with no sign-up and no tracking. Joining comes later, with a parent's OK.</p>
@@ -203,7 +210,7 @@ const [coverMain, coverTail] = cover ? splitTitle(cover.data.title) : ['', null]
       <SectionHead num="03" label="Go deeper" id="deeper-title" lead="Guides tell you what. These two tell you how we got here, and what worked elsewhere.">Nobody starts <span class="red">from zero</span></SectionHead>
       <div class="deeper__grid">
         <article class="door">
-          <Photo id="in-015-2020-delhi-shaheen-bagh-fatima-sheikh-savitribai-phul" tone="green" aspect="16 / 10" caption={false} sizes="(min-width: 900px) 44vw, 92vw" widths={[480, 720, 960]} alt="A bus stop turned into a small library at a 2020 Delhi sit-in, hung with hand-painted posters." />
+          <Photo id={DOORS[0]} tone="green" aspect="16 / 10" caption={false} sizes="(min-width: 900px) 44vw, 92vw" widths={[480, 720, 960]} alt="A bus stop turned into a small library at a 2020 Delhi sit-in, hung with hand-painted posters." />
           <div class="door__body">
             <p class="label door__kicker">Public memory</p>
             <h3 class="door__title"><a href="/memory/">The struggles that brought us here</a></h3>
@@ -212,7 +219,7 @@ const [coverMain, coverTail] = cover ? splitTitle(cover.data.title) : ['', null]
           </div>
         </article>
         <article class="door">
-          <Photo id="2018-dublin-castle-repeal-result-a" tone="marigold" aspect="16 / 10" caption={false} sizes="(min-width: 900px) 44vw, 92vw" widths={[480, 720, 960]} alt="A crowd celebrating in a courtyard after a referendum result is announced." />
+          <Photo id={DOORS[1]} tone="marigold" aspect="16 / 10" caption={false} sizes="(min-width: 900px) 44vw, 92vw" widths={[480, 720, 960]} alt="A crowd celebrating in a courtyard after a referendum result is announced." />
           <div class="door__body">
             <p class="label door__kicker">Case studies</p>
             <h3 class="door__title"><a href="/case-studies/">What movements teach us</a></h3>
@@ -220,22 +227,6 @@ const [coverMain, coverTail] = cover ? splitTitle(cover.data.title) : ['', null]
             <p class="door__pic small">Pictured: crowds at Dublin Castle as Ireland's Repeal the 8th result is announced, May 2018.</p>
           </div>
         </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- 06 newsletter -->
-  <TornEdge color="var(--ink)" seed={2} />
-  <section class="section news ground-ink grain">
-    <div class="wrap news__inner">
-      <div class="news__text">
-        <p class="label news__label">The Journal, by email</p>
-        <h2 class="h2" id="news-title">One email a month. <span class="red">No doom.</span></h2>
-        <p class="lead">New guides, one good-news story, one receipt worth sending to the group chat. Unsubscribe in one click.</p>
-        <p class="news__hand hand" aria-hidden="true">we never sell or share your email</p>
-      </div>
-      <div class="news__form">
-        <NewsletterForm id="resources" />
       </div>
     </div>
   </section>
@@ -344,7 +335,9 @@ const [coverMain, coverTail] = cover ? splitTitle(cover.data.title) : ['', null]
 
   .find__results { display: flex; flex-direction: column; counter-reset: shown; }
   .find__count { order: -1; margin-bottom: 18px; color: var(--muted); }
-  .find__num::before { content: counter(shown); color: var(--red-ink); font-weight: 900; }
+  /* The server-rendered default stays in the text for crawlers and no-CSS readers; the live CSS counter is shown. */
+  .find__num { font-size: 0; }
+  .find__num::before { content: counter(shown); color: var(--red-ink); font-weight: 900; font-size: var(--fs-label); }
   .find__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(28px, 3.4vw, 44px) clamp(20px, 3vw, 36px); }
   .entry { counter-increment: shown; }
   .find__empty { display: none; padding: 22px; border: 2px dashed var(--ink); background: var(--paper-light); font-weight: 600; }
@@ -392,15 +385,4 @@ const [coverMain, coverTail] = cover ? splitTitle(cover.data.title) : ['', null]
   .door__pic { color: var(--muted); }
   @media (max-width: 800px) { .deeper__grid { grid-template-columns: 1fr; } }
 
-  /* ---------- newsletter ---------- */
-  .news { border-top: 0; }
-  .news__inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(28px, 5vw, 72px); align-items: center; }
-  .news__text { display: grid; gap: 18px; }
-  .news__label { color: var(--coral); }
-  .news__hand { font-size: 1.6rem; color: var(--marigold); transform: rotate(-2deg); }
-  .news__form { background: var(--paper-light); color: var(--ink); padding: clamp(20px, 3vw, 32px); border: 3px solid var(--paper); box-shadow: 8px 8px 0 var(--red); --text: var(--ink); --muted: #6B655C; }
-  .news__form :global(.newsletter) { max-width: none; }
-  .news__form :global(.btn--paper) { --btn-bg: var(--ink); --btn-fg: var(--paper); --btn-shadow: var(--red); }
-  .news__form :global(a) { color: var(--red-ink); }
-  @media (max-width: 860px) { .news__inner { grid-template-columns: 1fr; } }
 </style>

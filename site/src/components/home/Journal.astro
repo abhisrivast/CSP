@@ -1,0 +1,72 @@
+---
+// From the Journal: four featured articles from the articles collection. Card photos come from each article's
+// card pool (./picks.ts), never its own hero and never a photo already used on the homepage.
+import SectionHead from '../ui/SectionHead.astro';
+import Card from '../blocks/Card.astro';
+import { readingMinutes, fmtDate } from '../resources/lib';
+import { journalPicks } from './picks';
+
+const { total, picks } = await journalPicks();
+---
+<section class="section journal ground-light" aria-labelledby="journal-title">
+  <div class="wrap">
+    <div class="journal__head">
+      <SectionHead num="10" label="From the Journal" id="journal-title" lead="Guides, explainers and toolkits in plain words, every number with its receipt. Read one, then send it to the group chat.">
+        Read it. <span class="journal__red">Send it.</span>
+      </SectionHead>
+      <a class="link-arrow journal__all" href="/resources/">All {total} guides and toolkits <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="journal__grid">
+      {picks.map(({ a, photo, tone }, i) => (
+        <div class:list={['journal__item', { 'journal__item--lead': i === 0 }]}>
+          <Card
+            href={`/resources/${a.id}/`}
+            title={a.data.title}
+            kicker={a.data.kind}
+            meta={i === 0 ? [fmtDate(a.data.date), `${readingMinutes(a)} min read`] : [`${readingMinutes(a)} min read`]}
+            dek={i === 0 ? a.data.description : undefined}
+            photo={photo}
+            tone={tone}
+            aspect={i === 0 ? '3 / 2' : '4 / 3'}
+            size={i === 0 ? 'l' : 'm'}
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .journal__head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px 40px; align-items: end; }
+  .journal__head :global(.section-head) { margin-bottom: 0; }
+  .journal__red { color: var(--red); }
+  .journal__all { margin-bottom: 10px; }
+  .journal__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(24px, 3vw, 40px) clamp(18px, 2.4vw, 32px); margin-top: clamp(32px, 5vw, 56px); }
+  .journal__item { grid-column: span 4; }
+  .journal__item--lead { grid-column: 1 / 8; grid-row: 1 / 4; }
+  .journal__item:not(.journal__item--lead) { grid-column: 8 / 13; }
+  .journal__item:not(.journal__item--lead) :global(.card) { grid-template-columns: 42% minmax(0, 1fr); gap: 16px; align-items: start; }
+  .journal__item:not(.journal__item--lead) :global(.card__title) { font-size: clamp(1.15rem, 1.5vw, 1.35rem); }
+  .journal__item + .journal__item:not(.journal__item--lead) { }
+  .journal__item:not(.journal__item--lead) { padding-bottom: clamp(20px, 2.4vw, 28px); border-bottom: 1px solid var(--line); }
+  .journal__item--lead :global(.card__dek) { font-family: var(--font-serif); font-size: 1.15rem; color: var(--ink); max-width: 46ch; }
+  @media (max-width: 900px) {
+    .journal__head { grid-template-columns: 1fr; }
+    .journal__grid { grid-template-columns: 1fr; }
+    .journal__item--lead, .journal__item:not(.journal__item--lead) { grid-column: 1 / -1; grid-row: auto; }
+  }
+  @media (min-width: 601px) and (max-width: 900px) {
+    /* tablets: the lead across the top, the other three side by side underneath */
+    .journal__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .journal__item:not(.journal__item--lead) { grid-column: auto; }
+    .journal__item:not(.journal__item--lead) :global(.card) { grid-template-columns: 1fr; gap: 12px; }
+  }
+  @media (max-width: 480px) {
+    .journal__item:not(.journal__item--lead) :global(.card) { grid-template-columns: 36% minmax(0, 1fr); gap: 12px; }
+  }
+  @media (max-width: 600px) {
+    /* narrow cards: kind above reading time, so a wrapped line never starts with the "/" separator */
+    .journal__item:not(.journal__item--lead) :global(.label-row) { display: grid; gap: 4px; }
+    .journal__item:not(.journal__item--lead) :global(.label-row > * + *::before) { display: none; }
+  }
+</style>

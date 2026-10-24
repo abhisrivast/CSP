@@ -1,0 +1,104 @@
+---
+// "What is Cultural Shock Party?": the answer in one sentence (quoted by answer engines), the name decoded,
+// then the engine with one photograph per stage.
+import SectionHead from '../ui/SectionHead.astro';
+import Engine from '../blocks/Engine.astro';
+import Photo from '../media/Photo.astro';
+import Stamp from '../ui/Stamp.astro';
+import { ENGINE_PHOTOS, DECODE_PHOTO } from './home';
+---
+<section class="section what" aria-labelledby="what-title">
+  <div class="wrap">
+    <div class="what__top">
+      <div class="what__answer">
+        <SectionHead num="01" label="The short answer" id="what-title">What is Cultural Shock Party?</SectionHead>
+        <p class="what__big">
+          Cultural Shock Party is a <mark>Fourth Wave feminist movement</mark>, founded in India in 2026, that turns ideas into research,
+          research into public consciousness, and public consciousness into collective political action.
+        </p>
+        <p class="what__honest">We’re new. So here is what we’re building first, and the receipts as we go.</p>
+        <p class="what__links">
+          <a class="link-arrow" href="/about/">About Cultural Shock Party <span aria-hidden="true">→</span></a>
+          <a class="link-arrow" href="/what-we-do/">What we do <span aria-hidden="true">→</span></a>
+        </p>
+      </div>
+      <aside class="decode" aria-labelledby="decode-title">
+        <p class="label decode__label">The name, decoded</p>
+        <h3 class="decode__title" id="decode-title">Why “cultural shock”?</h3>
+        <p>A cultural shock is the jolt that changes what a society treats as normal. Afterwards, yesterday’s “normal” suddenly looks strange.</p>
+        <p><strong>Ours is a positive shock:</strong> an awakening, not anger. Shock the culture, never people.</p>
+        <a href="/about/#what">The name and the badge, explained</a>
+        <span class="decode__stamp"><Stamp text="Est. 2026" sub="India · for everyone" tilt={-9} /></span>
+        <div class="decode__pic">
+          <Photo id={DECODE_PHOTO.id} tone={DECODE_PHOTO.tone} aspect="4 / 3" caption={false} tape="tl" tilt={-3}
+            alt={DECODE_PHOTO.alt}
+            widths={[240, 360, 480, 640]} sizes="(min-width: 900px) 24vw, 0px" />
+        </div>
+      </aside>
+    </div>
+
+    <div class="what__engine">
+      <p class="label what__engine-label">The engine: how an idea becomes power</p>
+      <ul class="what__pics" role="list">
+        {ENGINE_PHOTOS.map((p, i) => (
+          <li class:list={['what__pic', `what__pic--${i + 1}`]}>
+            <Photo id={p.id} tone={p.tone} alt={p.alt} position={p.position} aspect="16 / 10" caption={false}
+              widths={[240, 360, 480, 640]} sizes="(min-width: 900px) 22vw, (min-width: 561px) 44vw, 92vw" />
+          </li>
+        ))}
+      </ul>
+      <Engine />
+    </div>
+  </div>
+</section>
+
+<style>
+  .what__top { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 72px); align-items: start; }
+  .what__answer :global(.section-head) { margin-bottom: 24px; }
+  .what__big {
+    font-family: var(--font-serif); font-weight: 500; letter-spacing: -.012em;
+    font-size: clamp(1.6rem, 3vw, 2.55rem); line-height: 1.14; max-width: 26ch; text-wrap: pretty;
+  }
+  .what__big mark { background: linear-gradient(transparent 58%, var(--marigold) 58% 92%, transparent 92%); color: inherit; padding: 0 .05em; }
+  .what__honest { margin-top: 20px; font-size: 1.08rem; color: var(--ink-soft); max-width: 44ch; }
+  .what__links { display: flex; flex-wrap: wrap; gap: 14px 28px; margin-top: 24px; }
+
+  .decode {
+    position: relative; display: grid; gap: 12px; padding: 26px 24px 28px; margin-top: clamp(0px, 6vw, 86px);
+    background: var(--paper-light); border: 3px solid var(--ink); box-shadow: var(--shadow-hard);
+    font-size: 1rem; line-height: 1.5; color: var(--ink-soft);
+  }
+  .decode__label { color: var(--red-ink); }
+  .decode__title { font-weight: 900; font-stretch: var(--head-stretch); font-size: 1.6rem; line-height: 1.02; color: var(--ink); }
+  .decode strong { color: var(--ink); }
+  .decode a { font-weight: 700; }
+  .decode__stamp { position: absolute; right: -14px; top: -22px; background: var(--paper); }
+  .decode__pic { position: absolute; left: 10%; right: -2%; top: calc(100% + 36px); }
+  .decode__pic :global(.photo__img) { border: 6px solid var(--paper-light); box-shadow: 4px 5px 0 rgba(29, 28, 24, .2); }
+
+  .what__engine { margin-top: clamp(48px, 8vw, 96px); }
+  .what__engine-label { margin-bottom: 14px; }
+  .what__pics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(12px, 2vw, 28px); margin-bottom: -14px; padding-inline: 4px; }
+  .what__pic { position: relative; z-index: 1; }
+  .what__pic--1 { transform: rotate(-1.6deg); }
+  .what__pic--2 { transform: rotate(1.2deg) translateY(6px); }
+  .what__pic--3 { transform: rotate(-.8deg); }
+  .what__pic--4 { transform: rotate(1.8deg) translateY(4px); }
+  .what__pic :global(.photo__img) { border: 5px solid var(--paper-light); box-shadow: 3px 4px 0 rgba(29, 28, 24, .2); }
+  .what__engine :global(.engine) { position: relative; z-index: 2; background: var(--paper); }
+  /* shared Engine colours its small stage numbers in --red (large-type only); use the text red */
+  .what__engine :global(.engine__n span) { color: var(--red-ink); }
+
+  @media (max-width: 900px) {
+    .what__top { grid-template-columns: 1fr; }
+    .decode { margin-top: 8px; max-width: 520px; }
+    .decode__pic { display: none; }
+  }
+  @media (max-width: 560px) {
+    .what__pics { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-bottom: 10px; }
+    .what__pic :global(.photo__img) { border-width: 3px; }
+    .decode__stamp { right: 6px; }
+    /* the stamp sits over the card's top edge: start the label below it so "decoded" is never covered */
+    .decode { padding-top: 56px; margin-top: 28px; }
+  }
+</style>

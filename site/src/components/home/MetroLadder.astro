@@ -1,0 +1,104 @@
+---
+// "Start where you are": the five-rung ladder (STRATEGY §6) drawn as a metro line, one concrete action per stop.
+// Horizontal on wide screens, vertical on phones.
+import SectionHead from '../ui/SectionHead.astro';
+import Photo from '../media/Photo.astro';
+import Annotation from '../ui/Annotation.astro';
+import { RUNGS } from './home';
+---
+<section class="section metro" aria-labelledby="metro-title">
+  <div class="wrap">
+    <div class="metro__head">
+      <SectionHead num="09" label="Take part" id="metro-title" lead="Five stops, from five minutes on your phone to the institutions that run the country. Get on anywhere. Every stop counts.">
+        Start <span class="metro__red">where you are</span>
+      </SectionHead>
+      <div class="metro__sign" aria-hidden="true">
+        <span class="metro__sign-line">Line 4W</span>
+        <span class="metro__sign-dest">Towards: the institutions</span>
+      </div>
+    </div>
+
+    <ol class="metro__line" role="list">
+      {RUNGS.map((r, i) => (
+        <li class="stop" style={`--i:${i}`}>
+          <div class="stop__pic">
+            <Photo id={r.photo} tone={r.tone} alt={r.alt} position={r.position} aspect="1 / 1" caption={false}
+              widths={[160, 240, 360]} sizes="(min-width: 900px) 150px, 96px" />
+          </div>
+          <span class="stop__dot" aria-hidden="true">{i + 1}</span>
+          <div class="stop__body">
+            <p class="label stop__meta">Stop {i + 1} · {r.meta}</p>
+            <h3 class="stop__where">{r.where}</h3>
+            <p class="stop__action">{r.action}</p>
+            <a class="stop__link" href={r.href}>{r.link.split(' ').slice(0, -1).join(' ')} <span class="stop__last">{r.link.split(' ').at(-1)}&nbsp;<span aria-hidden="true">→</span></span></a>
+          </div>
+        </li>
+      ))}
+    </ol>
+
+    <div class="metro__foot">
+      <p class="metro__u18"><strong>Under 18?</strong> Stops one and two are yours: every guide is free to read, and nothing needs a sign-up. Joining needs a parent’s or guardian’s consent.</p>
+      <div class="metro__join">
+        <a class="btn" href="/join/">Join the movement <span class="arrow" aria-hidden="true">→</span></a>
+        <Annotation text="free, and it takes a minute" arrow="left" tilt={-4} width="16ch" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .metro__head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 20px 40px; align-items: end; }
+  .metro__head :global(.section-head) { margin-bottom: 0; }
+  .metro__red { color: var(--red); }
+  .metro__sign { display: grid; gap: 2px; padding: 12px 16px; background: var(--green); color: var(--paper); border-radius: 6px; margin-bottom: 10px; box-shadow: 4px 4px 0 var(--ink); }
+  .metro__sign-line { font-weight: 900; font-stretch: 80%; text-transform: uppercase; letter-spacing: .08em; font-size: .8rem; color: var(--marigold); }
+  .metro__sign-dest { font-weight: 800; font-size: 1.05rem; }
+
+  .metro__line {
+    --track: 10px; --dot: 46px; position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: clamp(12px, 2vw, 28px); margin-top: clamp(40px, 6vw, 72px); padding: 0;
+  }
+  /* the track runs through the dots */
+  .metro__line::before {
+    content: ''; position: absolute; left: 0; right: 0; top: calc(var(--pic) + 22px + var(--dot) / 2 - var(--track) / 2); height: var(--track);
+    background: linear-gradient(90deg, var(--ink) 0 18%, var(--pink) 18% 38%, var(--marigold) 38% 58%, var(--red) 58% 78%, var(--green) 78%);
+    border-radius: 6px;
+  }
+  .metro__line { --pic: clamp(120px, 11vw, 150px); }
+  .stop { position: relative; display: grid; justify-items: start; align-content: start; gap: 0; }
+  .stop__pic { width: var(--pic); transform: rotate(calc(-3deg + var(--i) * 1.5deg)); }
+  .stop__pic :global(.photo__img) { border-radius: 50%; border: 5px solid var(--paper-light); box-shadow: 3px 4px 0 rgba(29, 28, 24, .22); }
+  .stop__pic :global(.photo__img picture) { border-radius: 50%; }
+  .stop__dot {
+    position: relative; z-index: 2; display: grid; place-items: center; width: var(--dot); height: var(--dot); margin-top: 22px;
+    background: var(--paper-light); border: 4px solid var(--ink); border-radius: 50%; font-weight: 900; font-stretch: 80%; font-size: 1.2rem;
+  }
+  .stop__body { display: grid; gap: 8px; margin-top: 18px; padding-right: 6px; }
+  .stop__meta { color: var(--ink-soft); }
+  .stop__where { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(1.6rem, 2.3vw, 2.15rem); line-height: .9; }
+  .stop__action { color: var(--ink-soft); font-size: .98rem; line-height: 1.45; }
+  .stop__link { font-weight: 800; font-size: .95rem; color: var(--red-ink); }
+  .stop__last { white-space: nowrap; }
+
+  .metro__foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 24px 40px; margin-top: clamp(36px, 5vw, 56px); padding-top: 22px; border-top: 3px solid var(--ink); }
+  .metro__u18 { max-width: 60ch; padding: 12px 16px; background: var(--paper-light); border-left: 6px solid var(--red-ink); font-size: .95rem; line-height: 1.45; }
+  .metro__join { display: flex; align-items: center; gap: 6px; }
+
+  @media (max-width: 900px) {
+    .metro__head { grid-template-columns: 1fr; }
+    .metro__sign { justify-self: start; }
+    .metro__line { --pic: 92px; --dot: 40px; --cg: 18px; grid-template-columns: 1fr; gap: 0; }
+    .metro__line::before {
+      left: calc(var(--pic) + var(--cg) + var(--dot) / 2 - var(--track) / 2); right: auto; top: 10px; bottom: 10px; width: var(--track); height: auto;
+      background: linear-gradient(180deg, var(--ink) 0 18%, var(--pink) 18% 38%, var(--marigold) 38% 58%, var(--red) 58% 78%, var(--green) 78%);
+    }
+    .stop { grid-template-columns: var(--pic) var(--dot) minmax(0, 1fr); column-gap: var(--cg); align-items: start; padding-block: 14px; }
+    .stop__dot { margin-top: 24px; }
+    .stop__body { margin-top: 0; }
+  }
+  @media (max-width: 420px) {
+    .metro__line { --pic: 72px; --dot: 34px; --cg: 12px; }
+    .stop__dot { font-size: 1rem; border-width: 3px; }
+    .metro__join :global(.annot) { display: none; }
+  }
+</style>

@@ -140,6 +140,8 @@ const tilts = [0, 3, -2.5];
 
   /* collage */
   .prog__pic { position: relative; }
+  /* An annotation sits on the photo: give the handwriting a paper slip so it reads over any image. */
+  .prog__pic :global(.annot .hand) { background: var(--paper-light); padding: 4px 8px 2px; box-shadow: 2px 3px 0 rgba(29, 28, 24, .25); }
   /* make the image fill fixed-aspect frames even without tape (Photo only sizes <picture> when taped) */
   .prog__pic :global(.photo--fixed .photo__img picture) { display: block; height: 100%; }
   .prog__placard { display: flex; justify-content: center; margin-top: clamp(36px, 5vw, 64px); }

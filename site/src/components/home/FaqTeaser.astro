@@ -1,0 +1,37 @@
+---
+// FAQ teaser: three straight answers from the faq collection, answer first.
+import { getCollection } from 'astro:content';
+import SectionHead from '../ui/SectionHead.astro';
+import Faq from '../ui/Faq.astro';
+import { FAQ_IDS } from './home';
+
+const all = await getCollection('faq');
+const items = FAQ_IDS.map((id) => all.find((f) => f.data.id === id)?.data).filter((f) => !!f);
+---
+<section class="section faqt" aria-labelledby="faqt-title">
+  <div class="wrap faqt__inner">
+    <div class="faqt__side">
+      <SectionHead num="12" label="Straight answers" id="faqt-title" lead="Short questions get short answers. The first sentence always answers the question.">
+        You asked. <span class="faqt__red">We answer.</span>
+      </SectionHead>
+      <a class="btn btn--ink" href="/faq/">All {all.length} answers <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+    <div class="faqt__list">
+      {items.map((f, i) => (
+        <Faq q={f!.q} open={i === 0} id={`home-faq-${f!.id}`}>
+          <p>{f!.a}</p>
+          {f!.more && <p>{f!.more}</p>}
+          {f!.link && <p><a href={f!.link.href}>{f!.link.label}</a></p>}
+        </Faq>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faqt__inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: clamp(28px, 5vw, 72px); align-items: start; }
+  .faqt__side { display: grid; gap: 20px; justify-items: start; position: sticky; top: 100px; }
+  .faqt__side :global(.section-head) { margin-bottom: 0; }
+  .faqt__red { color: var(--red); white-space: nowrap; }
+  @media (max-width: 900px) { .faqt__inner { grid-template-columns: 1fr; } .faqt__side { position: static; } }
+</style>

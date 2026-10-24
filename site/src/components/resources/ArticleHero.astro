@@ -10,6 +10,8 @@ export interface Props { entry: Article; minutes: number; crumbs: { name: string
 const { entry, minutes, crumbs } = Astro.props;
 const d = entry.data;
 const [main, tail] = splitTitle(d.title);
+// A title split at "(…)" shows its tail without brackets; keep them for screen readers and plain-text readers.
+const paren = !!tail && d.title === `${main} (${tail})`;
 const size = main.length <= 40 ? 'xl' : main.length <= 58 ? 'l' : 'm';
 const aud = audienceLabels(d.audience);
 const no = ISSUE_ORDER.indexOf(entry.id);
@@ -20,8 +22,7 @@ const no = ISSUE_ORDER.indexOf(entry.id);
     <div class="a-hero__text">
       <p class="a-hero__kicker label"><span class="a-hero__kind">{d.kind}</span>{no >= 0 && <span>Journal No. {String(no + 1).padStart(2, '0')}</span>}<span>{minutes} min read</span></p>
       <h1 class:list={['a-hero__title', `a-hero__title--${size}`]}>
-        <span class="a-hero__main">{main}</span>
-        {tail && <span class="a-hero__tail">{tail}</span>}
+        <span class="a-hero__main">{main}</span>{tail && ' '}{tail && <span class="a-hero__tail">{paren && <span class="visually-hidden">(</span>}{tail}{paren && <span class="visually-hidden">)</span>}</span>}
       </h1>
       <p class="a-hero__dek">{d.description}</p>
     </div>

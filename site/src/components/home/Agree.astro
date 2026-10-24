@@ -1,0 +1,89 @@
+---
+// "Most of us already agree": one big typographic moment from the Ipsos 2026 India figures, with the sample caveat.
+import Placard from '../ui/Placard.astro';
+import { SRC } from './home';
+---
+<section class="agree ground-red grain" aria-labelledby="agree-title">
+  <div class="wrap agree__inner">
+    <p class="label agree__label"><span class="agree__num">03</span> / The good news</p>
+    <div class="agree__grid">
+      <div class="agree__left">
+        <p class="agree__figure" aria-hidden="true">68<span>%</span></p>
+        <div class="agree__placard" aria-hidden="true">
+          <Placard color="marigold" size="l" tilt={6} stick decorative><span lang="hi">हम सब</span><br />all of us</Placard>
+        </div>
+      </div>
+      <div class="agree__text">
+        <h2 class="agree__title" id="agree-title">Most of us already agree.</h2>
+        <p class="agree__lead">
+          <strong>68% of people in an urban, online sample in India call themselves feminists</strong>, against an average
+          of 39% across the 29 countries in Ipsos’s 2026 survey.
+        </p>
+        <dl class="agree__bars">
+          <div class="agree__bar" style="--v:65">
+            <dt>Men</dt><dd><span class="agree__fill"></span><span class="agree__val">65%</span></dd>
+          </div>
+          <div class="agree__bar" style="--v:71">
+            <dt>Women</dt><dd><span class="agree__fill"></span><span class="agree__val">71%</span></dd>
+          </div>
+        </dl>
+        <p class="agree__but">
+          The label is winning. The habits are slower: <strong>52%</strong> of the same sample agree that “a wife should always
+          obey her husband”. That gap is the work. Most of us already want this. Let’s make it normal.
+        </p>
+        <p class="agree__caveat">
+          <span class="label">Read the small print</span>
+          Ipsos says its India sample is urban and online, drawn largely from socio-economic classes A, B and C in metros
+          and tier 1 to 3 towns, so it should not be read as the whole country. Source: <a href={SRC.ipsos} rel="noopener">Ipsos, International Women’s Day 2026: global charts</a>{' '}
+          (fieldwork Dec 2025 to Jan 2026, published Mar 2026).
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .agree { padding-block: clamp(3.5rem, 8vw, 6.5rem); overflow: hidden; }
+  .agree__inner { position: relative; z-index: 2; }
+  .agree__label { padding-top: 12px; border-top: 3px solid var(--paper-light); }
+  .agree__num { font-weight: 900; }
+  .agree__grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 0 clamp(24px, 4vw, 56px); align-items: center; margin-top: 18px; }
+  .agree__left { position: relative; }
+  .agree__figure { font-weight: 900; font-stretch: var(--display-stretch); line-height: .78; letter-spacing: -.035em;
+    color: var(--paper-light); margin-left: -.04em;
+  }
+  .agree__figure span { font-size: .42em; vertical-align: top; position: relative; top: .14em; margin-left: .02em; color: var(--marigold); }
+  .agree__text { display: grid; gap: 18px; max-width: 34rem; }
+  .agree__title { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(2.6rem, 5.4vw, 4.6rem); line-height: .88; }
+  .agree__lead { font-size: clamp(1.1rem, 1.5vw, 1.3rem); line-height: 1.4; }
+  .agree__bars { display: grid; gap: 8px; margin: 4px 0; }
+  .agree__bar { display: grid; grid-template-columns: 4.6rem minmax(0, 1fr); align-items: center; gap: 12px; }
+  .agree__bar dt { font-weight: 800; font-size: .82rem; letter-spacing: .12em; text-transform: uppercase; }
+  .agree__bar dd { position: relative; height: 34px; background: rgba(29, 28, 24, .28); }
+  .agree__fill { position: absolute; inset: 0 auto 0 0; width: calc(var(--v) * 1%); background: var(--paper-light); }
+  .agree__val { position: absolute; top: 50%; left: calc(var(--v) * 1% - .4em); transform: translate(-100%, -50%); font-weight: 900; font-stretch: 80%; color: var(--ink); font-size: 1.1rem; }
+  .agree__but { font-family: var(--font-serif); font-size: clamp(1.1rem, 1.4vw, 1.25rem); line-height: 1.45; }
+  .agree__caveat { font-size: .86rem; line-height: 1.45; padding-top: 12px; border-top: 1.5px dashed var(--paper-light); }
+  .agree__caveat .label { display: block; margin-bottom: 4px; }
+  /* wide screens: the placard stands in the empty space under the "%", clear of the digits. It is placed in units
+     of the figure's size (--fig): the digits end at about .81 of it. */
+  .agree__left { --fig: clamp(11rem, 38vw, 34rem); }
+  .agree__figure { font-size: var(--fig); }
+  .agree__placard { position: absolute; left: calc(var(--fig) * .84); top: calc(var(--fig) * .5); z-index: 2; width: max-content; }
+  /* (the Placard's own size rule is more specific, hence .placard.placard--l) */
+  .agree__placard :global(.placard.placard--l .placard__text) { font-size: clamp(1.6rem, 3.6vw, 2.7rem); }
+  @media (max-width: 860px) {
+    .agree__grid { grid-template-columns: 1fr; }
+    /* figure and placard share a row when there is room, and the placard drops below the figure when there is not:
+       it never sits on top of the number */
+    .agree__left { --fig: clamp(9rem, 58vw, 20rem); display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px 20px; }
+    .agree__placard { position: relative; inset: auto; margin: 0 0 .6rem auto; }
+    .agree__placard :global(.placard.placard--l .placard__text) { font-size: clamp(1.7rem, 4.5vw, 2.4rem); }
+    .agree__placard :global(.placard--stick) { padding-bottom: 0; }
+    .agree__placard :global(.placard--stick::after) { display: none; }
+  }
+  @media (max-width: 536px) {
+    /* the placard wraps under the figure here: lift it into the empty space below the "%", clear of the digits */
+    .agree__placard { margin: -11vw 0 8px auto; }
+  }
+</style>

@@ -1,8 +1,8 @@
 ---
 // Case browser for /case-studies/: a CSS-only region filter (radio buttons + :has(), no JavaScript),
 // a hairline-ruled dossier index and a duotone card grid. Without :has() support everything shows.
-import Card from '../blocks/Card.astro';
-import { type CaseEntry, caseNo, heroOf, isIndia, lever, shortPlace, slug } from './case-utils';
+import CaseCard from './CaseCard.astro';
+import { type CaseEntry, caseNo, cardPicOf, isIndia, lever, shortPlace, slug } from './case-utils';
 
 export interface Props { cases: CaseEntry[] }
 const { cases } = Astro.props;
@@ -18,6 +18,14 @@ const filters = [
 ].filter((f) => count(f.key) > 0);
 // Drop region chips that would duplicate "Rest of the world".
 const shown = filters.filter((f, _, arr) => !(f.key.startsWith('r-') && count(f.key) === count('world') && arr.some((x) => x.key === 'world')));
+
+// One picture per card, never repeated across the grid.
+const used = new Set<string>();
+const pics = cases.map((c) => {
+  const pic = cardPicOf(c, used);
+  if (pic.photo) used.add(pic.photo.id);
+  return pic;
+});
 
 const css = shown
   .filter((f) => f.key !== 'all')
@@ -63,13 +71,13 @@ const css = shown
     <ul class="cb__grid" role="list">
       {cases.map((c, i) => (
         <li data-f={keysOf(c)} class:list={{ 'cb__card--wide': i === 0 }}>
-          <Card
+          <CaseCard
             href={`/case-studies/${c.id}/`}
             title={c.data.title}
             kicker={`Case ${caseNo(c, cases)}`}
             meta={[shortPlace(c), c.data.years]}
             dek={c.data.dek}
-            photo={heroOf(c)?.id}
+            pic={pics[i]}
             tone={c.data.tone === 'natural' ? 'ink' : c.data.tone}
             aspect={i === 0 ? '4 / 3' : '3 / 2'}
             size={i === 0 ? 'l' : 'm'}
@@ -123,6 +131,8 @@ const css = shown
   .cb__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(28px, 3.5vw, 48px) clamp(20px, 2.6vw, 36px); }
   .cb__card--wide { grid-column: span 2; grid-row: span 2; }
   .cb__grid :global(.photo--fixed .photo__img picture) { display: block; height: 100%; }
+  /* The lead card spans two rows: a squarer photo fills them instead of leaving a gap under its text. */
+  @media (min-width: 1001px) { .cb__card--wide :global(.photo--fixed .photo__img) { aspect-ratio: 1 / 1; } }
 
   @media (max-width: 1000px) {
     .cbi__row { grid-template-columns: 60px minmax(0, 1fr) minmax(0, .8fr); }

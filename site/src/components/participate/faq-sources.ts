@@ -18,7 +18,7 @@ const KCL_2025: FaqSource = {
   date: '5 Mar 2025',
 };
 const FCRA: FaqSource = {
-  label: 'Foreign Contribution (Regulation) Act 2010, section 3 (PRS copy of the Act)',
+  label: 'Foreign Contribution (Regulation) Act 2010, sections 3, 5 and 11 (PRS copy of the Act)',
   href: 'https://prsindia.org/files/bills_acts/acts_parliament/2010/the-foreign-contribution-(regulation)-act,-2010.pdf',
   date: '2010',
 };

@@ -2,9 +2,9 @@
 title: "Poland: Black Protest and Strajk Kobiet"
 dek: >-
   Black clothes and umbrellas in 2016. A red lightning bolt in 2020. A youth vote surge in 2023.
-  How Polish women beat a ban, lost to a court, and kept going.
+  How Polish women stopped a bill, lost to a court, and kept going.
 summary: >-
-  In October 2016, Polish women dressed in black went on strike, and three days later the Sejm rejected a near-total abortion ban. A 2020 court ruling still removed almost all legal grounds despite the biggest protests since 1989, and record youth turnout in 2023 changed the government but not yet the law.
+  In October 2016, Polish women dressed in black went on strike, and three days later the Sejm rejected the citizens’ ‘Stop Aborcji’ bill, which would have banned almost all abortions. A 2020 court ruling still removed almost all legal grounds despite the biggest protests since 1989, and record youth turnout in 2023 changed the government but not yet the law.
 place: "Warsaw and hundreds of towns across Poland"
 region: Europe
 years: "2016–2024"
@@ -23,17 +23,17 @@ timeline:
   - date: "22 Sep 2016"
     title: "Selfies in black"
     text: >-
-      People across Poland post photos of themselves dressed in black under #czarnyprotest, against a proposed
-      near-total abortion ban.
+      People across Poland post photos of themselves dressed in black under #czarnyprotest, against
+      the citizens’ ‘Stop Aborcji’ bill, which would have banned almost all abortions.
   - date: "3 Oct 2016"
     title: "Black Monday"
     text: >-
       Women stay away from work, school and housework, in a strike modelled on Iceland’s 1975 women’s day off. It
       rains; the crowds become seas of black umbrellas.
   - date: "6 Oct 2016"
-    title: "The ban is thrown out"
+    title: "The bill is thrown out"
     text: >-
-      Three days after the strike, the Sejm rejects the total-ban bill by 352 votes to 58.
+      Three days after the strike, the Sejm rejects the citizens’ ‘Stop Aborcji’ bill, which would have banned almost all abortions, by 352 votes to 58.
   - date: "22 Oct 2020"
     title: "A court does what a vote did not"
     text: >-
@@ -60,7 +60,7 @@ timeline:
       restrictive law stays.
 numbers:
   - figure: "352–58"
-    label: "The Sejm’s vote rejecting a near-total abortion ban, three days after Black Monday"
+    label: "The Sejm’s vote rejecting the citizens’ ‘Stop Aborcji’ bill, which would have banned almost all abortions, three days after Black Monday"
     source: "Al Jazeera, 6 Oct 2016"
     href: "https://www.aljazeera.com/news/2016/10/6/polish-parliament-rejects-plans-for-total-abortion-ban"
     date: "Oct 2016"
@@ -98,7 +98,7 @@ lessons:
   - title: "Have a rapid-defence format ready"
     text: >-
       A colour, a symbol and a strike day, agreed in advance, can bring a country out within days. Poland’s 2016
-      format took two weeks from the first selfies to the ban’s defeat in parliament.
+      format took two weeks from the first selfies to the bill’s defeat in parliament.
   - title: "Turn street energy into votes"
     text: >-
       Run first-time voter drives, candidate pledges and plain “why vote” explainers. Youth turnout rose 22 points
@@ -152,7 +152,7 @@ updated: 2026-10-24
 
 Poland already had one of Europe's strictest abortion laws. Since 1993, abortion had been legal only if the pregnancy put the woman's life or health at risk, came from a crime such as rape or incest, or involved severe foetal impairment.<sup><a class="fn-ref" href="#src-2" aria-label="Source 2">2</a></sup> Even then, legal abortions were rare: 1,110 were recorded in 2019, almost all of them on the foetal-impairment ground.<sup><a class="fn-ref" href="#src-3" aria-label="Source 3">3</a></sup>
 
-In 2016, an anti-abortion citizens' initiative wanted to go further: a near-total ban, with up to five years in prison for women and for doctors.<sup><a class="fn-ref" href="#src-1" aria-label="Source 1">1</a></sup>
+In 2016, an anti-abortion citizens' initiative, the "Stop Aborcji" (Stop Abortion) bill, wanted to go further: it would have banned almost all abortions, with up to five years in prison for women and for doctors.<sup><a class="fn-ref" href="#src-1" aria-label="Source 1">1</a></sup>
 
 The governing party had a majority in parliament, and few expected women to win. What happened next became a template other movements have copied ever since: Polish women stopped working. This is the story of what happened when they did.
 
@@ -164,7 +164,7 @@ It started with clothes. On 22 September 2016, people across Poland posted selfi
 
 On Monday 3 October, women stayed away from work, school and housework. It rained all day. Crowds in Warsaw, Gdańsk, Łódź, Wrocław and Kraków turned into seas of black umbrellas, and the umbrella became the symbol: shelter for women's rights.<sup><a class="fn-ref" href="#src-2" aria-label="Source 2">2</a></sup> Up to 100,000 people protested across the country.<sup><a class="fn-ref" href="#src-1" aria-label="Source 1">1</a></sup>
 
-Three days later, the Sejm threw out the total-ban bill by 352 votes to 58.<sup><a class="fn-ref" href="#src-1" aria-label="Source 1">1</a></sup>
+Three days later, the Sejm threw out the Stop Aborcji bill by 352 votes to 58.<sup><a class="fn-ref" href="#src-1" aria-label="Source 1">1</a></sup>
 
 ### The court, 2020
 
@@ -188,7 +188,7 @@ Meanwhile, the cost kept rising. Since the ruling, several women have died of se
 
 ## Why it matters for the Fourth Wave
 
-Poland shows both halves of the toolkit. A ready-made format (wear black, strike on a Monday, bring an umbrella) brought a country out in days and beat a ban. A symbol simple enough to draw on a mask filled 150 towns in 2020.
+Poland shows both halves of the toolkit. A ready-made format (wear black, strike on a Monday, bring an umbrella) brought a country out in days and defeated a bill. A symbol simple enough to draw on a mask filled 150 towns in 2020.
 
 It also shows what comes after. A court can undo a street win overnight. An election can change a government without changing a law. Movements have to work at three levels at once: the street, the ballot box and the bill, and keep publishing the human cost while they do.
 

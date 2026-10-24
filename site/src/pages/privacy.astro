@@ -1,0 +1,366 @@
+---
+// /privacy/ — Privacy notice. Plain-language, DPDP-aligned (research/india-compliance.md §2, §10, §11.1), with
+// GDPR-informed good practice for supporters abroad (research/compliance.md §3, §7). Every form on the site links here,
+// so the form-by-form ledger must match the short notices printed beside each form.
+import Base from '../layouts/Base.astro';
+import TrustHero from '../components/trust/TrustHero.astro';
+import DocLayout from '../components/trust/DocLayout.astro';
+import DocSection from '../components/trust/DocSection.astro';
+import ShortVersion from '../components/trust/ShortVersion.astro';
+import DataReceipt from '../components/trust/DataReceipt.astro';
+import FormLedger, { type LedgerForm } from '../components/trust/FormLedger.astro';
+import RightsGrid from '../components/trust/RightsGrid.astro';
+import ContactCard from '../components/trust/ContactCard.astro';
+import Steps from '../components/trust/Steps.astro';
+import YesNever from '../components/trust/YesNever.astro';
+import Placard from '../components/ui/Placard.astro';
+import Sources from '../components/blocks/Sources.astro';
+import TrustClose from '../components/trust/TrustClose.astro';
+
+const path = '/privacy/';
+const crumbs = [{ name: 'Privacy notice', href: path }];
+const description =
+  'What Cultural Shock Party collects (as little as possible), why, who sees it, how long we keep it and your rights under India’s DPDP Act. We never sell it.';
+const DATA_ROUTE = '/contact/?topic=data#contact-form';
+
+const TOC = [
+  { id: 'who', n: '01', title: 'Who we are' },
+  { id: 'forms', n: '02', title: 'What we collect, form by form' },
+  { id: 'never', n: '03', title: 'What we never ask for' },
+  { id: 'why', n: '04', title: 'Why we use it' },
+  { id: 'who-sees', n: '05', title: 'Who sees it, and who never will' },
+  { id: 'how-long', n: '06', title: 'How long we keep it' },
+  { id: 'rights', n: '07', title: 'Your rights' },
+  { id: 'under-18', n: '08', title: 'If you’re under 18' },
+  { id: 'security', n: '09', title: 'Keeping it safe' },
+  { id: 'cookies', n: '10', title: 'Cookies and tracking' },
+  { id: 'abroad', n: '11', title: 'If you live outside India' },
+  { id: 'changes', n: '12', title: 'Changes to this notice' },
+];
+
+const SHORT = [
+  { k: 'What we collect', strong: 'As little as we can.', v: 'Usually an email address and your age band. A first name or your state only if you choose to give them.' },
+  { k: 'Why', strong: 'Only for what you tick.', v: 'The newsletter, volunteering, events, a manifesto signature, or a reply to your message. Nothing else.' },
+  { k: 'Who sees it', strong: 'A small CSP team, and Netlify,', v: 'which hosts this site and its forms. Never any political party, candidate or advertiser.' },
+  { k: 'How long', strong: 'Not for ever.', v: 'Contact messages 6 months; volunteering and events 12 months after we last hear from you; the newsletter until you unsubscribe.' },
+  { k: 'Tracking', strong: 'None.', v: 'No cookies, no analytics, no ad pixels, no social media plugins.' },
+  { k: 'Under 18', strong: 'Read everything, sign up for nothing.', v: 'We don’t keep under-18s’ details without a parent’s or guardian’s verified consent.' },
+  { k: 'Your control', strong: 'See it, fix it, delete it, withdraw.', v: 'Ask through the contact form and we reply within 30 days at the latest.' },
+];
+
+const FORMS: LedgerForm[] = [
+  {
+    id: 'form-newsletter', name: 'Newsletter sign-up', code: 'newsletter',
+    where: [{ label: 'Footer of every page', href: '#news-title' }, { label: 'Resources', href: '/resources/' }],
+    collect: ['Email', 'Age band', 'Which page you signed up on'],
+    use: 'Send you CSP’s newsletter, about once a month. Your age band tells us not to sign up anyone under 18.',
+    basis: 'Your consent: the box you tick, which is never ticked for you.',
+    kept: ['Until you unsubscribe.'],
+  },
+  {
+    id: 'form-join', name: 'Join the movement', code: 'join',
+    where: [{ label: 'The Join page', href: '/join/' }],
+    collect: ['Age band', 'Email', 'The purposes you tick', 'Notice version'],
+    optional: ['First name', 'State or union territory', 'City or town', 'Interests', 'Translation languages'],
+    use: 'Only the purposes you tick, each with its own box: the newsletter; contacting you about volunteering (18 and over); inviting you to events in your state.',
+    basis: 'Your consent, given separately for each purpose.',
+    kept: ['Newsletter: until you unsubscribe.', 'Volunteering and events: 12 months after we last hear from you. We email you before we delete.'],
+    note: 'For your safety we don’t send automatic “you’ve joined” emails, so nobody can use the form to find out who has joined.',
+  },
+  {
+    id: 'form-manifesto-sign', name: 'Sign the manifesto', code: 'manifesto-sign',
+    where: [{ label: 'The manifesto: sign it', href: '/manifesto/#sign' }],
+    collect: ['Age band', 'Manifesto version you signed', 'Notice version'],
+    optional: ['First name', 'City or town', 'State or UT', 'Email (only for the newsletter)'],
+    use: 'Count signatures and see where support comes from. Your email is used only if you also tick the newsletter box.',
+    basis: 'Your consent.',
+    kept: ['Until this consultation closes and the final manifesto is published. After that we keep only anonymous totals.', 'Newsletter: until you unsubscribe.'],
+    note: 'We never publish signers’ names without asking first.',
+  },
+  {
+    id: 'form-manifesto-feedback', name: 'Suggest an edit to the manifesto', code: 'manifesto-feedback',
+    where: [{ label: 'The manifesto: suggest an edit', href: '/manifesto/#edit' }],
+    collect: ['Age band', 'The clause you chose', 'Your suggestion'],
+    optional: ['Email, only if you’d like a reply'],
+    use: 'Improve the manifesto. We may quote a suggestion in a public summary of the consultation, without your name or email. We use your email only to reply.',
+    basis: 'Your consent.',
+    kept: ['Suggestion and email are deleted when the consultation closes.'],
+    note: 'Under 18? Your suggestion still counts; the form doesn’t ask for your email.',
+  },
+  {
+    id: 'form-contact', name: 'Contact us', code: 'contact',
+    where: [{ label: 'The Contact page', href: '/contact/' }],
+    collect: ['Age band', 'A name (any name you like)', 'Email', 'Topic', 'Your message', 'Notice version'],
+    use: 'Reply to you, and nothing else. Only the people who handle your topic read it.',
+    basis: 'Your consent: the box you tick, which is never ticked for you. You also gave us these details so that we could reply (DPDP Act, section 7(a)).',
+    kept: ['6 months, then deleted.', 'Anything from someone under 18: deleted as soon as we see it.'],
+    note: 'Please don’t include anyone else’s personal details, or any address or phone number.',
+  },
+];
+
+const KEEP = [
+  { what: 'Contact messages', how: '6 months, then deleted' },
+  { what: 'Newsletter (from any form)', how: 'Until you unsubscribe' },
+  { what: 'Join: volunteering and events', how: '12 months after we last hear from you, with an email before we delete' },
+  { what: 'Manifesto signatures', how: 'Until the consultation closes and the final version is published; then anonymous totals only' },
+  { what: 'Manifesto suggestions', how: 'Deleted when the consultation closes' },
+  { what: 'Anything sent by someone under 18', how: 'Deleted as soon as we see it' },
+];
+
+const RIGHTS = [
+  { verb: 'See it', text: 'Ask what we hold about you, what we use it for, and who else has handled it.', law: 'DPDP Act 2023, section 11' },
+  { verb: 'Fix it', text: 'Correct anything wrong or out of date, or fill in what’s missing.', law: 'DPDP Act 2023, section 12' },
+  { verb: 'Delete it', text: 'Ask us to erase it. We will, unless a law says we must keep it.', law: 'DPDP Act 2023, section 12' },
+  { verb: 'Withdraw', text: 'Take back your consent at any time, as easily as you gave it. We stop, and so does Netlify.', law: 'DPDP Act 2023, section 6(4)' },
+  { verb: 'Complain', text: 'Tell us first, through the contact form. Not satisfied? From 13 May 2027 you can take it to the Data Protection Board of India.', law: 'DPDP Act 2023, section 13' },
+  { verb: 'Nominate', text: 'Name someone to use these rights for you if you die or can’t act yourself.', law: 'DPDP Act 2023, section 14' },
+];
+
+const HOW = [
+  { t: 'Write to us', d: `Use <a href="${DATA_ROUTE}">the contact form</a> and choose <strong>My data: see, correct or delete it</strong>. Write from the email you signed up with, and tell us what you’d like.` },
+  { t: 'We check it’s really you', d: 'We may ask you to confirm from that email address, so nobody can fish for someone else’s details.' },
+  { t: 'We act within 30 days', d: 'At the latest. Indian law allows up to 90 days for a grievance (DPDP Rules 2025, rule 14(3)); we promise 30.' },
+  { t: 'Not satisfied? Go to the Board', d: 'From 13 May 2027 you can complain to the Data Protection Board of India, once you have used our grievance route. As of October 2026 the Board had been set up in law but had no members appointed yet (India Data Law); we will link its complaint page here when it opens.' },
+];
+
+const SOURCES = [
+  { label: 'Digital Personal Data Protection Act, 2023 (gazette text)', href: 'https://www.meity.gov.in/static/uploads/2024/06/2bf1f0e9f04e6fb4f8fef35e82c42aa5.pdf', publisher: 'Ministry of Electronics and IT', date: '11 Aug 2023' },
+  { label: 'Digital Personal Data Protection Rules, 2025, G.S.R. 846(E)', href: 'https://www.meity.gov.in/static/uploads/2025/11/53450e6e5dc0bfa85ebd78686cadad39.pdf', publisher: 'Ministry of Electronics and IT', date: '13 Nov 2025', note: 'Rules 3, 5–16, 22 and 23 apply from 13 May 2027.' },
+  { label: 'Government notifies the DPDP Rules, 2025', href: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=2190014&reg=3&lang=2', publisher: 'Press Information Bureau', date: '14 Nov 2025' },
+  { label: 'Is the Data Protection Board operational?', href: 'https://indiadatalaw.org/is-the-board-operational/', publisher: 'India Data Law', date: 'checked Oct 2026' },
+  { label: 'Netlify Privacy Statement (EU-US Data Privacy Framework and UK Extension)', href: 'https://www.netlify.com/privacy/', publisher: 'Netlify', date: 'updated 10 Apr 2026' },
+  { label: 'Where does Netlify store form data? (“infrastructure is primarily hosted in the United States”)', href: 'https://answers.netlify.com/t/privacy-policy-where-does-netlify-store-form-data/128605', publisher: 'Netlify Support Forums', date: '30 Oct 2024' },
+  { label: 'Netlify Trust Center: sub-processors (Akismet spam filtering, United States)', href: 'https://netlify.com/trust-center?itemUid=e3fae2ca-94a9-416b-b577-5c90e382df57', publisher: 'Netlify', date: 'updated 23 Oct 2026' },
+  { label: 'GDPR Article 9: processing of special categories of personal data', href: 'https://gdpr-info.eu/art-9-gdpr/', publisher: 'gdpr-info.eu' },
+  { label: 'Political campaigning guidance: special category data', href: 'https://ico.org.uk/for-organisations/direct-marketing-and-privacy-and-electronic-communications/guidance-for-the-use-of-personal-data-in-political-campaigning-1/special-category-data/', publisher: 'Information Commissioner’s Office (UK)' },
+];
+---
+<Base
+  title="Privacy notice: your data, in plain words"
+  description={description}
+  pageType="WebPage"
+  breadcrumbs={crumbs}
+  modified="2026-10-24"
+>
+  <TrustHero
+    crumbs={crumbs}
+    current="privacy"
+    label="Privacy notice"
+    meta={['Version 1.0', '24 Oct 2026', '8 min read']}
+    title="Privacy notice"
+    sub="Your data, in plain words."
+    lead="We collect as little as we can, we use it only for what you ask, and we never sell it or hand it to any party or advertiser. Here is exactly what that means, form by form."
+  >
+    <p class="hero-actions">
+      <a class="btn btn--ink" href="#short">The short version <span class="arrow" aria-hidden="true">↓</span></a>
+      <a class="link-arrow" href={DATA_ROUTE}>Ask about your data <span aria-hidden="true">→</span></a>
+    </p>
+    <DataReceipt slot="aside" />
+  </TrustHero>
+
+  <section class="short-wrap" aria-label="Summary">
+    <div class="wrap short-wrap__inner">
+      <ShortVersion
+        rows={SHORT}
+        intro="Seven lines for people in a hurry. Everything below explains them in full."
+        foot="This is information about how we handle data, not legal advice."
+      />
+    </div>
+  </section>
+
+  <DocLayout toc={TOC} updated="Version 1.0 · published 24 October 2026">
+    <DocSection id="who" n="01" title="Who we are">
+      <p>Cultural Shock Party (CSP) is a Fourth Wave feminist movement founded in India in 2026. When you fill in a form on this site, CSP decides why and how your details are used. India’s Digital Personal Data Protection Act 2023 calls that a <strong>Data Fiduciary</strong>.<sup><a class="fn-ref" href="#src-1">1</a></sup> For this website, that’s us.</p>
+      <p>Most of the Act’s duties (notice, consent, children’s data and your rights) apply from 13 May 2027, under the rules gazetted on 13 November 2025.<sup><a class="fn-ref" href="#src-2">2</a></sup> We follow them now, because you shouldn’t have to wait for the law to be treated fairly.</p>
+      <ContactCard
+        id="grievance"
+        kicker="Data & Grievance contact"
+        role="Your data questions"
+        cta={{ label: 'Ask about your data', href: DATA_ROUTE }}
+        reply="within 30 days at the latest"
+      >
+        <p>We are appointing a Data & Grievance Lead, and we will name the role here. Until then, every question, request and complaint about personal data is answered by our founder. Use the contact form and choose <strong>My data: see, correct or delete it</strong>.</p>
+        <p>Write from the email address you signed up with. We quote this contact in every reply about your data.</p>
+      </ContactCard>
+    </DocSection>
+
+    <DocSection id="forms" n="02" title="What we collect, form by form">
+      <p>This site has five forms. Each shows a short notice beside it; these cards are the full version. Netlify, which hosts the site, also records the date and time of every entry, and most forms record which version of the notice you saw, so we can prove what you agreed to.</p>
+      <FormLedger forms={FORMS} />
+      <p class="dsec-note">Every form has a hidden spam trap and no file uploads. Netlify passes entries through an automatic spam filter (Akismet). Entries caught as spam are never added to any list.</p>
+    </DocSection>
+
+    <DocSection id="never" n="03" title="What we never ask for">
+      <ul class="never" role="list">
+        {['Caste', 'Religion', 'Aadhaar', 'Voter ID', 'Home address', 'Phone number', 'School', 'Employer', 'Photos of you', 'Card or bank details'].map((t) => <li>{t}</li>)}
+      </ul>
+      <h3>Why so little?</h3>
+      <p>Signing up to a feminist movement says something about your politics. India’s data law has no special category for political opinions, but UK and EU law do, and so do the people who might want to misuse a list like ours.<sup><a class="fn-ref" href="#src-8">8</a></sup> So we treat every sign-up as sensitive.</p>
+      <p>There is a second reason. From 13 May 2027 the DPDP Rules require every organisation to keep records of its processing for at least a year (rule 8(3)), and let the government ask organisations for information for purposes listed in the Rules (rule 23).<sup><a class="fn-ref" href="#src-2">2</a></sup> The best protection for you is that we never hold the data in the first place.</p>
+    </DocSection>
+
+    <DocSection id="why" n="04" title="Why we use it">
+      <ul class="dsec-list">
+        <li><strong>Because you said yes.</strong> For the newsletter, joining and signing the manifesto, we use your details only because you ticked a box that says what for. No box is ticked for you, and each purpose has its own box (DPDP Act, section 6).</li>
+        <li><strong>Because you wrote to us.</strong> When you use the contact form, you give us a name and an email so that we can reply. We use them for that and nothing else (section 7(a)).</li>
+        <li><strong>Never for anything else.</strong> We don’t make automated decisions about you, we don’t build profiles, and we don’t use your data to target political messages.</li>
+      </ul>
+      <p>You can withdraw your consent at any time, as easily as you gave it: use the unsubscribe link in any newsletter, or <a href={DATA_ROUTE}>write to us</a>. Once you withdraw, we stop, and we make Netlify and anyone else who handles the data for us stop too (section 6).</p>
+    </DocSection>
+
+    <DocSection id="who-sees" n="05" title="Who sees it, and who never will">
+      <p>Inside CSP, only the people who handle a topic can open its entries. Outside CSP, these companies handle data for us, under contract, and only on our instructions:</p>
+      <div class="proc">
+        <table>
+          <caption class="visually-hidden">Companies that process data for Cultural Shock Party</caption>
+          <thead><tr><th scope="col">Who</th><th scope="col">What they do for us</th><th scope="col">Where</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Netlify, Inc.</th><td>Hosts this website and stores every form entry.</td><td>United States<sup><a class="fn-ref" href="#src-6">6</a></sup></td></tr>
+            <tr><th scope="row">Automattic Inc. (Akismet)</th><td>Checks form entries for spam, on Netlify’s behalf.</td><td>United States<sup><a class="fn-ref" href="#src-7">7</a></sup></td></tr>
+            <tr><th scope="row">Our newsletter service</th><td>Not chosen yet. We will name it here before we move a single email address to it.</td><td>To be named</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pledge">
+        <p class="label pledge__label">Our promise</p>
+        <ul role="list">
+          <li>We never sell, rent or swap your details.</li>
+          <li>We never share them with any political party, candidate or advertiser.</li>
+          <li>We never upload supporter lists to Facebook, Instagram, Google or any other advertising platform.</li>
+          <li>We never publish your name without asking you first.</li>
+        </ul>
+      </div>
+      <p>If the law ever forces us to hand over data, we will tell the people affected, unless the law forbids us to.</p>
+    </DocSection>
+
+    <DocSection id="how-long" n="06" title="How long we keep it">
+      <div class="keep">
+        <table>
+          <caption class="visually-hidden">How long Cultural Shock Party keeps each kind of data</caption>
+          <thead><tr><th scope="col">What</th><th scope="col">How long</th></tr></thead>
+          <tbody>
+            {KEEP.map((k) => <tr><th scope="row">{k.what}</th><td>{k.how}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+      <p>When the time is up, we delete it, or keep only anonymous totals that can’t be traced back to you. If you ask us to delete something sooner, we will.</p>
+    </DocSection>
+
+    <DocSection id="rights" n="07" title="Your rights">
+      <p>These are yours under India’s data law, wherever you live. Using them is free.</p>
+      <RightsGrid rights={RIGHTS} />
+      <h3>How to use them</h3>
+      <Steps steps={HOW} label="How to use your data rights" />
+    </DocSection>
+
+    <DocSection id="under-18" n="08" title="If you’re under 18">
+      <p>Indian law treats everyone under 18 as a child. Before an organisation uses a child’s data, it needs the verifiable consent of a parent or lawful guardian, and it may never track, monitor or target ads at children (DPDP Act, section 9).<sup><a class="fn-ref" href="#src-1">1</a></sup> We haven’t built a safe way to get a parent’s verified consent yet, so we don’t take sign-ups from under-18s at all.</p>
+      <YesNever
+        id="kids"
+        yesTitle="You can"
+        neverTitle="We never"
+        yes={[
+          'Read, share and print everything on this site, free, with no sign-up.',
+          'Send a manifesto suggestion without giving an email.',
+          'Ask a parent or guardian to sign up for the newsletter with their own email, and pass it on.',
+        ]}
+        never={[
+          'Keep an under-18’s details. If we receive them, we delete them.',
+          'Track, profile or target ads at anyone under 18 (or anyone else).',
+          'Ask for your school’s name or a photo of you.',
+        ]}
+      />
+      <p>Parents, teachers and young people: our <a href="/safeguarding/">safeguarding policy</a> explains how we keep under-18s safe at events and online.</p>
+    </DocSection>
+
+    <DocSection id="security" n="09" title="Keeping it safe">
+      <ul class="dsec-list">
+        <li><strong>Locked pages.</strong> The whole site runs over HTTPS, with strict security headers and a content security policy that stops other companies’ scripts from running on our pages.</li>
+        <li><strong>Locked accounts.</strong> The accounts that can open your data (our host, our email and our code) use two-step login, and only the people who need an entry can open it.</li>
+        <li><strong>Less to lose.</strong> We collect little and delete on schedule, because data we don’t have can’t leak.</li>
+      </ul>
+      <p>If a data breach ever affects you, we will tell you without delay: what happened, what it means for you, what we are doing about it and what you can do. We will also report it to the Data Protection Board, as the law requires (DPDP Rules 2025, rule 7).<sup><a class="fn-ref" href="#src-2">2</a></sup></p>
+    </DocSection>
+
+    <DocSection id="cookies" n="10" title="Cookies and tracking: none">
+      <div class="nocookie">
+        <p class="nocookie__big">This site sets <span class="red-ink">no cookies</span> and stores nothing in your browser.</p>
+        <Placard text="No cookies. No trackers. No selling." color="marigold" shape="sticker" size="s" tilt={4} class="nocookie__sticker" decorative />
+      </div>
+      <ul class="dsec-list">
+        <li>No analytics at all for now: no Google Analytics, no ad pixels, no social media plugins, no embedded feeds or videos.</li>
+        <li>Fonts and images come from our own domain, so opening a page doesn’t tell Google, Meta or anyone else that you visited.</li>
+        <li>Share buttons are plain links. Nothing from WhatsApp, X or LinkedIn loads until you tap one, and then their privacy policy applies.</li>
+        <li>Like every web host, Netlify’s servers see your IP address when they send you a page. We don’t collect it or use it to identify you.</li>
+      </ul>
+      <p>If we ever add visitor counts, we will choose a tool that sets no cookies and stores no personal data, and we will update this notice before it goes live.</p>
+    </DocSection>
+
+    <DocSection id="abroad" n="11" title="If you live outside India">
+      <p>Our supporters live everywhere. If you are in the UK or the European Union, the GDPR treats your support for a political movement as “special category” data about your political opinions.<sup><a class="fn-ref" href="#src-8">8</a></sup><sup><a class="fn-ref" href="#src-9">9</a></sup> So for you:</p>
+      <ul class="dsec-list">
+        <li>we rely on your <strong>explicit consent</strong> (Article 9(2)(a)), given with the boxes you tick;</li>
+        <li>you also have the rights to <strong>restrict</strong> how we use your data, to <strong>object</strong> to it, and to get a copy in a <strong>portable</strong> format;</li>
+        <li>you can complain to your own regulator, such as the Information Commissioner’s Office in the UK or the Data Protection Commission in Ireland.</li>
+      </ul>
+      <p>Netlify stores data mainly in the United States. It is certified under the EU-US Data Privacy Framework and its UK Extension, which is the legal safeguard for moving data there.<sup><a class="fn-ref" href="#src-5">5</a></sup></p>
+    </DocSection>
+
+    <DocSection id="changes" n="12" title="Changes to this notice">
+      <p>This is <strong>version 1.0, published 24 October 2026</strong>. Each form entry records the version of the notice you saw. If we make a meaningful change, such as a new purpose or a new company handling your data, we will say what changed at the top of this page, and we will ask for your consent again before using your details in a new way.</p>
+      <p>Need this notice in Hindi, in large print or as plain text? <a href={DATA_ROUTE}>Ask us</a> and we’ll send it the way you need it.</p>
+      <Sources sources={SOURCES} />
+    </DocSection>
+  </DocLayout>
+
+  <TrustClose
+    current="privacy"
+    title="A question about your data?"
+    text="Ask us to show it, fix it, delete it, or stop using it. We reply within 30 days at the latest."
+    cta={{ label: 'Ask about your data', href: DATA_ROUTE }}
+    placard="Your data. Your call."
+  />
+</Base>
+
+<style>
+  .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; margin-top: 6px; }
+  .short-wrap { padding-block: clamp(36px, 5vw, 64px) 0; }
+  .short-wrap__inner { max-width: 1100px; }
+
+  .never { display: flex; flex-wrap: wrap; gap: 8px; font-family: var(--font-sans); }
+  .never li {
+    padding: .35em .8em .3em; border: 2px solid var(--ink); background: var(--paper-light); font-weight: 800; font-size: .95rem;
+    text-decoration: line-through; text-decoration-color: var(--red); text-decoration-thickness: 3px;
+  }
+
+  .proc, .keep { overflow-x: auto; font-family: var(--font-sans); }
+  .proc table, .keep table { width: 100%; border-collapse: collapse; font-size: .96rem; line-height: 1.45; }
+  .proc thead th, .keep thead th { text-align: left; padding: 10px 12px 8px 0; border-bottom: 3px solid var(--ink); font-size: var(--fs-label); letter-spacing: .12em; text-transform: uppercase; }
+  .proc tbody th, .keep tbody th { text-align: left; font-weight: 800; padding: 12px 12px 12px 0; vertical-align: top; }
+  .proc td, .keep td { padding: 12px 12px 12px 0; vertical-align: top; border-bottom: 1px solid var(--line-soft); }
+  .proc tbody th, .keep tbody th { border-bottom: 1px solid var(--line-soft); }
+  .proc tbody tr:last-child td, .proc tbody tr:last-child th { color: var(--ink-soft); }
+  .keep tbody th { width: 42%; }
+  .keep td { font-family: var(--font-serif); font-size: 1.05rem; }
+
+  .pledge { background: var(--ink); color: var(--paper); padding: clamp(18px, 2.6vw, 26px); border-left: 10px solid var(--red); font-family: var(--font-sans); }
+  .pledge__label { color: var(--marigold); margin-bottom: 8px; }
+  .pledge ul { display: grid; gap: 0; }
+  .pledge li { padding: 10px 0; border-top: 1px solid #5A554D; font-weight: 800; font-stretch: var(--head-stretch); font-size: clamp(1.1rem, 1.6vw, 1.3rem); line-height: 1.2; }
+
+  .nocookie { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px; align-items: center; padding: 18px 0; border-block: 1px solid var(--ink); }
+  .nocookie__big { font-family: var(--font-serif); font-weight: 500; font-size: clamp(1.5rem, 2.6vw, 2.1rem); line-height: 1.12; letter-spacing: -.01em; max-width: 24ch; }
+  .nocookie :global(.nocookie__sticker .placard__text) { max-width: 11ch; }
+  @media (max-width: 640px) {
+    .nocookie { grid-template-columns: 1fr; }
+    .keep tbody th { width: auto; }
+    .proc thead { display: none; }
+    .proc table, .proc tbody, .proc tr, .proc th, .proc td { display: block; width: auto; }
+    .proc tr { padding: 12px 0; border-bottom: 1px solid var(--line-soft); }
+    .proc tbody th, .proc td { padding: 0; border: 0; }
+    .proc tbody th { font-size: 1.02rem; }
+    .proc td + td { margin-top: 4px; font-size: .85rem; font-weight: 700; color: var(--ink-soft); }
+    .proc td + td::before { content: 'Where: '; font-weight: 500; }
+    .proc tr:first-child { border-top: 3px solid var(--ink); }
+  }
+</style>
