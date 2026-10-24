@@ -130,14 +130,14 @@ async function makeTones(list) {
     const pending = Object.keys(TONES).filter((tone) => !existsSync(join(TONES_OUT, `${p.id}--${tone}.jpg`)));
     if (!pending.length) continue;
     const { data, info } = await sharp(join(OUT, p.file))
-      .resize({ width: 1600, height: 1600, fit: 'inside', withoutEnlargement: true })
+      .resize({ width: 1600, height: 1600, fit: 'inside', withoutEnlargement: true, fastShrinkOnLoad: true })
       .removeAlpha().greyscale().normalise({ lower: 1, upper: 99 }).raw().toBuffer({ resolveWithObject: true });
     const px = info.width * info.height, step = info.channels;
     for (const tone of pending) {
       const lut = luts[tone], out = Buffer.alloc(px * 3);
       for (let i = 0; i < px; i++) { const g = data[i * step]; out[i * 3] = lut[g * 3]; out[i * 3 + 1] = lut[g * 3 + 1]; out[i * 3 + 2] = lut[g * 3 + 2]; }
       await sharp(out, { raw: { width: info.width, height: info.height, channels: 3 } })
-        .jpeg({ quality: 80, mozjpeg: true }).toFile(join(TONES_OUT, `${p.id}--${tone}.jpg`));
+        .jpeg({ quality: 84 }).toFile(join(TONES_OUT, `${p.id}--${tone}.jpg`)); // plain libjpeg: ~4× faster than mozjpeg; Astro re-encodes anyway
       made++;
     }
   }

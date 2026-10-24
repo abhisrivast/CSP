@@ -36,7 +36,8 @@ const style = [aspect && `--aspect:${aspect}`, position && `--pos:${position}`, 
       alt={alt ?? meta.alt}
       widths={widths.filter((w) => w <= src.width)}
       sizes={sizes}
-      formats={['avif', 'webp']}
+      formats={['avif']}
+      fallbackFormat="webp"
       quality={tone === 'natural' ? 62 : 55}
       loading={priority ? 'eager' : 'lazy'}
       fetchpriority={priority ? 'high' : 'auto'}
