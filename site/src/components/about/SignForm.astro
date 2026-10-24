@@ -1,0 +1,117 @@
+---
+// "Sign the manifesto" (Netlify Forms). DPDP-aligned: age band first, minimum data, separate unticked
+// newsletter opt-in, a required consent line (research/india-compliance.md §11.2) and a plain notice.
+// Under-18s see a note instead of the rest of the form (CSS :has, plus a submit guard in JS).
+import { MANIFESTO_VERSION, MANIFESTO_DATE } from './manifesto';
+const p = 'sign';
+---
+<form class="sign" name="manifesto-sign" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field" data-sign-form>
+  <input type="hidden" name="form-name" value="manifesto-sign" />
+  <input type="hidden" name="manifesto_version" value={MANIFESTO_VERSION} />
+  <input type="hidden" name="notice_version" value={`manifesto-sign-notice-${MANIFESTO_DATE}`} />
+  <p class="visually-hidden"><label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+
+  <div class="field sign__age">
+    <label for={`${p}-age`}>First, how old are you?</label>
+    <select class="select" id={`${p}-age`} name="age_band" required aria-describedby={`${p}-age-hint`}>
+      <option value="">Choose one</option>
+      <option value="under-13">Under 13</option>
+      <option value="13-17">13 to 17</option>
+      <option value="18-24">18 to 24</option>
+      <option value="25-34">25 to 34</option>
+      <option value="35-plus">35 or older</option>
+    </select>
+    <p class="hint" id={`${p}-age-hint`}>We ask this first because signing needs you to be 18 or over, or to have a parent's consent.</p>
+  </div>
+
+  <div class="sign__minor" role="status" tabindex="-1">
+    <p class="sign__minor-title">You're under 18, so you can't sign here yet.</p>
+    <p>Signing needs a parent or guardian's consent, and we don't have a way to collect that safely yet. You can still do the part that matters most: read the manifesto, share it, and argue about it with your friends.</p>
+    <p><a href="/resources/">Start with our free guides</a> · <a href="#share">Share the manifesto</a></p>
+  </div>
+
+  <div class="sign__rest">
+    <div class="sign__row">
+      <div class="field">
+        <label for={`${p}-name`}>First name <span class="opt">(optional)</span></label>
+        <input class="input" id={`${p}-name`} name="first_name" autocomplete="given-name" maxlength="60" />
+      </div>
+      <div class="field">
+        <label for={`${p}-city`}>City or town <span class="opt">(optional)</span></label>
+        <input class="input" id={`${p}-city`} name="city" autocomplete="address-level2" maxlength="80" />
+      </div>
+      <div class="field">
+        <label for={`${p}-state`}>State or UT <span class="opt">(optional)</span></label>
+        <input class="input" id={`${p}-state`} name="state" autocomplete="address-level1" maxlength="80" />
+      </div>
+    </div>
+
+    <div class="field">
+      <label for={`${p}-email`}>Email <span class="opt">(optional)</span></label>
+      <input class="input" id={`${p}-email`} type="email" name="email" autocomplete="email" inputmode="email" aria-describedby={`${p}-email-hint`} />
+      <p class="hint" id={`${p}-email-hint`}>Only needed if you tick the newsletter box below.</p>
+    </div>
+
+    <label class="check">
+      <input type="checkbox" name="newsletter" value="yes" data-sign-news />
+      <span><strong>Also send me the CSP newsletter</strong> (once a month). We use your email and first name for this, and nothing else. Unsubscribe any time.</span>
+    </label>
+
+    <div class="sign__notice">
+      <p class="label">What happens to your details</p>
+      <ul>
+        <li><strong>What we collect:</strong> your age band, plus only what you choose to add above.</li>
+        <li><strong>Why:</strong> to count signatures and see where support comes from; your email is used only if you ticked the newsletter.</li>
+        <li><strong>Who sees it:</strong> the CSP team. Netlify, our website host, stores form entries for us.</li>
+        <li><strong>How long:</strong> until this consultation closes and the final version is published. After that we keep only anonymous totals. The newsletter lasts until you unsubscribe.</li>
+        <li><strong>Your control:</strong> to see, correct or delete your signature, <a href="/contact/">write to us</a>. We never publish signers' names without asking first.</li>
+      </ul>
+    </div>
+
+    <label class="check sign__consent">
+      <input type="checkbox" name="consent" value="yes" required />
+      <span>I'm signing version {MANIFESTO_VERSION} of the Fourth Wave Manifesto. I've read the <a href="/privacy/">privacy notice</a>. I understand Cultural Shock Party is an independent movement, not a registered political party, and that <strong>CSP will never share my details with any political party, candidate or advertiser.</strong></span>
+    </label>
+
+    <button class="btn" type="submit">Sign the manifesto <span class="arrow" aria-hidden="true">→</span></button>
+  </div>
+</form>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('form[data-sign-form]').forEach((form) => {
+    const age = form.elements.namedItem('age_band') as HTMLSelectElement;
+    const email = form.elements.namedItem('email') as HTMLInputElement;
+    const news = form.querySelector<HTMLInputElement>('[data-sign-news]');
+    const minor = () => age.value === 'under-13' || age.value === '13-17';
+    const sync = () => {
+      form.classList.toggle('is-minor', minor());
+      email.required = !!news?.checked;
+    };
+    age.addEventListener('change', sync);
+    news?.addEventListener('change', sync);
+    sync();
+    form.addEventListener('submit', (e) => {
+      sync();
+      if (minor()) { e.preventDefault(); form.querySelector<HTMLElement>('.sign__minor')?.focus?.(); }
+    });
+  });
+</script>
+
+<style>
+  .sign { display: grid; gap: 18px; }
+  .sign .opt { font-weight: 500; color: var(--muted); }
+  .sign__row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+  .sign .hint { color: var(--muted); }
+  .sign__minor { display: none; gap: 8px; padding: 16px 18px; background: var(--marigold); color: var(--ink); border-left: 6px solid var(--ink); }
+  .sign__minor-title { font-weight: 800; font-size: 1.05rem; }
+  .sign__minor a { color: var(--ink); font-weight: 700; }
+  .sign:has(option[value='under-13']:checked) .sign__minor, .sign:has(option[value='13-17']:checked) .sign__minor, .sign.is-minor .sign__minor { display: grid; }
+  .sign:has(option[value='under-13']:checked) .sign__rest, .sign:has(option[value='13-17']:checked) .sign__rest, .sign.is-minor .sign__rest { display: none; }
+  .sign__rest { display: grid; gap: 18px; }
+  .sign__notice { padding: 14px 16px; border: 1.5px dashed var(--ink-soft); font-size: .88rem; line-height: 1.45; }
+  .sign__notice ul { display: grid; gap: 6px; margin-top: 8px; padding-left: 1.1em; }
+  .sign__notice li::marker { color: var(--red-ink); }
+  .sign__consent { font-size: .92rem; }
+  .sign .btn { justify-self: start; }
+  @media (max-width: 640px) { .sign__row { grid-template-columns: 1fr; } }
+</style>

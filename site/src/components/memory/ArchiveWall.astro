@@ -1,0 +1,23 @@
+---
+// A masonry wall of archival objects and documentary photos: what movements leave behind.
+// Natural colour (the colour is part of the record); short true captions; full credits on /credits/.
+import Photo from '../media/Photo.astro';
+export type WallItem = { id: string; caption: string; tilt?: number };
+export interface Props { items: WallItem[] }
+const { items } = Astro.props;
+---
+<ul class="wall" role="list">
+  {items.map((it, i) => (
+    <li class:list={['wall__item', `wall__item--${(i % 4) + 1}`]}>
+      <Photo id={it.id} caption={it.caption} showCredit={false} tilt={it.tilt ?? 0} frame sizes="(min-width: 1100px) 300px, (min-width: 640px) 45vw, 90vw" widths={[320, 480, 640]} />
+    </li>
+  ))}
+</ul>
+
+<style>
+  .wall { columns: 4 240px; column-gap: clamp(18px, 2.4vw, 32px); }
+  .wall__item { break-inside: avoid; margin-bottom: clamp(22px, 3vw, 38px); }
+  .wall__item :global(figcaption) { font-size: .82rem; }
+  .wall__item :global(.photo__caption) { color: var(--ink-soft); }
+  .wall__item :global(.photo--frame .photo__img) { border-width: 8px; }
+</style>

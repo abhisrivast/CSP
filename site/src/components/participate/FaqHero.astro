@@ -1,0 +1,110 @@
+---
+// /faq/ hero: oversized headline, a quick-jump index of the five groups, and one taped, duotoned placard photo.
+import Shot from './Shot.astro';
+import Breadcrumbs from '../ui/Breadcrumbs.astro';
+import Placard from '../ui/Placard.astro';
+import Stamp from '../ui/Stamp.astro';
+
+export interface Props {
+  crumbs: { name: string; href: string }[];
+  groups: { id: string; n: string; title: string; count: number }[];
+  total: number;
+  updated: string;
+}
+const { crumbs, groups, total, updated } = Astro.props;
+---
+<section class="fhero grain" aria-labelledby="faq-title">
+  <div class="wrap fhero__inner">
+    <Breadcrumbs items={crumbs} />
+    <div class="fhero__text">
+      <p class="label-row label"><span class="fhero__kicker">FAQ</span><span>{total} answers</span></p>
+      <h1 class="fhero__title" id="faq-title">FAQ: <span class="red">straight</span> answers</h1>
+      <p class="lead fhero__lead">Is Cultural Shock Party a political party? Who funds it? Can boys join? The short answer comes first, every time. The receipts come right after.</p>
+      <p class="label fhero__updated">Checked and updated {updated}</p>
+    </div>
+
+    <div class="fhero__art">
+      <Shot
+        id="060-armed-with-a-mind-sign"
+        tone="ink"
+        aspect="5 / 4"
+        position="50% 45%"
+        priority
+        caption={false}
+        tape="both"
+        tilt={2}
+        alt="A hand holds up a cardboard placard, lettered in black marker: Armed with a mind."
+        sizes="(min-width: 900px) 34vw, 86vw"
+        widths={[420, 640, 900]}
+      />
+      <div class="fhero__sticker">
+        <Placard shape="sticker" color="marigold" size="m" tilt={-7} decorative><span lang="hi">सवाल पूछो</span> · ask away</Placard>
+      </div>
+      <span class="fhero__stamp"><Stamp text="Receipts" sub="Every number" color="red" tilt={-10} /></span>
+    </div>
+
+    <nav class="fjump" aria-label="Question groups">
+      <ol role="list">
+        {groups.map((g) => (
+          <li>
+            <a href={`#${g.id}`}>
+              <span class="fjump__n" aria-hidden="true">{g.n}</span>
+              <span class="fjump__t">{g.title}</span>
+              <span class="fjump__c label">{g.count} <span class="visually-hidden">questions</span><span aria-hidden="true">Qs</span></span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<style>
+  .fhero { padding-block: clamp(24px, 4vw, 44px) clamp(40px, 6vw, 72px); border-bottom: var(--rule); overflow: hidden; }
+  .fhero__inner {
+    position: relative; z-index: 2; display: grid; gap: 22px clamp(24px, 4vw, 56px);
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    grid-template-areas: 'crumbs crumbs' 'text art' 'jump jump';
+    align-items: center;
+  }
+  .fhero :global(.crumbs) { grid-area: crumbs; }
+  .fhero__text { grid-area: text; display: grid; gap: 20px; position: relative; z-index: 3; }
+  .fhero__kicker { color: var(--red-ink); }
+  .fhero__title {
+    font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; letter-spacing: -.015em;
+    font-size: clamp(4.7rem, 10.4vw, 10.25rem); line-height: .84; max-width: 9ch; margin-right: -12%;
+  }
+  .fhero__lead { max-width: 40ch; color: var(--ink-soft); }
+  .fhero__art { grid-area: art; position: relative; padding: 18px 10px 26px; }
+  .fhero__sticker { position: absolute; left: -6%; bottom: 0; z-index: 3; }
+  .fhero__sticker :global(.placard__text) { font-size: clamp(1.2rem, 2vw, 1.6rem); }
+  .fhero__stamp { position: absolute; right: -2%; top: -4px; z-index: 3; background: var(--paper); padding: 4px; }
+  .fhero__stamp :global(.stamp__text) { font-size: 1.35rem; }
+  .fhero__stamp :global(.stamp__sub) { font-size: .7rem; }
+  .fhero__updated { color: var(--muted); }
+
+  .fjump { grid-area: jump; margin-top: clamp(8px, 2vw, 24px); }
+  .fjump ol { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: var(--rule); border-bottom: var(--rule); }
+  .fjump li + li { border-left: 1px solid var(--line); }
+  .fjump a {
+    display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; gap: 2px 12px; align-items: end;
+    min-height: 100%; padding: 16px clamp(10px, 1.4vw, 18px) 16px; color: var(--ink); text-decoration: none;
+    transition: background .15s var(--ease);
+  }
+  .fjump li:first-child a { padding-left: 0; }
+  .fjump a:hover { background: var(--paper-light); }
+  .fjump__n { grid-row: 1 / 3; font-weight: 900; font-stretch: var(--display-stretch); font-size: clamp(2.2rem, 3.4vw, 3.1rem); line-height: .8; color: var(--red); }
+  .fjump__t { font-weight: 800; font-stretch: var(--head-stretch); font-size: clamp(1.02rem, 1.3vw, 1.2rem); line-height: 1.05; text-wrap: balance; }
+  .fjump__c { color: var(--muted); }
+  .fjump a:hover .fjump__t { text-decoration: underline; text-decoration-color: var(--red); text-decoration-thickness: 3px; text-underline-offset: .15em; }
+
+  @media (max-width: 900px) {
+    .fhero__inner { grid-template-columns: 1fr; grid-template-areas: 'crumbs' 'text' 'art' 'jump'; }
+    .fhero__title { margin-right: 0; }
+    .fhero__art { max-width: 520px; width: 92%; justify-self: center; }
+    .fjump ol { grid-template-columns: 1fr; }
+    .fjump li + li { border-left: 0; border-top: 1px solid var(--line); }
+    .fjump a, .fjump li:first-child a { padding: 14px 0; grid-template-columns: 3.2rem 1fr auto; grid-template-rows: auto; align-items: center; }
+    .fjump__n { grid-row: auto; font-size: 2.2rem; }
+  }
+</style>

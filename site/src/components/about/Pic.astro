@@ -1,0 +1,60 @@
+---
+// Wraps the shared Photo with an honest short caption and a clean credit line.
+// Real-event photos: pass a short, true caption (what / where / when from the registry).
+// Stock photos: pass caption={false}; their credit then lives on /credits/.
+import Photo from '../media/Photo.astro';
+import { photoMeta, type Tone } from '../../lib/photos';
+
+export interface Props {
+  id: string;
+  tone?: Tone;
+  alt?: string;
+  caption?: string | false;
+  credit?: boolean;
+  aspect?: string;
+  position?: string;
+  widths?: number[];
+  sizes?: string;
+  tape?: 'tl' | 'tr' | 'both' | false;
+  tilt?: number;
+  frame?: boolean;
+  priority?: boolean;
+  class?: string;
+}
+const {
+  id, tone = 'red', alt, caption = false, credit = true, aspect, position, tape = false, tilt = 0, frame = false, priority = false,
+  widths = [360, 560, 800], sizes = '(min-width: 1100px) 30vw, (min-width: 760px) 44vw, 92vw', class: cls,
+} = Astro.props;
+
+const meta = photoMeta(id);
+// Registry credits mix "Photo: X" and "Photo by X"; strip the prefix and the bare licence URL.
+const clean = meta.credit
+  .replace(/^Photo:\s*/i, '')
+  .replace(/\s*\(https?:[^)]*\)/g, '')
+  .replace(/\.$/, '');
+const creditText = /^photo by/i.test(clean) ? clean : `Photo: ${clean}`;
+const [before, after] = meta.licence && creditText.includes(meta.licence) ? creditText.split(meta.licence) : [creditText, undefined];
+const showCap = caption !== false;
+---
+<div class:list={['pic', cls]}>
+  <Photo id={id} tone={tone} alt={alt} caption={false} aspect={aspect} position={position} widths={widths} sizes={sizes} tape={tape} tilt={tilt} frame={frame} priority={priority} />
+  {showCap && (
+    <p class="pic__cap">
+      <span class="pic__text">{caption}</span>
+      {credit && (
+        <span class="pic__credit">{before}{after !== undefined && <><a href={meta.licenceUrl} rel="noopener license">{meta.licence}</a>{after}</>}</span>
+      )}
+    </p>
+  )}
+</div>
+
+<style>
+  .pic { display: grid; gap: 10px; align-content: start; }
+  /* Shared Photo only stretches <picture> to the aspect box when taped; do it for every fixed-aspect photo. */
+  .pic :global(.photo--fixed .photo__img picture) { display: block; height: 100%; }
+  .pic__cap { display: grid; gap: 2px; font-size: .84rem; line-height: 1.38; max-width: 52ch; }
+  .pic__text { color: var(--text); font-weight: 600; }
+  .pic__credit { color: var(--ink-soft); font-size: .74rem; }
+  :global(.ground-pink) .pic__credit { color: var(--muted); }
+  .pic__credit a { color: inherit; }
+</style>

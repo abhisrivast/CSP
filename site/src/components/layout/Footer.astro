@@ -1,0 +1,66 @@
+---
+import { Image } from 'astro:assets';
+import badge from '../../assets/brand/csp-badge.png';
+import NewsletterForm from '../blocks/NewsletterForm.astro';
+import { FOOTER_NAV, SITE, liveSocials } from '../../data/site';
+
+const year = new Date().getFullYear();
+---
+<footer class="site-footer ground-ink grain">
+  <div class="wrap">
+    <div class="slogan">
+      <p class="h-hero" aria-hidden="true">The next wave<br /><span class="red">is ours</span> to build.</p>
+      <Image src={badge} alt="Cultural Shock Party badge: a woman breaking a chain above a crowd of marchers" width={200} height={200} densities={[1, 2]} class="slogan__badge" />
+    </div>
+
+    <div class="cols">
+      <section class="col col--news" aria-labelledby="news-title">
+        <h2 id="news-title" class="h3">Get the monthly receipts</h2>
+        <p class="small muted">One email a month: what we researched, what changed, and where to show up. No spam, unsubscribe any time.</p>
+        <NewsletterForm id="footer" />
+      </section>
+
+      {FOOTER_NAV.map((group) => (
+        <nav class="col" aria-label={group.title}>
+          <h2 class="label">{group.title}</h2>
+          <ul role="list">
+            {group.items.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+          </ul>
+        </nav>
+      ))}
+    </div>
+
+    <hr class="rule--thin" />
+
+    <div class="base">
+      <p class="small">{SITE.name} is a {SITE.descriptor}. {SITE.baseLine}.</p>
+      {liveSocials().length > 0 && <p class="label">{liveSocials().map((s) => <a href={s.href} rel="me noopener">{s.label}</a>)}</p>}
+      <p class="small muted">© {year} {SITE.name}. Words licensed CC BY-SA 4.0 unless noted; photos belong to their credited authors.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer { padding-block: clamp(3.5rem, 8vw, 6rem) 7rem; position: relative; z-index: 0; }
+  .site-footer > .wrap { position: relative; z-index: 2; }
+  .slogan { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 24px; padding-bottom: clamp(2.5rem, 6vw, 4.5rem); border-bottom: 3px solid var(--paper); }
+  .slogan .h-hero { font-size: clamp(3.2rem, 11vw, 10rem); }
+  .slogan__badge { width: clamp(110px, 16vw, 200px); height: auto; transform: rotate(8deg); }
+  .cols { display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: 36px; padding-block: 44px; }
+  .col ul { display: grid; gap: 10px; margin-top: 14px; }
+  .col a { color: var(--paper); text-decoration: none; font-weight: 600; }
+  .col a:hover { color: var(--coral); text-decoration: underline; }
+  .col--news .h3 { font-size: 1.7rem; }
+  .col--news p { margin-block: 10px 16px; max-width: 44ch; }
+  .base { display: grid; gap: 10px; padding-top: 24px; }
+  .base a { color: var(--paper); margin-right: 16px; }
+  hr { border-color: rgba(243, 236, 220, .35); }
+  @media (max-width: 900px) {
+    .cols { grid-template-columns: 1fr 1fr; }
+    .col--news { grid-column: 1 / -1; }
+  }
+  @media (max-width: 520px) {
+    .slogan { grid-template-columns: 1fr; }
+    .slogan__badge { justify-self: end; margin-top: -40px; }
+  }
+</style>

@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import Placard from '../components/ui/Placard.astro';
+import ShareBar from '../components/blocks/ShareBar.astro';
+---
+<Base title="Thank you" description="Your message reached Cultural Shock Party. Here is what happens next, and three things you can do right now." noindex>
+  <section class="section grain thanks">
+    <div class="wrap thanks__inner">
+      <div class="stack" style="--flow: 1.2rem">
+        <p class="label red-ink">Received</p>
+        <h1 class="h1">You're in. <span class="red">Thank you.</span></h1>
+        <p class="lead">We read everything that comes in. If you asked us something, a human will reply. If you signed up, your first email arrives with our next monthly receipts.</p>
+        <p class="small muted">Under 18? We don't keep sign-ups from under-18s without a parent's consent, so we'll delete it and you won't hear from us. Everything on this site is free to read without signing up.</p>
+        <h2 class="h3">Three things you can do right now</h2>
+        <ol class="thanks__list">
+          <li><a href="/manifesto/">Read the manifesto</a> and add your name.</li>
+          <li><a href="/resources/">Pick one guide</a> and send it to your group chat.</li>
+          <li><a href="/join/">Choose your rung</a> on the ladder, from five minutes on your phone to organising in your city.</li>
+        </ol>
+        <ShareBar title="Cultural Shock Party: building the Fourth Wave" path="/" text="I just joined Cultural Shock Party, a Fourth Wave feminist movement. Bring a friend (yes, boys too)" />
+      </div>
+      <Placard text="Welcome to the wave" color="marigold" size="l" tilt={-5} stick decorative />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .thanks__inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; align-items: center; }
+  .thanks__list { padding-left: 1.3em; display: grid; gap: .5em; font-size: 1.1rem; }
+  .thanks__list li::marker { color: var(--red); font-weight: 900; }
+  @media (max-width: 760px) { .thanks__inner { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,43 @@
+{
+  "id": "03-shock-venus",
+  "name": "Shock Venus",
+  "idea": "A heavy Venus sign whose cross has turned into a single lightning bolt: the bolt's horizontal jog is the Venus crossbar. You can draw it in two strokes, a circle and a zigzag.",
+  "rationale": "CSP needs one symbol that works on a flag, a stencil, a wall and a ballot. A Venus everyone already reads, charged with a shock, says 'feminism with power' in one shape and points at the 'Shock' in the name. The monoline is built with care: one stroke weight matched to Archivo Black's stems, a point-symmetric bolt with parallel 33-degree legs, jog points flush with the ring's width, and a filleted junction so it reads as one stroke. In the primary lockup the bolt strikes down beside a red SHOCK, so the symbol and the name explain each other. The stacked alt is the justified poster block from the reference's protest-print world.",
+  "fonts": ["ArchivoBlack-400 (wordmark, outlined)", "SpaceGrotesk-500 (corner captions in textured.svg only, outlined)"],
+  "colors": ["#CB3932", "#221F1D", "#F6EEDD"],
+  "files": [
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/03-shock-venus/primary.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/03-shock-venus/alt.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/03-shock-venus/mark.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/03-shock-venus/reverse.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/03-shock-venus/mono.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/03-shock-venus/textured.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/03-shock-venus/primary.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/03-shock-venus/primary-sheet.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/03-shock-venus/mark-sheet.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/03-shock-venus/alt.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/03-shock-venus/reverse.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/03-shock-venus/mono.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/03-shock-venus/textured.png"
+  ],
+  "associationsChecked": "BUF flash-and-circle and the Singapore PAP: the bolt hangs below the ring, attached at its base. It is never inside a circle and never crosses one. SS / sig runes: there is one bolt, never doubled. Its middle stroke is a horizontal jog (the crossbar), not the rune's steep diagonal. The shape has only 180-degree point symmetry, with no 4-fold rotation, so it cannot be turned into anything swastika-like. Poland's Strajk Kobiet: their mark is a filled, freestanding red bolt. Ours is a monoline bolt fused into a Venus ring, so the overlap is the idea, not the drawing. Rule: never use the bolt on its own. Indian election symbols (hand, lotus, broom, elephant, bicycle, hammer-sickle, etc.), the Labour rose and the US donkey/elephant: nothing alike. It is not the cliche of a Venus with a fist inside, and it is not pink. Also noted: at a glance it could read as a balloon on a zigzag string. Mild, and arguably a harmless 'party' pun. Not checked: an exhaustive trademark search. Venus-plus-bolt graphics exist in generic feminist merch, so a legal clearance search is still needed.",
+  "strengths": [
+    "One idea, not two glued together: the bolt's jog does double duty as the Venus crossbar.",
+    "Two strokes by hand (a circle and a zigzag), so it can be stencilled, spray-painted or chalked, and drawn freehand at a rally.",
+    "Geometry is controlled: one stroke weight (44 units on a 200 ring), a 41-unit horizontal for optical balance, parallel 33-degree legs, jog points solved to sit flush with the ring (+1% overshoot), and a fillet on the concave junction.",
+    "The mark's stroke matches Archivo Black's stem at lockup size, so the symbol and wordmark read as one family. The ring sits against CULTURAL and the bolt strikes beside a red SHOCK.",
+    "Reads as a Venus at 16px. The zigzag is clear from 24-32px. The header lockup stays legible at 28px tall.",
+    "Holds up in one colour, in reverse on ink, and as a worn screenprint (textured.svg). It feels like protest print, not a corporate logo."
+  ],
+  "weaknesses": [
+    "At 16px the bolt reduces to a kinked stem: it reads as 'Venus', but the electric idea only shows from about 24px up.",
+    "The red bolt sits in visual territory shared with Strajk Kobiet, and Venus-plus-bolt is not unheard of in feminist merch. Ownership depends on this exact geometry and on never showing the bolt alone.",
+    "The mark is tall and narrow (about 1.8:1), so square avatars and favicons leave empty side space. A dedicated app-icon tile (the mark on a red or ink square) would be stronger.",
+    "The red mark disappears on red grounds and is only medium contrast on ink (about 3.2:1). A paper or ink version is needed on red.",
+    "The wordmark is plain Archivo Black in caps: confident and credible, but not custom. In the two-line header lockup the caps are only about 10-11px tall at 28px, which is legible but tight.",
+    "In the stacked alt, PARTY is tracked about 0.085em wider than SHOCK to justify the block. A trained eye will see the rhythm change.",
+    "The junction is asymmetric by design: a crisp convex shoulder on the left, a fillet on the right. At poster scale some people may read that as a flaw.",
+    "The master marks are clean geometry. The handmade, dry-brush side of the reference only appears in the textured version."
+  ],
+  "iterations": 7
+}

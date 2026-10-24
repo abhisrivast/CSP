@@ -1,0 +1,113 @@
+---
+// One manifesto clause: giant numeral, title, short argument, evidence aside, research link and a copy-link control.
+import { pad, clauseId } from './manifesto';
+
+export interface Props {
+  n: number;
+  title: string;
+  research: { href: string; label: string }[];
+  ground?: 'paper' | 'light' | 'ink' | 'pink' | 'deep';
+  wideAside?: boolean;
+}
+const { n, title, research, ground = 'paper', wideAside = false } = Astro.props;
+const id = clauseId(n);
+const hasAside = Astro.slots.has('aside');
+---
+<section class:list={['clause', `ground-${ground}`, { 'clause--wide': wideAside, 'clause--solo': !hasAside }]} id={id} aria-labelledby={`${id}-title`}>
+  <div class="wrap clause__grid">
+    <p class="clause__n" aria-hidden="true"><span>{pad(n)}</span></p>
+    <div class="clause__body">
+      <p class="label clause__kicker"><span class="clause__kicker-n">Clause {pad(n)}</span> <span aria-hidden="true">/ 12</span></p>
+      <h2 class="clause__title" id={`${id}-title`}><span class="visually-hidden">Clause {n}: </span>{title}</h2>
+      <div class="clause__text prose"><slot /></div>
+      <div class="clause__foot">
+        <div class="clause__research">
+          <p class="label">Read the research behind this</p>
+          <ul role="list">
+            {research.map((r) => <li><a class="link-arrow" href={r.href}>{r.label}{'\u00a0'}<span aria-hidden="true">→</span></a></li>)}
+          </ul>
+        </div>
+        <a class="clause__copy" href={`#${id}`} data-copy-clause>
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1" /><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1" /></svg>
+          <span class="clause__copy-label">Copy link<span class="visually-hidden"> to clause {n}</span></span>
+        </a>
+      </div>
+    </div>
+    {hasAside && <div class="clause__aside"><slot name="aside" /></div>}
+  </div>
+</section>
+
+<script>
+  // Copy a shareable link to one clause. Without JS the link still jumps to the clause, so the URL can be copied by hand.
+  document.querySelectorAll<HTMLAnchorElement>('[data-copy-clause]').forEach((a) => {
+    a.addEventListener('click', async (e) => {
+      const url = `${location.origin}${location.pathname}${a.getAttribute('href')}`;
+      const label = a.querySelector<HTMLElement>('.clause__copy-label');
+      try {
+        await navigator.clipboard.writeText(url);
+        e.preventDefault();
+        history.replaceState(null, '', a.getAttribute('href'));
+        if (label) {
+          const old = label.innerHTML;
+          label.textContent = 'Link copied';
+          a.classList.add('is-copied');
+          setTimeout(() => { label.innerHTML = old; a.classList.remove('is-copied'); }, 2200);
+        }
+      } catch { /* fall back to normal anchor navigation */ }
+    });
+  });
+</script>
+
+<style>
+  .clause { padding-block: clamp(3.5rem, 8vw, 6.5rem); border-top: var(--rule); scroll-margin-top: 70px; overflow-x: clip; }
+  .clause__grid { display: grid; grid-template-columns: minmax(0, 2.3fr) minmax(0, 6fr) minmax(0, 4fr); gap: clamp(20px, 3.4vw, 52px); align-items: start; }
+  .clause--wide .clause__grid { grid-template-columns: minmax(0, 2.3fr) minmax(0, 5.2fr) minmax(0, 4.8fr); }
+  .clause--solo .clause__grid { grid-template-columns: minmax(0, 2.3fr) minmax(0, 7fr) minmax(0, 3fr); }
+  .clause__n { position: sticky; top: 96px; line-height: .78; }
+  .clause__n span {
+    display: block; font-weight: 900; font-stretch: 62%; font-size: clamp(6rem, 11.5vw, 11.5rem); letter-spacing: -.03em;
+    color: transparent; -webkit-text-stroke: 3px var(--red);
+  }
+  :global(.ground-ink) .clause__n span { -webkit-text-stroke-color: var(--coral); }
+  :global(.ground-pink) .clause__n span { -webkit-text-stroke-color: var(--red-ink); }
+  .clause__body { display: grid; gap: 18px; min-width: 0; }
+  .clause__kicker-n { color: var(--red-ink); }
+  :global(.ground-ink) .clause__kicker-n { color: var(--coral); }
+  :global(.ground-pink) .clause__kicker-n { color: var(--ink); }
+  .clause__title {
+    font-weight: 900; font-stretch: 62%; text-transform: uppercase; line-height: .88; letter-spacing: -.01em;
+    font-size: clamp(2.5rem, 5.4vw, 4.6rem); text-wrap: balance; max-width: 13ch;
+  }
+  .clause__text { max-width: 58ch; }
+  .clause__text :global(p:first-child) { font-size: 1.12em; line-height: 1.5; }
+  .clause__foot { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 18px 28px; margin-top: 8px; padding-top: 18px; border-top: 1px solid var(--line); }
+  .clause__research { display: grid; gap: 10px; }
+  .clause__research ul { display: flex; flex-wrap: wrap; gap: 10px 24px; }
+  .clause__research .link-arrow { display: inline; font-size: .95rem; line-height: 1.6; }
+  :global(.ground-ink) .clause__research .link-arrow { color: var(--paper); border-color: var(--coral); }
+  .clause__copy {
+    display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; border: 2px solid currentColor;
+    color: var(--text); font-weight: 750; font-size: .88rem; text-decoration: none; background: transparent; white-space: nowrap;
+  }
+  .clause__copy:hover, .clause__copy.is-copied { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  :global(.ground-ink) .clause__copy:hover, :global(.ground-ink) .clause__copy.is-copied { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+  .clause__aside { display: grid; gap: 28px; min-width: 0; padding-top: clamp(0px, 4vw, 54px); }
+  .clause:target .clause__title { text-decoration: underline; text-decoration-color: var(--marigold); text-decoration-thickness: .12em; text-underline-offset: .12em; }
+
+  @media (max-width: 1000px) {
+    .clause__grid, .clause--wide .clause__grid, .clause--solo .clause__grid { grid-template-columns: minmax(0, 1.4fr) minmax(0, 6fr); }
+    .clause__aside { grid-column: 2; padding-top: 0; max-width: 560px; }
+  }
+  @media (max-width: 700px) {
+    .clause__grid, .clause--wide .clause__grid, .clause--solo .clause__grid { grid-template-columns: 1fr; gap: 14px; }
+    .clause__n { position: static; }
+    .clause__n span { font-size: clamp(5rem, 28vw, 7.5rem); -webkit-text-stroke-width: 2.5px; }
+    .clause__aside { grid-column: auto; margin-top: 18px; }
+    .clause__title { font-size: clamp(2.3rem, 11vw, 3.2rem); }
+  }
+  @media print {
+    .clause { padding-block: 1.2rem; break-inside: avoid; background: #fff !important; color: #000 !important; }
+    .clause__n { position: static; }
+    .clause__copy, .clause__aside :global(.pic) { display: none !important; }
+  }
+</style>

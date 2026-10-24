@@ -1,0 +1,76 @@
+---
+// <head> contents for every page: title, description, canonical, Open Graph, Twitter, JSON-LD, icons, fonts.
+import archivoLatin from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
+import { SITE } from '../../data/site';
+import { abs, graph, webPageNode, breadcrumbNode } from '../../lib/schema';
+
+export interface Props {
+  title: string;              // page title without the site suffix
+  description: string;        // 140–160 chars, answer-first
+  path?: string;              // defaults to the current URL path
+  image?: string;             // absolute path under /, 1200×630
+  imageAlt?: string;
+  type?: 'website' | 'article' | 'profile';
+  pageType?: string;          // schema.org WebPage subtype (AboutPage, ContactPage, CollectionPage, FAQPage, ProfilePage…)
+  published?: string;         // ISO date
+  modified?: string;
+  author?: string;
+  tags?: string[];
+  noindex?: boolean;
+  breadcrumbs?: { name: string; href: string }[];
+  schema?: object[];          // extra JSON-LD nodes
+  titleRaw?: boolean;         // use title as-is (home page)
+}
+
+const p = Astro.props;
+const path = p.path ?? Astro.url.pathname;
+const canonical = abs(path);
+const fullTitle = p.titleRaw ? p.title : `${p.title} | ${SITE.name}`;
+const ogImage = abs(p.image ?? '/og/default.png');
+const ogAlt = p.imageAlt ?? `${SITE.name}: ${SITE.descriptor}`;
+
+const nodes: object[] = [
+  webPageNode({ path, title: fullTitle, description: p.description, type: p.pageType, image: p.image ?? '/og/default.png', breadcrumb: !!p.breadcrumbs?.length, dateModified: p.modified }),
+  ...(p.breadcrumbs?.length ? [breadcrumbNode(path, [{ name: 'Home', href: '/' }, ...p.breadcrumbs])] : []),
+  ...(p.schema ?? []),
+];
+const jsonLd = JSON.stringify(graph(nodes)).replace(/</g, '\\u003c');
+---
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{fullTitle}</title>
+<meta name="description" content={p.description} />
+<link rel="canonical" href={canonical} />
+{p.noindex && <meta name="robots" content="noindex, follow" />}
+<meta name="theme-color" content={SITE.themeColor} />
+<meta name="color-scheme" content="light" />
+
+<link rel="preload" href={archivoLatin} as="font" type="font/woff2" crossorigin />
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="alternate" type="application/rss+xml" title={`${SITE.name}: Resources`} href="/rss.xml" />
+
+<meta property="og:site_name" content={SITE.name} />
+<meta property="og:locale" content={SITE.locale} />
+<meta property="og:type" content={p.type ?? 'website'} />
+<meta property="og:title" content={p.titleRaw ? p.title : p.title} />
+<meta property="og:description" content={p.description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={ogAlt} />
+{p.published && <meta property="article:published_time" content={p.published} />}
+{p.modified && <meta property="article:modified_time" content={p.modified} />}
+{p.author && <meta property="article:author" content={p.author} />}
+{p.tags?.map((t) => <meta property="article:tag" content={t} />)}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={p.title} />
+<meta name="twitter:description" content={p.description} />
+<meta name="twitter:image" content={ogImage} />
+<meta name="twitter:image:alt" content={ogAlt} />
+
+<script type="application/ld+json" set:html={jsonLd} />

@@ -1,0 +1,222 @@
+---
+// /resources/glossary/ — the feminist glossary: plain-language definitions (reading age 12–14), Hindi where common,
+// an example, see-also links and the source each definition is paraphrased from. DefinedTermSet schema.
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/blocks/PageHero.astro';
+import Photo from '../../components/media/Photo.astro';
+import Placard from '../../components/ui/Placard.astro';
+import Card from '../../components/blocks/Card.astro';
+import JoinBand from '../../components/blocks/JoinBand.astro';
+import { definedTermSetNode } from '../../lib/schema';
+import { getArticles, readingMinutes } from '../../components/resources/lib';
+
+const terms = (await getCollection('glossary')).sort((a, b) => a.data.term.localeCompare(b.data.term, 'en'));
+const byId = new Map(terms.map((t) => [t.id, t]));
+const letterOf = (t: string) => t.trim()[0].toUpperCase();
+const groups = new Map<string, typeof terms>();
+for (const t of terms) {
+  const l = letterOf(t.data.term);
+  groups.set(l, [...(groups.get(l) ?? []), t]);
+}
+const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+const letters = [...groups.keys()];
+
+// Photo interludes between letter groups (illustrative stock photos, no captions; credits on /credits/).
+const INTERLUDES: Record<string, { id: string; tone: 'red' | 'ink' | 'green' | 'pink' | 'marigold'; line: string; hand: string }> = {
+  D: { id: '077-zines-on-a-table', tone: 'marigold', line: 'Learn one word today. Teach it to someone tomorrow.', hand: 'that\'s how ideas travel' },
+  M: { id: '091-pavement-feminist-stencils', tone: 'red', line: 'Naming a thing is the first step to changing it.', hand: 'say it out loud' },
+  S: { id: 'in-053-greater-noida-student-studying-in-library', tone: 'green', line: 'No question is too basic. Everyone started somewhere.', hand: 'start where you are' },
+};
+// Each interlude sits after the first group at or beyond its letter.
+const interludeAfter = new Map<string, (typeof INTERLUDES)[string]>();
+for (const [key, val] of Object.entries(INTERLUDES)) {
+  const host = letters.find((l) => l >= key);
+  if (host && !interludeAfter.has(host)) interludeAfter.set(host, val);
+}
+
+const articles = await getArticles();
+const READ_IDS = ['what-is-fourth-wave-feminism', 'intersectional-feminism-explained', 'feminism-myths-and-receipts', 'boys-men-and-the-manosphere'];
+const reads = READ_IDS.map((id) => articles.find((a) => a.id === id)).filter(Boolean) as typeof articles;
+
+const path = '/resources/glossary/';
+const title = 'Feminist glossary: plain words, no jargon';
+const description = `What does intersectionality mean? What is patriarchy, POSH or consent? ${terms.length} feminist terms explained in plain words, with Hindi, examples and sources.`;
+const schema = [definedTermSetNode(path, 'Feminist glossary (Cultural Shock Party)', terms.map((t) => ({ id: t.id, term: t.data.term, definition: t.data.definition })))];
+const hindiCount = terms.filter((t) => t.data.hindi).length;
+---
+<Base title={title} description={description} pageType="CollectionPage" breadcrumbs={[{ name: 'Resources', href: '/resources/' }, { name: 'Glossary', href: path }]} schema={schema} image="/og/glossary.png" bodyClass="page-glossary">
+  <PageHero
+    label="The glossary"
+    title="Feminist glossary"
+    lead="Jargon keeps people out. Here are the words you'll hear in feminist debates, explained the way a friend would, with an example and the source we checked."
+    crumbs={[{ name: 'Resources', href: '/resources/' }, { name: 'Glossary', href: path }]}
+    photo="in-052-west-bengal-woman-eyes-over-bengali-book"
+    tone="pink"
+    meta={[`${terms.length} terms`, `${hindiCount} in Hindi too`, 'Checked 24 Oct 2026']}
+  >
+    <div class="g-hero__extra">
+      <Placard shape="tape" color="marigold" tilt={-2} size="s"><span lang="hi">शब्द मायने रखते हैं</span> / words matter</Placard>
+    </div>
+  </PageHero>
+
+  <nav class="az" aria-label="Glossary, A to Z">
+    <div class="wrap az__inner">
+      <p class="label az__label" aria-hidden="true">Jump to</p>
+      <ol class="az__list" role="list">
+        {ALPHABET.map((l) => (
+          <li>{groups.has(l) ? <a href={`#letter-${l.toLowerCase()}`}>{l}</a> : <span class="az__off" aria-hidden="true">{l}</span>}</li>
+        ))}
+      </ol>
+    </div>
+  </nav>
+
+  <div class="g-body">
+    <div class="wrap">
+      <p class="g-note small">Every definition is our plain-language summary of the source linked on its card. These are explainers, not legal definitions, and nothing here is legal advice. Spotted something to fix? <a href="/contact/">Tell us</a>.</p>
+
+      {[...groups.entries()].map(([letter, list]) => (
+        <>
+          <section class="g-group" id={`letter-${letter.toLowerCase()}`} aria-labelledby={`h-${letter.toLowerCase()}`}>
+            <h2 class="g-letter" id={`h-${letter.toLowerCase()}`}><span aria-hidden="true">{letter}</span><span class="visually-hidden">Terms starting with {letter}</span></h2>
+            <div class="g-grid">
+              {list.map((t) => (
+                <article class="term" id={t.id} aria-labelledby={`t-${t.id}`}>
+                  <header class="term__head">
+                    <h3 class="term__name" id={`t-${t.id}`}>{t.data.term}</h3>
+                    {t.data.hindi && <p class="term__hi"><span class="visually-hidden">In Hindi: </span><span lang="hi">{t.data.hindi}</span></p>}
+                  </header>
+                  <p class="term__def">{t.data.definition}</p>
+                  {t.data.example && <p class="term__eg"><span class="label">For example</span> {t.data.example}</p>}
+                  {t.data.see.length > 0 && (
+                    <p class="term__see"><span class="label">See also</span>{' '}
+                      {t.data.see.filter((id) => byId.has(id)).map((id, i, arr) => (
+                        <><a href={`#${id}`}>{byId.get(id)!.data.term}</a>{i < arr.length - 1 ? ', ' : ''}</>
+                      ))}
+                    </p>
+                  )}
+                  {t.data.source && (
+                    <p class="term__src"><span class="label">Source</span> <a href={t.data.source.href} rel="noopener">{t.data.source.label}</a>{(t.data.source.publisher || t.data.source.date) && <span class="muted">, {[t.data.source.publisher, t.data.source.date].filter(Boolean).join(', ')}</span>}</p>
+                  )}
+                  <a class="term__anchor" href={`#${t.id}`} aria-label={`Link to ${t.data.term}`}>#</a>
+                </article>
+              ))}
+            </div>
+          </section>
+          {interludeAfter.has(letter) && (() => {
+            const it = interludeAfter.get(letter)!;
+            return (
+              <div class="interlude">
+                <div class="interlude__photo">
+                  <Photo id={it.id} tone={it.tone} aspect="16 / 9" caption={false} alt="" sizes="(min-width: 900px) 60vw, 92vw" widths={[480, 720, 960]} />
+                </div>
+                <div class="interlude__text">
+                  <p class="interlude__line">{it.line}</p>
+                  <p class="interlude__hand hand" aria-hidden="true">{it.hand}</p>
+                </div>
+              </div>
+            );
+          })()}
+        </>
+      ))}
+    </div>
+  </div>
+
+  {reads.length > 0 && (
+    <section class="section g-reads ground-deep" aria-labelledby="reads-title">
+      <div class="wrap">
+        <p class="label g-reads__label">Words in action</p>
+        <h2 class="h2" id="reads-title">Now read them <span class="red">in a sentence</span></h2>
+        <ul class="g-reads__grid" role="list">
+          {reads.map((r) => (
+            <li><Card href={`/resources/${r.id}/`} title={r.data.title} kicker={r.data.kind} meta={[`${readingMinutes(r)} min`]} photo={r.data.heroPhoto} tone={r.data.tone} aspect="4 / 3" /></li>
+          ))}
+        </ul>
+        <a class="link-arrow" href="/resources/">Every guide in the Journal <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  )}
+
+  <JoinBand title="Words first. Then action." text="Once you can name it, you can change it. Joining is free and takes a minute. Bring a friend. Yes, boys too." placard="Say it plainly" />
+</Base>
+
+<style>
+  :global(.photo--fixed .photo__img > picture) { display: block; height: 100%; }
+  /* JoinBand: ground link colours override .btn text (see report); keep the button's own colours. */
+  :global(.join-band .btn) { color: var(--btn-fg); }
+  .g-hero__extra { margin-top: 6px; }
+
+  /* ---------- A–Z bar ---------- */
+  .az { position: sticky; top: 71px; z-index: 30; background: var(--ink); color: var(--paper); border-bottom: 3px solid var(--red); }
+  .az__inner { display: flex; align-items: center; gap: 14px; }
+  .az__label { flex: none; color: var(--coral); }
+  .az__list { display: flex; flex: 1; justify-content: space-between; overflow-x: auto; scrollbar-width: none; }
+  .az__list::-webkit-scrollbar { display: none; }
+  .az__list a, .az__off {
+    display: grid; place-items: center; min-width: 32px; min-height: 48px; font-weight: 900; font-stretch: var(--display-stretch);
+    font-size: 1.55rem; line-height: 1; text-decoration: none;
+  }
+  .az__list a { color: var(--paper); }
+  .az__list a:hover { color: var(--marigold); }
+  .az__list a:focus-visible { outline-offset: -3px; }
+  .az__off { color: #8C8475; }
+  @media (max-width: 700px) {
+    .az__label { display: none; }
+    .az__list { justify-content: flex-start; gap: 2px; }
+    .az__list a, .az__off { min-width: 34px; font-size: 1.35rem; }
+    .az__off { display: none; }
+  }
+
+  /* ---------- groups + cards ---------- */
+  .g-body { padding-block: clamp(28px, 4vw, 48px) clamp(56px, 8vw, 96px); }
+  .g-note { max-width: 70ch; color: var(--muted); padding-bottom: 18px; }
+  .g-group { display: grid; grid-template-columns: minmax(90px, 200px) minmax(0, 1fr); gap: 0 clamp(18px, 3vw, 40px); padding-top: 18px; margin-top: clamp(24px, 4vw, 44px); border-top: var(--rule); scroll-margin-top: 130px; }
+  .g-letter { font-weight: 900; font-stretch: var(--display-stretch); font-size: clamp(5rem, 12vw, 10rem); line-height: .78; color: var(--red); position: sticky; top: 140px; align-self: start; }
+  .g-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: start; }
+
+  .term {
+    position: relative; display: grid; gap: 10px; padding: 18px 20px 18px; background: var(--paper-light); border: 2px solid var(--ink);
+    scroll-margin-top: 140px; transition: box-shadow .2s var(--ease), transform .2s var(--ease);
+  }
+  .term:target { box-shadow: 0 0 0 4px var(--marigold), 6px 6px 0 6px var(--ink); transform: rotate(-.4deg); }
+  .term__head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; padding-right: 30px; }
+  .term__name { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(1.7rem, 2.4vw, 2.1rem); line-height: .92; }
+  .term__hi { font-size: 1.1rem; font-weight: 600; color: var(--red-ink); }
+  .term__def { font-family: var(--font-serif); font-size: 1.12rem; line-height: 1.5; }
+  .term__eg { font-size: .95rem; line-height: 1.5; color: var(--ink-soft); padding: 10px 12px; background: var(--paper); border-left: 4px solid var(--marigold); }
+  .term__eg .label, .term__see .label, .term__src .label { color: var(--ink); margin-right: .4em; }
+  .term__see { font-size: .92rem; font-weight: 650; }
+  .term__src { font-size: .8rem; line-height: 1.4; color: var(--ink-soft); border-top: 1.5px dashed var(--line-soft); padding-top: 10px; }
+  .term__src a { color: var(--ink-soft); }
+  .term__src a:hover { color: var(--red-ink); }
+  .term__anchor {
+    position: absolute; top: 12px; right: 12px; display: grid; place-items: center; width: 28px; height: 28px;
+    font-weight: 900; color: var(--muted); text-decoration: none; border-radius: 50%;
+  }
+  .term__anchor:hover { background: var(--ink); color: var(--paper); }
+
+  /* ---------- interludes ---------- */
+  .interlude { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(20px, 4vw, 56px); align-items: center; margin-top: clamp(40px, 6vw, 72px); }
+  .interlude__photo :global(.photo) { transform: rotate(-1deg); }
+  .interlude__line { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(2.1rem, 4.4vw, 3.8rem); line-height: .9; text-wrap: balance; }
+  .interlude__hand { margin-top: 12px; font-size: 1.7rem; color: var(--red-ink); transform: rotate(-2deg); }
+  .interlude:nth-of-type(even) { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); }
+  .interlude:nth-of-type(even) .interlude__photo { order: 2; }
+
+  /* ---------- reads ---------- */
+  .g-reads__label { padding-top: 12px; border-top: var(--rule); margin-bottom: 14px; }
+  .g-reads__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(18px, 2.6vw, 30px); margin-block: clamp(26px, 4vw, 44px); }
+
+  @media (max-width: 1000px) {
+    .g-group { grid-template-columns: 1fr; }
+    .g-letter { position: static; font-size: clamp(4.4rem, 20vw, 6rem); margin-bottom: 14px; }
+    .g-reads__grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 700px) {
+    .g-grid { grid-template-columns: 1fr; }
+    .interlude, .interlude:nth-of-type(even) { grid-template-columns: 1fr; }
+    .interlude:nth-of-type(even) .interlude__photo { order: 0; }
+    .g-group, .term { scroll-margin-top: 130px; }
+  }
+  @media (max-width: 520px) { .g-reads__grid { grid-template-columns: 1fr; } }
+</style>

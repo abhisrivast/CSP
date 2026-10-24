@@ -1,0 +1,168 @@
+---
+// One public-memory milestone: giant year, dated meta, plain-language text, "why it matters", sources,
+// a self-link, and either an archival photo (natural colour, honest caption) or a typographic evidence card.
+import Photo from '../media/Photo.astro';
+import { CARDS } from './cards';
+
+type Source = { label: string; href: string; publisher?: string; date?: string; note?: string };
+export type MilestoneData = {
+  id: string; date: string; year: number; title: string; text: string; why: string;
+  place?: string; region: 'India' | 'Global'; tag?: string; photo?: string; sources: Source[];
+};
+export interface Props {
+  m: MilestoneData;
+  n: number;                 // 1-based position in the whole timeline
+  total: number;
+  photoNote?: string;        // e.g. "Pictured: the 2005 anniversary strike"
+  caption?: string;          // caption override (stock photos are labelled illustrative)
+}
+const { m, n, total, photoNote, caption } = Astro.props;
+const card = CARDS[m.id];
+const grounds = ['pink', 'marigold', 'ink', 'green', 'deep'];
+const ground = grounds[(n - 1) % grounds.length];
+const portrait = m.photo?.startsWith('in-046') || m.photo?.startsWith('in-028');
+const pubs = [...new Set(m.sources.map((s) => (s.publisher ?? s.label).replace(/ \(.*\)$/, '')))];
+---
+<li class="ms" id={m.id} data-region={m.region}>
+  <div class="ms__marker" aria-hidden="true">
+    <span class="ms__year">{m.year}</span>
+    <span class="label ms__n">{String(n).padStart(2, '0')} / {total}</span>
+  </div>
+
+  <article class="ms__card" aria-labelledby={`${m.id}-t`}>
+    <div class="ms__top">
+      <p class="label-row label ms__meta">
+        <span>{m.date}</span>
+        {m.place && <span>{m.place}</span>}
+      </p>
+      <a class="ms__self" href={`#${m.id}`} title="Link to this milestone"><span aria-hidden="true">#</span><span class="visually-hidden">Link to this milestone: {m.title}</span></a>
+    </div>
+    <h3 class="ms__title" id={`${m.id}-t`}>{m.title}</h3>
+    <p class="ms__chips">
+      <span class:list={['ms__chip', `ms__chip--${m.region.toLowerCase()}`]}>{m.region === 'Global' ? 'World' : 'India'}</span>
+      {m.tag && <span class="ms__chip ms__chip--tag">{m.tag}</span>}
+    </p>
+    <p class="ms__text">{m.text}</p>
+    <div class="ms__why">
+      <p class="label ms__why-label">Why it matters</p>
+      <p>{m.why}</p>
+    </div>
+    <details class="ms__foot">
+      <summary>
+        <span class="label ms__src-label">Sources ({m.sources.length})</span>
+        <span class="ms__pubs">{pubs.join(' · ')}</span>
+        <span class="ms__plus" aria-hidden="true"></span>
+      </summary>
+      <ol class="ms__src">
+        {m.sources.map((s) => (
+          <li><a href={s.href} rel="noopener">{s.label}</a>{(s.publisher || s.date) && <span class="ms__src-pub"> · {[s.publisher, s.date].filter(Boolean).join(', ')}</span>}{s.note && <span class="ms__src-note">. {s.note}</span>}</li>
+        ))}
+      </ol>
+    </details>
+  </article>
+
+  <div class:list={['ms__media', { 'ms__media--portrait': portrait }]}>
+    {m.photo ? (
+      <>
+        {photoNote && <p class="label ms__later">{photoNote}</p>}
+        <Photo id={m.photo} aspect={portrait ? '4 / 5' : '4 / 3'} position={m.id === 'phule-school-1848' ? '50% 20%' : undefined} caption={caption} sizes="(min-width: 1100px) 320px, (min-width: 700px) 40vw, 88vw" widths={[320, 480, 640]} tape={n % 2 ? 'tl' : 'tr'} />
+      </>
+    ) : card ? (
+      <div class:list={['tcard', `tcard--${ground}`]} aria-hidden="true">
+        <span class="tcard__corner label">{m.year}</span>
+        <span class="tcard__big" lang={card.lang}>{card.big}</span>
+        {card.list && <span class="tcard__list">{card.list.map((x) => <span>{x}</span>)}</span>}
+        <span class="tcard__small">{card.small}</span>
+      </div>
+    ) : null}
+  </div>
+</li>
+
+<style>
+  .ms {
+    display: grid; grid-template-columns: minmax(130px, 190px) minmax(0, 1fr) minmax(0, 340px);
+    gap: clamp(14px, 3vw, 44px); padding-block: clamp(24px, 3.2vw, 40px); border-top: 1px solid var(--line);
+    align-items: start; scroll-margin-top: 80px;
+  }
+  .ms:target .ms__card { background: var(--paper-light); box-shadow: 0 0 0 14px var(--paper-light); }
+  .ms:target .ms__year { color: var(--ink); background: var(--marigold); }
+  .ms__marker { position: sticky; top: 160px; display: grid; gap: 8px; justify-items: start; }
+  .ms__year {
+    font-weight: 900; font-stretch: var(--display-stretch); font-size: clamp(3.2rem, 6.4vw, 5.6rem); line-height: .8;
+    color: var(--red); letter-spacing: -.02em; padding: .04em .06em 0;
+  }
+  .ms__n { color: var(--muted); }
+
+  .ms__card { display: grid; gap: 12px; max-width: 64ch; border-radius: 1px; transition: background .3s var(--ease); }
+  .ms__meta { color: var(--ink-soft); }
+  .ms__title { font-weight: 800; font-stretch: var(--head-stretch); font-size: clamp(1.45rem, 2.3vw, 1.95rem); line-height: 1.06; text-wrap: balance; }
+  .ms__chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ms__chip { font-size: var(--fs-label); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; line-height: 1; padding: .45em .6em .4em; border: 1.5px solid var(--ink); }
+  .ms__chip--india { background: var(--red-ink); border-color: var(--red-ink); color: var(--paper-light); }
+  .ms__chip--global { background: var(--ink); color: var(--paper); }
+  .ms__text { font-family: var(--font-serif); font-size: clamp(1.08rem, 1.3vw, 1.2rem); line-height: 1.55; }
+  .ms__why { padding: 12px 16px 14px; border-left: 5px solid var(--marigold); background: rgba(241, 179, 98, .16); display: grid; gap: 4px; font-size: .98rem; line-height: 1.5; color: var(--ink-soft); }
+  .ms__why-label { color: var(--red-ink); }
+  .ms__foot { margin-top: 2px; border-top: 1px dashed var(--line-soft); border-bottom: 1px dashed var(--line-soft); }
+  .ms__foot summary { display: flex; align-items: center; gap: 10px; min-height: 44px; padding-block: 6px; cursor: pointer; list-style: none; }
+  .ms__foot summary::-webkit-details-marker { display: none; }
+  .ms__src-label { flex: none; color: var(--red-ink); }
+  .ms__pubs { flex: 1; font-size: .84rem; line-height: 1.35; color: var(--ink-soft); }
+  .ms__plus { position: relative; flex: none; width: 22px; height: 22px; border: 2px solid var(--ink); border-radius: 50%; }
+  .ms__plus::before, .ms__plus::after { content: ''; position: absolute; left: 50%; top: 50%; width: 10px; height: 2px; background: var(--ink); transform: translate(-50%, -50%); }
+  .ms__plus::after { transform: translate(-50%, -50%) rotate(90deg); }
+  .ms__foot[open] .ms__plus::after { transform: translate(-50%, -50%); }
+  .ms__foot summary:hover .ms__pubs { color: var(--ink); }
+  .ms__src { display: grid; gap: 4px; padding: 2px 0 12px 1.3em; font-size: .84rem; line-height: 1.4; color: var(--muted); }
+  .ms__src li::marker { color: var(--red-ink); font-weight: 800; }
+  .ms__src a { color: var(--ink); text-decoration-color: var(--red); }
+  .ms__src a:hover { color: var(--red-ink); }
+  .ms__top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: -10px; }
+  .ms__self {
+    flex: none; display: grid; place-items: center; width: 44px; height: 44px; border: 2px solid transparent; border-radius: 50%;
+    font-weight: 900; font-size: 1.25rem; text-decoration: none; color: var(--red-ink);
+  }
+  .ms__self:hover { border-color: var(--red-ink); color: var(--red-ink); }
+
+  .ms__media { display: grid; gap: 8px; padding-top: 6px; }
+  .ms__media--portrait { max-width: 260px; }
+  .ms__media :global(.photo__img picture) { display: block; height: 100%; }
+  .ms__later { justify-self: start; background: var(--ink); color: var(--paper); padding: .35em .55em .3em; }
+
+  .tcard {
+    --bg: var(--pink); --fg: var(--ink);
+    position: relative; display: grid; align-content: end; gap: 10px; aspect-ratio: 4 / 3; padding: 18px 20px 20px;
+    background: var(--bg); color: var(--fg); overflow: hidden;
+    box-shadow: 5px 6px 0 rgba(29, 28, 24, .16);
+  }
+  .tcard::after { content: ''; position: absolute; inset: 0; background-image: url('/textures/grain.png'); background-size: 160px; pointer-events: none; opacity: .7; }
+  .tcard--marigold { --bg: var(--marigold); }
+  .tcard--ink { --bg: var(--ink); --fg: var(--paper); }
+  .tcard--green { --bg: var(--green); --fg: var(--paper); }
+  .tcard--deep { --bg: var(--paper-deep); }
+  .tcard__corner { position: absolute; top: 14px; right: 16px; opacity: .8; }
+  .tcard__big { position: relative; z-index: 1; font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(2.3rem, 3.6vw, 3.3rem); line-height: .86; text-wrap: balance; overflow-wrap: anywhere; }
+  .tcard__big[lang] { text-transform: none; font-weight: 800; font-size: clamp(2rem, 3vw, 2.8rem); line-height: 1.05; }
+  .tcard__list { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 4px; }
+  .tcard__list span { font-size: .72rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: .3em .45em; border: 1.5px solid currentColor; }
+  .tcard__small { position: relative; z-index: 1; font-family: var(--font-serif); font-style: italic; font-size: 1.02rem; line-height: 1.3; max-width: 26ch; }
+
+  @media (max-width: 1100px) {
+    .ms { grid-template-columns: minmax(110px, 150px) minmax(0, 1fr); }
+    .ms__media { grid-column: 2; max-width: 420px; }
+  }
+  @media (max-width: 700px) {
+    .ms { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+    .ms__marker { position: static; grid-auto-flow: column; justify-content: start; align-items: end; gap: 14px; }
+    .ms__media { grid-column: auto; grid-row: 2; max-width: 100%; }
+    .ms__media--portrait { max-width: 280px; }
+    .ms__top { align-items: flex-start; }
+    .ms__meta { flex-direction: column; align-items: flex-start; gap: 3px; }
+    .ms__meta > span + span::before { content: none; }
+    .tcard { aspect-ratio: auto; padding: 12px 14px 14px; gap: 4px; box-shadow: 4px 4px 0 rgba(29, 28, 24, .16); }
+    .tcard__corner { display: none; }
+    .tcard__big { font-size: clamp(1.7rem, 8vw, 2.1rem); }
+    .tcard__big[lang] { font-size: 1.8rem; }
+    .tcard__small { font-size: .95rem; }
+  }
+</style>

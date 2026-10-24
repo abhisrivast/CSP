@@ -1,0 +1,22 @@
+# dependencies + build output
+node_modules/
+.venv/
+__pycache__/
+dist/
+.astro/
+.netlify/
+
+# generated: rebuilt on every deploy / QA run
+site/src/assets/photos/tones/
+site/qa/
+
+# working files from research and logo exploration (originals of every site photo live in site/src/assets/photos)
+research/images/
+research/peers/
+brand/logo/concepts/**/work/
+brand/logo/concepts/**/explore/
+brand/logo/concepts/**/_v1/
+brand/logo/concepts/**/*.png
+brand/logo/_judging/
+
+.DS_Store

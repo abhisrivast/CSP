@@ -1,0 +1,41 @@
+---
+// Content note shown before a case study that discusses sexual violence, femicide or state violence,
+// with the India helpline block (docs/STRATEGY.md §13; research/india-compliance.md §7.2).
+export interface Props { text: string }
+const { text } = Astro.props;
+---
+<aside class="cnote" aria-label="Content note">
+  <div class="wrap cnote__inner">
+    <p class="cnote__text"><span class="label cnote__label">Content note</span> <span set:html={text} /></p>
+    <details class="cnote__help">
+      <summary><span class="label">Need support? Helplines in India</span></summary>
+      <div class="cnote__panel">
+        <ul role="list" class="cnote__list">
+          <li><strong>112</strong> Emergency</li>
+          <li><strong>181</strong> National Women Helpline</li>
+          <li><strong>14490</strong> NCW 24×7 Women Helpline (women over 18)</li>
+          <li><strong>1930</strong> Cyber crime, and <a href="https://cybercrime.gov.in/" rel="noopener">cybercrime.gov.in</a></li>
+          <li><strong>1098</strong> Child Helpline</li>
+          <li><strong>14416</strong> Tele-MANAS mental health</li>
+        </ul>
+        <p class="small muted">Numbers checked 24 Oct 2026; check before you call. Source: <a href="https://www.ncw.gov.in/other-useful-helplines/" rel="noopener">National Commission for Women, other useful helplines</a>. This is information, not legal or medical advice.</p>
+      </div>
+    </details>
+  </div>
+</aside>
+
+<style>
+  .cnote { background: var(--paper-light); border-bottom: 1px solid var(--line); }
+  .cnote__inner { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 28px; padding-block: 12px; }
+  .cnote__text { font-size: .95rem; line-height: 1.45; max-width: 80ch; }
+  .cnote__label { display: inline-block; margin-right: .6em; padding: .2em .5em; background: var(--ink); color: var(--paper); }
+  .cnote__help summary { cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: .5em; min-height: 44px; color: var(--red-ink); }
+  .cnote__help summary::-webkit-details-marker { display: none; }
+  .cnote__help summary::after { content: '+'; font-weight: 900; font-size: 1.2rem; line-height: 1; }
+  .cnote__help[open] summary::after { content: '–'; }
+  .cnote__help summary .label { border-bottom: 2px solid currentColor; }
+  .cnote__help[open] { flex-basis: 100%; }
+  .cnote__panel { display: grid; gap: 10px; padding: 6px 0 10px; }
+  .cnote__list { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: .95rem; }
+  .cnote__list strong { font-weight: 900; font-stretch: var(--head-stretch); font-size: 1.15rem; margin-right: .25em; }
+</style>

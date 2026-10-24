@@ -1,0 +1,75 @@
+# Netlify config for culturalshockparty.com (static Astro build; no functions, no adapter).
+# Free plan = 300 credits/month: every production deploy costs 15, bandwidth 20/GB. Batch content changes.
+
+[build]
+  base = "site"
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "24"
+
+# One canonical domain.
+[[redirects]]
+  from = "https://www.culturalshockparty.com/*"
+  to = "https://culturalshockparty.com/:splat"
+  status = 301
+  force = true
+[[redirects]]
+  from = "https://culturalshockparty.in/*"
+  to = "https://culturalshockparty.com/:splat"
+  status = 301
+  force = true
+[[redirects]]
+  from = "https://www.culturalshockparty.in/*"
+  to = "https://culturalshockparty.com/:splat"
+  status = 301
+  force = true
+[[redirects]]
+  from = "https://culturalshockparty.org/*"
+  to = "https://culturalshockparty.com/:splat"
+  status = 301
+  force = true
+[[redirects]]
+  from = "https://www.culturalshockparty.org/*"
+  to = "https://culturalshockparty.com/:splat"
+  status = 301
+  force = true
+
+# Friendly short links
+[[redirects]]
+  from = "/blog/*"
+  to = "/resources/:splat"
+  status = 301
+[[redirects]]
+  from = "/sign"
+  to = "/manifesto/#sign"
+  status = 302
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
+
+# Hashed build assets never change.
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+[[headers]]
+  for = "/brand/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "/textures/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+[[headers]]
+  for = "/og/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"

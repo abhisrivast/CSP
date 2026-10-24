@@ -1,0 +1,323 @@
+---
+// Case-study detail. Renders any entry that passes the caseStudies schema (src/content.config.ts).
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Photo from '../../components/media/Photo.astro';
+import SectionHead from '../../components/ui/SectionHead.astro';
+import Receipt from '../../components/ui/Receipt.astro';
+import Timeline from '../../components/blocks/Timeline.astro';
+import Sources from '../../components/blocks/Sources.astro';
+import Card from '../../components/blocks/Card.astro';
+import ShareBar from '../../components/blocks/ShareBar.astro';
+import JoinBand from '../../components/blocks/JoinBand.astro';
+import TornEdge from '../../components/ui/TornEdge.astro';
+import ContentNote from '../../components/cases/ContentNote.astro';
+import CaseHero from '../../components/cases/CaseHero.astro';
+import CaseDossier from '../../components/cases/CaseDossier.astro';
+import StagePanels from '../../components/cases/StagePanels.astro';
+import CaseLessons from '../../components/cases/CaseLessons.astro';
+import CaseGallery from '../../components/cases/CaseGallery.astro';
+import CaseNav from '../../components/cases/CaseNav.astro';
+import { articleNode } from '../../lib/schema';
+import { SITE } from '../../data/site';
+import {
+  type CaseEntry, sortCases, caseNo, heroOf, galleryOf, splitBody, metaDescription, relatedCases, lever,
+  fmtDate, isoDate, heroTone, honestCaption, isStock, isOwn, photoYear,
+} from '../../components/cases/case-utils';
+
+export async function getStaticPaths() {
+  const all = sortCases(await getCollection('caseStudies'));
+  return all.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props as { entry: CaseEntry };
+const all = sortCases(await getCollection('caseStudies'));
+const d = entry.data;
+const no = caseNo(entry, all);
+const path = `/case-studies/${entry.id}/`;
+const crumbs = [{ name: 'Case studies', href: '/case-studies/' }, { name: d.title, href: path }];
+const description = metaDescription(entry);
+const published = isoDate(d.updated);
+
+// Photos: hero, then the gallery split between the reading column's margin and the photo wall.
+const hero = heroOf(entry);
+const gallery = galleryOf(entry, hero?.id);
+// Up to two photos ride alongside the reading column, keeping at least two for the photo wall when possible.
+const marginCount = gallery.length >= 4 ? 2 : gallery.length >= 2 ? 1 : 0;
+const margin = gallery.slice(0, marginCount);
+let pool = gallery.slice(marginCount);
+// Documentary photos of this movement whose year matches a timeline event sit beside that event,
+// as long as the wall keeps two or more.
+const tlPhoto = new Map<number, string>();
+d.timeline.forEach((t, k) => {
+  const y = t.date.match(/\d{4}/)?.[0];
+  const hit = y && pool.find((p) => !isStock(p) && isOwn(p, entry.id) && photoYear(p) === y);
+  if (hit && pool.length > 2) { tlPhoto.set(k, hit.id); pool = pool.filter((p) => p.id !== hit.id); }
+});
+const wall = pool;
+
+// Body: content note + the three H2 sections (Context / The story / Why it matters for the Fourth Wave).
+const html = entry.rendered?.html;
+const body = html ? splitBody(html) : undefined;
+const { Content } = html ? { Content: undefined } : await render(entry);
+const proseSections = body?.sections.filter((s) => s.kind === 'prose') ?? [];
+const whySections = body?.sections.filter((s) => s.kind === 'why') ?? [];
+
+// Numbered sections and the in-page contents list.
+const blocks = [
+  { id: proseSections[0]?.id ?? 'story', label: proseSections[0]?.heading || 'The story', show: true },
+  { id: 'timeline', label: 'Timeline', show: d.timeline.length > 0 },
+  { id: 'how', label: 'How they did it', show: true },
+  { id: 'receipts', label: 'What changed', show: d.numbers.length > 0 },
+  { id: 'limits', label: 'Limits and critiques', show: !!d.limits.trim() },
+  { id: 'lessons', label: 'Lessons for CSP', show: d.lessons.length > 0 },
+  { id: 'gallery', label: 'In pictures', show: wall.length > 0 },
+  { id: 'sources', label: 'Sources', show: true },
+].filter((b) => b.show);
+const num = (id: string) => String(blocks.findIndex((b) => b.id === id) + 1).padStart(2, '0');
+
+// Prev / next (wrapping) and related cases.
+const i = all.findIndex((c) => c.id === entry.id);
+const prevC = all.length > 1 ? all[(i - 1 + all.length) % all.length] : undefined;
+const nextC = all.length > 2 ? all[(i + 1) % all.length] : undefined;
+const nav = (c?: CaseEntry) => c && { href: `/case-studies/${c.id}/`, no: caseNo(c, all), title: c.data.title, place: c.data.place };
+const related = relatedCases(entry, all, [prevC?.id, nextC?.id].filter(Boolean) as string[]);
+const cardPhoto = (c: CaseEntry) => heroOf(c)?.id;
+
+const rows = [
+  { k: 'Case file', v: Number(no) <= all.length ? `${no} of ${all.length}` : no },
+  { k: 'Place', v: d.place },
+  { k: 'Years', v: d.years },
+  { k: 'Region', v: d.region },
+  ...(lever(entry) ? [{ k: 'Main lever', v: lever(entry)! }] : []),
+  { k: 'Updated', v: fmtDate(d.updated) },
+  { k: 'Sources', v: `${d.sources.length} cited, with dates`, href: '#sources' },
+  { k: 'Additional funding', v: "None. Research by CSP's Receipts Desk" },
+];
+const receiptTones = ['paper', 'marigold', 'pink', 'ink'] as const;
+const tilts = [-1.2, 0.8, -0.5, 1.1];
+const lessonsTitle = d.lessons.length === 3 ? 'Three lessons for CSP' : `${d.lessons.length} lessons for CSP`;
+---
+<Base
+  title={d.title}
+  description={description}
+  image={`/og/case-${entry.id}.png`}
+  imageAlt={`${d.title}: a Cultural Shock Party case study`}
+  type="article"
+  published={published}
+  modified={published}
+  author={SITE.name}
+  tags={d.tags}
+  breadcrumbs={crumbs}
+  schema={[
+    articleNode({
+      path, title: d.title, description, image: `/og/case-${entry.id}.png`, datePublished: published, dateModified: published,
+      authorName: SITE.name, section: 'Case studies', keywords: [d.title, d.place, ...d.tags], type: 'Article',
+    }),
+  ]}
+>
+  {body?.note && <ContentNote text={body.note} />}
+
+  <CaseHero caseId={entry.id} no={no} title={d.title} dek={d.dek} place={d.place} region={d.region} years={d.years} photo={hero} tone={d.tone} crumbs={crumbs} />
+
+  <CaseDossier rows={rows} summary={d.summary} contents={blocks.map((b) => ({ id: b.id, label: b.label }))} />
+
+  <!-- 01 The story: the markdown body, with a sticky photo rail on wide screens -->
+  <section class="section story" aria-label="The story">
+    <div class="wrap">
+      <p class="label story__label"><span class="red-ink">{num(blocks[0].id)}</span> / The case file</p>
+      <div class:list={['story__grid', { 'story__grid--rail': margin.length > 0 }]}>
+        <div class="story__main">
+          {body ? (
+            <>
+              {body.intro && <div class="prose" set:html={body.intro} />}
+              {proseSections.map((s, k) => (
+                <>
+                  <div class="prose story__prose" set:html={s.html} />
+                  {margin[k] && (
+                    <div class="story__inline">
+                      <Photo id={margin[k].id} tone={heroTone(margin[k], d.tone)} caption={honestCaption(margin[k], entry.id)} tape={k % 2 ? 'tr' : 'tl'} sizes="92vw" widths={[360, 560, 720]} />
+                    </div>
+                  )}
+                </>
+              ))}
+            </>
+          ) : (
+            <div class="prose">{Content && <Content />}</div>
+          )}
+        </div>
+        {margin.length > 0 && (
+          <aside class="story__rail" aria-label="Photos">
+            <div class="story__rail-inner">
+              {margin.map((m, k) => (
+                <Photo id={m.id} tone={heroTone(m, d.tone)} caption={honestCaption(m, entry.id)} tape={k % 2 ? 'tr' : 'tl'} tilt={k % 2 ? 1.2 : -1.5} sizes="360px" widths={[360, 560, 720]} />
+              ))}
+            </div>
+          </aside>
+        )}
+      </div>
+      {whySections.map((s) => (
+        <div class="why ground-pink">
+          <p class="label why__kicker">For the Fourth Wave</p>
+          <h2 class="h2 why__title" id={s.id}>{s.heading}</h2>
+          <div class="why__body" set:html={s.body} />
+        </div>
+      ))}
+    </div>
+  </section>
+
+  {d.timeline.length > 0 && (
+    <section class="section ground-deep" id="timeline" aria-labelledby="timeline-title">
+      <div class="wrap">
+        <SectionHead num={num('timeline')} label="Timeline" title="How it unfolded" id="timeline-title" lead={`${d.timeline.length} dated moments, from the first spark to where things stand.`} />
+        <Timeline events={d.timeline.map((t, k) => ({ date: t.date, title: t.title, text: t.text, photo: tlPhoto.get(k) }))} />
+      </div>
+    </section>
+  )}
+
+  <TornEdge color="var(--ink)" seed={2} />
+  <section class="section ground-ink grain how" id="how" aria-labelledby="how-title">
+    <div class="wrap how__inner">
+      <SectionHead num={num('how')} label="How they did it" title="How they did it" id="how-title" />
+      <p class="lead how__lead">Mapped onto CSP's engine: ideas into research, research into public consciousness, public consciousness into collective action. <a href="/what-we-do/">How our engine works</a>.</p>
+      <StagePanels stages={d.stages} />
+    </div>
+  </section>
+
+  {d.numbers.length > 0 && (
+    <section class="section" id="receipts" aria-labelledby="receipts-title">
+      <div class="wrap">
+        <SectionHead num={num('receipts')} label="What changed" title="The receipts" id="receipts-title" lead="Every number with its source and date. Click through and check us." />
+        <div class:list={['receipts', `receipts--${Math.min(d.numbers.length, 4)}`]}>
+          {d.numbers.map((n, k) => (
+            <Receipt figure={n.figure} label={n.label} source={n.source} href={n.href} date={n.date} tone={receiptTones[k % receiptTones.length]} tilt={tilts[k % tilts.length]} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {d.limits.trim() && (
+    <section class="section ground-light" id="limits" aria-labelledby="limits-title">
+      <div class="wrap limits">
+        <SectionHead num={num('limits')} label="Limits and critiques" title="Limits and critiques" id="limits-title" />
+        <div class="limits__panel">
+          <p class="limits__text">{d.limits}</p>
+          <p class="label limits__note">We publish what didn't work, too. Movements learn faster from honest records.</p>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {d.lessons.length > 0 && (
+    <section class="section ground-red grain" id="lessons" aria-labelledby="lessons-title">
+      <div class="wrap lessons-wrap">
+        <SectionHead num={num('lessons')} label="What we take from it" title={lessonsTitle} id="lessons-title" lead="Written as what to do, so the next movement starts further ahead." />
+        <CaseLessons lessons={d.lessons} />
+      </div>
+    </section>
+  )}
+
+  {wall.length > 0 && (
+    <section class="section" id="gallery" aria-labelledby="gallery-title">
+      <div class="wrap">
+        <SectionHead num={num('gallery')} label="In pictures" title="From the record" id="gallery-title" lead="Captions say what each photo shows, where and when. Illustrative photos are marked." />
+        <CaseGallery photos={wall} tone={d.tone} caseId={entry.id} />
+      </div>
+    </section>
+  )}
+
+  <section class="section section--tight" id="sources-wrap" aria-label="Sources">
+    <div class="wrap wrap--narrow">
+      <Sources sources={d.sources} id="sources" title={`${num('sources')} / How we know: ${d.sources.length} sources`} />
+      <p class="small muted sources-foot">Last checked {fmtDate(d.updated)}. Spotted an error or a better source? <a href="/contact/">Tell us</a> and we will correct it in public. Photo credits sit under each photo and on our <a href="/credits/">image credits</a> page.</p>
+    </div>
+  </section>
+
+  <section class="section section--tight more" aria-labelledby="more-title">
+    <div class="wrap more__inner">
+      <h2 class="visually-hidden" id="more-title">More case studies</h2>
+      <CaseNav prev={nav(prevC)} next={nav(nextC)} />
+      {related.length > 0 && (
+        <div class="related">
+          <p class="label related__label">Related cases</p>
+          <div class="related__grid">
+            {related.map((c) => (
+              <Card href={`/case-studies/${c.id}/`} title={c.data.title} kicker={`Case ${caseNo(c, all)}`} meta={[c.data.place, c.data.years]} dek={c.data.dek} photo={cardPhoto(c)} tone={c.data.tone === 'natural' ? 'ink' : c.data.tone} />
+            ))}
+          </div>
+        </div>
+      )}
+      <ShareBar title={d.title} path={path} text={`${d.title}: what this movement teaches us`} />
+      <p class="more__all"><a class="link-arrow" href="/case-studies/">All case studies <span aria-hidden="true">→</span></a></p>
+    </div>
+  </section>
+
+  <div class="join-fix"><JoinBand
+    title="Every movement here started small."
+    text="A reading circle, a group chat, a few friends who decided to count. Start where you are: read, share, sign the manifesto. Go bigger when you're ready."
+  /></div>
+</Base>
+
+<style>
+  .story { padding-top: clamp(2.5rem, 6vw, 4.5rem); }
+  .story__label { margin-bottom: 8px; }
+  .story__grid { display: grid; grid-template-columns: minmax(0, 68ch); gap: clamp(24px, 5vw, 80px); align-items: start; }
+  .story__grid--rail { grid-template-columns: minmax(0, 68ch) minmax(240px, 360px); }
+  .story__prose > :global(h2:first-child) { margin-top: 1.1em; }
+  .story__rail { align-self: stretch; }
+  .story__rail-inner { position: sticky; top: 96px; display: grid; gap: 44px; padding-top: clamp(3rem, 6vw, 5.4rem); }
+  .story__inline { display: none; }
+  .why { margin-top: clamp(2.5rem, 6vw, 4.5rem); padding: clamp(24px, 4vw, 48px); max-width: 980px; display: grid; gap: 16px; }
+  .why__kicker { color: var(--ink); }
+  .why__title { font-size: clamp(2rem, 4.4vw, 3.6rem); max-width: 18ch; }
+  .why__body { font-family: var(--font-serif); font-size: clamp(1.12rem, 1.5vw, 1.3rem); line-height: 1.55; max-width: 62ch; display: grid; gap: .9em; }
+  .why__body :global(a) { color: var(--ink); }
+
+  .how { padding-top: clamp(3.5rem, 8vw, 6rem); }
+  .how__inner { position: relative; z-index: 2; }
+  .how__inner :global(.section-head) { margin-bottom: 18px; }
+  .how__lead { margin-bottom: clamp(28px, 4vw, 48px); max-width: 60ch; }
+
+  .receipts { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: clamp(20px, 3vw, 36px); align-items: start; }
+  .receipts--1 { grid-template-columns: minmax(0, 420px); }
+  .receipts--2 { grid-template-columns: repeat(2, minmax(0, 420px)); }
+  @media (min-width: 1100px) { .receipts--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+  .limits { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: clamp(24px, 5vw, 72px); align-items: start; }
+  .limits :global(.section-head) { margin-bottom: 0; }
+  .limits__panel { display: grid; gap: 18px; padding: clamp(20px, 3vw, 32px); border: 3px solid var(--ink); border-left-width: 10px; border-left-color: var(--red); background: var(--paper); }
+  .limits__text { font-family: var(--font-serif); font-size: clamp(1.15rem, 1.6vw, 1.35rem); line-height: 1.55; }
+  .limits__note { color: var(--ink-soft); }
+
+  .lessons-wrap { position: relative; z-index: 2; }
+
+  .sources-foot { margin-top: 18px; }
+  #sources-wrap :global(.sources) { margin-top: 10px; }
+
+  .more__inner { display: grid; gap: clamp(32px, 5vw, 56px); }
+  .related { display: grid; gap: 20px; }
+  .related__label { padding-top: 12px; border-top: 3px solid var(--line); }
+  .related__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 36px); }
+  .more__all { margin-top: -12px; }
+  /* Photo-in-fixed-box fill (see report: shared Photo leaves <picture> at auto height). */
+  .related__grid :global(.photo--fixed .photo__img picture), #timeline :global(.photo--fixed .photo__img picture) { display: block; height: 100%; }
+  /* Shared JoinBand: .ground-green a overrides the paper button's ink text. */
+  .join-fix :global(.join-band .btn--paper) { color: var(--ink); }
+  /* Shared SectionHead sets its small number in --red (large-type colour); use the text red on light grounds. */
+  .section:not(.ground-ink):not(.ground-green):not(.ground-red) :global(.section-head__num) { color: var(--red-ink); }
+
+  @media (max-width: 1000px) {
+    .story__grid--rail { grid-template-columns: minmax(0, 1fr); }
+    .story__rail { display: none; }
+    .story__inline { display: block; max-width: 440px; margin-top: 2.2rem; }
+  }
+  @media (max-width: 860px) {
+    .limits { grid-template-columns: 1fr; }
+    .related__grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .related__grid { grid-template-columns: 1fr; }
+    .receipts--2 { grid-template-columns: 1fr; }
+  }
+</style>

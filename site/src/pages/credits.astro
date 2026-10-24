@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/blocks/PageHero.astro';
+import { PHOTOS } from '../lib/photos';
+
+const groups = [
+  { key: 'commons', title: 'Documentary and archival photographs (Wikimedia Commons / Openverse)' },
+  { key: 'india', title: 'India and South Asia' },
+  { key: 'stock', title: 'Photographs from Unsplash and Pexels' },
+];
+const other = PHOTOS.filter((p) => !groups.some((g) => g.key === p.source));
+---
+<Base
+  title="Image credits"
+  description="Every photograph on Cultural Shock Party, with its photographer, licence and source. We only use images we're allowed to use, and we credit them."
+  breadcrumbs={[{ name: 'Image credits', href: '/credits/' }]}
+>
+  <PageHero label="Credits" title="Image credits" lead="Every photo on this site is credited here with its licence. Documentary photos show the real event named in their caption; stock photos are illustrative and do not show CSP members or events." crumbs={[{ name: 'Image credits', href: '/credits/' }]} />
+  <section class="section"><div class="wrap wrap--narrow stack" style="--flow: 2.5rem">
+    <p>Many photos on this site are shown as duotones (recoloured in our palette). Under their licences that counts as an adaptation; the originals are linked below. Licences: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>, <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>, public domain, the <a href="https://unsplash.com/license">Unsplash License</a> and the <a href="https://www.pexels.com/license/">Pexels License</a>. Our duotone adaptations of CC BY-SA photos are shared under the same licence.</p>
+    <p>Spotted a photo of yourself you'd like removed, or a credit that's wrong? <a href="/contact/">Tell us</a> and we'll fix it within 48 hours.</p>
+    {[...groups.map((g) => ({ ...g, items: PHOTOS.filter((p) => p.source === g.key) })), { key: 'other', title: 'Other', items: other }]
+      .filter((g) => g.items.length)
+      .map((g) => (
+        <section>
+          <h2 class="h3">{g.title}</h2>
+          <ol class="credits" role="list">
+            {g.items.map((p) => (
+              <li id={p.id}>
+                <span class="credits__title">{p.title || p.caption || p.id}</span>
+                <span class="small">{p.credit}{p.licence && !p.credit.includes(p.licence) ? ` · ${p.licence}` : ''}</span>
+                <span class="small">{p.sourcePage && <a href={p.sourcePage} rel="noopener">Source</a>}{p.licenceUrl && <> · <a href={p.licenceUrl} rel="noopener">Licence</a></>}</span>
+              </li>
+            ))}
+          </ol>
+        </section>
+      ))}
+  </div></section>
+</Base>
+
+<style>
+  .credits { margin-top: 14px; border-top: 3px solid var(--line); }
+  .credits li { display: grid; gap: 2px; padding: 12px 0; border-bottom: 1px solid var(--line-soft); }
+  .credits__title { font-weight: 700; }
+</style>

@@ -1,0 +1,32 @@
+---
+// "Who to read": index cards for key thinkers and texts. Every card links to the source we used.
+export type Thinker = { name: string; year: string; work: string; idea: string; href: string; role?: string };
+export interface Props { items: Thinker[] }
+const { items } = Astro.props;
+---
+<ul class="r-wide thinkers" role="list">
+  {items.map((t, i) => (
+    <li class="thinker" style={`--r:${[-.8, .6, -.4, .9, -.6, .5, -.9, .7][i % 8]}deg`}>
+      <p class="thinker__year">{t.year}</p>
+      <h3 class="thinker__name">{t.name}</h3>
+      <p class="thinker__work"><cite>{t.work}</cite></p>
+      <p class="thinker__idea">{t.idea}</p>
+      <a class="thinker__src" href={t.href} rel="noopener">Source<span class="visually-hidden">: {t.work}</span> <span aria-hidden="true">↗</span></a>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .thinkers { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr)); gap: 18px; margin-block: 2em; font-family: var(--font-sans); }
+  .thinkers li + li { margin-top: 0; }
+  .thinker {
+    position: relative; display: grid; gap: 6px; align-content: start; padding: 16px 18px 18px; background: var(--paper-light);
+    border: 1.5px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); transform: rotate(var(--r));
+    background-image: repeating-linear-gradient(transparent 0 27px, rgba(179, 38, 30, .12) 27px 28px); background-position: 0 58px;
+  }
+  .thinker__year { font-weight: 900; font-stretch: var(--display-stretch); font-size: 2rem; line-height: .9; color: var(--red); }
+  .thinker__name { font-size: 1.15rem; font-weight: 850; font-stretch: var(--head-stretch); line-height: 1.1; margin: 0 !important; }
+  .thinker__work { font-family: var(--font-serif); font-size: .98rem; line-height: 1.3; color: var(--ink-soft); }
+  .thinker__idea { font-size: .95rem; line-height: 1.45; }
+  .thinker__src { font-size: .82rem; font-weight: 750; justify-self: start; }
+</style>

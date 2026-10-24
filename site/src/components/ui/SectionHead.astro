@@ -1,0 +1,29 @@
+---
+// "01 / THE POLITICAL PROJECT" + oversized condensed title + optional standfirst.
+export interface Props {
+  num?: string;
+  label: string;
+  title?: string;          // or use the default slot for rich titles (spans with .red etc.)
+  lead?: string;
+  as?: 'h1' | 'h2' | 'h3';
+  size?: 'h1' | 'h2' | 'h3';
+  id?: string;
+  align?: 'start' | 'center';
+}
+const { num, label, title, lead, as: Tag = 'h2', size = 'h2', id, align = 'start' } = Astro.props;
+---
+<header class:list={['section-head', `section-head--${align}`]}>
+  <p class="label section-head__label"><span class="section-head__num">{num}</span>{num && <span aria-hidden="true"> / </span>}{label}</p>
+  <Tag class={size} id={id}>{title}<slot /></Tag>
+  {lead && <p class="lead">{lead}</p>}
+</header>
+
+<style>
+  .section-head { display: grid; gap: clamp(14px, 2vw, 22px); margin-bottom: clamp(28px, 5vw, 56px); }
+  .section-head--center { justify-items: center; text-align: center; }
+  .section-head--center .lead { margin-inline: auto; }
+  .section-head__label { display: flex; align-items: center; gap: .3em; padding-top: 12px; border-top: 3px solid var(--line); width: 100%; }
+  .section-head__num { color: var(--red); font-weight: 900; }
+  :global(.ground-ink) .section-head__num, :global(.ground-green) .section-head__num { color: var(--coral); }
+  :global(.ground-red) .section-head__num { color: var(--paper-light); }
+</style>

@@ -1,0 +1,257 @@
+---
+// /contact/ — Contact Cultural Shock Party: helplines first, routes as cards, one Netlify form with a topic select.
+// No personal email addresses, phone numbers or office address are published (team safety).
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import ContactHero from '../components/participate/ContactHero.astro';
+import SectionHead from '../components/ui/SectionHead.astro';
+import Stamp from '../components/ui/Stamp.astro';
+import TornEdge from '../components/ui/TornEdge.astro';
+import JoinBand from '../components/blocks/JoinBand.astro';
+import RouteCard from '../components/participate/RouteCard.astro';
+import ContactForm from '../components/participate/ContactForm.astro';
+import HelpNow from '../components/participate/HelpNow.astro';
+import QA from '../components/participate/QA.astro';
+import type { Tone } from '../lib/photos';
+
+const path = '/contact/';
+const title = 'Contact us: press, partnerships, schools and safeguarding';
+const description =
+  'Contact Cultural Shock Party, a Fourth Wave feminist movement: one form for questions, press, partners, schools and safeguarding. Helplines come first.';
+const crumbs = [{ name: 'Contact', href: path }];
+
+const ROUTES: {
+  id: string; title: string; who: string; include: string[]; note?: string; topic: string; cta: string;
+  photo?: { id: string; tone: Tone; alt: string; position?: string }; ground?: 'paper' | 'marigold' | 'pink';
+}[] = [
+  {
+    id: 'route-general', title: 'General questions', topic: 'general', cta: 'Ask a question',
+    who: 'Anything about Cultural Shock Party, the manifesto or this site. Check the FAQ first: it may already be there.',
+    include: ['Your question, in a sentence or two'],
+    photo: { id: '069-two-young-women-friends-delhi', tone: 'marigold', position: '50% 35%', alt: 'Two young women sit close together outdoors, smiling at the camera.' },
+  },
+  {
+    id: 'route-press', title: 'Press & interviews', topic: 'press', cta: 'Send a press request',
+    who: 'Journalists, podcasters, researchers and students writing about Cultural Shock Party or the Fourth Wave.',
+    include: ['Your publication or project', 'Your deadline', 'What you’d like to ask, and in what format'],
+    photo: { id: '079-notes-fountain-pen', tone: 'ink', position: '50% 55%', alt: 'A fountain pen rests on an open notebook headed Notes.' },
+  },
+  {
+    id: 'route-partner', title: 'Partnerships & collaborations', topic: 'partnerships', cta: 'Propose a collaboration',
+    who: 'Organisations, collectives, campuses and creators who want to make something together.',
+    include: ['Who you are and what you do', 'The idea, and the timeline'],
+    note: 'We stay independent: no party, candidate or funder gets a say in what we publish.',
+    photo: { id: '086-clasped-hands-overhead', tone: 'red', alt: 'Seen from above, many hands of different skin tones clasp one another.' },
+  },
+  {
+    id: 'route-schools', title: 'Schools & teachers', topic: 'schools', cta: 'Write to us about your class',
+    who: 'Teachers, principals, parents and youth workers who want to use our explainers with young people.',
+    include: ['The age group and the subject', 'What you’d like to use, or what you need'],
+    note: 'Please don’t send us pupils’ names or details.',
+    photo: { id: '071-new-delhi-library-reader', tone: 'green', position: '40% 40%', alt: 'A young woman in glasses reads a textbook at a library desk.' },
+  },
+  {
+    id: 'route-make', title: 'Write, design or research for us', topic: 'make', cta: 'Offer your skills',
+    who: 'Writers, designers, illustrators, researchers, translators, video-makers, coders and people who read the law.',
+    include: ['A link to your work', 'What you’d like to make', 'The languages you work in'],
+    note: 'Volunteering is for adults (18 and over) for now.',
+    photo: { id: 'in-039-2019-kolkata-pride-workshop-love-knows-no-gender', tone: 'pink', position: '60% 50%', alt: 'A person bends over a black poster, hand-painting white letters that read Love knows no gender.' },
+  },
+  {
+    id: 'route-data', title: 'Your data', topic: 'data', cta: 'Ask about your data', ground: 'marigold',
+    who: 'See what we hold about you, correct it, delete it, or withdraw your consent.',
+    include: ['The email you signed up with', 'What you’d like us to do'],
+    note: 'We reply to data requests within 30 days at the latest. If you’re not satisfied, you can complain to the Data Protection Board of India.',
+  },
+];
+
+const faqIds = ['is-csp-a-political-party', 'who-funds-csp', 'press-and-interviews', 'start-a-group-at-college'];
+const faq = await getCollection('faq');
+const faqItems = faqIds.map((id) => faq.find((e) => e.data.id === id)!.data);
+---
+<Base
+  title={title}
+  description={description}
+  pageType="ContactPage"
+  breadcrumbs={crumbs}
+  image="/og/contact.png"
+  imageAlt="Talk to us: contact Cultural Shock Party"
+  modified="2026-10-24"
+>
+  <ContactHero crumbs={crumbs}>
+    <nav class="fast" aria-label="Contact routes">
+      <ul role="list">
+        <li><a href="#route-safeguarding" class="fast__urgent">Safeguarding concern</a></li>
+        <li><a href="#route-press">Press</a></li>
+        <li><a href="#route-partner">Partnerships</a></li>
+        <li><a href="#route-schools">Schools</a></li>
+        <li><a href="#route-make">Write, design, research</a></li>
+        <li><a href="#route-data">Your data</a></li>
+      </ul>
+    </nav>
+  </ContactHero>
+
+  <!-- Danger strip: helplines before anything else -->
+  <section class="urgent ground-red" aria-labelledby="urgent-title">
+    <div class="wrap urgent__inner">
+      <h2 class="urgent__title" id="urgent-title">In danger right now?</h2>
+      <p class="urgent__text">Call <a href="tel:112"><strong>112</strong></a>. Don’t wait for an email from us. For a child, call <a href="tel:1098"><strong>1098</strong></a>; the National Women Helpline is <a href="tel:181"><strong>181</strong></a>.</p>
+      <a class="urgent__more" href="#route-safeguarding">All six helplines <span aria-hidden="true">↓</span></a>
+    </div>
+  </section>
+
+  <!-- 01 Routes -->
+  <section class="section routes" id="routes" aria-labelledby="routes-title">
+    <div class="wrap">
+      <div class="routes__head">
+        <SectionHead num="01" label="Routes" id="routes-title" title="Pick a route" lead="Seven routes, one form. Choosing the right one gets your message to the right person faster." />
+        <span class="routes__stamp" aria-hidden="true"><Stamp text="Seven ways in" sub="One form" color="ink" tilt={-9} /></span>
+      </div>
+      <div class="routes__grid">
+        {ROUTES.map((r, i) => <RouteCard {...r} n={String(i + 1).padStart(2, '0')} />)}
+      </div>
+
+      <article class="safe ground-ink grain" id="route-safeguarding" aria-labelledby="route-safeguarding-title">
+        <div class="safe__inner">
+          <div class="safe__help">
+            <HelpNow id="safe-help" level="h3" title="Helplines first" lead="If you or someone else is in danger, or needs to talk to someone now, these numbers are free in India. They answer faster than we can." />
+          </div>
+          <div class="safe__body">
+            <p class="label safe__n"><span>07</span> Route</p>
+            <h3 class="safe__title" id="route-safeguarding-title">Safeguarding concern</h3>
+            <p class="safe__lead">Worried about the safety of a child or an adult in connection with Cultural Shock Party: something at an event, online, or in a message from someone in CSP? Tell us. We treat every concern seriously and confidentially.</p>
+            <p class="label">Please include</p>
+            <ul class="safe__inc" role="list">
+              <li>What happened, when and where (online or offline)</li>
+              <li>How we can reach you safely</li>
+              <li>Please don’t name children or send images</li>
+            </ul>
+            <p class="safe__law small">In India, anyone who knows that a child is being sexually abused must tell the police or the Special Juvenile Police Unit (POCSO Act 2012, section 19). This is information, not legal advice.</p>
+            <div class="safe__ctas">
+              <a class="btn btn--paper" href="#contact-form" data-topic="safeguarding">Raise a concern <span class="arrow" aria-hidden="true">↓</span></a>
+              <a class="link-arrow" href="/safeguarding/">Our safeguarding policy <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <TornEdge color="var(--paper-deep)" seed={1} />
+
+  <!-- 02 The form -->
+  <section class="section ground-deep cform-sec" id="contact-form" aria-labelledby="cform-title">
+    <div class="wrap cform-sec__grid">
+      <div class="cform-sec__side">
+        <SectionHead num="02" label="Write to us" id="cform-title" title="One form. A real person." />
+        <dl class="expect">
+          <div>
+            <dt>When we reply</dt>
+            <dd>We’re a small volunteer team. We aim to reply within five working days, and to data requests within 30 days at the latest.</dd>
+          </div>
+          <div>
+            <dt>What we’re not</dt>
+            <dd>We’re not a helpline, a legal service or the police. If you need help now, use the numbers above.</dd>
+          </div>
+          <div>
+            <dt>What happens to your message</dt>
+            <dd>Only the people who handle your topic read it. We delete messages after 6 months.</dd>
+          </div>
+        </dl>
+        <p class="safety-note"><span class="label">Why there’s no email address here</span> We don’t publish personal email addresses or phone numbers, to keep our team safe. Everything comes through this form.</p>
+      </div>
+      <div class="cform-sec__form">
+        <ContactForm />
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 Before you write -->
+  <section class="section before" aria-labelledby="before-title">
+    <div class="wrap before__grid">
+      <div class="before__head">
+        <SectionHead num="03" label="Before you write" id="before-title" title="Already answered" lead="What journalists, partners and new groups ask us most. All 45 answers are on the FAQ." />
+        <a class="btn btn--ink" href="/faq/">Read the FAQ <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+      <div>
+        {faqItems.map((it, i) => <QA item={it} idPrefix="q-" open={i === 0} />)}
+      </div>
+    </div>
+  </section>
+
+  <JoinBand />
+</Base>
+
+<style>
+  .fast ul { display: flex; flex-wrap: wrap; gap: 8px; }
+  .fast a {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border: 2px solid var(--ink); background: var(--paper-light);
+    color: var(--ink); font-weight: 750; font-size: .92rem; text-decoration: none;
+  }
+  .fast a:hover { background: var(--ink); color: var(--paper-light); }
+  .fast a.fast__urgent { background: var(--red-ink); border-color: var(--red-ink); color: var(--paper-light); }
+  .fast a.fast__urgent:hover { background: var(--ink); border-color: var(--ink); }
+
+  .urgent { padding-block: 22px; border-bottom: var(--rule); }
+  .urgent__inner { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 10px 32px; }
+  .urgent__title { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(1.9rem, 3.4vw, 2.8rem); line-height: .9; }
+  .urgent__text { font-size: clamp(1.02rem, 1.4vw, 1.2rem); line-height: 1.45; max-width: 60ch; }
+  .urgent__text a { text-decoration-thickness: 2px; }
+  .urgent__text strong { font-weight: 900; font-size: 1.15em; }
+  .urgent__more { display: inline-flex; align-items: center; min-height: 44px; font-weight: 800; font-stretch: 85%; text-transform: uppercase; letter-spacing: .05em; }
+  .urgent a:focus-visible { outline-color: var(--paper-light); }
+
+  .routes__head { position: relative; }
+  .routes__stamp { position: absolute; right: 2%; top: 18px; }
+  .routes__stamp :global(.stamp__text) { font-size: 1.3rem; }
+  .routes__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 2.6vw, 34px); align-items: stretch; }
+
+  .safe { margin-top: clamp(36px, 5vw, 64px); padding: clamp(24px, 4vw, 48px); border: 3px solid var(--ink); scroll-margin-top: 90px; }
+  .safe__inner { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
+  .safe__help :global(.help) { border: 1.5px solid #5A554D; border-left: 10px solid var(--marigold); background: #26251F; }
+  .safe__body { display: grid; gap: 14px; align-content: start; }
+  .safe__n { display: flex; gap: .6em; align-items: baseline; color: #B9B0A0; }
+  .safe__n span { color: var(--coral); font-weight: 900; font-size: 1rem; }
+  .safe__title { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(2.4rem, 4.4vw, 3.8rem); line-height: .86; color: var(--paper-light); }
+  .safe__lead { font-size: 1.08rem; line-height: 1.5; color: var(--paper); }
+  .safe__inc { display: grid; gap: 4px; }
+  .safe__inc li { position: relative; padding-left: 18px; }
+  .safe__inc li::before { content: ''; position: absolute; left: 0; top: .6em; width: 8px; height: 8px; background: var(--marigold); transform: rotate(45deg); }
+  .safe__law { color: #CFC6B4; border-left: 3px solid var(--marigold); padding-left: 12px; }
+  .safe__ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; margin-top: 6px; }
+  .safe .btn--paper, .safe .btn--paper:hover { color: var(--ink); }
+  .safe .link-arrow { color: var(--paper); border-color: var(--marigold); }
+
+  .cform-sec__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(28px, 5vw, 72px); align-items: start; }
+  .cform-sec__side { position: sticky; top: 92px; display: grid; gap: 4px; }
+  .cform-sec__side :global(.section-head .h2) { max-width: 10ch; }
+  .expect { display: grid; border-top: 3px solid var(--ink); }
+  .expect > div { padding: 14px 0; border-bottom: 1px solid var(--line-soft); display: grid; gap: 4px; }
+  .expect dt { font-weight: 800; }
+  .expect dd { color: var(--ink-soft); line-height: 1.45; }
+  .safety-note { margin-top: 18px; display: grid; gap: 6px; padding: 14px 16px; background: var(--paper-light); border-left: 6px solid var(--red-ink); font-size: .95rem; line-height: 1.45; }
+  .safety-note .label { color: var(--red-ink); }
+
+  .before__grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: clamp(28px, 5vw, 80px); align-items: start; }
+  .before__head { position: sticky; top: 96px; display: grid; gap: 4px; justify-items: start; }
+
+  @media (max-width: 1000px) {
+    .routes__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .safe__inner { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 900px) {
+    .cform-sec__grid, .before__grid { grid-template-columns: 1fr; }
+    .cform-sec__side, .before__head { position: static; }
+    .urgent__inner { grid-template-columns: 1fr; }
+    .urgent__more { justify-self: start; }
+  }
+  @media (max-width: 640px) {
+    .routes__grid { grid-template-columns: 1fr; }
+    .routes__stamp { display: none; }
+    .safe { padding: 20px 16px; margin-inline: calc(-1 * var(--gutter) + 0px); border-left: 0; border-right: 0; }
+  }
+  /* SectionHead (shared) prints its number in --red, which is under 4.5:1 at label size on paper; use --red-ink here. */
+  :global(main .section-head .section-head__num) { color: var(--red-ink); }
+  /* JoinBand (shared): .ground-green a outranks .btn--paper, turning the button label marigold on paper. Keep it ink. */
+  :global(.join-band .btn--paper), :global(.join-band .btn--paper:hover) { color: var(--ink); }
+</style>

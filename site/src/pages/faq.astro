@@ -1,0 +1,182 @@
+---
+// /faq/ — 45 straight answers about Cultural Shock Party and feminism, grouped, answer-first, every number sourced.
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import FaqHero from '../components/participate/FaqHero.astro';
+import ShortAnswers from '../components/participate/ShortAnswers.astro';
+import FaqGroup from '../components/participate/FaqGroup.astro';
+import Ticker from '../components/ui/Ticker.astro';
+import TornEdge from '../components/ui/TornEdge.astro';
+import Annotation from '../components/ui/Annotation.astro';
+import Placard from '../components/ui/Placard.astro';
+import Shot from '../components/participate/Shot.astro';
+import JoinBand from '../components/blocks/JoinBand.astro';
+import { faqNode, abs } from '../lib/schema';
+import type { Tone } from '../lib/photos';
+
+const path = '/faq/';
+const entries = (await getCollection('faq')).map((e) => e.data).sort((a, b) => a.order - b.order);
+
+const GROUPS: {
+  key: (typeof entries)[number]['group']; id: string; n: string; title: string; dek: string;
+  photo: { id: string; tone: Tone; alt: string; caption?: string | false; position?: string; aspect?: string };
+}[] = [
+  {
+    key: 'About CSP', id: 'about-csp', n: '01', title: 'About CSP',
+    dek: 'Who we are, who funds us (nobody, yet), and what the name and the badge mean.',
+    photo: { id: 'in-050-delhi-jantar-mantar-red-instrument', tone: 'red', aspect: '4 / 3', position: '50% 70%', alt: 'The red-and-white curved stairways of an eighteenth-century astronomical instrument against a clear sky.', caption: 'Jantar Mantar observatory, New Delhi.' },
+  },
+  {
+    key: 'Joining and taking part', id: 'joining', n: '02', title: 'Joining & taking part',
+    dek: 'How to join, how old you need to be, and why five minutes on your phone counts.',
+    photo: { id: '066-hingoli-women-circle', tone: 'marigold', aspect: '4 / 3', alt: 'Women in bright saris sit in a wide circle on a grassy field, talking.', caption: false },
+  },
+  {
+    key: 'Feminism basics', id: 'feminism-basics', n: '03', title: 'Feminism basics',
+    dek: 'The Fourth Wave, intersectionality and the myths, in plain words with receipts.',
+    photo: { id: 'art-feminism-india-editathon-library', tone: 'green', aspect: '4 / 3', alt: 'Young people work on laptops at a long table in front of tall glass-fronted bookshelves.', caption: 'An Art+Feminism Wikipedia edit-a-thon at the Government Museum and Art Gallery, Chandigarh, April 2017.' },
+  },
+  {
+    key: 'Safety, data and trust', id: 'safety-data-trust', n: '04', title: 'Safety, data & trust',
+    dek: 'What happens to your data, how to report abuse, and how we keep young people safe.',
+    photo: { id: '087-hands-star-against-sky', tone: 'ink', aspect: '4 / 3', position: '50% 40%', alt: 'Several raised hands touch fingertips to make a star shape against a pale sky.', caption: false },
+  },
+  {
+    key: 'Issues and action', id: 'issues-action', n: '05', title: 'Issues & action',
+    dek: 'Reservation, care work, the manosphere, and how to make institutions answer.',
+    photo: { id: 'in-062-delhi-women-hindi-placard-apna-vada-pura-karo', tone: 'red', aspect: '4 / 3', position: '62% 40%', alt: 'Masked women march holding a handwritten placard in Hindi and English.', caption: 'A placard in Hindi and English, “keep your promise”, at a protest for policy change, 25 December 2021.' },
+  },
+];
+
+const groups = GROUPS.map((g) => ({ ...g, items: entries.filter((e) => e.group === g.key) }));
+
+const SHORT = [
+  { id: 'is-csp-a-political-party', big: 'No.', short: 'We’re a movement, not a registered political party, and we don’t contest elections.' },
+  { id: 'who-funds-csp', big: 'Nobody, yet.', short: 'We’re run by volunteers, and take no donations and no foreign money.' },
+  { id: 'can-boys-and-men-join', big: 'Yes.', short: 'Boys and men are invited. It’s written into the manifesto.' },
+  { id: 'how-old-do-i-need-to-be', big: '18', short: 'to sign up yourself. Any age to read, learn and share.' },
+  { id: 'what-happens-to-my-data', big: 'Yours.', short: 'We use it only for what you tick, and never share it with any party, candidate or advertiser.' },
+].map((s) => ({ ...s, q: entries.find((e) => e.id === s.id)!.q }));
+
+const title = 'FAQ: straight answers about CSP and feminism';
+const description =
+  'Cultural Shock Party is a Fourth Wave feminist movement, not a political party. Straight answers on joining, funding, your data, safety and feminism basics.';
+const crumbs = [{ name: 'FAQ', href: path }];
+// Head already emits the page node as @type FAQPage (@id …#page). Give the Q&A node the same @id so the two merge
+// into one FAQPage with mainEntity, instead of a second FAQPage and a first one missing mainEntity.
+const schema = [{ ...faqNode(path, entries.map((e) => ({ q: e.q, a: e.more ? `${e.a} ${e.more}` : e.a }))), '@id': `${abs(path)}#page` }];
+---
+<Base
+  title={title}
+  description={description}
+  pageType="FAQPage"
+  breadcrumbs={crumbs}
+  image="/og/faq.png"
+  imageAlt="Straight answers: the Cultural Shock Party FAQ"
+  modified="2026-10-24"
+  schema={schema}
+>
+  <FaqHero crumbs={crumbs} groups={groups.map((g) => ({ id: g.id, n: g.n, title: g.title, count: g.items.length }))} total={entries.length} updated="24 Oct 2026" />
+
+  <TornEdge color="var(--ink)" seed={2} />
+  <ShortAnswers items={SHORT} />
+
+  {groups.map((g, i) => (
+    <FaqGroup id={g.id} n={g.n} title={g.title} dek={g.dek} items={g.items} photo={g.photo} ground={i % 2 ? 'light' : 'paper'}>
+      {g.id === 'safety-data-trust' && (
+        <p slot="before" class="danger">
+          <span class="danger__tag label">In danger now?</span>
+          <span>Call <a href="tel:112"><strong>112</strong></a>. For a child, call <a href="tel:1098"><strong>1098</strong></a>. <a href="#helplines-india">All six helplines</a></span>
+        </p>
+      )}
+      {g.id === 'about-csp' && (
+        <div slot="side" class="side-note" aria-hidden="true">
+          <Placard shape="tape" color="red" size="s" tilt={-3} decorative>Party: not that kind</Placard>
+        </div>
+      )}
+    </FaqGroup>
+  ))}
+
+  <Ticker items={['Hope first', 'Receipts always', 'Ask us anything']} tone="marigold" />
+
+  <section class="ask section ground-pink grain" aria-labelledby="ask-title">
+    <div class="wrap ask__inner">
+      <div class="ask__text">
+        <p class="label">Still wondering?</p>
+        <h2 class="h2" id="ask-title">Didn’t find your question?</h2>
+        <p class="lead ask__lead">Ask us. A person reads every message, and the best questions end up on this page, answered for everyone.</p>
+        <div class="ask__ctas">
+          <a class="btn btn--ink" href="/contact/">Ask us directly <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="link-arrow" href="/resources/glossary/">Look up a word in the glossary <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="ask__art">
+        <Shot
+          id="in-055-chennai-woman-reading-on-kerb"
+          tone="ink"
+          aspect="4 / 3"
+          position="60% 50%"
+          tilt={-2}
+          tape="tr"
+          caption={false}
+          alt="A young woman sits on a kerb, reading a paperback."
+          sizes="(min-width: 760px) 36vw, 90vw"
+          widths={[360, 560, 800]}
+        />
+        <div class="ask__placard"><Placard text="Just ask" color="marigold" size="l" tilt={-6} decorative /></div>
+        <Annotation text="no question is too small" arrow="left" color="ink" tilt={-3} width="22ch" />
+      </div>
+    </div>
+  </section>
+
+  <JoinBand
+    title="Got your answer? Take the first step."
+    text="Five minutes on your phone is a real start. Read the manifesto, add your name, then send it to one friend."
+    primary={{ label: 'Join the movement', href: '/join/' }}
+    secondary={{ label: 'Read the manifesto', href: '/manifesto/' }}
+    placard="Start where you are"
+  />
+</Base>
+
+<script>
+  // Deep links (/faq/#question-id) open the matching answer. Without JS the anchor still scrolls to the question.
+  const openFromHash = () => {
+    const id = decodeURIComponent(location.hash.slice(1));
+    if (!id) return;
+    const el = document.getElementById(id);
+    if (el instanceof HTMLDetailsElement) el.open = true;
+  };
+  openFromHash();
+  window.addEventListener('hashchange', openFromHash);
+</script>
+
+<style>
+  .danger {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin-bottom: 18px; padding: 12px 16px;
+    background: var(--red-ink); color: var(--paper-light); font-weight: 600; line-height: 1.4;
+  }
+  .danger__tag { background: var(--paper-light); color: var(--red-ink); padding: .3em .55em .25em; }
+  .danger a { color: var(--paper-light); text-decoration-thickness: 2px; }
+  .danger a:hover { color: var(--paper-light); text-decoration-thickness: 3px; }
+  .danger a:focus-visible { outline-color: var(--paper-light); }
+  .side-note { margin-top: 6px; }
+
+  .ask__inner { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 40px; align-items: center; }
+  .ask__text { display: grid; gap: 20px; }
+  .ask__text .h2 { max-width: 12ch; }
+  .ask__lead { color: var(--ink); }
+  .ask__ctas { display: flex; flex-wrap: wrap; gap: 18px 28px; align-items: center; }
+  .ask .link-arrow { border-color: var(--ink); }
+  .ask__art { position: relative; padding: 10px 0 40px; }
+  .ask__art :global(.photo__img) { border: 8px solid var(--paper-light); box-shadow: 6px 7px 0 rgba(29, 28, 24, .22); }
+  .ask__placard { position: absolute; left: -8%; bottom: 0; z-index: 3; }
+  .ask__art :global(.annot) { position: absolute; left: 47%; bottom: -30px; }
+  @media (max-width: 760px) {
+    .ask__inner { grid-template-columns: 1fr; }
+    .ask__art { max-width: 420px; width: 90%; justify-self: center; }
+    .ask__placard { left: -4%; }
+    .ask__art :global(.annot) { display: none; }
+  }
+  /* JoinBand (shared): .ground-green a outranks .btn--paper, turning the button label marigold on paper. Keep it ink. */
+  :global(.join-band .btn--paper), :global(.join-band .btn--paper:hover) { color: var(--ink); }
+</style>

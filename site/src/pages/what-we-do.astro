@@ -1,0 +1,358 @@
+---
+// /what-we-do/: the engine, the six programmes (STRATEGY §6, names fixed), the engagement ladder and our ground rules.
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/blocks/PageHero.astro';
+import SectionHead from '../components/ui/SectionHead.astro';
+import Engine from '../components/blocks/Engine.astro';
+import Ticker from '../components/ui/Ticker.astro';
+import TornEdge from '../components/ui/TornEdge.astro';
+import Receipt from '../components/ui/Receipt.astro';
+import Annotation from '../components/ui/Annotation.astro';
+import Placard from '../components/ui/Placard.astro';
+import JoinBand from '../components/blocks/JoinBand.astro';
+import Programme from '../components/wwd/Programme.astro';
+import SeatWaffle from '../components/wwd/SeatWaffle.astro';
+import Ladder from '../components/wwd/Ladder.astro';
+import WontDo from '../components/wwd/WontDo.astro';
+import { abs } from '../lib/schema';
+
+const path = '/what-we-do/';
+const title = 'What we do: from ideas to power';
+const description =
+  'Cultural Shock Party, a Fourth Wave feminist movement, runs six programmes that turn feminist ideas into research, public consciousness and collective action.';
+const crumbs = [{ name: 'What we do', href: path }];
+
+const STAGE = ['Ideas', 'Research', 'Public consciousness', 'Collective action'];
+const PROGRAMMES = [
+  { id: 'lab', num: '01', name: 'The Fourth Wave Lab', stage: 1, line: 'Essays, manifestos and political theory: what should this wave demand?' },
+  { id: 'receipts-desk', num: '02', name: 'The Receipts Desk', stage: 2, line: 'Evidence, data and investigations that test ideas against real lives and institutions.' },
+  { id: 'memory-project', num: '03', name: 'The Memory Project', stage: 3, line: 'A living archive and timeline of the struggles that brought us here, so they are never lost again.' },
+  { id: 'culture-studio', num: '04', name: 'The Culture Studio', stage: 3, line: 'Explainers, zines, posters, reels and art that move findings from reports into group chats.' },
+  { id: 'the-street', num: '05', name: 'The Street', stage: 4, line: 'Teach-ins, reading circles, marches and joyful, peaceful, lawful public action.' },
+  { id: 'accountability-watch', num: '06', name: 'The Accountability Watch', stage: 4, line: 'Promise trackers, letters and public records that make institutions answer.' },
+] as const;
+const P = Object.fromEntries(PROGRAMMES.map((p) => [p.id, p]));
+
+const SRC = {
+  dataful: 'https://insights.dataful.in/articles/women-in-lok-sabha-at-138-slow-gains-persistent-gaps',
+  scroll: 'https://scroll.in/latest/1068900/lok-sabha-polls-74-women-mps-elected-this-time-slight-dip-from-2019',
+  adr: 'https://adrindia.org/content/Womens-Political-Participation-and-Representation-in-India-2026',
+  president: 'https://presidentofindia.nic.in/press_releases/president-droupadi-murmu-interacts-scheduled-tribe-women-representatives-panchayati',
+  livelaw: 'https://www.livelaw.in/top-stories/lok-sabha-rejects-constitution-131st-bill-2026-on-delimitation-530736',
+  prs: 'https://prsindia.org/billtrack/the-delimitation-bill-2026',
+  theprint: 'https://theprint.in/india/amid-daily-protests-govt-denotifies-jantar-mantar-as-protest-venue-which-are-the-3-new-sites/3069058/',
+};
+
+const rungs = [
+  { where: 'On your phone', time: '5 min', role: 'Reader', text: 'Read one explainer. Save one fact card. Check the receipts.', photo: '054-sydney-phone-filming-protest-bw', tone: 'ink', href: '/resources/', linkLabel: 'Start with a guide' },
+  { where: 'In the group chat', role: 'Sharer', text: 'Send a fact card to the group chat. Answer one myth kindly, with a source.', photo: '069-two-young-women-friends-delhi', tone: 'pink', href: '/resources/feminism-myths-and-receipts/', linkLabel: 'Ten myths, with receipts' },
+  { where: 'At school, college or work', role: 'Signer · Member', text: 'Sign the manifesto. Start a reading circle. Ask who sits on your workplace’s POSH committee.', photo: 'in-060-new-delhi-college-students-laughing-together', tone: 'marigold', href: '/manifesto/', linkLabel: 'Sign the manifesto' },
+  { where: 'On the street', role: 'Organiser', text: 'Come to a teach-in or a peaceful, lawful march, and bring a friend. Yes, boys too.', photo: '062-india-we-want-job-security', tone: 'red', href: '/resources/protest-safety-india/', linkLabel: 'Read the safety guide' },
+  { where: 'In the institutions', role: 'Lead', text: 'Write to your MP and MLA. Track promises. Hold every institution to the Constitution, in public, with records.', photo: 'in-051-delhi-central-avenue-autos-rashtrapati-bhavan', tone: 'green', position: '50% 60%', href: '/join/', linkLabel: 'Join the movement' },
+] as const;
+
+const refusals = [
+  { no: 'Corporate feminism', text: 'Feminism is not a brand, a sale or a month. We will not sell slogans, and we will not lend our name to pinkwashing.' },
+  { no: 'Unsourced claims', text: 'Every number carries a source and a date. If we cannot show the receipt, we do not print it. If we get something wrong, we correct it in public.' },
+  { no: 'Party affiliation', text: 'We are an independent movement, not a political party, and we do not stand in elections. We criticise laws, systems and institutions, never voters.' },
+  { no: 'Shaming', text: 'Not of voters, not of boys and men as a class, not of anyone still learning. We argue with ideas and leave people their dignity.' },
+  { no: 'Violence', text: 'Peaceful, lawful, creative, collective. We shock the culture, never people.' },
+];
+
+const schema = [
+  {
+    '@type': 'ItemList',
+    '@id': abs(path) + '#programmes',
+    name: 'Cultural Shock Party programmes',
+    description: 'Six programmes that map onto the Cultural Shock Party engine: ideas, research, public consciousness and collective action.',
+    numberOfItems: PROGRAMMES.length,
+    itemListElement: PROGRAMMES.map((p, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: p.name,
+      description: `${STAGE[p.stage - 1]}: ${p.line}`,
+      url: abs(path) + '#' + p.id,
+    })),
+  },
+];
+---
+<Base title={title} description={description} pageType="WebPage" breadcrumbs={crumbs} schema={schema} image="/og/what-we-do.png" imageAlt="What we do: from ideas to power. Cultural Shock Party">
+  <PageHero
+    label="What we do"
+    title="From ideas to power"
+    lead="Six programmes, one engine: ideas into research, research into public consciousness, public consciousness into collective political action. We’re new, so here is what we’re building first, and the receipts as we go."
+    crumbs={crumbs}
+    photo="in-022-2021-tikri-iwd-stage-woman-addressing-crowd"
+    tone="red"
+    photoPosition="52% 40%"
+    meta={['6 programmes', 'All now building, 2026']}
+  >
+    <div class="hero-ctas">
+      <a class="btn" href="#programmes">See the six programmes <span class="arrow" aria-hidden="true">↓</span></a>
+      <a class="link-arrow" href="#ladder">Find your first step <span aria-hidden="true">→</span></a>
+    </div>
+  </PageHero>
+
+  <!-- The engine, large, plus the programme index -->
+  <section class="section ground-light engine-sec" id="engine" aria-labelledby="engine-title">
+    <div class="wrap">
+      <div class="engine-sec__head">
+        <SectionHead label="The engine" title="How an idea becomes power" id="engine-title" lead="Our theory of change has four stages. Every programme plugs into one of them, so nothing we make is decoration: each piece has a job." />
+        <Annotation text="read it left to right, then start again" arrow="down" tilt={-5} width="13ch" />
+      </div>
+      <Engine heading="h3" />
+
+      <div class="index" id="programmes">
+        <h2 class="index__title"><span class="label">The programmes</span> <span class="index__big">Six programmes. All of them new.</span></h2>
+        <ol class="index__list" role="list">
+          {PROGRAMMES.map((p) => (
+            <li>
+              <a class="index__card" href={`#${p.id}`}>
+                <span class="index__num" aria-hidden="true">{p.num}</span>
+                <span class="index__name">{p.name}</span>
+                <span class="label index__stage">Stage 0{p.stage} · {STAGE[p.stage - 1]}</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <Programme
+    {...P['lab']}
+    ground="paper"
+    outputs={[
+      { title: 'Manifesto v1.0, open for consultation', text: 'Twelve positions, published as a draft so that you can sign it, argue with it and suggest edits.', href: '/manifesto/', linkLabel: 'Read the draft manifesto' },
+      { title: 'The Fourth Wave essays', text: 'Short essays in plain words on the big questions: care work, consent, caste, representation, and what boys are being sold online.' },
+      { title: 'A reading and watching list', text: 'The books, films and reports this wave stands on, chosen so that you can start anywhere.', href: '/resources/fourth-wave-reading-list/', linkLabel: 'Open the reading list' },
+    ]}
+    take={[
+      { label: 'Comment on the manifesto', href: '/manifesto/' },
+      { label: 'What is the Fourth Wave?', href: '/resources/what-is-fourth-wave-feminism/' },
+    ]}
+    photos={[
+      { id: '1975-den-haag-dolle-mina-emancipation-weekend', tone: 'ink', note: 'Dolle Mina emancipation weekend, The Hague, 24 May 1975: a discussion circle (Nationaal Archief).' },
+      { id: '073-sticky-notes-workshop-milan', tone: 'marigold', note: 'Illustrative stock photo.' },
+    ]}
+  />
+
+  <TornEdge color="var(--ink)" seed={2} />
+  <Programme
+    {...P['receipts-desk']}
+    ground="ink"
+    flip
+    outputs={[
+      { title: 'The Representation Tracker', text: 'How many women sit in the Lok Sabha, the state assemblies and the panchayats, updated when the numbers change. A first look is below.' },
+      { title: 'Fact cards for the group chat', text: 'One number, one source, one date. Sized to send, built to survive an argument.' },
+      { title: 'Myths, checked', text: 'The things people say about feminism, tested against the data.', href: '/resources/feminism-myths-and-receipts/', linkLabel: 'Read ten myths, and the receipts' },
+    ]}
+    take={[
+      { label: 'Read the women’s reservation explainer', href: '/resources/womens-reservation-act-explained/' },
+      { label: 'Send us a source to check', href: '/contact/' },
+    ]}
+    photos={[
+      { id: 'in-053-greater-noida-student-studying-in-library', tone: 'red', note: 'Illustrative stock photo.' },
+      { id: '081-library-card-catalogue-reader', tone: 'marigold', note: 'Illustrative stock photo.' },
+    ]}
+  >
+    <div class="wrap tracker">
+      <header class="tracker__head">
+        <p class="label tracker__kicker">Representation Tracker · first look</p>
+        <h3 class="tracker__title">Where women sit, and where they don’t</h3>
+      </header>
+      <div class="tracker__grid">
+        <SeatWaffle women={75} title="Women in the Lok Sabha, as of April 2026" caption="Each square is one of the 543 Lok Sabha seats. 74 women were elected in June 2024, and a by-election later brought the number to 75. ">
+          Sources: <a href={SRC.dataful} rel="noopener">Dataful, from Election Commission data</a> (24 Apr 2026); <a href={SRC.scroll} rel="noopener">Scroll</a> (6 Jun 2024).
+        </SeatWaffle>
+        <div class="tracker__receipts">
+          <Receipt figure="9%" label="of state assembly MLAs are women: 390 of 4,123" source="ADR, Women’s political participation and representation in India 2026" href={SRC.adr} date="Mar 2026" tone="paper" tilt={-1.2} />
+          <Receipt figure="46%" label="of elected panchayat members are women, about 14 lakh, where at least a third of seats are reserved" source="President of India, press release" href={SRC.president} date="Jan 2025" tone="marigold" tilt={1.4} />
+        </div>
+      </div>
+      <p class="tracker__note">Where seats are reserved, the numbers look very different. That is why the one-third law matters, and why we will track it until it starts.</p>
+    </div>
+  </Programme>
+
+  <TornEdge color="var(--paper-deep)" seed={3} />
+  <Programme
+    {...P['memory-project']}
+    ground="deep"
+    outputs={[
+      { title: 'The public timeline', text: 'Forty milestones from 1848 to 2026, India first, each with its sources. It is live now.', href: '/memory/', linkLabel: 'Explore the timeline' },
+      { title: 'An archive of movement material', text: 'Posters, pamphlets, photos and stories, gathered privately with consent, published only with permission, and backed up so that they outlive any one website.' },
+      { title: 'Forgotten foremothers', text: 'Short profiles of Indian feminists the textbooks skipped.', href: '/resources/indian-feminists-history-forgot/', linkLabel: 'Meet 12 Indian feminists' },
+    ]}
+    take={[
+      { label: 'Explore the timeline', href: '/memory/' },
+      { label: 'Add something to the archive', href: '/contact/' },
+    ]}
+    photos={[
+      { id: '2017-long-beach-grandmothers-name-chalk', tone: 'pink', note: '“What’s Your Grandmother’s Name?”, chalk art where passers-by added names, Long Beach, California, 2017.' },
+      { id: '1908-womens-freedom-league-banner', tone: 'red', note: 'Women’s Freedom League banner, 1908–09: “Dare to be Free” (The Women’s Library, LSE).' },
+      { id: '2021-madrid-ciudad-lineal-feminist-mural', tone: 'ink', note: 'Feminist mural of foremothers, Ciudad Lineal, Madrid, photographed 2021.' },
+    ]}
+  />
+
+  <TornEdge color="var(--pink)" seed={1} />
+  <Programme
+    {...P['culture-studio']}
+    ground="pink"
+    flip
+    outputs={[
+      { title: 'Explainers and reels', text: 'Sixty-second explainers for Instagram Reels and YouTube Shorts, each one linked back to its sources.' },
+      { title: 'Zines and posters', text: 'Print-at-home zines and posters, free to copy and share.' },
+      { title: 'A plain-words glossary', text: 'Feminist terms explained in a sentence or two, with the Hindi word where there is a common one.', href: '/resources/glossary/', linkLabel: 'Open the glossary' },
+    ]}
+    take={[
+      { label: 'Make something with us', href: '/join/' },
+      { label: 'Look up a word', href: '/resources/glossary/' },
+    ]}
+    photos={[
+      { id: 'in-039-2019-kolkata-pride-workshop-love-knows-no-gender', tone: 'ink', note: 'Painting a poster at the Kolkata Rainbow Pride Walk workshop, 21 December 2019.' },
+      { id: '077-zines-on-a-table', tone: 'marigold', note: 'Illustrative stock photo.' },
+    ]}
+    placard="Culture is where politics starts"
+  />
+
+  <TornEdge color="var(--green)" seed={2} />
+  <Programme
+    {...P['the-street']}
+    ground="green"
+    outputs={[
+      { title: 'Teach-ins and reading circles', text: 'Small, free sessions in colleges and community spaces, and a kit so that anyone can run one.', href: '/resources/how-to-join-or-start-a-feminist-group/', linkLabel: 'How to start a group at your college' },
+      { title: 'Peaceful public action', text: 'Marches and gatherings that are joyful, lawful and planned with our safety guide.', href: '/resources/protest-safety-india/', linkLabel: 'Read the protest safety guide' },
+      { title: 'Check before you plan', text: 'Protest rules change. In October 2026 Jantar Mantar was de-notified as a protest site, and Ramlila, Burari and CBD Grounds were named instead. Always check the current Delhi Police order.', href: SRC.theprint, linkLabel: 'ThePrint’s report on the new sites (12 Oct 2026)' },
+    ]}
+    take={[
+      { label: 'Read the protest safety guide', href: '/resources/protest-safety-india/' },
+      { label: 'Start a reading circle', href: '/resources/how-to-join-or-start-a-feminist-group/' },
+    ]}
+    photos={[
+      { id: 'in-008-2024-kolkata-street-meeting-megaphones', tone: 'marigold', note: 'A street meeting and street play for justice in the RG Kar case, Sakherbazar, Kolkata, 15 October 2024.' },
+      { id: '2024-paris-8m-drums', tone: 'red', note: 'A women’s drum corps at the 8 March 2024 demonstration in Paris.' },
+    ]}
+  />
+
+  <TornEdge color="var(--paper-light)" seed={3} />
+  <Programme
+    {...P['accountability-watch']}
+    ground="light"
+    flip
+    outputs={[
+      { title: 'The reservation watch', text: 'One-third of seats for women is now law, but it has not started. We will track every step until it does.', href: '/resources/womens-reservation-act-explained/', linkLabel: 'The Women’s Reservation Act, explained' },
+      { title: 'Open letters, on the record', text: 'Documented letters that hold institutions to the Constitution: equality (Articles 14 and 15) and the right to life with dignity (Article 21).' },
+      { title: 'Promise trackers', text: 'What was promised, by which institution, when, and what has happened since. Records, not rumours.' },
+    ]}
+    take={[
+      { label: 'Read the reservation explainer', href: '/resources/womens-reservation-act-explained/' },
+      { label: 'Tell us what to track', href: '/contact/' },
+    ]}
+    photos={[
+      { id: 'in-062-delhi-women-hindi-placard-apna-vada-pura-karo', tone: 'ink', note: 'A placard in Hindi and English, “keep your promise”, at a protest for policy change, December 2021.', position: '62% 40%' },
+      { id: '042-whatever-youre-not-changing-bw', tone: 'red', note: 'Illustrative stock photo.' },
+    ]}
+    annotate={{ text: '“keep your promise”', arrow: 'left', top: '30%', right: '-4%', color: 'red', width: '11ch', tilt: -6 }}
+  >
+    <div class="wrap watch">
+      <p class="label watch__kicker">The reservation watch · where it stands</p>
+      <div class="watch__grid">
+        <Receipt figure="16 Apr 2026" label="The Women’s Reservation Act came into force" note="But one-third of seats only starts after a census and a redrawing of constituencies." source="LiveLaw" href={SRC.livelaw} date="Apr 2026" tone="marigold" tilt={-1} />
+        <Receipt figure="298–230" label="Lok Sabha vote on 17 April 2026 on a bill to start the quota sooner" note="It needed two-thirds of members voting, so it failed." source="LiveLaw" href={SRC.livelaw} date="17 Apr 2026" tone="ink" tilt={1.2} />
+        <Receipt figure="2029" label="No redrawing of seats is expected before the 2029 election, so no reserved seats then" source="PRS Legislative Research, The Delimitation Bill, 2026" href={SRC.prs} date="Apr 2026" tone="pink" tilt={-1} />
+      </div>
+    </div>
+  </Programme>
+
+  <Ticker items={['Hope first', 'Receipts always', 'Start where you are']} tone="red" />
+
+  <!-- Engagement ladder -->
+  <section class="section ladder-sec" id="ladder" aria-labelledby="ladder-title">
+    <div class="wrap">
+      <SectionHead label="The engagement ladder" title="Start where you are" id="ladder-title" lead="Five rungs, from five minutes on your phone to the institutions that run the country. Climb at your own speed. Every rung counts." />
+      <Ladder rungs={rungs as any} />
+      <p class="ladder-sec__minor"><strong>Under 18?</strong> Rungs one and two are yours, and every guide is free to read without signing up. Joining needs a parent’s or guardian’s consent.</p>
+    </div>
+  </section>
+
+  <!-- What we won't do -->
+  <section class="section ground-deep wont-sec" id="ground-rules" aria-labelledby="wont-title">
+    <div class="wrap wont-sec__grid">
+      <div class="wont-sec__head">
+        <SectionHead label="Ground rules" title="What we won’t do" id="wont-title" lead="Clear values, plural politics. Five lines we hold in every programme." />
+        <Placard text="Shock the culture, not people" color="pink" shape="sticker" tilt={4} decorative />
+      </div>
+      <WontDo items={refusals} />
+    </div>
+  </section>
+
+  <JoinBand />
+</Base>
+
+<style>
+  .hero-ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; margin-top: 6px; }
+
+  /* engine + index */
+  .engine-sec__head { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 24px; }
+  .engine-sec__head :global(.annot) { margin-bottom: 18px; margin-right: 4%; }
+  .index { margin-top: clamp(56px, 8vw, 96px); }
+  .index__title { display: grid; gap: 10px; margin-bottom: 26px; padding-top: 12px; border-top: 3px solid var(--line); }
+  .index__big { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(2rem, 4.4vw, 3.4rem); line-height: .9; }
+  .index__list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-left: 1px solid var(--line); }
+  .index__card {
+    display: grid; gap: 10px; align-content: start; min-height: 100%; padding: 18px 20px 22px;
+    border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--ink); text-decoration: none;
+    transition: background .2s var(--ease);
+  }
+  .index__list li:nth-child(-n+3) .index__card { border-top: 1px solid var(--line); }
+  .index__card:hover { background: var(--marigold); color: var(--ink); }
+  .index__num { font-weight: 900; font-stretch: var(--display-stretch); font-size: 3rem; line-height: .8; color: var(--red); }
+  .index__name { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(1.5rem, 2.4vw, 2.1rem); line-height: .92; }
+  .index__stage { color: var(--ink-soft); }
+
+  /* receipts desk: tracker */
+  .tracker { position: relative; z-index: 2; margin-top: clamp(56px, 8vw, 96px); }
+  .tracker__head { display: grid; gap: 10px; padding-top: 12px; border-top: 3px solid var(--line); margin-bottom: 28px; }
+  .tracker__kicker { color: var(--marigold); }
+  .tracker__title { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(2rem, 4.4vw, 3.4rem); line-height: .9; max-width: 18ch; }
+  .tracker__grid { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); gap: clamp(28px, 4vw, 56px); align-items: start; }
+  .tracker__receipts { display: grid; gap: 26px; color: var(--ink); }
+  .tracker__note { margin-top: 30px; font-family: var(--font-serif); font-style: italic; font-size: clamp(1.25rem, 2vw, 1.6rem); line-height: 1.25; max-width: 40ch; }
+
+  /* shared-bug workaround: grounds recolour every <a>, which turns the JoinBand button text marigold on paper */
+  :global(.join-band a.btn) { color: var(--btn-fg); }
+
+  /* accountability: receipts */
+  .watch { position: relative; z-index: 2; margin-top: clamp(56px, 8vw, 88px); }
+  .watch__kicker { padding-top: 12px; border-top: 3px solid var(--line); margin-bottom: 24px; color: var(--red-ink); }
+  .watch__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 36px); align-items: start; }
+  .watch__grid :global(.receipt__figure) { font-size: clamp(2.8rem, 5vw, 4.4rem); }
+
+  /* ladder */
+  .ladder-sec__minor { margin-top: 32px; max-width: 62ch; padding: 14px 18px; border-left: 6px solid var(--red); background: var(--paper-light); font-size: .98rem; }
+
+  /* won't do */
+  .wont-sec__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(28px, 5vw, 80px); align-items: start; }
+  .wont-sec__head { position: sticky; top: 100px; display: grid; gap: 10px; justify-items: start; }
+  .wont-sec__head :global(.placard) { margin-left: 8px; }
+
+  @media (max-width: 1000px) {
+    .tracker__grid { grid-template-columns: minmax(0, 1fr); }
+    .tracker__receipts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 900px) {
+    .index__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .index__list li:nth-child(3) .index__card { border-top: 0; }
+    .index__list li:nth-child(-n+2) .index__card { border-top: 1px solid var(--line); }
+    .watch__grid { grid-template-columns: minmax(0, 1fr); max-width: 460px; }
+    .wont-sec__grid { grid-template-columns: minmax(0, 1fr); }
+    .wont-sec__head { position: static; }
+    .engine-sec__head { grid-template-columns: minmax(0, 1fr); }
+    .engine-sec__head :global(.annot) { display: none; }
+  }
+  @media (max-width: 560px) {
+    .index__list { grid-template-columns: minmax(0, 1fr); }
+    .index__list li:nth-child(2) .index__card { border-top: 0; }
+    .tracker__receipts { grid-template-columns: minmax(0, 1fr); }
+  }
+</style>

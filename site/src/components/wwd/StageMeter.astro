@@ -1,0 +1,27 @@
+---
+// Four-segment meter showing which engine stage a programme belongs to.
+// The visible segments are decorative; the accessible text names the stage.
+export interface Props { stage: 1 | 2 | 3 | 4 }
+const { stage } = Astro.props;
+const STAGES = ['Ideas', 'Research', 'Public consciousness', 'Collective action'];
+---
+<p class="meter">
+  <span class="label meter__label">Engine stage <span class="meter__n">0{stage}</span> <span class="meter__name">{STAGES[stage - 1]}</span></span>
+  <span class="meter__bar" aria-hidden="true">
+    {STAGES.map((s, i) => <span class:list={['meter__seg', { 'is-on': i + 1 === stage, 'is-past': i + 1 < stage }]} title={s}></span>)}
+  </span>
+</p>
+
+<style>
+  .meter { display: grid; gap: 8px; max-width: 360px; }
+  .meter__label { display: flex; flex-wrap: wrap; gap: .5em; align-items: baseline; }
+  .meter__n { color: var(--red-ink); font-weight: 900; }
+  :global(.ground-ink) .meter__n { color: var(--coral); }
+  :global(.ground-green) .meter__n { color: var(--marigold); }
+  .meter__bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+  .meter__seg { height: 10px; border: 2px solid currentColor; }
+  .meter__seg.is-past { background: repeating-linear-gradient(135deg, currentColor 0 2px, transparent 2px 6px); opacity: .55; }
+  .meter__seg.is-on { background: var(--red); border-color: var(--red); }
+  :global(.ground-ink) .meter__seg.is-on { background: var(--coral); border-color: var(--coral); }
+  :global(.ground-green) .meter__seg.is-on { background: var(--marigold); border-color: var(--marigold); }
+</style>

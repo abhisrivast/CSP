@@ -1,0 +1,217 @@
+---
+// Article template for every entry in src/content/articles (Guide, Explainer, Toolkit, Data, History, Essay, Reading list).
+// Calm journal layout: hero → "In 30 seconds" → contents → prose (with wide breakouts) → FAQ → sources → share → read next → join.
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ArticleHero from '../../components/resources/ArticleHero.astro';
+import Tldr from '../../components/resources/Tldr.astro';
+import Faq from '../../components/ui/Faq.astro';
+import Sources from '../../components/blocks/Sources.astro';
+import ShareBar from '../../components/blocks/ShareBar.astro';
+import Card from '../../components/blocks/Card.astro';
+import JoinBand from '../../components/blocks/JoinBand.astro';
+import { articleNode, faqNode } from '../../lib/schema';
+import { getArticles, readingMinutes, relatedFor, isoDate, KIND_NOUN, type Article } from '../../components/resources/lib';
+
+export async function getStaticPaths() {
+  const all = await getArticles();
+  return all.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props as { entry: Article };
+const d = entry.data;
+const { Content, headings } = await render(entry);
+const all = await getArticles();
+const path = `/resources/${entry.id}/`;
+const minutes = readingMinutes(entry);
+const related = relatedFor(entry, all, 3);
+const toc = headings.filter((h) => h.depth === 2);
+const crumbs = [{ name: 'Resources', href: '/resources/' }, { name: d.title, href: path }];
+const image = `/og/resources-${entry.id}.png`;
+const published = isoDate(d.date);
+const modified = d.updated ? isoDate(d.updated) : undefined;
+
+const schema: object[] = [
+  articleNode({
+    path, title: d.title, description: d.description, image, datePublished: published, dateModified: modified,
+    authorName: d.author, section: d.kind, keywords: [d.cluster.replace(/-/g, ' '), d.kind.toLowerCase(), 'fourth wave feminism'],
+    type: d.kind === 'Essay' ? 'BlogPosting' : 'Article',
+  }),
+  ...(d.faq.length ? [faqNode(path, d.faq)] : []),
+];
+---
+<Base
+  title={d.title}
+  description={d.description}
+  type="article"
+  pageType="WebPage"
+  published={published}
+  modified={modified}
+  author={d.author}
+  tags={[d.kind, d.cluster]}
+  breadcrumbs={crumbs}
+  schema={schema}
+  image={image}
+  imageAlt={`${d.title}: ${d.kind} from Cultural Shock Party`}
+  bodyClass="page-article"
+>
+  <ArticleHero entry={entry} minutes={minutes} crumbs={crumbs} />
+
+  <div class="article">
+    <div class="article__lede">
+      <Tldr items={d.tldr} minutes={minutes} />
+      {toc.length >= 3 && (
+        <nav class="toc" aria-labelledby="toc-title">
+          <h2 class="label toc__title" id="toc-title">In this {KIND_NOUN[d.kind] ?? 'piece'}</h2>
+          <ol role="list">
+            {toc.map((h, i) => (
+              <li><a href={`#${h.slug}`}><span class="toc__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span><span>{h.text}</span></a></li>
+            ))}
+          </ol>
+        </nav>
+      )}
+    </div>
+
+    <div class="prose article__prose">
+      <Content />
+    </div>
+
+    {d.faq.length > 0 && (
+      <section class="article__faq" aria-labelledby="faq-title">
+        <p class="label article__faq-label"><span class="red-ink">FAQ</span> / Straight answers</p>
+        <h2 class="article__faq-title" id="faq-title">Questions people ask</h2>
+        <div class="article__faq-list">
+          {d.faq.map((f, i) => (
+            <Faq q={f.q} id={`faq-${i + 1}`} open={i === 0}><p>{f.a}</p></Faq>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <div class="article__end">
+      {d.sources.length > 0 && <Sources sources={d.sources} />}
+      <p class="article__note small">
+        This is an explainer, not legal or medical advice. Spotted a mistake or a newer figure? <a href="/contact/">Tell us</a> and we will correct it in public.
+      </p>
+      <ShareBar title={d.title} path={path} text={d.title} />
+    </div>
+  </div>
+
+  {related.length > 0 && (
+    <section class="read-next ground-deep" aria-labelledby="read-next-title">
+      <div class="wrap">
+        <div class="read-next__head">
+          <p class="label">Keep going</p>
+          <h2 class="h2" id="read-next-title">Read next</h2>
+          <a class="link-arrow" href="/resources/">All guides and explainers <span aria-hidden="true">→</span></a>
+        </div>
+        <ul class="read-next__grid" role="list">
+          {related.map((r) => (
+            <li>
+              <Card href={`/resources/${r.id}/`} title={r.data.title} kicker={r.data.kind} meta={[`${readingMinutes(r)} min`]} dek={r.data.description} photo={r.data.heroPhoto} tone={r.data.tone} aspect="4 / 3" />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <JoinBand />
+</Base>
+
+<style>
+  /* Photo.astro: make <picture> fill fixed-aspect frames (see report: shared component). */
+  :global(.photo--fixed .photo__img > picture) { display: block; height: 100%; }
+  /* JoinBand: ground link colours override .btn text (see report); keep the button's own colours. */
+  :global(.join-band .btn) { color: var(--btn-fg); }
+
+  /* ---------- layout ---------- */
+  .article {
+    --text-w: min(700px, 100%);
+    padding-block: clamp(28px, 5vw, 56px) clamp(48px, 8vw, 96px);
+    padding-inline: var(--gutter);
+  }
+  .article__lede, .article__faq, .article__end { max-width: 700px; margin-inline: auto; }
+  .article__lede { display: grid; gap: clamp(26px, 4vw, 40px); margin-top: clamp(-56px, -5vw, -28px); position: relative; z-index: 3; }
+
+  /* contents */
+  .toc { border-top: var(--rule); padding-top: 12px; }
+  .toc ol { display: grid; margin-top: 10px; }
+  .toc li { border-bottom: 1px solid var(--line-soft); }
+  .toc a {
+    display: grid; grid-template-columns: 2.2rem 1fr; gap: 8px; align-items: baseline; padding: 10px 0; min-height: 44px;
+    color: var(--ink); text-decoration: none; font-weight: 700; line-height: 1.3;
+  }
+  .toc a:hover span:last-child { text-decoration: underline; text-decoration-color: var(--red); text-decoration-thickness: 2px; }
+  .toc__n { font-weight: 900; font-stretch: var(--display-stretch); font-size: 1.15rem; color: var(--red-ink); }
+  @media (min-width: 760px) { .toc ol { grid-template-columns: 1fr 1fr; column-gap: 28px; } }
+
+  /* ---------- prose with wide breakouts ---------- */
+  .article__prose {
+    max-width: none; margin-top: clamp(36px, 5vw, 56px);
+    display: grid;
+    grid-template-columns: [full-start] minmax(0, 1fr) [wide-start] minmax(0, 150px) [text-start] var(--text-w) [text-end] minmax(0, 150px) [wide-end] minmax(0, 1fr) [full-end];
+  }
+  .article__prose > :global(*) { grid-column: text; min-width: 0; }
+  .article__prose > :global(p:first-child) { font-size: 1.18em; line-height: 1.5; }
+  .article__prose > :global(p:first-child::first-letter) {
+    float: left; font-family: var(--font-sans); font-weight: 900; font-stretch: var(--display-stretch); color: var(--red);
+    font-size: 4.6em; line-height: .8; padding: .04em .1em 0 0; text-transform: uppercase;
+  }
+  .article__prose :global(h2), .article__prose :global(h3) { scroll-margin-top: 96px; }
+  .article__prose > :global(:is(figure.photo, .pull, .timeline, .r-wide, .table-scroll, table)) { grid-column: wide; }
+  .article__prose > :global(.r-full) { grid-column: full; }
+  .article__prose > :global(figure.photo) { margin-block: 2.2em; }
+  .article__prose > :global(figure.photo figcaption) { font-family: var(--font-sans); }
+  .article__prose > :global(.pull) { margin-block: 1.6em; }
+  .article__prose > :global(.placard) { justify-self: center; margin-block: 1.4em; }
+  .article__prose > :global(.receipt) { max-width: 30rem; margin-block: 2em; font-family: var(--font-sans); }
+  .article__prose > :global(.receipt:nth-of-type(odd)) { --tilt: -1deg; }
+  .article__prose > :global(.receipt:nth-of-type(even)) { --tilt: .8deg; justify-self: end; }
+  .article__prose > :global(table) { display: block; overflow-x: auto; }
+  .article__prose :global(.timeline) { font-family: var(--font-sans); margin-block: 1.5em; }
+  .article__prose :global(.timeline li + li) { margin-top: 0; }
+  .article__prose :global(.timeline .tl__text) { font-size: 1rem; }
+  .article__prose :global(.timeline h3) { margin-top: 0; font-size: 1.3rem; }
+  .article__prose :global(.timeline .tl) { padding-block: 18px; }
+  .article__prose :global(.timeline .tl__body) { gap: 6px; }
+  @media (max-width: 700px) {
+    .article__prose :global(.timeline--dense .tl) { grid-template-columns: 1fr; gap: 8px; }
+    .article__prose :global(.timeline--dense .tl__marker) { position: static; grid-template-columns: auto auto; justify-content: start; align-items: end; gap: 12px; }
+  }
+  .article__prose :global(.pull blockquote) { border-left: 0; padding: 0; font-size: clamp(1.9rem, 4.4vw, 3.4rem); }
+  .article__prose :global(.thinkers), .article__prose :global(.waves) { margin-top: 1.6em; }
+
+  /* the closing "What you can do" list becomes numbered action cards */
+  .article__prose > :global(h2[id^='what-you-can-do']) { color: var(--ink); }
+  .article__prose > :global(h2[id^='what-you-can-do'] + :is(ol, ul)) {
+    list-style: none; padding: 0; counter-reset: act; display: grid; gap: 12px; font-family: var(--font-sans);
+  }
+  .article__prose > :global(h2[id^='what-you-can-do'] + :is(ol, ul) > li) {
+    counter-increment: act; position: relative; margin: 0; padding: 16px 18px 16px 64px; background: var(--paper-light);
+    border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); font-size: 1.02rem; line-height: 1.5;
+  }
+  .article__prose > :global(h2[id^='what-you-can-do'] + :is(ol, ul) > li::before) {
+    content: counter(act, decimal-leading-zero); position: absolute; left: 16px; top: 12px;
+    font-weight: 900; font-stretch: var(--display-stretch); font-size: 1.9rem; line-height: 1; color: var(--red);
+  }
+  .article__prose > :global(h2[id^='what-you-can-do'] + :is(ol, ul) > li::marker) { content: ''; }
+
+  /* ---------- FAQ + end matter ---------- */
+  .article__faq { margin-top: clamp(56px, 8vw, 96px); }
+  .article__faq-label { padding-top: 12px; border-top: var(--rule); }
+  .article__faq-title { margin: 12px 0 18px; font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(2rem, 4vw, 2.9rem); line-height: .92; }
+  .article__end { display: grid; gap: 22px; margin-top: 8px; }
+  .article__note { color: var(--muted); }
+
+  /* ---------- read next ---------- */
+  .read-next { padding-block: clamp(3rem, 7vw, 5.5rem); border-top: var(--rule); }
+  .read-next__head { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 10px 24px; margin-bottom: clamp(24px, 4vw, 40px); }
+  .read-next__head .label { grid-column: 1 / -1; padding-top: 12px; border-top: var(--rule); }
+  .read-next__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 36px); }
+  @media (max-width: 900px) { .read-next__grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) {
+    .read-next__grid { grid-template-columns: 1fr; }
+    .read-next__head { grid-template-columns: 1fr; }
+  }
+</style>

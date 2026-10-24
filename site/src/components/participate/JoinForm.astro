@@ -1,0 +1,264 @@
+---
+// The Join form (Netlify Forms, name="join"). DPDP-aligned: age band first, the minimum of data, one unticked box
+// per purpose, plain-language notice beside the form, consent wording from research/india-compliance.md §11.2.
+// Under-18s are routed to a learn path: with JS the rest of the form is disabled and the path appears;
+// without JS the hint under the age question explains it, and /thanks/ repeats it.
+export interface Props { noticeVersion?: string }
+const { noticeVersion = 'join-notice-v1.0-2026-10-24' } = Astro.props;
+
+const STATES = [
+  'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh',
+  'Jharkhand', 'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha',
+  'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal',
+];
+const UTS = [
+  'Andaman and Nicobar Islands', 'Chandigarh', 'Dadra and Nagar Haveli and Daman and Diu', 'Delhi', 'Jammu and Kashmir',
+  'Ladakh', 'Lakshadweep', 'Puducherry',
+];
+const INTERESTS = [
+  { v: 'research', l: 'Research' }, { v: 'writing', l: 'Writing' }, { v: 'design', l: 'Design' }, { v: 'video', l: 'Video' },
+  { v: 'organising', l: 'Organising' }, { v: 'translation', l: 'Translation' }, { v: 'legal', l: 'Legal' }, { v: 'tech', l: 'Tech' },
+];
+const PURPOSES = [
+  { name: 'purpose_newsletter', title: 'Send me the CSP newsletter.', uses: 'We use: your email and first name.' },
+  { name: 'purpose_volunteering', title: 'Contact me about volunteering.', uses: 'We use: your name, email, state or city and the interests you tick.', tag: '18+' },
+  { name: 'purpose_events', title: 'Invite me to events in my state.', uses: 'We use: your email and your state or city.' },
+];
+const LEARN = [
+  { href: '/resources/glossary/', label: 'The feminist glossary, in plain words' },
+  { href: '/memory/', label: 'Public memory: the struggles that brought us here' },
+  { href: '/resources/what-is-fourth-wave-feminism/', label: 'What is the Fourth Wave? A plain-language guide' },
+];
+---
+<div class="jf">
+  <aside class="notice" id="notice" aria-labelledby="notice-title">
+    <p class="label notice__label">Before you join</p>
+    <h3 class="notice__title" id="notice-title">What we do with your details</h3>
+    <dl class="notice__list">
+      <div><dt>What we collect</dt><dd>Your age band and email. If you choose: a first name, your state or city, your interests.</dd></div>
+      <div><dt>Why</dt><dd>Only for the things you tick: the newsletter, volunteering, events in your state. Nothing else.</dd></div>
+      <div><dt>Who sees it</dt><dd>A small team at Cultural Shock Party, and Netlify, which hosts this site and its forms. Never any political party, candidate or advertiser.</dd></div>
+      <div><dt>How long</dt><dd>Newsletter: until you unsubscribe. Volunteering and events: 12 months after we last hear from you, and we’ll email before we delete.</dd></div>
+      <div><dt>What we never ask</dt><dd>Caste, religion, Aadhaar, voter ID, address, phone, school, employer or photos.</dd></div>
+      <div><dt>Your control</dt><dd>Unsubscribe from any email. Ask to see, correct or delete your data through <a href="/contact/?topic=data#contact-form">the contact form</a>; we reply within 30 days at the latest. You can also complain to the Data Protection Board of India.</dd></div>
+    </dl>
+    <p class="notice__foot small"><a href="/privacy/">Read the full privacy notice</a> <span class="muted">· Notice v1.0, 24 October 2026</span></p>
+  </aside>
+
+  <form class="jform" name="join" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field" data-join-form>
+    <input type="hidden" name="form-name" value="join" />
+    <input type="hidden" name="notice_version" value={noticeVersion} />
+    <p class="visually-hidden"><label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+
+    <p class="jform__intro">We’ll only use your details for the things you tick below. Untick or withdraw any time. <a class="jform__noticelink" href="#notice">What we do with your details</a></p>
+
+    <fieldset class="jform__age">
+      <legend class="jform__legend"><span class="jform__step" aria-hidden="true">1</span> How old are you?</legend>
+      <div class="ages">
+        <label class="age"><input type="radio" name="age_band" value="under-13" required /><span>Under 13</span></label>
+        <label class="age"><input type="radio" name="age_band" value="13-17" /><span>13 to 17</span></label>
+        <label class="age"><input type="radio" name="age_band" value="18-plus" /><span>18 or over</span></label>
+      </div>
+      <p class="hint" id="age-hint">Under 18? Please don’t fill in the rest. Indian law needs a parent’s or guardian’s verified consent before we keep an under-18’s details, so we delete any we receive. Everything on this site is free to read without signing up.</p>
+    </fieldset>
+
+    <div class="minor" data-minor hidden role="status" aria-live="polite">
+      <p class="minor__title" data-for="under-13" hidden>You’re early, and that’s brilliant.</p>
+      <p class="minor__title" data-for="13-17" hidden>You can’t sign up yet, but you can do almost everything else.</p>
+      <p data-for="under-13" hidden>You don’t need to sign up for anything. Everything here is free to read. Explore it with a parent or a teacher, and ask them your questions too.</p>
+      <p data-for="13-17" hidden>Sign-ups from under-18s need a parent’s or guardian’s verified consent, and we haven’t built that yet. Read, share and print anything you like. A parent or guardian can sign up for the newsletter with their own email and pass it on.</p>
+      <p class="label minor__label">Your learn path</p>
+      <ul class="minor__links" role="list">
+        {LEARN.map((l) => <li><a href={l.href}>{l.label} <span aria-hidden="true">→</span></a></li>)}
+      </ul>
+    </div>
+
+    <fieldset class="jform__adult" data-adult>
+      <legend class="visually-hidden">Your details and choices (18 or over)</legend>
+
+      <div class="jform__row">
+        <div class="field">
+          <label for="join-name">First name <span class="opt">(optional)</span></label>
+          <input class="input" id="join-name" name="first_name" type="text" autocomplete="given-name" maxlength="60" />
+        </div>
+        <div class="field">
+          <label for="join-email">Email</label>
+          <input class="input" id="join-email" name="email" type="email" autocomplete="email" inputmode="email" required />
+        </div>
+      </div>
+
+      <div class="jform__row">
+        <div class="field">
+          <label for="join-state">State or union territory <span class="opt">(optional)</span></label>
+          <select class="select" id="join-state" name="state" autocomplete="address-level1">
+            <option value="">Choose one</option>
+            <optgroup label="States">{STATES.map((s) => <option>{s}</option>)}</optgroup>
+            <optgroup label="Union territories">{UTS.map((s) => <option>{s}</option>)}</optgroup>
+            <optgroup label="Elsewhere"><option value="outside-india">I live outside India</option></optgroup>
+          </select>
+        </div>
+        <div class="field">
+          <label for="join-city">City or town <span class="opt">(optional)</span></label>
+          <input class="input" id="join-city" name="city" type="text" autocomplete="address-level2" maxlength="60" />
+        </div>
+      </div>
+
+      <fieldset class="jform__group">
+        <legend class="jform__legend"><span class="jform__step" aria-hidden="true">2</span> What are you into? <span class="opt">(optional)</span></legend>
+        <div class="chips">
+          {INTERESTS.map((it) => (
+            <label class="chip"><input type="checkbox" name={`interest_${it.v}`} value="yes" /><span>{it.l}</span></label>
+          ))}
+        </div>
+        <div class="field jform__langs">
+          <label for="join-langs">Translation: which languages? <span class="opt">(optional)</span></label>
+          <input class="input" id="join-langs" name="translation_languages" type="text" maxlength="120" placeholder="For example: Hindi, Punjabi, Bengali" />
+        </div>
+      </fieldset>
+
+      <fieldset class="jform__group" aria-describedby="purpose-hint">
+        <legend class="jform__legend"><span class="jform__step" aria-hidden="true">3</span> What would you like from us?</legend>
+        <p class="hint" id="purpose-hint">Tick any. None is ticked for you.</p>
+        <div class="purposes">
+          {PURPOSES.map((p) => (
+            <label class="purpose">
+              <input type="checkbox" name={p.name} value="yes" />
+              <span class="purpose__body">
+                <span class="purpose__title">{p.title}{p.tag && <span class="purpose__tag">{p.tag}</span>}</span>
+                <span class="purpose__uses">{p.uses}</span>
+              </span>
+            </label>
+          ))}
+        </div>
+        <p class="jform__error" data-purpose-error role="alert" hidden>Tick at least one thing you’d like from us, so we know why we’re keeping your email.</p>
+      </fieldset>
+
+      <label class="check consent">
+        <input type="checkbox" name="consent" value="yes" required />
+        <span>I’ve read the <a href="/privacy/">privacy notice</a>. I understand CSP is an independent movement, not a registered political party, and will never share my details with any political party, candidate or advertiser.</span>
+      </label>
+
+      <button class="btn jform__submit" type="submit">Join with the choices I ticked <span class="arrow" aria-hidden="true">→</span></button>
+      <p class="jform__after small">For your safety, we don’t send automatic “you’ve joined” emails, so nobody can use this form to find out who has joined.</p>
+    </fieldset>
+  </form>
+</div>
+
+<script>
+  // Progressive enhancement: route under-18s to the learn path and disable the adult fields; require one purpose.
+  document.querySelectorAll<HTMLFormElement>('form[data-join-form]').forEach((form) => {
+    const adult = form.querySelector<HTMLFieldSetElement>('[data-adult]');
+    const minor = form.querySelector<HTMLElement>('[data-minor]');
+    const error = form.querySelector<HTMLElement>('[data-purpose-error]');
+    if (!adult || !minor) return;
+    const update = () => {
+      const age = form.querySelector<HTMLInputElement>('input[name="age_band"]:checked')?.value;
+      const isMinor = age === 'under-13' || age === '13-17';
+      adult.disabled = isMinor;
+      form.classList.toggle('is-minor', isMinor);
+      minor.hidden = !isMinor;
+      minor.querySelectorAll<HTMLElement>('[data-for]').forEach((el) => { el.hidden = el.dataset.for !== age; });
+    };
+    form.addEventListener('change', (e) => {
+      const t = e.target as HTMLInputElement;
+      if (t.name === 'age_band') update();
+      if (t.name.startsWith('purpose_') && error) error.hidden = true;
+    });
+    form.addEventListener('submit', (e) => {
+      const ticked = form.querySelectorAll('input[name^="purpose_"]:checked').length;
+      if (!ticked && error) {
+        e.preventDefault();
+        error.hidden = false;
+        error.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      }
+    });
+    update();
+  });
+</script>
+
+<style>
+  .jf { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
+
+  .notice { position: sticky; top: 92px; display: grid; gap: 14px; padding: clamp(20px, 2.6vw, 30px); background: var(--paper-light); border: 2px solid var(--ink); border-top-width: 8px; }
+  .notice__label { color: var(--red-ink); }
+  .notice__title { font-weight: 900; font-stretch: var(--head-stretch); font-size: clamp(1.4rem, 2vw, 1.75rem); line-height: 1.02; }
+  .notice__list { display: grid; gap: 0; }
+  .notice__list > div { display: grid; grid-template-columns: 9.5em minmax(0, 1fr); gap: 4px 14px; padding: 10px 0; border-top: 1px dashed var(--line-soft); }
+  .notice__list dt { font-weight: 800; font-size: .86rem; line-height: 1.35; }
+  .notice__list dd { font-size: .9rem; line-height: 1.45; color: var(--ink-soft); }
+  .notice__foot { padding-top: 10px; border-top: 2px solid var(--ink); }
+
+  .jform { display: grid; gap: 22px; padding: clamp(20px, 3vw, 38px); background: var(--paper-light); border: 3px solid var(--ink); box-shadow: 8px 8px 0 var(--ink); }
+  .jform fieldset { border: 0; padding: 0; min-width: 0; }
+  .jform__intro { font-family: var(--font-serif); font-size: 1.15rem; line-height: 1.4; padding-bottom: 14px; border-bottom: 3px solid var(--ink); }
+  .jform__legend { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-weight: 900; font-stretch: var(--head-stretch); font-size: 1.3rem; line-height: 1.1; }
+  .jform__step { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--red-ink); color: var(--paper-light); font-size: .95rem; font-stretch: 100%; flex: none; }
+  .opt { font-weight: 500; font-size: .85em; color: var(--muted); font-stretch: 100%; }
+
+  .ages { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .age { position: relative; }
+  .age input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+  .age span {
+    display: grid; place-items: center; min-height: 56px; padding: 10px; text-align: center; border: 2px solid var(--ink); background: var(--paper);
+    font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(1.25rem, 2vw, 1.6rem); line-height: .95;
+    transition: background .15s var(--ease), color .15s var(--ease);
+  }
+  .age input:hover + span { background: var(--paper-deep); }
+  .age input:checked + span { background: var(--ink); color: var(--paper-light); box-shadow: 3px 3px 0 var(--red); }
+  .age input:focus-visible + span { outline: 3px solid var(--red-ink); outline-offset: 3px; }
+  .jform .hint { font-size: .88rem; line-height: 1.45; color: var(--muted); }
+  .jform__age .hint { margin-top: 10px; }
+  .jform__noticelink { display: none; font-family: var(--font-sans); font-size: .9rem; font-weight: 700; }
+  .is-minor .jform__age .hint { display: none; }
+
+  .minor { display: grid; gap: 10px; padding: 18px 20px; background: var(--marigold); color: var(--ink); border: 2px solid var(--ink); }
+  .minor[hidden] { display: none; }
+  .minor [hidden] { display: none; }
+  .minor__title { font-weight: 900; font-stretch: var(--head-stretch); font-size: 1.35rem; line-height: 1.1; }
+  .minor__label { margin-top: 4px; }
+  .minor__links { display: grid; gap: 4px; }
+  .minor__links a { display: inline-flex; gap: .35em; min-height: 40px; align-items: center; color: var(--ink); font-weight: 800; text-decoration-thickness: 2px; }
+
+  .jform__adult { display: grid; gap: 20px; transition: opacity .2s var(--ease); }
+  .jform__adult:disabled { opacity: .38; }
+  .jform__row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .jform__group { padding-top: 18px; border-top: 1px solid var(--line-soft) !important; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { position: relative; }
+  .chip input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+  .chip span { display: inline-flex; align-items: center; gap: .4em; min-height: 44px; padding: 0 16px; border: 2px solid var(--ink); border-radius: 999px; background: var(--paper); font-weight: 750; font-size: .95rem; }
+  .chip span::before { content: '+'; font-weight: 900; }
+  .chip input:checked + span { background: var(--ink); color: var(--paper-light); }
+  .chip input:checked + span::before { content: '✓'; }
+  .chip input:focus-visible + span { outline: 3px solid var(--red-ink); outline-offset: 2px; }
+  .jform__langs { margin-top: 14px; }
+
+  .purposes { display: grid; gap: 8px; }
+  .purpose { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 12px; align-items: start; padding: 14px 14px; border: 2px solid var(--ink); background: var(--paper); cursor: pointer; }
+  .purpose:has(input:checked) { background: #F7E7CC; box-shadow: inset 6px 0 0 var(--red-ink); }
+  .purpose input { width: 22px; height: 22px; margin-top: 2px; accent-color: var(--red-ink); }
+  .purpose__body { display: grid; gap: 3px; }
+  .purpose__title { font-weight: 800; line-height: 1.3; }
+  .purpose__tag { display: inline-block; margin-left: 8px; padding: .1em .45em; background: var(--ink); color: var(--paper-light); font-size: .72rem; letter-spacing: .08em; vertical-align: .15em; }
+  .purpose__uses { font-size: .86rem; color: var(--muted); font-style: italic; }
+  .jform__error { padding: 10px 14px; background: var(--red-ink); color: var(--paper-light); font-weight: 700; margin-top: 10px; }
+
+  .consent { padding: 14px 0 0; border-top: 3px solid var(--ink); font-size: .94rem; }
+  .jform__submit { justify-self: start; font-size: 1.1rem; }
+  .jform__after { color: var(--muted); max-width: 52ch; }
+
+  @media (max-width: 960px) {
+    .jf { grid-template-columns: 1fr; }
+    .notice { position: static; order: 2; }
+    .jform__noticelink { display: inline; }
+  }
+  @media (max-width: 560px) {
+    .jform { box-shadow: 5px 5px 0 var(--ink); padding: 18px 16px; }
+    .jform__row { grid-template-columns: 1fr; }
+    .ages { gap: 6px; }
+    .age span { min-height: 52px; padding: 8px 4px; font-size: 1.12rem; }
+    .notice__list > div { grid-template-columns: 1fr; }
+    .jform__submit { width: 100%; justify-content: center; font-size: .98rem; letter-spacing: .02em; padding-inline: 12px; }
+  }
+</style>

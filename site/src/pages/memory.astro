@@ -1,0 +1,387 @@
+---
+// /memory/: public memory. A sourced, filterable (CSS-only) timeline of 40 feminist milestones, India first.
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/blocks/PageHero.astro';
+import SectionHead from '../components/ui/SectionHead.astro';
+import Photo from '../components/media/Photo.astro';
+import Annotation from '../components/ui/Annotation.astro';
+import Stamp from '../components/ui/Stamp.astro';
+import Placard from '../components/ui/Placard.astro';
+import PullQuote from '../components/ui/PullQuote.astro';
+import TornEdge from '../components/ui/TornEdge.astro';
+import JoinBand from '../components/blocks/JoinBand.astro';
+import Milestone from '../components/memory/Milestone.astro';
+import YearRuler from '../components/memory/YearRuler.astro';
+import ArchiveWall from '../components/memory/ArchiveWall.astro';
+import raw from '../content/memory.json';
+import { abs } from '../lib/schema';
+
+const path = '/memory/';
+const title = 'Indian feminist history timeline';
+const description =
+  "A sourced timeline of Indian and global feminist history: 40 milestones from the Phules' girls' school in 1848 to the women's reservation fight of 2026.";
+const crumbs = [{ name: 'Public memory', href: path }];
+
+const order = new Map(raw.map((r, i) => [r.id, i]));
+const items = (await getCollection('memory'))
+  .map((e) => e.data)
+  .sort((a, b) => a.year - b.year || (order.get(a.id) ?? 0) - (order.get(b.id) ?? 0));
+const total = items.length;
+const nIndia = items.filter((m) => m.region === 'India').length;
+const nGlobal = total - nIndia;
+const nSources = items.reduce((s, m) => s + m.sources.length, 0);
+const first = items[0].year;
+const last = items[items.length - 1].year;
+
+const ERAS = [
+  { id: 'era-1', from: 0, to: 1945, range: '1848–1945', title: 'Schools, pamphlets and petitions', lead: 'Before independence, women teach, write, petition and strike: in Pune and Madras, in Wellington and Petrograd.' },
+  { id: 'era-2', from: 1946, to: 1999, range: '1946–1999', title: 'Equal on paper', lead: 'A Republic of equal votes, then decades of work to make the law match life: consent, maintenance, harassment at work and seats in the panchayats.' },
+  { id: 'era-3', from: 2000, to: 9999, range: '2000–2026', title: 'Laws, streets and screens', lead: 'New laws, bigger streets and a phone in every pocket, from Delhi 2012 and #MeToo to Reclaim the Night and the unfinished fight for one-third of seats.' },
+];
+const indexOf = new Map(items.map((m, i) => [m.id, i + 1]));
+
+// Interludes break the long list: an archival panorama and two short, sourced quotations.
+type Break =
+  | { kind: 'photo'; id: string; caption: string }
+  | { kind: 'strip'; title: string; photos: { id: string; caption: string }[] }
+  | { kind: 'quote'; quote: string; by: string; role: string; href: string };
+const BREAKS: Record<string, Break> = {
+  'new-zealand-suffrage-1893': { kind: 'photo', id: '1913-washington-suffrage-procession-opening', caption: 'The vote was won march by march: the opening of the Woman Suffrage Procession, Washington, D.C., 1913.' },
+  'towards-equality-1974': { kind: 'strip', title: 'Meanwhile, in the 1970s: the second wave takes to the streets', photos: [
+    { id: '1970-den-haag-dolle-mina-megaphone', caption: 'Dolle Mina protest against the cost of crèches, The Hague, 22 April 1970 (Nationaal Archief).' },
+    { id: '1972-utrecht-dolle-mina-abortion-protest', caption: 'Women protest against a new abortion bill, Utrecht, 19 February 1972 (Nationaal Archief).' },
+  ] },
+  'udhr-hansa-mehta-1948': { kind: 'quote', quote: 'All human beings are born free and equal in dignity and rights.', by: 'Universal Declaration of Human Rights', role: 'Article 1, 1948', href: 'https://www.un.org/en/about-us/universal-declaration-of-human-rights' },
+  'metoo-india-2018': { kind: 'quote', quote: 'Woman has a right to put up the grievance at any platform of her choice even after decades.', by: 'Delhi court, acquitting Priya Ramani', role: '17 February 2021, as reported by LiveLaw', href: 'https://livelaw.in/top-stories/delhi-court-acquits-priya-ramani-in-mj-akbars-criminal-defamation-case-169993' },
+};
+const eras = ERAS.map((e) => {
+  const list = items.filter((m) => m.year >= e.from && m.year <= e.to);
+  const chunks: { items: typeof list; after?: Break }[] = [{ items: [] }];
+  for (const m of list) {
+    chunks[chunks.length - 1].items.push(m);
+    if (BREAKS[m.id]) { chunks[chunks.length - 1].after = BREAKS[m.id]; chunks.push({ items: [] }); }
+  }
+  return { ...e, chunks: chunks.filter((c) => c.items.length) };
+});
+
+// Honest photo labelling: say when a photo shows a later moment, and mark stock as illustrative.
+const LATER: Record<string, string> = {
+  'phule-school-1848': 'Her legacy, pictured in 2018',
+  'iceland-strikes-1975-2023': 'Pictured: the 2005 anniversary strike',
+  'ni-una-menos-2015': 'Pictured: Santa Fe, 2017',
+  'woman-life-freedom-2022': 'Pictured: a memorial wall, 2024',
+  'reservation-in-force-2026': 'Pictured: voting in Assam, 2026',
+};
+const CAPTION: Record<string, string> = {
+  'woman-farmer-2026': 'Illustrative photo: a woman farmer waters vegetable beds at Vellayani, Kerala.',
+};
+
+const wall = [
+  { id: '1908-jane-austen-suffrage-banner', caption: 'A suffrage banner honouring Jane Austen, painted silk, by Mary Lowndes, 1908 (The Women’s Library, LSE).', tilt: -1.5 },
+  { id: 'jai-jagat-half-the-world-sticker', caption: '“We are half of the world, we demand half of the land”: a women’s land-rights sticker in Hindi and English, Gwalior, 2018.', tilt: 1 },
+  { id: 'in-019-manipur-meira-paibi-torch-bearer-sculptures', caption: 'Sculptures of the Meira Paibis, the Meitei women’s torch-bearing movement, Thoubal, Manipur (photographed 2023).' },
+  { id: '1914-lisburn-lilian-metge-hunger-strike-medal', caption: 'A hunger-strike medal awarded to Lilian Metge, who went on hunger strike while on trial in Lisburn, August 1914.', tilt: 1.5 },
+  { id: '1913-washington-inez-milholland-horse', caption: 'Lawyer Inez Milholland on a white horse at the suffrage parade in Washington, D.C., 3 March 1913.' },
+  { id: 'suffrage-atelier-what-a-woman-may-be', caption: '“What a Woman may be, and yet not have the Vote”: a Suffrage Atelier poster (Schlesinger Library, Harvard).', tilt: -1 },
+  { id: 'in-004-2024-kolkata-pink-gate-graffiti-stop-rape-justice', caption: '“Stop rape”, “Justice” and, in Bengali, “Where is justice?”: protest graffiti on a gate in Kolkata, 15 September 2024.' },
+  { id: '1927-votes-for-women-at-21', caption: '“Votes for Women at 21”: women in sandwich boards demand the vote on the same terms as men, 1927.', tilt: 1 },
+  { id: '1963-woolworth-segregation-picket', caption: 'Black women lead a picket against segregation at Woolworth’s, 20 April 1963 (Kheel Center, Cornell).' },
+  { id: '095-votes-for-women-button-smithsonian', caption: 'A “Votes for Women” button (Smithsonian).', tilt: -2 },
+  { id: '1970-washington-womens-strike-for-equality', caption: 'The Women’s Strike for Equality, Washington, D.C., 26 August 1970.' },
+  { id: '2025-barcelona-25n-mural', caption: '“Ens volem vives i lliures” (“we want to live, and be free”): a wall of hearts naming women, Barcelona, 2025.', tilt: 1.2 },
+];
+
+const schema = [
+  {
+    '@type': 'ItemList',
+    '@id': abs(path) + '#timeline',
+    name: `Feminist history timeline: India and the world, ${first}–${last}`,
+    description: `${total} sourced milestones in Indian and global feminist history, compiled by Cultural Shock Party.`,
+    numberOfItems: total,
+    itemListOrder: 'https://schema.org/ItemListOrderAscending',
+    itemListElement: items.map((m, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: abs(path) + '#' + m.id,
+      name: `${m.date}: ${m.title}`,
+      description: m.text,
+    })),
+  },
+];
+---
+<Base title={title} description={description} pageType="CollectionPage" breadcrumbs={crumbs} schema={schema} image="/og/memory.png" imageAlt="The struggles that brought us here: public memory, Cultural Shock Party">
+  <PageHero
+    label="Public memory"
+    title="The struggles that brought us here"
+    lead={`A sourced timeline of feminist history in India and the world, from a girls’ school in Pune in ${first} to the fight over women’s reservation in ${last}. ${total} milestones, every one with its receipts.`}
+    crumbs={crumbs}
+    photo="2012-delhi-raisina-hill-protest-crowd"
+    tone="natural"
+    photoPosition="62% 50%"
+    meta={[`${total} milestones`, 'Updated 24 Oct 2026']}
+  >
+    <div class="hero-ctas">
+      <a class="btn" href="#era-1">Start in {first} <span class="arrow" aria-hidden="true">↓</span></a>
+      <a class="link-arrow" href="#add">Add to the archive <span aria-hidden="true">→</span></a>
+    </div>
+  </PageHero>
+
+  <!-- Why public memory -->
+  <section class="section ground-light intro" aria-labelledby="intro-title">
+    <div class="wrap intro__grid">
+      <div class="intro__text">
+        <p class="label intro__kicker">Why remember</p>
+        <h2 class="h2" id="intro-title">Nobody starts from zero</h2>
+        <p class="intro__lead">Every right on this page was argued for, organised for and won by someone first: teachers in Pune, strikers in Petrograd and Reykjavík, students on Raisina Hill, grandmothers on a Delhi road.</p>
+        <div class="intro__prose">
+          <p>Public memory is how a movement learns. It shows which tactics worked, who got left out of the story, and how long change really takes: 16 years from the Vishaka guidelines to the POSH Act, and 76 years from equal votes to a one-third quota of seats for women that is law but still has not started.</p>
+          <p>Memory is also fragile. The websites of Ni Una Menos, the Argentine movement that filled the streets in 2015, are gone: one old address no longer loads, and another now shows an online-casino page using the movement’s name. So we keep this timeline in public, with its sources, and we are building the archive to outlast any one website.</p>
+          <p class="intro__src small">Source: <a href="https://web.archive.org/web/20191218165142/http://niunamenos.org.ar/" rel="noopener">Internet Archive copy of the Ni Una Menos website</a> (18 Dec 2019); both addresses checked 24 Oct 2026.</p>
+        </div>
+        <dl class="intro__stats">
+          <div><dt>Milestones</dt><dd>{total}</dd></div>
+          <div><dt>India</dt><dd>{nIndia}</dd></div>
+          <div><dt>The world</dt><dd>{nGlobal}</dd></div>
+          <div><dt>Sources linked</dt><dd>{nSources}</dd></div>
+        </dl>
+      </div>
+      <div class="intro__media">
+        <div class="intro__pic intro__pic--1">
+          <Photo id="2026-la-plata-ni-una-menos-a" aspect="5 / 4" sizes="(min-width: 900px) 44vw, 92vw" widths={[480, 720, 960]} tape="tr" />
+          <Annotation text="“If justice is sexist, let memory be feminist”" arrow="down" top="-74px" left="3%" width="24ch" tilt={-3} />
+        </div>
+        <div class="intro__pic intro__pic--2">
+          <Photo id="in-015-2020-delhi-shaheen-bagh-fatima-sheikh-savitribai-phul" aspect="4 / 3" caption="A pavement library named after Fatima Sheikh and Savitribai Phule, at the Shaheen Bagh sit-in, New Delhi, 28 January 2020." sizes="(min-width: 900px) 26vw, 70vw" widths={[320, 480, 640]} tilt={2.5} frame />
+        </div>
+        <div class="intro__stamp"><Stamp text="Sourced" sub="Checked Oct 2026" tilt={-10} round /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <div class="memory" id="timeline">
+    <section class="section tl-head" aria-labelledby="tl-title">
+      <div class="wrap">
+        <SectionHead label="The timeline" title={`${last - first} years in ${total} milestones`} id="tl-title" lead="Filter by India or the world. Every entry has its sources and its own link, so you can send one milestone to the group chat." />
+        <YearRuler items={items} />
+      </div>
+    </section>
+
+    <div class="mf-bar" id="timeline-filter">
+      <div class="wrap mf-bar__inner">
+        <fieldset class="mf">
+          <legend class="label mf__legend">Show</legend>
+          <div class="mf__opts">
+            <input class="visually-hidden" type="radio" name="mf" id="mf-all" value="all" checked />
+            <label for="mf-all">All <span class="mf__count">{total}</span></label>
+            <input class="visually-hidden" type="radio" name="mf" id="mf-india" value="india" />
+            <label for="mf-india">India <span class="mf__count">{nIndia}</span></label>
+            <input class="visually-hidden" type="radio" name="mf" id="mf-global" value="global" />
+            <label for="mf-global">The world <span class="mf__count">{nGlobal}</span></label>
+          </div>
+        </fieldset>
+        <nav class="mf__eras" aria-label="Jump to an era">
+          <span class="label mf__legend">Jump to</span>
+          {eras.map((e) => <a href={`#${e.id}`}>{e.range}</a>)}
+        </nav>
+      </div>
+    </div>
+
+    {eras.map((e, k) => (
+      <section class:list={['era', `era--${k + 1}`]} id={e.id} aria-labelledby={`${e.id}-title`}>
+        <div class="wrap">
+          <header class="era__head">
+            <p class="era__range" aria-hidden="true">{e.range}</p>
+            <div class="era__text">
+              <p class="label era__kicker">Era {k + 1} of {eras.length} · {e.range}</p>
+              <h2 class="h2 era__title" id={`${e.id}-title`}>{e.title}</h2>
+              <p class="lead era__lead">{e.lead}</p>
+            </div>
+          </header>
+          {e.chunks.map((c) => (
+            <>
+              <ol class="era__list" role="list" start={indexOf.get(c.items[0].id)}>
+                {c.items.map((m) => (
+                  <Milestone m={m} n={indexOf.get(m.id) ?? 0} total={total} photoNote={LATER[m.id]} caption={CAPTION[m.id]} />
+                ))}
+              </ol>
+              {c.after?.kind === 'photo' && (
+                <div class="interlude interlude--photo">
+                  <Photo id={c.after.id} caption={c.after.caption} sizes="(min-width: 1320px) 1240px, 94vw" widths={[640, 960, 1280]} tone="natural" />
+                </div>
+              )}
+              {c.after?.kind === 'strip' && (
+                <div class="interlude interlude--strip">
+                  <p class="label interlude__title">{c.after.title}</p>
+                  <div class="interlude__row">
+                    {c.after.photos.map((p, j) => (
+                      <Photo id={p.id} caption={p.caption} aspect="3 / 2" tilt={j ? 1.2 : -1.2} frame sizes="(min-width: 1320px) 600px, (min-width: 640px) 44vw, 92vw" widths={[400, 560, 720]} />
+                    ))}
+                  </div>
+                </div>
+              )}
+              {c.after?.kind === 'quote' && (
+                <div class="interlude interlude--quote">
+                  <PullQuote quote={c.after.quote} by={c.after.by} role={c.after.role} href={c.after.href} size="l" />
+                </div>
+              )}
+            </>
+          ))}
+          <p class="era__back"><a href="#timeline-filter">Filter the timeline or jump to another era <span aria-hidden="true">↑</span></a></p>
+        </div>
+      </section>
+    ))}
+  </div>
+
+  <!-- Archive wall -->
+  <TornEdge color="var(--ink)" seed={1} />
+  <section class="section ground-ink grain wall-sec" aria-labelledby="wall-title">
+    <div class="wrap wall-sec__inner">
+      <SectionHead label="From the archive" title="What movements leave behind" id="wall-title" lead="Banners, badges, medals, posters, stickers and walls. Crowds go home; objects keep the story alive." />
+      <ArchiveWall items={wall} />
+      <p class="wall-sec__credit small">Photographers, archives and licences for every image are listed on our <a href="/credits/">image credits page</a>.</p>
+    </div>
+  </section>
+
+  <!-- Add to the archive -->
+  <section class="section add" id="add" aria-labelledby="add-title">
+    <div class="wrap add__grid">
+      <div class="add__text">
+        <p class="label">The Memory Project</p>
+        <h2 class="h2" id="add-title">Add to the archive</h2>
+        <p class="add__lead">Know a struggle we have missed? A union your grandmother joined, a campus campaign, a local court case, a pamphlet in the family cupboard. Tell us privately.</p>
+        <div class="add__ctas">
+          <a class="btn btn--ink" href="/contact/">Suggest a milestone <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="link-arrow" href="/what-we-do/#memory-project">About the Memory Project <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="add__promise">
+        <h3 class="label add__promise-title">How we look after what you send</h3>
+        <ol role="list">
+          <li><span aria-hidden="true">01</span><p><strong>We check it.</strong> Nothing goes up without a source we have opened ourselves.</p></li>
+          <li><span aria-hidden="true">02</span><p><strong>We ask first.</strong> Stories are sent privately and published only with consent. Survivors and children are never identified.</p></li>
+          <li><span aria-hidden="true">03</span><p><strong>We correct in public.</strong> If we get a date or a name wrong, we fix it and say so.</p></li>
+        </ol>
+        <div class="add__placard" aria-hidden="true"><Placard text="Your history counts" color="paper" shape="sticker" tilt={-5} decorative /></div>
+      </div>
+    </div>
+  </section>
+
+  <JoinBand title="Nobody starts from zero. Neither do you." placard="Memory is power" />
+</Base>
+
+<style>
+  .hero-ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; margin-top: 6px; }
+  :global(.join-band a.btn) { color: var(--btn-fg); } /* shared-bug workaround: ground link colour overrides button text */
+
+  /* intro */
+  .intro__grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(36px, 6vw, 96px); align-items: start; }
+  .intro__text { display: grid; gap: 22px; }
+  .intro__kicker { color: var(--red-ink); padding-top: 12px; border-top: 3px solid var(--line); }
+  .intro__lead { font-family: var(--font-serif); font-size: clamp(1.5rem, 2.4vw, 2.05rem); line-height: 1.18; letter-spacing: -.01em; max-width: 30ch; }
+  .intro__prose { font-family: var(--font-serif); font-size: clamp(1.1rem, 1.35vw, 1.22rem); line-height: 1.6; max-width: 60ch; display: grid; gap: 1em; color: var(--ink-soft); }
+  .intro__src { font-family: var(--font-sans); color: var(--muted); }
+  .intro__src a { color: var(--ink); }
+  .intro__stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 3px solid var(--line); border-bottom: 1px solid var(--line); margin-top: 8px; }
+  .intro__stats div { padding: 14px 12px 16px; border-left: 1px solid var(--line); display: flex; flex-direction: column-reverse; gap: 6px; }
+  .intro__stats div:first-child { border-left: 0; padding-left: 0; }
+  .intro__stats dt { font-size: var(--fs-label); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
+  .intro__stats dd { font-weight: 900; font-stretch: var(--display-stretch); font-size: clamp(2.6rem, 4.6vw, 4rem); line-height: .8; color: var(--red); }
+  .intro__media { position: relative; padding-top: 64px; }
+  .intro__pic--1 { position: relative; }
+  .intro__pic--2 { width: 62%; margin: 26px 0 0 auto; position: relative; z-index: 2; }
+  .intro__media :global(.photo__img picture) { display: block; height: 100%; }
+  .intro__stamp { position: absolute; left: 6%; bottom: 14%; z-index: 3; }
+
+  /* timeline head + filter */
+  .tl-head { padding-bottom: clamp(1.5rem, 3vw, 2.5rem); }
+  .mf-bar { position: sticky; top: 71px; z-index: 30; background: var(--paper); border-block: 3px solid var(--ink); }
+  .mf-bar__inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 24px; padding-block: 10px; }
+  .mf { border: 0; padding: 0; display: flex; align-items: center; gap: 12px; }
+  .mf__legend { float: left; margin-right: 4px; }
+  .mf__opts { display: flex; flex-wrap: wrap; gap: 6px; }
+  .mf label {
+    display: inline-flex; align-items: center; gap: .5em; min-height: 44px; padding: 0 14px; border: 2px solid var(--ink);
+    background: var(--paper-light); font-weight: 800; font-stretch: 85%; text-transform: uppercase; letter-spacing: .04em; font-size: .92rem; cursor: pointer;
+  }
+  .mf label:hover { background: var(--marigold); }
+  .mf__count { font-size: .75rem; padding: .15em .4em; background: var(--ink); color: var(--paper); }
+  .mf input:checked + label { background: var(--ink); color: var(--paper); box-shadow: 3px 3px 0 var(--red); }
+  .mf input:checked + label .mf__count { background: var(--red); color: var(--paper-light); }
+  .mf input:focus-visible + label { outline: 3px solid var(--ink); outline-offset: 3px; box-shadow: 0 0 0 6px var(--marigold); }
+  .mf__eras { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; }
+  .mf__eras a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 800; font-size: .92rem; color: var(--ink); text-decoration-color: var(--red); text-decoration-thickness: 2px; }
+  .mf__eras a:hover { color: var(--red-ink); }
+
+  /* the filter itself: CSS only */
+  .memory:has(#mf-india:checked) :global(.ms[data-region='Global']),
+  .memory:has(#mf-global:checked) :global(.ms[data-region='India']) { display: none; }
+  .memory:has(#mf-india:checked) :global(.ruler__gl),
+  .memory:has(#mf-global:checked) :global(.ruler__in) { opacity: .12; }
+
+  /* eras */
+  .era { padding-block: clamp(3rem, 7vw, 6rem) clamp(2rem, 5vw, 4rem); scroll-margin-top: 70px; overflow-x: clip; }
+  .intro { overflow-x: clip; }
+  .era--2 { background: var(--paper-light); }
+  .era__head { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(20px, 4vw, 60px); align-items: end; margin-bottom: clamp(26px, 4vw, 44px); }
+  .era__range {
+    font-weight: 900; font-stretch: var(--display-stretch); font-size: clamp(3rem, 7.8vw, 8rem); line-height: .78; letter-spacing: -.02em;
+    color: transparent; -webkit-text-stroke: 2.5px var(--ink); white-space: nowrap;
+  }
+  .era__text { display: grid; gap: 12px; }
+  .era__kicker { color: var(--red-ink); }
+  .era__title { max-width: 14ch; }
+  .era__list:last-of-type { border-bottom: 3px solid var(--line); }
+  .era__list:first-of-type > :global(li:first-child) { border-top: 3px solid var(--line); }
+  .era__back { margin-top: 18px; }
+  .era__back a { display: inline-flex; align-items: center; gap: .4em; min-height: 44px; font-weight: 800; font-size: .9rem; color: var(--ink); text-decoration-color: var(--red); text-decoration-thickness: 2px; }
+  .mf-bar { scroll-margin-top: 72px; }
+  .interlude { border-top: 1px solid var(--line); padding-block: clamp(28px, 4.5vw, 56px); }
+  .interlude__title { margin-bottom: 18px; color: var(--red-ink); }
+  .interlude__row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(18px, 3vw, 40px); }
+  .interlude__row :global(.photo__img picture) { display: block; height: 100%; }
+  .interlude--quote { display: grid; justify-items: center; text-align: left; }
+  .interlude--quote :global(.pull) { max-width: 920px; width: 100%; }
+  .interlude--quote :global(.pull blockquote) { max-width: 22em; }
+
+  /* archive wall */
+  .wall-sec__inner { position: relative; z-index: 2; }
+  .wall-sec__credit { margin-top: 10px; color: var(--ink-soft); }
+
+  /* add to the archive */
+  .add { background: var(--marigold); color: var(--ink); --ink-soft: #3E3A33; }
+  .add__grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(32px, 5vw, 80px); align-items: start; }
+  .add__text { display: grid; gap: 20px; }
+  .add__lead { font-family: var(--font-serif); font-size: clamp(1.3rem, 2vw, 1.7rem); line-height: 1.3; max-width: 34ch; }
+  .add__ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; }
+  .add .link-arrow { border-color: var(--ink); }
+  .add__promise { position: relative; background: var(--paper-light); border: 3px solid var(--ink); box-shadow: var(--shadow-hard); padding: 22px 22px 26px; }
+  .add__promise-title { padding-bottom: 10px; border-bottom: 1.5px dashed var(--ink); margin-bottom: 14px; }
+  .add__promise ol { display: grid; gap: 14px; }
+  .add__promise li { display: grid; grid-template-columns: 34px 1fr; gap: 10px; font-size: .98rem; line-height: 1.45; }
+  .add__promise li > span { font-weight: 900; font-stretch: 80%; color: var(--red-ink); }
+  .add__placard { position: absolute; right: -16px; bottom: -34px; }
+
+  @media (max-width: 1000px) {
+    .intro__grid, .add__grid { grid-template-columns: minmax(0, 1fr); }
+    .intro__media { max-width: 620px; }
+    .era__head { grid-template-columns: minmax(0, 1fr); align-items: start; }
+  }
+  @media (max-width: 640px) {
+    .interlude__row { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 900px) {
+    .mf-bar { position: static; }
+  }
+  @media (max-width: 560px) {
+    .intro__stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .intro__stats div:nth-child(3) { border-left: 0; padding-left: 0; }
+    .intro__stats div:nth-child(n+3) { border-top: 1px solid var(--line); }
+    .intro__media { padding-top: 70px; }
+    .intro__stamp { display: none; }
+    .era__range { font-size: clamp(3rem, 17vw, 5rem); -webkit-text-stroke-width: 2px; }
+    .mf { flex-wrap: wrap; }
+    .add__placard { display: none; }
+  }
+</style>

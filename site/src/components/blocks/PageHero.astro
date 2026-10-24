@@ -1,0 +1,53 @@
+---
+// Standard inner-page hero: breadcrumbs, label row, oversized H1 that overlaps a documentary photo, standfirst.
+import Photo from '../media/Photo.astro';
+import Breadcrumbs from '../ui/Breadcrumbs.astro';
+import type { Tone } from '../../lib/photos';
+
+export interface Props {
+  label: string;
+  title?: string;               // or slot "title" for rich markup
+  lead?: string;
+  crumbs?: { name: string; href: string }[];
+  photo?: string;
+  tone?: Tone;
+  photoPosition?: string;
+  meta?: string[];              // extra label-row items, e.g. ["Updated 24 Oct 2026", "8 min read"]
+  ground?: 'paper' | 'ink' | 'green' | 'pink';
+}
+const { label, title, lead, crumbs, photo, tone = 'red', photoPosition, meta = [], ground = 'paper' } = Astro.props;
+---
+<section class:list={['page-hero', `ground-${ground}`, { 'page-hero--photo': !!photo }, 'grain']}>
+  <div class="wrap page-hero__inner">
+    {crumbs && <Breadcrumbs items={crumbs} />}
+    <div class="page-hero__text">
+      <p class="label-row label page-hero__label"><span class="page-hero__kicker">{label}</span>{meta.map((m) => <span>{m}</span>)}</p>
+      <h1 class="h1 page-hero__title">{title}<slot name="title" /></h1>
+      {lead && <p class="lead page-hero__lead">{lead}</p>}
+      <slot />
+    </div>
+    {photo && (
+      <div class="page-hero__photo">
+        <Photo id={photo} tone={tone} aspect="4 / 5" position={photoPosition} priority sizes="(min-width: 900px) 42vw, 92vw" widths={[480, 720, 960, 1280]} tape="tr" />
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .page-hero { padding-block: clamp(28px, 4vw, 48px) clamp(48px, 8vw, 96px); border-bottom: var(--rule); overflow: hidden; }
+  .page-hero__inner { position: relative; z-index: 2; display: grid; gap: 24px; }
+  .page-hero--photo .page-hero__inner { grid-template-columns: 1.25fr 1fr; grid-template-areas: 'crumbs crumbs' 'text photo'; align-items: end; }
+  .page-hero--photo :global(.crumbs) { grid-area: crumbs; }
+  .page-hero__text { grid-area: text; display: grid; gap: 20px; position: relative; z-index: 3; }
+  .page-hero__kicker { color: var(--red-ink); }
+  :global(.ground-ink) .page-hero__kicker, :global(.ground-green) .page-hero__kicker { color: var(--coral); }
+  .page-hero__title { max-width: 12ch; text-wrap: balance; }
+  .page-hero--photo .page-hero__title { margin-right: -22%; } /* headline overlaps the photograph */
+  .page-hero__photo { grid-area: photo; position: relative; z-index: 1; }
+  @media (max-width: 900px) {
+    .page-hero--photo .page-hero__inner { grid-template-columns: 1fr; grid-template-areas: 'crumbs' 'text' 'photo'; }
+    .page-hero--photo .page-hero__title { margin-right: 0; }
+    .page-hero__photo { max-width: 520px; }
+  }
+</style>

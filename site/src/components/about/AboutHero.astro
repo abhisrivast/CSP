@@ -1,0 +1,59 @@
+---
+// Inner-page hero in the PageHero language (oversized H1 overlapping a duotone documentary photo),
+// with a short, true caption and a clean credit via Pic.
+import Breadcrumbs from '../ui/Breadcrumbs.astro';
+import Stamp from '../ui/Stamp.astro';
+import Pic from './Pic.astro';
+import type { Tone } from '../../lib/photos';
+
+export interface Props {
+  label: string;
+  meta?: string[];
+  lead?: string;
+  crumbs: { name: string; href: string }[];
+  photo: string;
+  tone?: Tone;
+  position?: string;
+  caption: string;
+  alt?: string;
+  stamp?: { text: string; sub?: string };
+}
+const { label, meta = [], lead, crumbs, photo, tone = 'red', position, caption, alt, stamp } = Astro.props;
+---
+<section class="ahero grain">
+  <div class="wrap ahero__inner">
+    <Breadcrumbs items={crumbs} />
+    <div class="ahero__text">
+      <p class="label-row label"><span class="ahero__kicker">{label}</span>{meta.map((m) => <span>{m}</span>)}</p>
+      <h1 class="h1 ahero__title"><slot name="title" /></h1>
+      {lead && <p class="lead ahero__lead">{lead}</p>}
+      <slot />
+    </div>
+    <div class="ahero__photo">
+      <Pic id={photo} tone={tone} alt={alt} aspect="4 / 5" position={position} priority caption={caption} sizes="(min-width: 900px) 40vw, 92vw" widths={[480, 720, 960]} tape="tr" />
+      {stamp && <span class="ahero__stamp"><Stamp text={stamp.text} sub={stamp.sub} color="ink" tilt={-10} /></span>}
+    </div>
+  </div>
+</section>
+
+<style>
+  .ahero { padding-block: clamp(24px, 4vw, 44px) clamp(48px, 8vw, 92px); border-bottom: var(--rule); overflow: hidden; }
+  .ahero__inner { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); grid-template-areas: 'crumbs crumbs' 'text photo'; gap: 24px clamp(24px, 4vw, 56px); align-items: end; }
+  .ahero__inner > :global(.crumbs) { grid-area: crumbs; }
+  .ahero__text { grid-area: text; display: grid; gap: 22px; position: relative; z-index: 3; padding-bottom: clamp(0px, 3vw, 40px); }
+  .ahero__kicker { color: var(--red-ink); }
+  /* paper keyline so the headline reads as a cut-out where it overlaps the photograph */
+  .ahero__title { font-size: clamp(3.6rem, 12.4vw, 10.25rem); line-height: .82; -webkit-text-stroke: .09em var(--paper); paint-order: stroke fill; }
+  .ahero__lead { max-width: 40ch; }
+  .ahero__title :global(.l) { display: block; white-space: nowrap; }
+  .ahero__title :global(.red) { color: var(--red); }
+  .ahero__photo { grid-area: photo; position: relative; z-index: 1; }
+  .ahero__stamp { position: absolute; right: -14px; bottom: 120px; z-index: 4; font-size: 1.1rem; }
+  .ahero__stamp :global(.stamp) { background: var(--paper-light); }
+  @media (max-width: 900px) {
+    .ahero__inner { grid-template-columns: 1fr; grid-template-areas: 'crumbs' 'text' 'photo'; }
+    .ahero__title { margin-right: 0; }
+    .ahero__photo { max-width: 520px; }
+    .ahero__stamp { right: 8px; bottom: auto; top: 18px; }
+  }
+</style>

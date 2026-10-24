@@ -1,0 +1,104 @@
+---
+// Article hero: breadcrumbs, kind label, a two-part headline (display + serif tail) that overlaps the
+// duotone hero photo, the standfirst, and a ruled "dossier" strip with byline, dates, reading time and audience.
+import Photo from '../media/Photo.astro';
+import Breadcrumbs from '../ui/Breadcrumbs.astro';
+import Stamp from '../ui/Stamp.astro';
+import { splitTitle, fmtDate, isoDate, audienceLabels, ISSUE_ORDER, type Article } from './lib';
+
+export interface Props { entry: Article; minutes: number; crumbs: { name: string; href: string }[] }
+const { entry, minutes, crumbs } = Astro.props;
+const d = entry.data;
+const [main, tail] = splitTitle(d.title);
+const size = main.length <= 40 ? 'xl' : main.length <= 58 ? 'l' : 'm';
+const aud = audienceLabels(d.audience);
+const no = ISSUE_ORDER.indexOf(entry.id);
+---
+<header class:list={['a-hero', 'grain', { 'a-hero--photo': !!d.heroPhoto }]}>
+  <div class="wrap a-hero__grid">
+    <div class="a-hero__crumbs"><Breadcrumbs items={crumbs} /></div>
+    <div class="a-hero__text">
+      <p class="a-hero__kicker label"><span class="a-hero__kind">{d.kind}</span>{no >= 0 && <span>Journal No. {String(no + 1).padStart(2, '0')}</span>}<span>{minutes} min read</span></p>
+      <h1 class:list={['a-hero__title', `a-hero__title--${size}`]}>
+        <span class="a-hero__main">{main}</span>
+        {tail && <span class="a-hero__tail">{tail}</span>}
+      </h1>
+      <p class="a-hero__dek">{d.description}</p>
+    </div>
+    {d.heroPhoto ? (
+      <div class="a-hero__photo">
+        <Photo id={d.heroPhoto} tone={d.tone} aspect="4 / 5" priority caption={false} sizes="(min-width: 960px) 40vw, 92vw" widths={[420, 640, 900, 1200]} tape="tr" />
+        <span class="a-hero__stamp"><Stamp text="Sourced" sub={`Checked ${fmtDate(d.updated ?? d.date)}`} tilt={-9} /></span>
+      </div>
+    ) : (
+      <div class="a-hero__nophoto" aria-hidden="true"><Stamp text={d.kind} sub="Cultural Shock Party" round tilt={-10} /></div>
+    )}
+  </div>
+
+  <div class="wrap">
+    <dl class="a-meta">
+      <div><dt class="label">Words</dt><dd>{d.author}</dd></div>
+      <div><dt class="label">Published</dt><dd><time datetime={isoDate(d.date)}>{fmtDate(d.date)}</time></dd></div>
+      {d.updated && <div><dt class="label">Updated</dt><dd><time datetime={isoDate(d.updated)}>{fmtDate(d.updated)}</time></dd></div>}
+      <div><dt class="label">Reading time</dt><dd>{minutes} minutes</dd></div>
+      <div class="a-meta__aud"><dt class="label">Written for</dt><dd><ul role="list" class="chips">{aud.map((a) => <li>{a}</li>)}</ul></dd></div>
+    </dl>
+  </div>
+</header>
+
+<style>
+  .a-hero { background: var(--paper); padding-block: clamp(20px, 3vw, 36px) 0; border-bottom: var(--rule); overflow: hidden; }
+  .a-hero__grid { position: relative; z-index: 2; display: grid; gap: 22px 0; grid-template-columns: minmax(0, 1fr); }
+  .a-hero__text { display: grid; gap: 18px; align-content: end; position: relative; z-index: 3; }
+  .a-hero__kicker { display: flex; flex-wrap: wrap; gap: .5em; align-items: center; }
+  .a-hero__kind { background: var(--red-ink); color: var(--paper-light); padding: .35em .6em .3em; }
+  .a-hero__kicker span + span { border: 1.5px solid var(--ink); padding: calc(.35em - 1.5px) .6em calc(.3em - 1.5px); }
+
+  .a-hero__title { display: block; font-size: var(--fs); line-height: .88; text-wrap: balance; }
+  .a-hero__main {
+    font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; letter-spacing: -.012em;
+    -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  }
+  .a-hero__title--xl { --fs: clamp(2.9rem, 12.4vw, 7rem); }
+  .a-hero__title--l { --fs: clamp(2.6rem, 10vw, 5.6rem); }
+  .a-hero__title--m { --fs: clamp(2.3rem, 8.4vw, 4.6rem); }
+  .a-hero__tail {
+    display: block; margin-top: .45em; text-wrap: balance;
+    font-family: var(--font-serif); font-style: italic; font-weight: 500; letter-spacing: -.01em; line-height: 1.05;
+    font-size: clamp(1.55rem, 3.4vw, 2.6rem); color: var(--red-ink); max-width: 22ch;
+  }
+  .a-hero__dek { font-family: var(--font-serif); font-size: clamp(1.15rem, 1.7vw, 1.4rem); line-height: 1.45; color: var(--ink-soft); max-width: 40ch; }
+
+  .a-hero__photo { position: relative; max-width: 470px; width: 100%; justify-self: end; }
+  .a-hero__photo :global(.photo) { transform: rotate(1.2deg); }
+  .a-hero__stamp { position: absolute; left: -14px; bottom: 26px; z-index: 3; background: var(--paper-light); padding: 4px; transform: rotate(-4deg); }
+  .a-hero__nophoto { display: grid; place-items: center; min-height: 220px; font-size: 1.6rem; }
+
+  .a-meta {
+    position: relative; z-index: 2; display: flex; flex-wrap: wrap; gap: 0; margin-top: clamp(28px, 4vw, 48px);
+    border-top: var(--rule);
+  }
+  .a-meta > div { display: grid; gap: 4px; padding: 14px clamp(14px, 2vw, 26px) 16px 0; margin-right: clamp(14px, 2vw, 26px); border-right: 1px solid var(--line-soft); }
+  .a-meta > div:last-child { border-right: 0; }
+  .a-meta dt { color: var(--muted); }
+  .a-meta dd { font-weight: 700; font-size: .98rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chips li { font-size: .82rem; font-weight: 750; padding: .2em .6em; background: var(--marigold); border: 1.5px solid var(--ink); border-radius: 99px; }
+
+  @media (min-width: 960px) {
+    .a-hero--photo .a-hero__grid { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); grid-template-areas: 'crumbs crumbs' 'text photo'; align-items: center; }
+    .a-hero__crumbs { grid-area: crumbs; }
+    .a-hero--photo .a-hero__text { grid-area: text; padding-bottom: 28px; }
+    .a-hero--photo .a-hero__title { margin-right: -18%; }
+    .a-hero--photo .a-hero__main { background: var(--paper); padding: 0 .12em 0 0; }
+    .a-hero__photo { grid-area: photo; margin-bottom: -2px; }
+    .a-hero:not(.a-hero--photo) .a-hero__grid { grid-template-columns: minmax(0, 1fr) 260px; grid-template-areas: 'crumbs crumbs' 'text stamp'; align-items: center; }
+    .a-hero:not(.a-hero--photo) .a-hero__crumbs { grid-area: crumbs; }
+    .a-hero:not(.a-hero--photo) .a-hero__text { grid-area: text; }
+    .a-hero__nophoto { grid-area: stamp; }
+  }
+  @media (max-width: 959px) {
+    .a-hero__photo { justify-self: start; max-width: 440px; margin-top: 8px; }
+    .a-hero__nophoto { display: none; }
+  }
+</style>

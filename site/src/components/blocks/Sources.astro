@@ -1,0 +1,26 @@
+---
+// Numbered source list ("How we know"). Pair with <sup><a class="fn-ref" href="#src-3">3</a></sup> in text.
+export type Source = { label: string; href: string; publisher?: string; date?: string; note?: string };
+export interface Props { sources: Source[]; title?: string; id?: string }
+const { sources, title = 'How we know: sources', id = 'sources' } = Astro.props;
+---
+<section class="sources" aria-labelledby={`${id}-title`}>
+  <h2 class="label sources__title" id={`${id}-title`}>{title}</h2>
+  <ol>
+    {sources.map((s, i) => (
+      <li id={`src-${i + 1}`}>
+        <a href={s.href} rel="noopener">{s.label}</a>
+        {(s.publisher || s.date) && <span class="muted">. {[s.publisher, s.date].filter(Boolean).join(', ')}.</span>}
+        {s.note && <span class="sources__note"> {s.note}</span>}
+      </li>
+    ))}
+  </ol>
+</section>
+
+<style>
+  .sources { margin-top: 3rem; padding-top: 14px; border-top: 3px solid var(--line); font-size: .92rem; line-height: 1.45; }
+  .sources ol { margin-top: 14px; padding-left: 1.6em; display: grid; gap: 8px; }
+  .sources li::marker { font-weight: 800; color: var(--red-ink); }
+  .sources li:target { background: var(--marigold); }
+  .sources a { word-break: break-word; }
+</style>

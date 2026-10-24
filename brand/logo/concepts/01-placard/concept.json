@@ -1,0 +1,70 @@
+{
+  "id": "01-placard",
+  "name": "The Placard",
+  "idea": "A hand-lettered cardboard protest sign, split into a system. The header primary is a small torn-cardboard S placard (S for Shock, red with an ink keyline) beside CULTURAL SHOCK PARTY in one line of custom chisel-marker caps. The O of SHOCK is a Venus ring with a short cross stub below the baseline. The stacked placard on a hand-held stake becomes the campaign lockup for posters and banners.",
+  "rationale": "CSP turns feminist ideas into street politics, and the placard is the object street politics is made of. It comes straight from the reference poster (cardboard signs, black marker caps, a red hero word). After critique the system was rebuilt so the part that has to work small is not a picture: the header primary is one line of lettering, legible at 28px tall (caps are about half the lockup height), with only the S placard as a signature. The Venus O makes the feminism explicit in the name itself, in a form activists can draw with three marker strokes. Dropping 'CSP' from the mark avoids India's 'Customer Service Point' bank kiosks and the historical Congress Socialist Party. Red on cardboard is only about 1.7:1, so every red on cardboard gets a sign-writer's ink keyline (outline to board about 5.6:1). The 16-32px favicon uses a cream poster-board with a cardboard rim, where red is about 4.4:1. The full placard is kept for 64px and up, where it reads as a protest sign held at a march.",
+  "fonts": [
+    "Custom chisel-marker caps drawn for this concept (skeleton strokes swept with a chisel nib in marker.py; per-stroke nib angle varied +/-9 degrees; P/R drawn stem-up into the bowl in one stroke; K arm and leg joins hidden inside the strokes; Venus O glyph). No font file used. Tested against and rejected: PermanentMarker, CaveatBrush, Mansalva, Knewave, SedgwickAveDisplay, GochiHand, Kalam-700"
+  ],
+  "colors": [
+    "#221F1D ink (lettering, keylines)",
+    "#CB3932 protest red (SHOCK, the S, underline)",
+    "#B49073 cardboard (placards)",
+    "#966C52 dark cardboard (stake, favicon rim)",
+    "#F6EEDD paper (cream poster-board on ink and in the favicon; tear liner)"
+  ],
+  "files": [
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/primary.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/alt.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/mark.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/mark-favicon.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/reverse.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/mono.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/alt-reverse.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/alt-mono.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/mark-reverse.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/mark-mono.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/textured.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/primary.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/primary-sheet.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/alt.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/alt-sheet.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/mark-sheet.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/mark-favicon-sheet.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/reverse.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/mono.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/alt-reverse.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/alt-mono.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/mark-reverse.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/mark-mono.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/textured.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/overview.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/build.py",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/marker.py",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/knockout.py",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/variants.py",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/render.sh",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/01-placard/_v1/ (pre-critique backup)"
+  ],
+  "associationsChecked": "No lightning bolt, circle, double bolt or rune shapes, and nothing that rotates into a swastika. Nothing resembles the Strajk Kobiet bolt. The only symbols are a rectangle of torn board and a Venus drawn as the O of a word, never on its own with a fist, and no pink. It does not echo Indian reserved party symbols (hand, lotus, broom, elephant, bicycle, hammer-sickle, etc.), the Labour rose or the US donkey/elephant. 'CSP' no longer appears in any mark or lockup, so there is no read-across to India's bank 'Customer Service Point' kiosks, the historical Congress Socialist Party, or Belgian/Swiss Christian-social CSPs. The red S has no vertical bar, so it does not read as a dollar sign. Yard-sign / 'For Sale' risk: the stake is gone from the mark and the header. It stays only on the campaign placard, where it is now 30% longer and angled off the board's axis, so it reads as hand-held at a march rather than planted in a lawn. The lettering is one consistent hand, not mixed ransom-note letters. Not done: trademark search, and a check of the placard silhouette against the Election Commission of India free-symbol list if CSP registers a symbol.",
+  "strengths": [
+    "The header primary is now a real logo, not an illustration. It is one line of custom marker caps with a small S placard, legible at 28px tall (caps about 50% of the lockup height; checked at 1x and 4x zoom) and still clear at 16px tall.",
+    "Says feminist, not just protest: the O of SHOCK is a Venus ring with a cross stub, so the feminism sits inside the name. Three marker strokes, so activists can draw it on real cardboard.",
+    "Contrast fixed where it failed. Red on cardboard always carries an ink keyline (outline to board about 5.6:1), so SHOCK and the S hold at 48-64px. The 16-32px favicon uses cream board with a cardboard rim (red on cream about 4.4:1). Reverse uses cream poster-board.",
+    "The S placard mark has no stake and no initials. It reads as an S on a torn sign from 128px down to 16px (favicon cut), with no 'CSP' collisions.",
+    "True one-ink versions: mono.svg and mark-mono.svg are solid ink boards with the S knocked out, and alt-mono.svg is the whole placard knocked out (traced boolean, no stray slivers). These work for stamps, stencils and newsprint.",
+    "The lettering is more human. Each stroke has its own nib angle (+/-9 degrees), so terminals are no longer identical stamps. P and R stem tops are one continuous stroke, the K joins are hidden, O-C in SHOCK is opened about 18 units and R-T in PARTY is tightened about 10%.",
+    "The torn edge is irregular now: tooth spacing varies about 5x, height 2-3x, with calm stretches and the odd fibre.",
+    "Everything regenerates from build.py, marker.py and knockout.py. Masters are flat filled paths in palette colours only."
+  ],
+  "weaknesses": [
+    "The campaign placard (alt.svg) is still a picture logo. It is meant for 64px and up (posters, banners, social tiles); below that the header lockup or the S mark must be used, and the guidelines have to enforce that.",
+    "The header lockup is long (about 8.9:1). Narrow mobile headers will want the S mark alone, or the mark plus a two-line stack (not drawn yet).",
+    "Several mark cuts to manage: cardboard S with keyline (master, 32px and up), cream favicon cut (16-32px), cream reverse, knock-out mono. This is deliberate but needs a usage table.",
+    "The Venus O adds a descender under SHOCK. It is clear from about 32px tall; at 16-24px it reduces to a small tick under the O. At poster scale the Venus-in-a-word idea is familiar from feminist typography, so the lettering carries the ownership.",
+    "The S on its own is a modest symbol. Its distinctiveness comes from the torn board and the marker hand, not from a unique shape.",
+    "The flat masters are cleaner than the raw, collaged poster. The dry-marker energy depends on textured.svg, whose SVG filters may render differently or not at all in Figma or Illustrator.",
+    "The lettering is still algorithmic. P, R and K have been corrected, but a pass by a human letterer on the final lockups would still lift it."
+  ],
+  "iterations": 12
+}

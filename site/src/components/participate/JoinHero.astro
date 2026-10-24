@@ -1,0 +1,113 @@
+---
+// /join/ hero: "Join the movement" set huge over a taped, duotoned photo collage, with an honest picture key.
+import Shot from './Shot.astro';
+import Breadcrumbs from '../ui/Breadcrumbs.astro';
+import Placard from '../ui/Placard.astro';
+import Stamp from '../ui/Stamp.astro';
+
+export interface Props { crumbs: { name: string; href: string }[] }
+const { crumbs } = Astro.props;
+---
+<section class="jhero grain" aria-labelledby="join-title">
+  <div class="wrap jhero__inner">
+    <Breadcrumbs items={crumbs} />
+
+    <div class="jhero__text">
+      <p class="label-row label"><span class="jhero__kicker">Join</span><span>Free</span><span>About a minute</span></p>
+      <h1 class="jhero__title" id="join-title"><span class="jhero__l">Join the</span> <span class="jhero__l red">movement</span></h1>
+      <p class="lead jhero__lead">Start where you are. Five minutes on your phone counts. So does starting a reading circle at college. Pick a rung, climb when you’re ready, and bring a friend.</p>
+      <div class="jhero__ctas">
+        <a class="btn" href="#join-form">Join with the form <span class="arrow" aria-hidden="true">↓</span></a>
+        <a class="link-arrow" href="#ladder">See the five rungs <span aria-hidden="true">→</span></a>
+      </div>
+      <p class="jhero__nosign small">No sign-up needed to read, share or print. <a href="#no-signup">Start without one</a>.</p>
+    </div>
+
+    <div class="collage" role="group" aria-label="Photo collage">
+      <div class="collage__item collage__item--a">
+        <Shot id="in-030-2015-jantar-mantar-art-students-bilingual-placards" tone="red" aspect="4 / 3" priority caption={false}
+          alt="Students raise hand-painted placards in Hindi and English at a street rally."
+          sizes="(min-width: 900px) 36vw, 74vw" widths={[480, 720, 960]} />
+      </div>
+      <div class="collage__item collage__item--b">
+        <Shot id="in-034-2018-bhubaneswar-pride-why-should-straight-be-default" tone="pink" aspect="4 / 5" position="30% 40%" caption={false} tape="tr"
+          alt="A young woman in glasses smiles as she holds up a hand-lettered red placard at a pride march."
+          sizes="(min-width: 900px) 20vw, 44vw" widths={[320, 480, 640]} />
+      </div>
+      <div class="collage__item collage__item--c">
+        <Shot id="in-040-2019-delhi-queer-pride-bilingual-banner" tone="green" aspect="16 / 10" position="40% 50%" caption={false}
+          alt="Marchers walk behind a long bilingual banner, in English and Hindi, under rainbow balloons."
+          sizes="(min-width: 900px) 24vw, 52vw" widths={[320, 480, 640]} />
+      </div>
+      <div class="collage__item collage__item--d">
+        <Shot id="085-stacked-hands-sweaters" tone="marigold" aspect="1 / 1" caption={false}
+          alt="A circle of friends stack their hands together in the middle."
+          sizes="(min-width: 900px) 13vw, 30vw" widths={[240, 360, 480]} />
+      </div>
+      <div class="collage__placard"><Placard text="Start where you are" color="marigold" size="m" tilt={-5} decorative /></div>
+      <p class="collage__hindi" aria-hidden="true"><span class="hand" lang="hi">हम सब</span><span class="hand collage__en">all of us</span></p>
+      <span class="collage__stamp"><Stamp text="Free to join" sub="No fees" color="ink" tilt={8} /></span>
+    </div>
+
+    <p class="jhero__key">
+      <span class="label">In the pictures</span>
+      Art students at Jantar Mantar, New Delhi, 2 September 2015 · Bhubaneswar Pride Parade, Odisha, 1 September 2018 · Delhi Queer Pride, New Delhi, 24 November 2019 · stacked hands (illustrative stock photo). None of these shows a Cultural Shock Party event. <a href="/credits/">Photo credits</a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .jhero { padding-block: clamp(24px, 4vw, 44px) clamp(36px, 6vw, 64px); border-bottom: var(--rule); overflow: hidden; }
+  .jhero__inner {
+    position: relative; z-index: 2; display: grid; gap: 22px clamp(20px, 3vw, 44px);
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+    grid-template-areas: 'crumbs crumbs' 'text collage' 'key key';
+    align-items: center;
+  }
+  .jhero :global(.crumbs) { grid-area: crumbs; }
+  .jhero__text { grid-area: text; display: grid; gap: 22px; position: relative; z-index: 4; }
+  .jhero__kicker { color: var(--red-ink); }
+  .jhero__title {
+    font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; letter-spacing: -.02em;
+    font-size: clamp(4.9rem, 11.2vw, 11rem); line-height: .8; margin-right: -30%;
+  }
+  .jhero__l { display: block; }
+  .jhero__lead { max-width: 38ch; color: var(--ink-soft); }
+  .jhero__ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; }
+  .jhero__nosign { color: var(--muted); }
+
+  .collage { grid-area: collage; position: relative; aspect-ratio: 1 / 1.02; min-height: 0; }
+  .collage__item { position: absolute; }
+  .collage__item :global(.photo__img) { border: 7px solid var(--paper-light); box-shadow: 5px 6px 0 rgba(29, 28, 24, .2); }
+  .collage__item--a { left: 6%; top: 4%; width: 74%; transform: rotate(-2.5deg); z-index: 1; }
+  .collage__item--b { right: 0; top: 37%; width: 42%; transform: rotate(3deg); z-index: 3; }
+  .collage__item--c { left: 0; bottom: 3%; width: 54%; transform: rotate(1.5deg); z-index: 2; }
+  .collage__item--d { right: 3%; top: 0; width: 25%; transform: rotate(7deg); z-index: 2; }
+  .collage__placard { position: absolute; left: 44%; bottom: -2%; z-index: 4; }
+  .collage__placard :global(.placard__text) { font-size: clamp(1.15rem, 1.9vw, 1.7rem); }
+  .collage__hindi { position: absolute; left: 1%; top: 46%; z-index: 4; display: grid; justify-items: start; transform: rotate(-8deg); line-height: .9; }
+  .collage__hindi .hand { background: var(--ink); color: var(--paper-light); padding: .12em .45em .2em; font-size: clamp(1.5rem, 2.6vw, 2.3rem); }
+  .collage__hindi .collage__en { background: var(--paper-light); color: var(--ink); font-size: clamp(1rem, 1.5vw, 1.3rem); margin-left: 18px; border: 2px solid var(--ink); }
+  .collage__stamp { position: absolute; left: 1%; top: -1%; z-index: 4; background: var(--paper); padding: 3px; }
+  .collage__stamp :global(.stamp__text) { font-size: 1.15rem; }
+
+  .jhero__key { grid-area: key; display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; padding-top: 12px; border-top: 1px solid var(--line); font-size: .82rem; line-height: 1.45; color: var(--muted); }
+  .jhero__key .label { color: var(--text); font-size: .66rem; }
+  .jhero__key a { color: var(--red-ink); }
+
+  @media (max-width: 900px) {
+    .jhero__inner { grid-template-columns: 1fr; grid-template-areas: 'crumbs' 'text' 'collage' 'key'; }
+    .jhero__title { margin-right: 0; }
+    .collage { width: 100%; max-width: 560px; justify-self: center; margin-top: 6px; }
+  }
+  @media (max-width: 520px) {
+    .collage { aspect-ratio: 1 / 1.12; }
+    .collage__item--a { left: 4%; width: 82%; }
+    .collage__item--b { width: 46%; top: 40%; }
+    .collage__item--c { width: 58%; }
+    .collage__item--d { width: 28%; top: -2%; }
+    .collage__item :global(.photo__img) { border-width: 5px; }
+    .collage__stamp { display: none; }
+    .collage__placard { left: 30%; bottom: -3%; }
+  }
+</style>

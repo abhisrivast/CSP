@@ -1,0 +1,51 @@
+---
+// A hand-lettered protest placard / sticker. Decorative-by-default copy (set `decorative` false if it carries meaning).
+export interface Props {
+  text?: string;                  // or slot
+  color?: 'cardboard' | 'pink' | 'marigold' | 'red' | 'paper' | 'ink' | 'green';
+  shape?: 'placard' | 'sticker' | 'round' | 'tape';
+  tilt?: number;
+  size?: 's' | 'm' | 'l';
+  stick?: boolean;                // wooden stick under a placard
+  decorative?: boolean;
+  class?: string;
+}
+const { text, color = 'cardboard', shape = 'placard', tilt = -3, size = 'm', stick = false, decorative = false, class: cls } = Astro.props;
+---
+<div class:list={['placard', `placard--${color}`, `placard--${shape}`, `placard--${size}`, { 'placard--stick': stick }, cls]} style={`--tilt:${tilt}deg`} aria-hidden={decorative ? 'true' : undefined}>
+  <span class="placard__text">{text}<slot /></span>
+</div>
+
+<style>
+  .placard { --bg: #C9A27E; --fg: var(--ink); display: inline-grid; position: relative; transform: rotate(var(--tilt)); }
+  .placard__text {
+    display: block; background: var(--bg); color: var(--fg); font-family: var(--font-hand); line-height: .98;
+    text-transform: uppercase; letter-spacing: .01em; text-align: center; text-wrap: balance;
+  }
+  .placard--placard .placard__text {
+    padding: .5em .7em .45em; box-shadow: 4px 5px 0 rgba(29, 28, 24, .22);
+    clip-path: polygon(0 2%, 98% 0, 100% 97%, 2% 100%);
+    background-image: linear-gradient(180deg, rgba(255,255,255,.08), rgba(0,0,0,.05)), url('/textures/grain.png');
+    background-size: auto, 120px;
+  }
+  .placard--sticker .placard__text { padding: .45em .8em .4em; border-radius: 10px; border: 3px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); }
+  .placard--round .placard__text {
+    display: grid; place-items: center; width: 8.2em; aspect-ratio: 1; border-radius: 50%; padding: 1em; border: 3px solid var(--ink);
+  }
+  .placard--tape .placard__text { padding: .25em .9em .2em; clip-path: polygon(2% 0, 100% 6%, 98% 100%, 0 92%); font-family: var(--font-sans); font-weight: 800; font-stretch: 80%; letter-spacing: .06em; }
+  .placard--s .placard__text { font-size: 1.15rem; }
+  .placard--m .placard__text { font-size: clamp(1.4rem, 2.6vw, 2rem); }
+  .placard--l .placard__text { font-size: clamp(1.9rem, 4.5vw, 3.4rem); }
+  .placard--stick { padding-bottom: 70px; }
+  .placard--stick::after {
+    content: ''; position: absolute; left: 50%; bottom: 0; width: 14px; height: 84px; transform: translateX(-50%); z-index: -1;
+    background: linear-gradient(90deg, #8A6A4A, #B08A62 45%, #7D5E40);
+  }
+  .placard--cardboard { --bg: #C9A27E; }
+  .placard--pink { --bg: var(--pink); }
+  .placard--marigold { --bg: var(--marigold); }
+  .placard--red { --bg: var(--red-ink); --fg: var(--paper-light); }
+  .placard--paper { --bg: var(--paper-light); }
+  .placard--ink { --bg: var(--ink); --fg: var(--paper); }
+  .placard--green { --bg: var(--green); --fg: var(--paper); }
+</style>

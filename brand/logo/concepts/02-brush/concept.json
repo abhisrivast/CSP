@@ -1,0 +1,56 @@
+{
+  "id": "02-brush",
+  "name": "Brush Manifesto",
+  "idea": "The poster's lettering made into a logo: 'Shock' in red dry-brush script, 'Cultural' in ink script, 'PARTY' in spaced grotesk caps, joined by one tapered brush underline. The mark is the same brush S, underlined, reversed out of a red hand-cut placard.",
+  "rationale": "It is the closest translation of the inspiration poster: a red brush-script hero word under an ink script, a long swash underline, and clean grotesk caps for weight. The underline is the movement's gesture of emphasis, the way you mark a word on a placard, and it recurs in the mark, both lockups and the textured poster tile. Spaced grotesk 'PARTY' gives the handmade script an institutional anchor, so it reads as an organisation and not a lifestyle brand. The placard tile ties the mark to street protest and stays a solid, legible S down to 16px.",
+  "fonts": [
+    "KaushanScript-400 (Cultural, Shock, mark S; outlined, optically thickened 1.5% em for small sizes)",
+    "SpaceGrotesk-700 (PARTY)",
+    "SpaceGrotesk-500 (corner captions in textured.svg only)"
+  ],
+  "colors": [
+    "#CB3932 protest red",
+    "#221F1D ink",
+    "#F6EEDD paper"
+  ],
+  "files": [
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/02-brush/primary.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/02-brush/alt.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/02-brush/mark.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/02-brush/reverse.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/02-brush/mono.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/02-brush/textured.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/02-brush/primary.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/02-brush/primary-sheet.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/02-brush/mark-sheet.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/02-brush/alt.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/02-brush/reverse.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/02-brush/mono.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/02-brush/textured.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/02-brush/concept.json",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/02-brush/work/build.py",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/02-brush/work/csp.py",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/02-brush/work/verify.py"
+  ],
+  "associationsChecked": "No lightning bolt, no circle, no double-S or sig-rune shapes. The single rounded brush S cannot be read as SS, and it does not rotate into a swastika-like form. Not derived from Strajk Kobiet's bolt. None of the listed party symbols appear (Indian election symbols such as hand, lotus, broom, elephant or bicycle; hammer-sickle; Labour rose; US donkey/elephant). No Venus-and-fist, megaphone, pink or ransom-note lettering. The underline sits below the S and never crosses it, so it does not read as a dollar sign. The swash is a near-straight underline with a blunt start and a pointed end, not a check shape, so it does not read as the Nike swoosh. Remaining genre resemblances: a red script with an underline swash recalls Coca-Cola and baseball-jersey scripts in general, though the casual brush letterform, the separate straight underline and the grotesk PARTY keep it apart. A white letter on a red square is a common app-icon pattern; I know of no political party that uses a red S tile, but it has not been checked against trademark databases.",
+  "strengths": [
+    "The most faithful echo of the poster: red brush hero word, ink script, swash underline, grotesk caps, paper ground",
+    "One gesture repeats across the system: the same brush S and the same tapered underline appear in the mark, the primary, the alt and the textured tile",
+    "The primary is a single-line lockup built for headers. At 28px tall (padding included) 'Cultural Shock PARTY' still reads, helped by the optical thickening",
+    "The mark stays a clear S at 16px and 32px on paper, white and ink",
+    "The mono version uses real knock-outs (the S and underline are cut out of the placard), so it works as a single-colour stamp, stencil or newsprint logo",
+    "The flat masters are clean and filter-free. textured.svg adds a dry-brush, screen-print look and crumpled paper for posters and social"
+  ],
+  "weaknesses": [
+    "The wordmark is a lightly modified free font, KaushanScript, which is common on t-shirts, cafes and sports merchandise. It is not ownable until someone redraws or hand-letters it",
+    "The mark is essentially a white S on a red square, which is legible but generic and app-icon-like. The hand-cut placard irregularity is invisible below about 48px",
+    "The flat masters lose the dry, raw texture that gives the poster its energy. Only textured.svg has it, so the everyday logo is tidier and more 'script brand' than protest",
+    "Script plus red can drift toward lifestyle or sports branding. The credibility of a political force rests almost entirely on the small grotesk 'PARTY'",
+    "The primary is long (about 6.8:1), only about 190px wide at 28px tall. Narrow mobile headers will need the mark alone",
+    "alt.svg is a stacked wordmark without the placard mark; a mark-above-wordmark version was tried and rejected because it repeats the S directly above 'Shock'",
+    "Thickening and knock-outs are done with boolean operations, which turn some outlines into dense polylines, so the masters are heavier than ideal (about 26\u201338 KB)",
+    "The colour mark disappears on a red ground, so red backgrounds need the mono or paper treatment, and red 'Shock' on ink in reverse.svg has only moderate contrast (about 3.6:1)",
+    "The textured tile includes my own corner captions ('Fourth Wave of Feminism', the URL, 'Street politics. Institutional accountability.') as demo copy, which the client has not approved"
+  ],
+  "iterations": 6
+}

@@ -1,0 +1,19 @@
+---
+// Torn-paper transition between two grounds. Put it at the top of the lower section; `color` is the LOWER ground.
+export interface Props { color?: string; flip?: boolean; seed?: 1 | 2 | 3 }
+const { color = 'var(--ink)', flip = false, seed = 1 } = Astro.props;
+const shapes = {
+  1: 'M0 40 L0 22 L38 26 L64 12 L101 20 L140 8 L176 18 L214 6 L251 21 L290 10 L332 24 L370 9 L409 19 L447 5 L488 17 L527 8 L566 22 L604 11 L645 20 L684 4 L722 18 L763 10 L801 23 L842 7 L880 19 L921 9 L960 21 L1000 12 L1000 40 Z',
+  2: 'M0 40 L0 15 L44 21 L83 9 L124 24 L162 13 L205 19 L243 6 L284 22 L322 14 L365 25 L403 8 L446 18 L484 10 L526 23 L566 12 L604 20 L648 6 L686 17 L727 11 L768 24 L806 9 L848 19 L888 13 L928 22 L968 7 L1000 16 L1000 40 Z',
+  3: 'M0 40 L0 26 L30 18 L71 23 L109 10 L150 17 L189 7 L231 20 L270 12 L312 22 L351 6 L393 16 L432 11 L474 24 L513 9 L555 19 L594 13 L636 23 L675 8 L717 18 L756 12 L797 25 L836 10 L878 17 L917 6 L958 20 L1000 14 L1000 40 Z',
+};
+---
+<div class:list={['torn', { 'torn--flip': flip }]} aria-hidden="true">
+  <svg viewBox="0 0 1000 40" preserveAspectRatio="none" width="100%" height="28"><path d={shapes[seed]} fill={color} /></svg>
+</div>
+
+<style>
+  .torn { line-height: 0; margin-top: -27px; position: relative; z-index: 2; }
+  .torn svg { width: 100%; height: clamp(16px, 2.6vw, 30px); }
+  .torn--flip { transform: scaleY(-1); margin-top: 0; margin-bottom: -27px; }
+</style>

@@ -1,0 +1,23 @@
+---
+// Rubber-stamp mark ("SOURCED", "VERIFIED 2026", "CASE 04"). Decorative unless it carries meaning.
+export interface Props { text: string; sub?: string; tilt?: number; color?: 'red' | 'ink' | 'green'; round?: boolean; decorative?: boolean }
+const { text, sub, tilt = -8, color = 'red', round = false, decorative = true } = Astro.props;
+---
+<span class:list={['stamp', `stamp--${color}`, { 'stamp--round': round }]} style={`--tilt:${tilt}deg`} aria-hidden={decorative ? 'true' : undefined}>
+  <span class="stamp__text">{text}</span>
+  {sub && <span class="stamp__sub">{sub}</span>}
+</span>
+
+<style>
+  .stamp {
+    --c: var(--red-ink); display: inline-grid; justify-items: center; gap: 2px; padding: .4em .8em .35em;
+    border: 3px solid var(--c); outline: 1.5px solid var(--c); outline-offset: 3px; color: var(--c);
+    transform: rotate(var(--tilt)); font-weight: 900; font-stretch: 80%; text-transform: uppercase; letter-spacing: .1em; line-height: 1;
+    -webkit-mask: url('/textures/distress.png') center / 120px; mask: url('/textures/distress.png') center / 120px;
+  }
+  .stamp__text { font-size: 1.05rem; }
+  .stamp__sub { font-size: .62rem; letter-spacing: .18em; }
+  .stamp--ink { --c: var(--ink); }
+  .stamp--green { --c: var(--green); }
+  .stamp--round { border-radius: 50%; aspect-ratio: 1; place-content: center; padding: 1.1em; }
+</style>

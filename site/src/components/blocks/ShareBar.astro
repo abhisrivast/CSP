@@ -1,0 +1,39 @@
+---
+// Share links without third-party scripts or trackers. "Send to the group chat" first (WhatsApp is how India shares).
+import { abs } from '../../lib/schema';
+export interface Props { title: string; path?: string; text?: string }
+const { title, path = Astro.url.pathname, text } = Astro.props;
+const url = abs(path);
+const msg = encodeURIComponent(`${text ?? title}: ${url}`);
+const links = [
+  { label: 'WhatsApp', href: `https://wa.me/?text=${msg}` },
+  { label: 'X', href: `https://x.com/intent/post?text=${encodeURIComponent(text ?? title)}&url=${encodeURIComponent(url)}` },
+  { label: 'LinkedIn', href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}` },
+  { label: 'Email', href: `mailto:?subject=${encodeURIComponent(title)}&body=${msg}` },
+];
+---
+<div class="share">
+  <p class="label">Send it to the group chat</p>
+  <ul role="list">
+    {links.map((l) => <li><a href={l.href} rel="noopener" target="_blank">{l.label}<span class="visually-hidden"> (opens in a new tab)</span></a></li>)}
+    <li><button type="button" class="share__copy" data-url={url}>Copy link</button></li>
+  </ul>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.share__copy').forEach((b) =>
+    b.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(b.dataset.url!); b.textContent = 'Copied ✓'; } catch { b.textContent = b.dataset.url!; }
+    }),
+  );
+</script>
+
+<style>
+  .share { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; padding-block: 16px; border-block: 1px solid var(--line); }
+  .share ul { display: flex; flex-wrap: wrap; gap: 8px; }
+  .share a, .share__copy {
+    display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; border: 2px solid var(--ink); background: var(--paper-light);
+    color: var(--ink); font-weight: 750; font-size: .9rem; text-decoration: none; cursor: pointer;
+  }
+  .share a:hover, .share__copy:hover { background: var(--ink); color: var(--paper); }
+</style>

@@ -1,0 +1,94 @@
+---
+// /contact/ hero: big "Contact us" headline beside a postcard (photo, handwritten greeting, stamp and postmark).
+import Shot from './Shot.astro';
+import Breadcrumbs from '../ui/Breadcrumbs.astro';
+import Stamp from '../ui/Stamp.astro';
+
+export interface Props { crumbs: { name: string; href: string }[] }
+const { crumbs } = Astro.props;
+---
+<section class="chero grain" aria-labelledby="contact-title">
+  <div class="wrap chero__inner">
+    <Breadcrumbs items={crumbs} />
+    <div class="chero__text">
+      <p class="label-row label"><span class="chero__kicker">Contact</span><span>Read by a person</span></p>
+      <h1 class="chero__title" id="contact-title"><span class="chero__l">Contact</span> <span class="chero__l red">us</span></h1>
+      <p class="lead chero__lead">Questions, press, partnerships, schools, or something that worries you. Pick the route that fits, and a person, not a bot, will read it.</p>
+      <slot />
+    </div>
+
+    <div class="card" aria-hidden="true">
+      <div class="card__photo">
+        <Shot id="in-058-haryana-four-village-women-on-road" tone="marigold" aspect="4 / 5" position="50% 55%" priority caption={false}
+          alt="" sizes="(min-width: 900px) 22vw, 44vw" widths={[320, 480, 720]} />
+      </div>
+      <div class="card__write">
+        <p class="card__stamp"><span class="card__stamp-inner"><span class="card__stamp-big">CSP</span><span class="card__stamp-small">2026</span></span></p>
+        <p class="card__post"><Stamp text="Read by humans" sub="Every message" color="red" tilt={-8} /></p>
+        <p class="hand card__dear">Dear CSP,</p>
+        <p class="hand card__line">I have a question about…</p>
+        <span class="card__rule"></span>
+        <span class="card__rule"></span>
+        <span class="card__rule card__rule--short"></span>
+        <p class="hand card__sign">From me</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .chero { padding-block: clamp(24px, 4vw, 44px) clamp(40px, 6vw, 72px); border-bottom: var(--rule); overflow: hidden; }
+  .chero__inner {
+    position: relative; z-index: 2; display: grid; gap: 22px clamp(24px, 4vw, 56px);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    grid-template-areas: 'crumbs crumbs' 'text card';
+    align-items: center;
+  }
+  .chero :global(.crumbs) { grid-area: crumbs; }
+  .chero__text { grid-area: text; display: grid; gap: 22px; }
+  .chero__kicker { color: var(--red-ink); }
+  .chero__title {
+    font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; letter-spacing: -.02em;
+    font-size: clamp(5.4rem, 10.4vw, 9.8rem); line-height: .8;
+  }
+  .chero__l { display: block; white-space: nowrap; }
+  .chero__lead { max-width: 40ch; color: var(--ink-soft); }
+
+  .card {
+    grid-area: card; position: relative; display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1fr); gap: 0;
+    background: var(--paper-light); border: 2px solid var(--ink); box-shadow: 10px 12px 0 rgba(29, 28, 24, .2);
+    transform: rotate(2deg); padding: 14px;
+  }
+  .card__photo :global(.photo__img) { border: 0; }
+  .card__write { position: relative; display: grid; align-content: start; gap: 6px; padding: 18px 8px 18px 22px; margin-left: 14px; border-left: 2px dashed var(--line-soft); min-height: 100%; }
+  .card__stamp { justify-self: end; margin-bottom: 8px; }
+  .card__stamp-inner {
+    display: grid; place-items: center; width: 74px; height: 88px; background: var(--red-ink); color: var(--paper-light);
+    outline: 4px dotted var(--paper-light); outline-offset: -8px; box-shadow: 0 0 0 4px var(--paper-light), 0 0 0 5px var(--line-soft);
+    line-height: .9; text-align: center;
+  }
+  .card__stamp-big { font-weight: 900; font-stretch: var(--display-stretch); font-size: 1.9rem; }
+  .card__stamp-small { font-size: .7rem; font-weight: 700; letter-spacing: .14em; }
+  .card__post { position: absolute; left: 18px; top: 26px; opacity: .92; }
+  .card__post :global(.stamp) { font-size: .9rem; }
+  .card__dear { font-size: clamp(1.7rem, 2.6vw, 2.3rem); color: var(--ink); margin-top: 18px; }
+  .card__line { font-size: clamp(1.25rem, 1.8vw, 1.6rem); color: var(--red-ink); }
+  .card__rule { display: block; height: 2px; background: var(--line-soft); margin-top: 26px; }
+  .card__rule--short { width: 60%; }
+  .card__sign { justify-self: end; margin-top: 12px; font-size: 1.35rem; color: var(--ink-soft); transform: rotate(-4deg); }
+
+  @media (max-width: 900px) {
+    .chero__inner { grid-template-columns: 1fr; grid-template-areas: 'crumbs' 'text' 'card'; }
+    .card { max-width: 560px; width: 96%; justify-self: center; margin-top: 8px; }
+  }
+  @media (max-width: 480px) {
+    .card { padding: 10px; transform: rotate(1.5deg); }
+    .card__write { padding: 10px 2px 10px 12px; margin-left: 10px; }
+    .card__stamp-inner { width: 54px; height: 64px; }
+    .card__stamp-big { font-size: 1.35rem; }
+    .card__post { display: none; }
+    .card__dear { margin-top: 10px; font-size: 1.45rem; }
+    .card__line { font-size: 1.1rem; }
+    .card__rule { margin-top: 18px; }
+  }
+</style>

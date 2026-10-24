@@ -1,0 +1,54 @@
+---
+// A 178-year ruler with one tick per milestone: India above the line (tall, red), the world below (short, ink).
+// Decorative summary of the timeline; the accessible version is the timeline itself.
+export interface Props { items: { id: string; year: number; region: 'India' | 'Global'; title: string }[]; from?: number; to?: number }
+const { items, from = 1840, to = 2030 } = Astro.props;
+const W = 1000;
+const x = (y: number) => ((y - from) / (to - from)) * W;
+const decades = Array.from({ length: Math.floor((to - from) / 10) + 1 }, (_, i) => from + i * 10);
+// nudge ticks that share a year so both stay visible
+const seen = new Map<string, number>();
+const ticks = items.map((m) => {
+  const k = `${m.year}-${m.region}`;
+  const c = seen.get(k) ?? 0;
+  seen.set(k, c + 1);
+  return { ...m, cx: x(m.year) + c * 4 };
+});
+const india = items.filter((m) => m.region === 'India').length;
+---
+<figure class="ruler">
+  <svg viewBox={`0 0 ${W} 150`} preserveAspectRatio="none" class="ruler__svg" aria-hidden="true">
+    <line x1="0" x2={W} y1="75" y2="75" class="ruler__axis" />
+    {decades.map((d) => (
+      <g>
+        <line x1={x(d)} x2={x(d)} y1={d % 50 === 0 ? 64 : 69} y2={d % 50 === 0 ? 86 : 81} class="ruler__dec" />
+      </g>
+    ))}
+    {ticks.map((t) => t.region === 'India'
+      ? <line x1={t.cx} x2={t.cx} y1="8" y2="73" class="ruler__in"><title>{t.year}: {t.title}</title></line>
+      : <line x1={t.cx} x2={t.cx} y1="77" y2="122" class="ruler__gl"><title>{t.year}: {t.title}</title></line>)}
+  </svg>
+  <div class="ruler__labels" aria-hidden="true">
+    {decades.filter((d) => d % 50 === 0).map((d) => <span style={`left:${(x(d) / W) * 100}%`}>{d}</span>)}
+  </div>
+  <figcaption class="ruler__cap">
+    <span class="ruler__key"><span class="ruler__sw ruler__sw--in" aria-hidden="true"></span>India, {india} milestones (tall marks, above the line)</span>
+    <span class="ruler__key"><span class="ruler__sw ruler__sw--gl" aria-hidden="true"></span>The world, {items.length - india} milestones (short marks, below)</span>
+  </figcaption>
+</figure>
+
+<style>
+  .ruler { display: grid; gap: 10px; }
+  .ruler__svg { width: 100%; height: clamp(90px, 11vw, 150px); overflow: visible; }
+  .ruler__axis { stroke: var(--ink); stroke-width: 3; vector-effect: non-scaling-stroke; }
+  .ruler__dec { stroke: var(--ink); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+  .ruler__in { stroke: var(--red); stroke-width: 4; vector-effect: non-scaling-stroke; stroke-linecap: square; }
+  .ruler__gl { stroke: var(--ink); stroke-width: 4; vector-effect: non-scaling-stroke; opacity: .75; }
+  .ruler__labels { position: relative; height: 1.4em; font-size: var(--fs-label); font-weight: 800; letter-spacing: .1em; }
+  .ruler__labels span { position: absolute; transform: translateX(-50%); }
+  .ruler__cap { display: flex; flex-wrap: wrap; gap: 8px 28px; font-size: .9rem; color: var(--ink-soft); }
+  .ruler__key { display: inline-flex; align-items: center; gap: 8px; }
+  .ruler__sw { display: inline-block; width: 4px; height: 18px; }
+  .ruler__sw--in { background: var(--red); height: 22px; }
+  .ruler__sw--gl { background: var(--ink); opacity: .75; height: 12px; }
+</style>

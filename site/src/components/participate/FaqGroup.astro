@@ -1,0 +1,73 @@
+---
+// One numbered group of questions on /faq/: a sticky side column (number, title, dek, photo) and the answers.
+import Shot from './Shot.astro';
+import QA, { type QAItem } from './QA.astro';
+import type { Tone } from '../../lib/photos';
+
+export interface Props {
+  id: string;
+  n: string;
+  title: string;
+  dek: string;
+  items: QAItem[];
+  photo: { id: string; tone: Tone; alt: string; caption?: string | false; position?: string; aspect?: string };
+  ground?: 'paper' | 'light';
+  openFirst?: boolean;
+}
+const { id, n, title, dek, items, photo, ground = 'paper', openFirst = true } = Astro.props;
+---
+<section class:list={['fgroup', `fgroup--${ground}`]} id={id} aria-labelledby={`${id}-title`}>
+  <div class="wrap fgroup__grid">
+    <header class="fgroup__side">
+      <p class="fgroup__n" aria-hidden="true">{n}</p>
+      <p class="label fgroup__count">{items.length} questions</p>
+      <h2 class="h2 fgroup__title" id={`${id}-title`}>{title}</h2>
+      <p class="fgroup__dek">{dek}</p>
+      <div class="fgroup__pic">
+        <Shot
+          id={photo.id}
+          tone={photo.tone}
+          aspect={photo.aspect ?? '4 / 3'}
+          position={photo.position}
+          alt={photo.alt}
+          caption={photo.caption ?? false}
+          tape="tl"
+          sizes="(min-width: 900px) 30vw, 80vw"
+          widths={[360, 560, 800]}
+        />
+      </div>
+      <slot name="side" />
+    </header>
+    <div class="fgroup__list">
+      <slot name="before" />
+      {items.map((it, i) => <QA item={it} open={openFirst && i === 0} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .fgroup { padding-block: clamp(3rem, 7vw, 6rem); border-top: var(--rule); scroll-margin-top: 70px; }
+  .fgroup--light { background: var(--paper-light); }
+  .fgroup__grid { display: grid; grid-template-columns: minmax(0, 4.2fr) minmax(0, 7.8fr); gap: clamp(28px, 5vw, 80px); align-items: start; }
+  .fgroup__side { position: sticky; top: 92px; display: grid; gap: 12px; align-content: start; }
+  .fgroup__n { font-weight: 900; font-stretch: var(--display-stretch); font-size: clamp(4.5rem, 9vw, 8.5rem); line-height: .78; color: var(--red); letter-spacing: -.03em; }
+  .fgroup__count { color: var(--muted); padding-top: 10px; border-top: 3px solid var(--line); }
+  .fgroup__title { font-size: clamp(2.3rem, 4.2vw, 3.9rem); max-width: 11ch; text-wrap: balance; }
+  .fgroup__dek { color: var(--ink-soft); font-size: 1.05rem; line-height: 1.45; max-width: 34ch; }
+  .fgroup__pic { margin-top: 14px; max-width: 420px; }
+  .fgroup__pic :global(.photo) { transform: rotate(-1.4deg); }
+  .fgroup__pic :global(.photo__img) { border: 8px solid var(--paper-light); box-shadow: 5px 6px 0 rgba(29, 28, 24, .18); }
+  .fgroup--light .fgroup__pic :global(.photo__img) { border-color: var(--paper); }
+  .fgroup__list { min-width: 0; }
+  .fgroup__list :global(.faq) { scroll-margin-top: 90px; }
+  @media (max-width: 900px) {
+    .fgroup__grid { grid-template-columns: 1fr; gap: 24px; }
+    .fgroup__side { position: static; grid-template-columns: minmax(0, 1fr) minmax(0, 40%); column-gap: 18px; }
+    .fgroup__n, .fgroup__count, .fgroup__title, .fgroup__dek { grid-column: 1; }
+    .fgroup__pic { grid-column: 2; grid-row: 1 / 5; align-self: center; margin-top: 0; }
+  }
+  @media (max-width: 520px) {
+    .fgroup__side { grid-template-columns: 1fr; }
+    .fgroup__pic { grid-column: 1; grid-row: auto; max-width: 300px; margin-top: 6px; }
+  }
+</style>

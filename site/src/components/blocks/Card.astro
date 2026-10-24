@@ -1,0 +1,43 @@
+---
+// Editorial card for articles, guides and case studies. The whole card is one link (title carries the href).
+import Photo from '../media/Photo.astro';
+import type { Tone } from '../../lib/photos';
+export interface Props {
+  href: string;
+  title: string;
+  kicker?: string;            // "Explainer", "Case study 04"
+  meta?: string[];            // ["Argentina", "2015–"]
+  dek?: string;
+  photo?: string;
+  tone?: Tone;
+  aspect?: string;
+  size?: 'm' | 'l';
+  headingLevel?: 'h2' | 'h3';
+}
+const { href, title, kicker, meta = [], dek, photo, tone = 'red', aspect = '3 / 2', size = 'm', headingLevel: H = 'h3' } = Astro.props;
+---
+<article class:list={['card', `card--${size}`]}>
+  {photo && <Photo id={photo} tone={tone} aspect={aspect} caption={false} sizes={size === 'l' ? '(min-width: 900px) 60vw, 92vw' : '(min-width: 900px) 30vw, 92vw'} widths={[360, 560, 800, 1100]} />}
+  <div class="card__body">
+    <p class="label-row label">{kicker && <span class="card__kicker">{kicker}</span>}{meta.map((m) => <span>{m}</span>)}</p>
+    <H class="card__title"><a href={href}>{title}</a></H>
+    {dek && <p class="card__dek">{dek}</p>}
+  </div>
+</article>
+
+<style>
+  .card { position: relative; display: grid; gap: 14px; align-content: start; }
+  .card__body { display: grid; gap: 10px; }
+  .card__kicker { color: var(--red-ink); }
+  :global(.ground-ink) .card__kicker, :global(.ground-green) .card__kicker { color: var(--coral); }
+  .card__title { font-weight: 900; font-stretch: var(--head-stretch); font-size: clamp(1.35rem, 2.1vw, 1.75rem); line-height: 1.02; text-transform: none; }
+  .card--l .card__title { font-size: clamp(1.9rem, 3.4vw, 3rem); font-stretch: var(--display-stretch); text-transform: uppercase; line-height: .92; }
+  .card__title a { color: inherit; text-decoration: none; }
+  .card__title a::after { content: ''; position: absolute; inset: 0; z-index: 4; }
+  .card__title a:focus-visible { outline: none; box-shadow: none; }
+  .card:has(a:focus-visible) { outline: 3px solid var(--ink); outline-offset: 6px; }
+  .card:hover .card__title a { text-decoration: underline; text-decoration-color: var(--red); text-decoration-thickness: 3px; }
+  .card :global(.photo__img img) { transition: transform .5s var(--ease); }
+  .card:hover :global(.photo__img img) { transform: scale(1.03); }
+  .card__dek { color: var(--ink-soft); font-size: .98rem; line-height: 1.45; }
+</style>

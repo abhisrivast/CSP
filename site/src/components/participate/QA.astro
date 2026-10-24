@@ -1,0 +1,61 @@
+---
+// One FAQ entry from src/content/faq.json, rendered through the shared answer-first <Faq> component,
+// with its receipt (source + date) and a descriptive link to the deeper page.
+import Faq from '../ui/Faq.astro';
+import Text from './Text.astro';
+import { FAQ_SOURCES } from './faq-sources';
+
+export type QAItem = { id: string; q: string; a: string; more?: string; link?: { label: string; href: string } };
+export interface Props { item: QAItem; open?: boolean; idPrefix?: string }
+const { item, open = false, idPrefix = '' } = Astro.props;
+const sources = FAQ_SOURCES[item.id] ?? [];
+
+// Answer-first: the opening sentence (or two, if the first is just "No." or "Yes.") gets the bold lead style.
+const SENT = /^(.+?[.!?])\s+(?=[A-Z0-9“‘"'])/u;
+function splitLead(a: string): [string, string] {
+  const m = a.match(SENT);
+  if (!m) return [a, ''];
+  let first = m[1];
+  let rest = a.slice(m[0].length);
+  if (first.length < 25) {
+    const m2 = rest.match(SENT);
+    if (!m2) return [a, ''];
+    first = `${first} ${m2[1]}`;
+    rest = rest.slice(m2[0].length);
+  }
+  return [first, rest];
+}
+const [lead, rest] = splitLead(item.a);
+---
+<Faq q={item.q} id={`${idPrefix}${item.id}`} open={open}>
+  <p><Text text={lead} /></p>
+  {rest && <p class="qa__more"><Text text={rest} /></p>}
+  {item.more && <p class="qa__more"><Text text={item.more} /></p>}
+  {sources.length > 0 && (
+    <div class="qa__src">
+      <span class="label">{sources.length > 1 ? 'Sources' : 'Source'}</span>
+      <ul role="list">
+        {sources.map((s) => <li><a href={s.href} rel="noopener">{s.label}</a>, {s.date}</li>)}
+      </ul>
+    </div>
+  )}
+  {item.link && (
+    <p class="qa__link"><a href={item.link.href}>{item.link.label}<span class="qa__arrow" aria-hidden="true"> →</span></a></p>
+  )}
+</Faq>
+
+<style>
+  .qa__more { line-height: 1.55; }
+  .qa__src { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; align-items: baseline; font-size: .84rem; line-height: 1.45; color: var(--muted); padding-top: 10px; border-top: 1px dashed var(--line-soft); }
+  .qa__src .label { color: var(--text); font-size: .68rem; }
+  .qa__src ul { display: grid; gap: 4px; }
+  .qa__src a { color: inherit; text-decoration-color: var(--red); }
+  .qa__src a:hover { color: var(--red-ink); }
+  .qa__link a {
+    display: inline-flex; align-items: center; min-height: 44px; font-weight: 800; font-stretch: 85%; letter-spacing: .01em;
+    color: var(--red-ink); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .22em;
+  }
+  .qa__link a:hover { color: var(--ink); }
+  .qa__arrow { transition: transform .15s var(--ease); display: inline-block; margin-left: .25em; }
+  .qa__link a:hover .qa__arrow { transform: translateX(3px); }
+</style>

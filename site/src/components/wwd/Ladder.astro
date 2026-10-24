@@ -1,0 +1,64 @@
+---
+// The engagement ladder as a staircase: five rungs that climb from the phone in your hand to the institutions.
+import Photo from '../media/Photo.astro';
+import type { Tone } from '../../lib/photos';
+
+export type Rung = { where: string; time?: string; role: string; text: string; photo: string; tone: Tone; position?: string; href: string; linkLabel: string };
+export interface Props { rungs: Rung[] }
+const { rungs } = Astro.props;
+---
+<ol class="ladder" role="list">
+  {rungs.map((r, i) => (
+    <li class:list={['rung', `rung--${i + 1}`]} style={`--i:${i}`}>
+      <div class="rung__pic">
+        <Photo id={r.photo} tone={r.tone} aspect="1 / 1" position={r.position} caption={false} sizes="(min-width: 1000px) 16vw, (min-width: 600px) 30vw, 34vw" widths={[240, 360, 480]} />
+      </div>
+      <div class="rung__card">
+        <p class="rung__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</p>
+        <h3 class="rung__where"><span class="visually-hidden">Step {i + 1}: </span>{r.where}</h3>
+        <p class="label rung__meta">{r.time && <span class="rung__time">{r.time}</span>}<span>{r.role}</span></p>
+        <p class="rung__text">{r.text}</p>
+        <a class="rung__link" href={r.href}>{r.linkLabel} <span aria-hidden="true">→</span></a>
+      </div>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .ladder { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; align-items: end; counter-reset: r; }
+  .rung { display: grid; gap: 0; align-content: end; }
+  .rung__pic { width: 72%; margin: 0 0 -18px 10px; position: relative; z-index: 2; transform: rotate(calc(-3deg + var(--i) * 1.5deg)); }
+  .rung__pic :global(.photo__img) { border: 6px solid var(--paper-light); box-shadow: 4px 5px 0 rgba(29, 28, 24, .25); }
+  .rung__pic :global(.photo__img picture) { display: block; height: 100%; }
+  .rung__card {
+    --bg: var(--paper-light); --fg: var(--ink);
+    position: relative; display: grid; gap: 8px; align-content: start; padding: 34px 18px 22px;
+    background: var(--bg); color: var(--fg); border: 3px solid var(--ink); border-left-width: 0;
+    min-height: calc(250px + var(--i) * 56px);
+  }
+  .rung--1 .rung__card { border-left-width: 3px; }
+  .rung--2 .rung__card { --bg: var(--pink); }
+  .rung--3 .rung__card { --bg: var(--marigold); }
+  .rung--4 .rung__card { --bg: var(--red-ink); --fg: var(--paper-light); }
+  .rung--5 .rung__card { --bg: var(--ink); --fg: var(--paper); }
+  .rung__n { font-weight: 900; font-stretch: var(--display-stretch); font-size: clamp(2.6rem, 4vw, 3.6rem); line-height: .8; }
+  .rung__where { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(1.45rem, 2.1vw, 1.95rem); line-height: .92; text-wrap: balance; }
+  .rung__meta { display: flex; flex-wrap: wrap; gap: 6px; }
+  .rung__meta span { padding: .2em .45em; border: 1.5px solid currentColor; }
+  .rung__time { background: var(--fg); color: var(--bg); border-color: var(--fg) !important; }
+  .rung__text { font-size: .97rem; line-height: 1.45; }
+  .rung__link { justify-self: start; margin-top: 4px; padding-block: 10px; color: inherit; font-weight: 800; font-size: .95rem; line-height: 1.3; text-underline-offset: .2em; }
+  .rung__link:hover { color: inherit; text-decoration-thickness: .16em; }
+  .rung--4 .rung__link:focus-visible, .rung--5 .rung__link:focus-visible { outline-color: var(--paper-light); }
+
+  @media (max-width: 1000px) {
+    .ladder { grid-template-columns: 1fr; gap: 14px; max-width: 640px; }
+    .rung { grid-template-columns: 110px 1fr; align-items: start; gap: 0; }
+    .rung__pic { width: auto; margin: 14px -14px 0 0; transform: rotate(-3deg); }
+    .rung__card { min-height: 0; border-left-width: 3px; padding: 18px 18px 16px 30px; margin-left: calc(var(--i) * 0px); }
+    .rung__n { font-size: 2.4rem; }
+  }
+  @media (max-width: 420px) {
+    .rung { grid-template-columns: 84px 1fr; }
+  }
+</style>

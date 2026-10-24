@@ -1,0 +1,64 @@
+---
+// Representation Tracker preview: every Lok Sabha seat as one square. Filled = women MPs now,
+// outlined = seats still missing to reach one-third, faint = the rest. Static SVG, no JS.
+export interface Props {
+  women: number;          // women MPs now
+  total?: number;         // seats in the house
+  rows?: number;
+  title: string;
+  caption: string;
+}
+const { women, total = 543, rows = 15, title, caption } = Astro.props;
+const target = Math.round(total / 3);
+const gap = target - women;
+const cols = Math.ceil(total / rows);
+const step = 15;
+const size = 12;
+const w = cols * step - (step - size);
+const h = rows * step - (step - size);
+const cells = Array.from({ length: total }, (_, i) => ({ x: Math.floor(i / rows) * step, y: (i % rows) * step, k: i < women ? 'w' : i < target ? 'g' : 'r' }));
+const pct = ((women / total) * 100).toFixed(1);
+const uid = `waffle-${women}-${total}`;
+---
+<figure class="waffle">
+  <div class="waffle__head">
+    <p class="waffle__big"><span class="waffle__fig">{women}</span><span class="waffle__of">of {total}</span></p>
+    <p class="waffle__title">{title}</p>
+  </div>
+  <svg viewBox={`0 0 ${w} ${h}`} width={w} height={h} role="img" aria-labelledby={`${uid}-t ${uid}-d`} class="waffle__svg">
+    <title id={`${uid}-t`}>{title}</title>
+    <desc id={`${uid}-d`}>{`${women} of ${total} seats (${pct}%) are held by women. Reaching one-third would take ${target} seats, ${gap} more than today.`}</desc>
+    {cells.map((c) => (
+      c.k === 'g'
+        ? <rect x={c.x + 1} y={c.y + 1} width={size - 2} height={size - 2} rx="2" class="c-g" />
+        : <rect x={c.x} y={c.y} width={size} height={size} rx="2" class={`c-${c.k}`} />
+    ))}
+  </svg>
+  <ul class="waffle__key" role="list">
+    <li><span class="sw sw--w" aria-hidden="true"></span><strong>{women}</strong> seats held by women ({pct}%)</li>
+    <li><span class="sw sw--g" aria-hidden="true"></span><strong>{gap}</strong> more seats to reach one-third ({target})</li>
+    <li><span class="sw sw--r" aria-hidden="true"></span><strong>{total - target}</strong> other seats</li>
+  </ul>
+  <figcaption class="waffle__cap">{caption}<slot /></figcaption>
+</figure>
+
+<style>
+  .waffle { display: grid; gap: 18px; }
+  .waffle__head { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 8px 22px; }
+  .waffle__big { display: flex; align-items: baseline; gap: 10px; font-weight: 900; font-stretch: var(--display-stretch); line-height: .8; }
+  .waffle__fig { font-size: clamp(4.5rem, 9vw, 7.5rem); color: var(--coral); }
+  .waffle__of { font-size: clamp(1.6rem, 3vw, 2.4rem); text-transform: uppercase; }
+  .waffle__title { font-weight: 700; font-size: 1.1rem; line-height: 1.3; max-width: 30ch; padding-bottom: 6px; }
+  .waffle__svg { width: 100%; height: auto; }
+  .c-w { fill: var(--coral); }
+  .c-g { fill: none; stroke: var(--marigold); stroke-width: 2; }
+  .c-r { fill: currentColor; opacity: .16; }
+  .waffle__key { display: flex; flex-wrap: wrap; gap: 10px 26px; font-size: .95rem; }
+  .waffle__key li { display: flex; align-items: center; gap: 10px; }
+  .sw { width: 16px; height: 16px; border-radius: 2px; flex: none; }
+  .sw--w { background: var(--coral); }
+  .sw--g { border: 2px solid var(--marigold); }
+  .sw--r { background: currentColor; opacity: .3; }
+  .waffle__cap { font-size: .86rem; line-height: 1.45; color: var(--muted); max-width: 80ch; }
+  .waffle__cap :global(a) { color: inherit; }
+</style>

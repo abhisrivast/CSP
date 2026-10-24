@@ -1,0 +1,50 @@
+---
+// "How they did it": what the movement did at each stage of CSP's engine
+// (Ideas → Research → Public consciousness → Collective action).
+export interface Props {
+  stages: { ideas: string; research: string; consciousness: string; action: string };
+}
+const { stages } = Astro.props;
+const panels = [
+  { n: '01', name: 'Ideas', verb: 'What they argued', text: stages.ideas },
+  { n: '02', name: 'Research', verb: 'What they proved', text: stages.research },
+  { n: '03', name: 'Public consciousness', verb: 'How they spread it', text: stages.consciousness },
+  { n: '04', name: 'Collective action', verb: 'How they acted', text: stages.action },
+];
+---
+<ol class="stages" role="list">
+  {panels.map((p, i) => (
+    <li class="stage">
+      <p class="label stage__n"><span>{p.n}</span> {p.verb}</p>
+      <h3 class="stage__name">{p.name}</h3>
+      <p class="stage__text">{p.text}</p>
+      {i < panels.length - 1 && <span class="stage__arrow" aria-hidden="true">→</span>}
+    </li>
+  ))}
+</ol>
+
+<style>
+  .stages { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-block: 3px solid var(--line); }
+  .stage { position: relative; display: grid; align-content: start; gap: 14px; padding: 26px clamp(16px, 2vw, 28px) 32px; border-left: 1px solid var(--line); }
+  .stage:first-child { border-left: 0; padding-left: 0; }
+  .stage__n span { color: var(--coral); font-weight: 900; }
+  .stage__name { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(1.9rem, 2.8vw, 2.7rem); line-height: .88; min-height: 1.8em; }
+  .stage__text { color: var(--ink-soft); font-family: var(--font-serif); font-size: 1.08rem; line-height: 1.5; }
+  .stage__arrow {
+    position: absolute; right: -19px; top: 26px; z-index: 2; display: grid; place-items: center; width: 38px; height: 38px;
+    background: var(--marigold); color: var(--ink); border-radius: 50%; font-weight: 900; font-size: 1.2rem;
+  }
+  @media (max-width: 980px) {
+    .stages { grid-template-columns: 1fr 1fr; }
+    .stage:nth-child(3) { border-left: 0; padding-left: 0; }
+    .stage:nth-child(n+3) { border-top: 1px solid var(--line); }
+    .stage:nth-child(2) .stage__arrow { display: none; }
+    .stage__name { min-height: 0; }
+  }
+  @media (max-width: 600px) {
+    .stages { grid-template-columns: 1fr; }
+    .stage { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-bottom: 36px; }
+    .stage:first-child { border-top: 0; }
+    .stage__arrow, .stage:nth-child(2) .stage__arrow { display: grid; right: 0; top: auto; bottom: -19px; transform: rotate(90deg); }
+  }
+</style>

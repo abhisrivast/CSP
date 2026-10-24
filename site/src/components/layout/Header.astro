@@ -1,0 +1,124 @@
+---
+import { Image } from 'astro:assets';
+import badge from '../../assets/brand/csp-badge.png';
+import { NAV, liveSocials } from '../../data/site';
+
+const current = Astro.url.pathname;
+const isCurrent = (href: string) => (href === '/' ? current === '/' : current.startsWith(href));
+---
+<header class="site-header">
+  <div class="bar wrap">
+    <a class="brand" href="/" aria-label="Cultural Shock Party, home">
+      <Image src={badge} alt="" width={56} height={56} densities={[1, 2]} loading="eager" fetchpriority="high" class="brand__badge" />
+      <img src="/brand/wordmark.svg" alt="Cultural Shock Party" width="200" height="20" class="brand__word" />
+    </a>
+
+    <nav class="nav" aria-label="Main">
+      <ul role="list">
+        {NAV.map((item) => (
+          <li><a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <a class="btn btn--sm join" href="/join/">Join <span class="arrow" aria-hidden="true">→</span></a>
+
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu">
+      <span class="menu-btn__bars" aria-hidden="true"><span></span><span></span></span>
+      <span class="menu-btn__label">Menu</span>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="mobile-menu ground-ink grain" hidden>
+    <nav class="wrap mobile-menu__inner" aria-label="Main (mobile)">
+      <ul role="list" class="mobile-menu__list">
+        <li><a href="/" aria-current={current === '/' ? 'page' : undefined}><span>Home</span><small>Start here</small></a></li>
+        {NAV.map((item, i) => (
+          <li><a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}><span>{item.label}</span><small>{String(i + 1).padStart(2, '0')} / {item.hint}</small></a></li>
+        ))}
+      </ul>
+      <a class="btn btn--paper mobile-menu__join" href="/join/">Join the movement <span class="arrow" aria-hidden="true">→</span></a>
+      {liveSocials().length > 0 && (
+        <p class="label mobile-menu__social">{liveSocials().map((s) => <a href={s.href} rel="me noopener">{s.label}</a>)}</p>
+      )}
+    </nav>
+  </div>
+</header>
+
+<a class="sticky-join btn" href="/join/">Join the movement <span class="arrow" aria-hidden="true">→</span></a>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('.menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  if (btn && menu) {
+    const set = (open: boolean) => {
+      btn.setAttribute('aria-expanded', String(open));
+      menu.hidden = !open;
+      document.documentElement.classList.toggle('menu-open', open);
+      btn.querySelector('.menu-btn__label')!.textContent = open ? 'Close' : 'Menu';
+    };
+    btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+    menu.addEventListener('keydown', (e) => { if (e.key === 'Escape') { set(false); btn.focus(); } });
+    matchMedia('(min-width: 1100px)').addEventListener('change', (e) => e.matches && set(false));
+  }
+</script>
+
+<style>
+  .site-header { position: sticky; top: 0; z-index: 50; background: var(--paper); border-bottom: var(--rule); }
+  .bar { display: flex; align-items: center; gap: clamp(12px, 2vw, 28px); min-height: 68px; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; flex: none; margin-right: auto; }
+  .brand__badge { width: 52px; height: 52px; margin-block: 6px; transition: transform .25s var(--ease); }
+  .brand:hover .brand__badge { transform: rotate(-8deg) scale(1.04); }
+  .brand__word { width: clamp(150px, 16vw, 210px); height: auto; }
+
+  .nav ul { display: flex; gap: clamp(10px, 1.4vw, 22px); }
+  .nav a {
+    display: block; padding: 6px 0; color: var(--ink); text-decoration: none;
+    font-weight: 800; font-stretch: 78%; font-size: 1rem; letter-spacing: .04em; text-transform: uppercase;
+    border-bottom: 3px solid transparent;
+  }
+  .nav a:hover { border-bottom-color: var(--ink); }
+  .nav a[aria-current='page'] { border-bottom-color: var(--red); }
+
+  :global(.btn--sm) { min-height: 42px; font-size: .95rem; padding: .55em .9em .5em; box-shadow: 3px 3px 0 var(--ink); }
+
+  .menu-btn {
+    display: none; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; background: var(--ink); color: var(--paper);
+    border: 0; font-weight: 800; font-stretch: 80%; text-transform: uppercase; letter-spacing: .06em; cursor: pointer;
+  }
+  .menu-btn__bars { display: grid; gap: 5px; width: 20px; }
+  .menu-btn__bars span { height: 3px; background: currentColor; transition: transform .2s var(--ease); }
+  .menu-btn[aria-expanded='true'] .menu-btn__bars span:first-child { transform: translateY(4px) rotate(45deg); }
+  .menu-btn[aria-expanded='true'] .menu-btn__bars span:last-child { transform: translateY(-4px) rotate(-45deg); }
+
+  .mobile-menu { position: fixed; inset: 68px 0 0 0; overflow-y: auto; z-index: 49; border-top: var(--rule); }
+  .mobile-menu__inner { padding-block: 24px 40px; display: grid; gap: 28px; }
+  .mobile-menu__list li { border-bottom: 1px solid rgba(243, 236, 220, .25); }
+  .mobile-menu__list a { display: flex; flex-direction: column; padding: 12px 0; color: var(--paper); text-decoration: none; }
+  .mobile-menu__list span {
+    font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(2.3rem, 11vw, 3.6rem); line-height: .9;
+  }
+  .mobile-menu__list small { font-size: var(--fs-label); letter-spacing: .14em; text-transform: uppercase; color: #CFC6B4; margin-top: 6px; }
+  .mobile-menu__list a[aria-current='page'] span { color: var(--coral); }
+  .mobile-menu__social { display: flex; gap: 18px; }
+  :global(html.menu-open) { overflow: hidden; }
+
+  .sticky-join { display: none; }
+
+  @media (max-width: 1099px) {
+    .nav, .join { display: none; }
+    .menu-btn { display: inline-flex; }
+  }
+  @media (max-width: 720px) {
+    .sticky-join {
+      display: inline-flex; position: fixed; z-index: 40; left: 50%; bottom: max(14px, env(safe-area-inset-bottom));
+      transform: translateX(-50%); white-space: nowrap; box-shadow: 4px 4px 0 var(--ink);
+    }
+    .sticky-join:hover { transform: translate(calc(-50% - 2px), -2px); }
+    :global(html.menu-open) .sticky-join { display: none; }
+  }
+  @media (max-width: 420px) {
+    .brand__badge { width: 44px; height: 44px; }
+    .brand__word { width: 132px; }
+  }
+</style>

@@ -1,0 +1,102 @@
+---
+// /case-studies/: what feminist movements teach a Fourth Wave movement. Lists every caseStudies entry.
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/blocks/PageHero.astro';
+import SectionHead from '../../components/ui/SectionHead.astro';
+import JoinBand from '../../components/blocks/JoinBand.astro';
+import Stamp from '../../components/ui/Stamp.astro';
+import CrossLessons from '../../components/cases/CrossLessons.astro';
+import CaseBrowser from '../../components/cases/CaseBrowser.astro';
+import { sortCases, caseNo, isIndia, fmtDate } from '../../components/cases/case-utils';
+import { abs } from '../../lib/schema';
+
+const cases = sortCases(await getCollection('caseStudies'));
+const n = cases.length;
+const words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty'];
+const nWord = words[n] ?? String(n);
+const Cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+const india = cases.filter(isIndia).length;
+const lastUpdated = cases.reduce((m, c) => (c.data.updated > m ? c.data.updated : m), new Date('2026-10-24'));
+const lookup = new Map(cases.map((c) => [c.id, { title: c.data.title, no: caseNo(c, cases) }]));
+
+const path = '/case-studies/';
+const title = 'What movements teach us';
+const description = `Case studies of feminist movements that changed laws and minds, from Delhi 2012 and SEWA to Iceland and Ni Una Menos: timelines, receipts and lessons.`;
+const itemList = {
+  '@type': 'ItemList',
+  '@id': abs(path) + '#cases',
+  name: 'Case studies: feminist movements and what they teach',
+  numberOfItems: n,
+  itemListElement: cases.map((c, i) => ({ '@type': 'ListItem', position: i + 1, url: abs(`/case-studies/${c.id}/`), name: c.data.title })),
+};
+---
+<Base
+  title={title}
+  description={description}
+  pageType="CollectionPage"
+  image="/og/case-studies.png"
+  modified={lastUpdated.toISOString().slice(0, 10)}
+  breadcrumbs={[{ name: 'Case studies', href: path }]}
+  schema={[itemList]}
+>
+  <PageHero
+    label="Case studies"
+    title={title}
+    lead={`${Cap(nWord)} feminist movements, ${india > 0 ? `${words[india] ?? india} of them in India, ` : ''}from Delhi to Reykjavík and Buenos Aires to Nairobi. What they did, what changed, what didn't, and what we take from each. Every claim sourced and dated.`}
+    crumbs={[{ name: 'Case studies', href: path }]}
+    photo="2026-chihuahua-8m-b"
+    tone="red"
+    meta={[`${n} cases`, `Updated ${fmtDate(lastUpdated)}`]}
+  >
+    <div class="hero-ctas">
+      <a class="btn" href="#cases">Browse the cases <span class="arrow" aria-hidden="true">↓</span></a>
+      <a class="link-arrow" href="#lessons">The eight lessons <span aria-hidden="true">↓</span></a>
+    </div>
+  </PageHero>
+
+  <section class="section" id="lessons" aria-labelledby="lessons-title">
+    <div class="wrap">
+      <div class="lessons-head">
+        <SectionHead num="01" label="The synthesis" title={`What ${n} movements teach us`} id="lessons-title" lead="Eight patterns come up again and again, on every continent. Each one maps onto our engine: ideas into research, research into public consciousness, public consciousness into collective action." />
+        <div class="lessons-head__stamp"><Stamp text="Receipts desk" sub="Read · checked · dated" tilt={-7} /></div>
+      </div>
+      <CrossLessons cases={lookup} />
+    </div>
+  </section>
+
+  <section class="section ground-deep" id="cases" aria-labelledby="cases-title">
+    <div class="wrap">
+      <SectionHead num="02" label="The case files" title="Read a case" id="cases-title" lead="Each file has the same shape: context, timeline, how they did it in four stages, the receipts, the limits, and three lessons we can use." />
+      <CaseBrowser cases={cases} />
+    </div>
+  </section>
+
+  <section class="section section--tight method" aria-labelledby="method-title">
+    <div class="wrap method__inner">
+      <h2 class="label" id="method-title">How we build a case file</h2>
+      <p class="method__text">We read primary documents first: court judgments, laws, official reports and organisers' own records, then the best reporting. Every number carries its source and date. Where sources disagree, we say so. Where a movement fell short, we say that too. Spotted something wrong? <a href="/contact/">Tell us</a> and we will correct it in public.</p>
+    </div>
+  </section>
+
+  <div class="join-fix"><JoinBand
+    title="The next case study could be ours."
+    text="Every movement here started with a few people who decided to organise. Start where you are: read, share, sign the manifesto, bring a friend. Yes, boys too."
+  /></div>
+</Base>
+
+<style>
+  .hero-ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 26px; margin-top: 6px; }
+  .lessons-head { position: relative; }
+  .lessons-head__stamp { position: absolute; right: 0; top: 54px; }
+  .method { border-top: var(--rule); }
+  .join-fix :global(.join-band .btn--paper) { color: var(--ink); }
+  /* Shared SectionHead sets its small number in --red (large-type colour); use the text red on light grounds. */
+  .section:not(.ground-ink):not(.ground-green):not(.ground-red) :global(.section-head__num) { color: var(--red-ink); }
+  .method__inner { display: grid; grid-template-columns: minmax(160px, 260px) minmax(0, 1fr); gap: 24px 48px; align-items: baseline; }
+  .method__text { font-family: var(--font-serif); font-size: clamp(1.1rem, 1.5vw, 1.3rem); line-height: 1.55; max-width: 64ch; }
+  @media (max-width: 900px) {
+    .lessons-head__stamp { display: none; }
+    .method__inner { grid-template-columns: 1fr; }
+  }
+</style>

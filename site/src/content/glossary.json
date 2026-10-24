@@ -1,0 +1,345 @@
+[
+  {
+    "id": "allyship",
+    "term": "Allyship",
+    "definition": "Being on the side of a group you are not part of, and using whatever voice or power you have to help them get fair treatment. It is something you do again and again, not a badge you wear.",
+    "example": "A boy who tells his friends to stop sharing a girl's photo without her permission is practising allyship.",
+    "see": ["manosphere", "victim-blaming", "consent"],
+    "source": { "label": "allyship (definition)", "href": "https://www.oxfordlearnersdictionaries.com/definition/english/allyship", "publisher": "Oxford Learner's Dictionaries", "date": "accessed 24 Oct 2026" }
+  },
+  {
+    "id": "bodily-autonomy",
+    "term": "Bodily autonomy",
+    "definition": "Your right to make choices about your own body and future without violence or pressure, including whether, when and with whom to have sex or become pregnant.",
+    "example": "Deciding for yourself what medical treatment you accept is bodily autonomy.",
+    "see": ["consent", "reproductive-justice", "ncii"],
+    "source": { "label": "State of World Population 2021: My Body Is My Own", "href": "https://www.unfpa.org/sowp-2021/autonomy", "publisher": "UNFPA", "date": "2021" }
+  },
+  {
+    "id": "brahmanical-patriarchy",
+    "term": "Brahmanical patriarchy",
+    "definition": "A term used by the historian Uma Chakravarti for the way caste and gender rules were tied together in Indian society, so that controlling women was also a way of keeping caste lines in place.",
+    "example": "Rules about who a woman may marry, made to protect a family's caste status, are an example.",
+    "see": ["patriarchy", "dalit-feminism", "intersectionality"],
+    "source": { "label": "Conceptualising Brahmanical Patriarchy in Early India, Uma Chakravarti (Economic and Political Weekly, 3 Apr 1993)", "href": "https://ruralindiaonline.org/en/library/resource/conceptualising-brahmanical-patriarchy-in-early-india-gender-caste-class-and-state/", "publisher": "PARI Library", "date": "1993" }
+  },
+  {
+    "id": "call-out-culture",
+    "term": "Call-out culture",
+    "definition": "Naming and criticising people in public, often online, for something they said or did. It can hold the powerful to account, but critics say it can also split allies over small disagreements.",
+    "see": ["fourth-wave-feminism", "allyship"],
+    "source": { "label": "The fourth wave of feminism, Peroni and Rodak (Oñati Socio-Legal Series)", "href": "https://opo.iisj.net/index.php/osls/article/view/1319", "publisher": "Oñati Socio-Legal Series", "date": "28 Dec 2020" }
+  },
+  {
+    "id": "care-work",
+    "term": "Care work (unpaid)",
+    "definition": "The cooking, cleaning and looking after children, older people and sick relatives that keeps every home and every economy running, mostly done by women and mostly unpaid.",
+    "example": "In India, women aged 6 and over spend 289 minutes a day on unpaid domestic work; men spend 88 (MoSPI Time Use Survey 2024).",
+    "see": ["gender-pay-gap", "patriarchy"],
+    "source": { "label": "Care work and care jobs for the future of decent work", "href": "https://www.ilo.org/global/about-the-ilo/newsroom/news/WCMS_633115/lang--en/index.htm", "publisher": "International Labour Organization", "date": "28 Jun 2018" }
+  },
+  {
+    "id": "coercive-control",
+    "term": "Coercive control",
+    "definition": "A pattern of abuse where one partner dominates the other through threats, isolation, checking their phone, or controlling their money and movements. It can happen without any physical violence.",
+    "example": "Taking someone's salary and making them ask for bus fare is a form of coercive control.",
+    "see": ["domestic-violence", "gender-based-violence", "gaslighting"],
+    "source": { "label": "FAQs: Types of violence against women and girls", "href": "https://www.unwomen.org/en/articles/faqs/faqs-types-of-violence-against-women-and-girls", "publisher": "UN Women", "date": "17 Nov 2025" }
+  },
+  {
+    "id": "consent",
+    "term": "Consent",
+    "definition": "A clear, freely given yes to something, especially sex or touch, that can be taken back at any time. Silence, pressure, fear or being too drunk to decide is not consent.",
+    "example": "In Indian law, not fighting back does not count as consent (Bharatiya Nyaya Sanhita, section 63).",
+    "hindi": "सहमति",
+    "see": ["bodily-autonomy", "consent-based-rape-law", "marital-rape-exception", "rape-culture"],
+    "source": { "label": "16 ways you can stand against rape culture", "href": "https://www.unwomen.org/en/news/stories/2019/11/compilation-ways-you-can-stand-against-rape-culture", "publisher": "UN Women", "date": "Nov 2019" }
+  },
+  {
+    "id": "consent-based-rape-law",
+    "term": "Consent-based rape law",
+    "definition": "A law that defines rape as sex without consent, instead of asking the survivor to prove she was forced or fought back. More than 60% of countries still do not have one (UN Women, Nov 2025).",
+    "see": ["consent", "marital-rape-exception"],
+    "source": { "label": "Facts and figures: Ending violence against women", "href": "https://www.unwomen.org/en/articles/facts-and-figures/facts-and-figures-ending-violence-against-women", "publisher": "UN Women", "date": "19 Nov 2025" }
+  },
+  {
+    "id": "dalit-feminism",
+    "term": "Dalit feminism",
+    "definition": "Feminism led by Dalit women, who face discrimination because of caste, class and gender at the same time. It argues that patriarchy cannot be ended without ending caste, and that mainstream feminism must listen to Dalit women rather than speak for them.",
+    "example": "The National Federation of Dalit Women was set up in 1995 to give Dalit women their own national platform.",
+    "hindi": "दलित नारीवाद",
+    "see": ["intersectionality", "brahmanical-patriarchy", "feminism"],
+    "source": { "label": "Ruth Manorama, Right Livelihood Award 2006", "href": "https://rightlivelihood.org/the-change-makers/find-a-laureate/ruth-manorama/", "publisher": "Right Livelihood", "date": "accessed 24 Oct 2026" }
+  },
+  {
+    "id": "deepfake",
+    "term": "Deepfake",
+    "definition": "A picture, video or voice recording made or changed with AI so that it looks as if someone said or did something they never did. Most deepfakes online are sexual images of women made without their consent.",
+    "example": "India's IT Rules, as amended in force from 20 February 2026, say AI-made content must carry a clear label.",
+    "see": ["ncii", "tfgbv", "doxxing"],
+    "source": { "label": "FAQs: AI-powered online abuse", "href": "https://www.unwomen.org/en/articles/faqs/ai-powered-online-abuse-how-ai-is-amplifying-violence-against-women-and-what-can-stop-it", "publisher": "UN Women", "date": "18 Nov 2025" }
+  },
+  {
+    "id": "domestic-violence",
+    "term": "Domestic violence",
+    "definition": "Abuse by a partner or family member at home. Indian law counts physical, sexual, verbal, emotional and economic abuse, and lets women ask a court for protection orders.",
+    "hindi": "घरेलू हिंसा",
+    "see": ["coercive-control", "gender-based-violence", "dowry"],
+    "source": { "label": "Protection of Women from Domestic Violence Act (in force 26 Oct 2006)", "href": "https://data.unwomen.org/global-database-on-violence-against-women/country-profile/India/measures/Protection%20of%20Women%20from%20Domestic%20Violence%20Act", "publisher": "UN Women Data Hub", "date": "accessed 24 Oct 2026" }
+  },
+  {
+    "id": "dowry",
+    "term": "Dowry",
+    "definition": "Money, property or valuables given or demanded in connection with a marriage, usually from the bride's family to the groom's. Giving, taking or asking for dowry has been illegal in India since 1961.",
+    "example": "A demand for a car or cash before, at or after the wedding counts as dowry under the law.",
+    "hindi": "दहेज",
+    "see": ["domestic-violence", "patriarchy", "gender-based-violence"],
+    "source": { "label": "Dowry Prohibition Act, 1961, section 2 (definition of dowry)", "href": "https://indiankanoon.org/doc/1249134/", "publisher": "Indian Kanoon", "date": "accessed 24 Oct 2026" }
+  },
+  {
+    "id": "doxxing",
+    "term": "Doxxing",
+    "definition": "Publishing someone's private details, like their home address or phone number, to scare or endanger them. It is often used against women who speak up online.",
+    "see": ["tfgbv", "deepfake", "ncii"],
+    "source": { "label": "FAQs: AI-powered online abuse", "href": "https://www.unwomen.org/en/articles/faqs/ai-powered-online-abuse-how-ai-is-amplifying-violence-against-women-and-what-can-stop-it", "publisher": "UN Women", "date": "18 Nov 2025" }
+  },
+  {
+    "id": "feminism",
+    "term": "Feminism",
+    "definition": "The belief that people of every gender should have equal rights, freedom and opportunities, and the work of making that true in laws, homes, schools and workplaces.",
+    "example": "Wanting your sister to have the same curfew, pocket money and career choices as your brother is a feminist idea.",
+    "hindi": "नारीवाद",
+    "see": ["fourth-wave-feminism", "intersectionality", "patriarchy"],
+    "source": { "label": "feminism (definition)", "href": "https://www.merriam-webster.com/dictionary/feminism", "publisher": "Merriam-Webster", "date": "accessed 24 Oct 2026" }
+  },
+  {
+    "id": "femicide",
+    "term": "Femicide",
+    "definition": "The killing of a woman or girl because she is a woman or girl. It is the most extreme form of gender-based violence, and it is most often committed by a partner or family member.",
+    "see": ["gender-based-violence", "domestic-violence", "dowry"],
+    "source": { "label": "FAQs: Types of violence against women and girls", "href": "https://www.unwomen.org/en/articles/faqs/faqs-types-of-violence-against-women-and-girls", "publisher": "UN Women", "date": "17 Nov 2025" }
+  },
+  {
+    "id": "fourth-wave-feminism",
+    "term": "Fourth-wave feminism",
+    "definition": "The feminism that took off around 2012, using phones, social media and street protest to challenge sexual violence, harassment, online abuse and inequality, with an intersectional lens.",
+    "example": "Reclaim the Night in West Bengal in August 2024, which grew from one social-media call, is a fourth-wave moment.",
+    "see": ["wave-metaphor", "intersectionality", "postfeminism", "call-out-culture"],
+    "source": { "label": "Fourth-wave feminism", "href": "https://en.wikipedia.org/wiki/Fourth-wave_feminism", "publisher": "Wikipedia", "date": "accessed 24 Oct 2026" }
+  },
+  {
+    "id": "gaslighting",
+    "term": "Gaslighting",
+    "definition": "Manipulating someone, usually over a long time, until they doubt their own memory, feelings or sense of what is real. The name comes from an old play and film in which a husband does this to his wife.",
+    "example": "Telling someone 'that never happened, you're overreacting' every time they raise a real problem can be gaslighting.",
+    "see": ["coercive-control", "victim-blaming"],
+    "source": { "label": "'Gaslighting' is Merriam-Webster's Word of the Year 2022", "href": "https://news.wttw.com/2022/11/28/gaslighting-merriam-websters-word-year-2022", "publisher": "WTTW News (AP)", "date": "28 Nov 2022" }
+  },
+  {
+    "id": "gender-based-violence",
+    "term": "Gender-based violence",
+    "definition": "Violence aimed at someone because of their gender, or that hits women and girls hardest. It includes physical, sexual and mental harm, threats and control.",
+    "hindi": "लिंग आधारित हिंसा",
+    "see": ["domestic-violence", "femicide", "sexual-harassment", "tfgbv"],
+    "source": { "label": "FAQs: Types of violence against women and girls", "href": "https://www.unwomen.org/en/articles/faqs/faqs-types-of-violence-against-women-and-girls", "publisher": "UN Women", "date": "17 Nov 2025" }
+  },
+  {
+    "id": "gender-pay-gap",
+    "term": "Gender pay gap",
+    "definition": "The difference between what men and women earn on average across all jobs. It is not only about unequal pay for the same job; it also shows who gets the better-paid jobs and who carries the unpaid care.",
+    "see": ["care-work", "patriarchy"],
+    "source": { "label": "Gender pay gap in the UK: 2026", "href": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/bulletins/genderpaygapintheuk/latest", "publisher": "Office for National Statistics", "date": "22 Oct 2026" }
+  },
+  {
+    "id": "gender-quota",
+    "term": "Gender quota",
+    "definition": "A rule that a minimum share of candidates or seats must go to women. Parliaments with quotas average 30.9% women, against 23.3% without (IPU, 1 Jan 2026).",
+    "see": ["womens-reservation", "feminism"],
+    "source": { "label": "IPU report: women's representation in parliament sees sluggish gains", "href": "https://www.bgipu.org/activity-reports/ipu-report-concludes-that-womens-representation-in-parliament-sees-sluggish-gains/", "publisher": "British Group IPU", "date": "6 Mar 2026" }
+  },
+  {
+    "id": "internal-committee",
+    "term": "Internal Committee (IC)",
+    "definition": "The committee every workplace must set up under the POSH Act to hear complaints of sexual harassment. If a workplace has fewer than ten workers, or the complaint is against the employer, the district's Local Committee hears it instead.",
+    "example": "Your college or office should tell you who sits on its Internal Committee and how to reach them.",
+    "see": ["posh-act", "sexual-harassment", "vishaka-guidelines"],
+    "source": { "label": "Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013, sections 4 and 6 (gazette copy)", "href": "https://www.iimshillong.ac.in/wp-content/uploads/2024/06/3.-Sexual-Harassment-of-Women-at-Workplace-Act-2013.pdf", "publisher": "Gazette of India", "date": "2013" }
+  },
+  {
+    "id": "intersectionality",
+    "term": "Intersectionality",
+    "definition": "A way of seeing how different unfair treatments, like sexism, casteism, racism, classism and ableism, overlap and make each other worse. The US law professor Kimberlé Crenshaw named it in 1989.",
+    "example": "A Dalit woman sanitation worker may face caste, class and gender barriers all at once, in ways that neither 'women's issues' nor 'caste issues' alone can explain.",
+    "see": ["dalit-feminism", "misogynoir", "brahmanical-patriarchy", "feminism"],
+    "source": { "label": "Explainer: Intersectional feminism, what it means and why it matters", "href": "https://www.unwomen.org/en/news/stories/2020/6/explainer-intersectional-feminism-what-it-means-and-why-it-matters", "publisher": "UN Women", "date": "12 Jun 2025" }
+  },
+  {
+    "id": "manosphere",
+    "term": "Manosphere",
+    "definition": "A loose online network of influencers, forums and videos that sell resentment of women and a rigid, 'alpha' idea of manhood to boys and young men. It is an industry that profits from loneliness.",
+    "example": "In a 2025 Movember survey of young men in the UK, US and Australia, 63% said they regularly watch 'masculinity influencers'.",
+    "see": ["misogyny", "allyship", "gaslighting"],
+    "source": { "label": "Young Men's Health in a Digital World", "href": "https://uk.movember.com/movember-institute/masculinities-report", "publisher": "Movember Institute", "date": "2025" }
+  },
+  {
+    "id": "marital-rape-exception",
+    "term": "Marital rape exception",
+    "definition": "The part of Indian criminal law that says sex forced on a wife aged 18 or over by her husband is not rape. It sits in Exception 2 to section 63 of the Bharatiya Nyaya Sanhita, and its validity is being challenged in the Supreme Court.",
+    "example": "The Justice Verma Committee recommended removing the exception in January 2013; Parliament did not.",
+    "hindi": "वैवाहिक बलात्कार",
+    "see": ["consent", "consent-based-rape-law", "bodily-autonomy"],
+    "source": { "label": "Marital rape exception: case tracker", "href": "https://www.scobserver.in/?p=22286", "publisher": "Supreme Court Observer", "date": "Sep 2026" }
+  },
+  {
+    "id": "misogynoir",
+    "term": "Misogynoir",
+    "definition": "The particular mix of sexism and anti-Black racism aimed at Black women. The scholar Moya Bailey coined the word in 2010.",
+    "see": ["intersectionality", "misogyny"],
+    "source": { "label": "Professor coins new word: misogynoir", "href": "https://news.northwestern.edu/stories/2023/05/professor-coins-new-word-misogynoir", "publisher": "Northwestern University", "date": "May 2023" }
+  },
+  {
+    "id": "misogyny",
+    "term": "Misogyny",
+    "definition": "Dislike of, contempt for or prejudice against women and girls. It shows up in jokes and slurs, but also in rules and habits that treat women as less.",
+    "example": "Calling a man weak by telling him to 'wear bangles' is everyday misogyny.",
+    "hindi": "स्त्री-द्वेष",
+    "see": ["sexism", "patriarchy", "manosphere", "misogynoir"],
+    "source": { "label": "misogyny (definition)", "href": "https://dictionary.cambridge.org/dictionary/english/misogyny", "publisher": "Cambridge Dictionary", "date": "accessed 24 Oct 2026" }
+  },
+  {
+    "id": "ncii",
+    "term": "NCII (non-consensual intimate imagery)",
+    "definition": "Private, sexual or nude photos or videos of someone shared, or threatened to be shared, without their consent, including fake or morphed ones. It is abuse, and the person pictured is never to blame.",
+    "example": "Under India's IT Rules, a platform must act within 2 hours on a request to remove intimate or morphed images; you can also report at cybercrime.gov.in or call 1930.",
+    "see": ["deepfake", "consent", "tfgbv", "victim-blaming"],
+    "source": { "label": "Standard Operating Procedure to curtail dissemination of NCII content", "href": "https://www.meity.gov.in/static/uploads/2025/11/a2c9500ef5f8b62a43bfc68747de592d.pdf", "publisher": "Ministry of Electronics and IT", "date": "Oct 2025" }
+  },
+  {
+    "id": "one-stop-centre",
+    "term": "One Stop Centre (Sakhi)",
+    "definition": "A government centre where a woman facing violence can get police help, medical care, legal aid and counselling under one roof. The Mission Shakti portal lists centres across India.",
+    "see": ["domestic-violence", "gender-based-violence", "ncii"],
+    "source": { "label": "One Stop Centre locator (Mission Shakti)", "href": "https://missionshakti.wcd.gov.in/statisticsOsc", "publisher": "Ministry of Women and Child Development", "date": "accessed 24 Oct 2026" }
+  },
+  {
+    "id": "patriarchy",
+    "term": "Patriarchy",
+    "definition": "A society, family or system in which men hold most of the power and decide most of the rules, often to their own advantage. It harms boys and men too, by squeezing them into narrow roles.",
+    "example": "A family where only sons inherit land, or where the eldest man has the final word on every decision, is patriarchal.",
+    "hindi": "पितृसत्ता",
+    "see": ["misogyny", "brahmanical-patriarchy", "feminism", "care-work"],
+    "source": { "label": "patriarchy (definition)", "href": "https://dictionary.cambridge.org/dictionary/english/patriarchy", "publisher": "Cambridge Dictionary", "date": "accessed 24 Oct 2026" }
+  },
+  {
+    "id": "period-poverty",
+    "term": "Period poverty",
+    "definition": "Not being able to get or afford pads, cups or other period products, clean toilets, or the information to manage periods safely.",
+    "example": "In NFHS-5 (2019–21), 77.3% of Indian women aged 15–24 used hygienic period protection, up from 57.5% in NFHS-4 (2015–16).",
+    "see": ["bodily-autonomy", "care-work"],
+    "source": { "label": "Menstrual health and hygiene", "href": "https://www.worldbank.org/en/topic/water/brief/menstrual-health-and-hygiene", "publisher": "World Bank", "date": "12 May 2022" }
+  },
+  {
+    "id": "posh-act",
+    "term": "POSH Act",
+    "definition": "India's 2013 law against sexual harassment at work, short for Prevention of Sexual Harassment. It turned the 1997 Vishaka guidelines into law and makes employers set up a complaints committee.",
+    "example": "The Act covers trainees, apprentices and volunteers as well as staff.",
+    "see": ["internal-committee", "vishaka-guidelines", "sexual-harassment", "saathin"],
+    "source": { "label": "Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013 (gazette copy)", "href": "https://www.iimshillong.ac.in/wp-content/uploads/2024/06/3.-Sexual-Harassment-of-Women-at-Workplace-Act-2013.pdf", "publisher": "Gazette of India", "date": "2013" }
+  },
+  {
+    "id": "postfeminism",
+    "term": "Postfeminism",
+    "definition": "The idea that equality has already been won, so feminism is no longer needed. The Fourth Wave grew up partly in reply to it.",
+    "see": ["fourth-wave-feminism", "wave-metaphor"],
+    "source": { "label": "Postfeminism(s) and the Arrival of the Fourth Wave, Nicola Rivers", "href": "https://eprints.glos.ac.uk/5346/", "publisher": "University of Gloucestershire", "date": "2017" }
+  },
+  {
+    "id": "rape-culture",
+    "term": "Rape culture",
+    "definition": "A social setting in which sexual violence is treated as normal or excused, through jokes, myths, victim-blaming and weak punishment. It grows wherever gender inequality goes unchallenged.",
+    "example": "Saying 'boys will be boys' when a girl reports being groped feeds rape culture.",
+    "see": ["victim-blaming", "consent", "sexual-harassment"],
+    "source": { "label": "16 ways you can stand against rape culture", "href": "https://www.unwomen.org/en/news/stories/2019/11/compilation-ways-you-can-stand-against-rape-culture", "publisher": "UN Women", "date": "Nov 2019" }
+  },
+  {
+    "id": "reproductive-justice",
+    "term": "Reproductive justice",
+    "definition": "The right to have children, not to have children, and to raise the children you have in safe, healthy communities. Black women in the US named the idea in 1994.",
+    "see": ["bodily-autonomy", "intersectionality"],
+    "source": { "label": "Reproductive justice", "href": "https://www.sistersong.net/reproductive-justice", "publisher": "SisterSong", "date": "accessed 24 Oct 2026" }
+  },
+  {
+    "id": "saathin",
+    "term": "Saathin",
+    "definition": "A village-level worker in Rajasthan's Women's Development Programme; the word means 'companion'. Saathins spread information on women's rights and worked against practices like child marriage.",
+    "example": "Bhanwari Devi was a saathin. Her fight for justice, after she reported being assaulted for trying to stop a child marriage, led to the Vishaka guidelines.",
+    "hindi": "साथिन",
+    "see": ["vishaka-guidelines", "posh-act"],
+    "source": { "label": "Bhanwari Devi", "href": "https://en.wikipedia.org/wiki/Bhanwari_Devi", "publisher": "Wikipedia", "date": "accessed 24 Oct 2026" }
+  },
+  {
+    "id": "safe-city",
+    "term": "Safe city",
+    "definition": "A city designed and run so that women and girls can use streets, transport and public places freely, day and night. That means lighting, working toilets, safe transport and police who respond, not curfews on girls.",
+    "example": "India's Safe City projects under the Nirbhaya Fund cover eight cities: Ahmedabad, Bengaluru, Chennai, Delhi, Hyderabad, Kolkata, Lucknow and Mumbai.",
+    "see": ["gender-based-violence", "sexual-harassment"],
+    "source": { "label": "Projects under the Nirbhaya Fund (annexure listing the Safe City proposal for 8 cities)", "href": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2022/jul/doc202272273001.pdf", "publisher": "Press Information Bureau", "date": "Jul 2022" }
+  },
+  {
+    "id": "sexism",
+    "term": "Sexism",
+    "definition": "Treating people unfairly, or judging what they can do, because of their sex or gender. It can be one remark or a whole system.",
+    "example": "Assuming a girl won't be good at maths, or a boy can't be a nurse, is sexism.",
+    "hindi": "लैंगिक भेदभाव",
+    "see": ["misogyny", "patriarchy", "feminism"],
+    "source": { "label": "sexism (definition)", "href": "https://dictionary.cambridge.org/dictionary/english/sexism", "publisher": "Cambridge Dictionary", "date": "accessed 24 Oct 2026" }
+  },
+  {
+    "id": "sexual-harassment",
+    "term": "Sexual harassment",
+    "definition": "Unwelcome behaviour of a sexual kind: touching, demands for sexual favours, sexual comments or jokes, showing porn, or any other unwanted sexual conduct, in person or online.",
+    "example": "Repeated comments about a colleague's body, after she has asked you to stop, are sexual harassment.",
+    "hindi": "यौन उत्पीड़न",
+    "see": ["posh-act", "internal-committee", "rape-culture"],
+    "source": { "label": "POSH Act 2013, section 2(n) (gazette copy)", "href": "https://www.iimshillong.ac.in/wp-content/uploads/2024/06/3.-Sexual-Harassment-of-Women-at-Workplace-Act-2013.pdf", "publisher": "Gazette of India", "date": "2013" }
+  },
+  {
+    "id": "tfgbv",
+    "term": "Technology-facilitated gender-based violence",
+    "definition": "Harm done, helped or made worse through phones, apps, platforms or AI, like stalking, trolling, location tracking, deepfakes and sharing private images. It often spills into offline harm.",
+    "example": "UN Women says studies find between 16% and 58% of women have experienced it (Nov 2025).",
+    "see": ["ncii", "deepfake", "doxxing", "gender-based-violence"],
+    "source": { "label": "FAQs: AI-powered online abuse", "href": "https://www.unwomen.org/en/articles/faqs/ai-powered-online-abuse-how-ai-is-amplifying-violence-against-women-and-what-can-stop-it", "publisher": "UN Women", "date": "18 Nov 2025" }
+  },
+  {
+    "id": "victim-blaming",
+    "term": "Victim-blaming",
+    "definition": "Suggesting that the person who was harmed, not the person who harmed them, is responsible: because of their clothes, the time of night, or who they trusted.",
+    "example": "'What was she doing out so late?' is victim-blaming. The right question is why the attacker did it.",
+    "see": ["rape-culture", "gaslighting", "ncii"],
+    "source": { "label": "16 ways you can stand against rape culture", "href": "https://www.unwomen.org/en/news/stories/2019/11/compilation-ways-you-can-stand-against-rape-culture", "publisher": "UN Women", "date": "Nov 2019" }
+  },
+  {
+    "id": "vishaka-guidelines",
+    "term": "Vishaka guidelines",
+    "definition": "Rules against sexual harassment at work laid down by India's Supreme Court on 13 August 1997, in a case brought by women's groups after Bhanwari Devi's ordeal. They applied until the POSH Act replaced them in 2013.",
+    "see": ["posh-act", "saathin", "internal-committee"],
+    "source": { "label": "Vishaka and Ors v State of Rajasthan and Ors (judgment)", "href": "https://indiankanoon.org/doc/1031794/", "publisher": "Supreme Court of India, via Indian Kanoon", "date": "13 Aug 1997" }
+  },
+  {
+    "id": "wave-metaphor",
+    "term": "Wave metaphor",
+    "definition": "The habit of telling feminist history as a series of numbered 'waves'. It caught on after a 1968 magazine article and is now criticised for making history look tidier and more Western than it was.",
+    "see": ["fourth-wave-feminism", "postfeminism"],
+    "source": { "label": "Feminism in 'Waves': Useful Metaphor or Not?, Linda Nicholson", "href": "https://newpol.org/issue_post/feminism-waves-useful-metaphor-or-not/", "publisher": "New Politics", "date": "Winter 2010" }
+  },
+  {
+    "id": "womens-reservation",
+    "term": "Women's reservation",
+    "definition": "Keeping a share of seats in elected bodies for women. India reserves one-third of panchayat and municipal seats for women, and a 2023 law will do the same for the Lok Sabha and state assemblies once seats are redrawn after the next census.",
+    "example": "The Women's Reservation Act came into force on 16 April 2026, but no seats are reserved yet (LiveLaw, 17 Apr 2026).",
+    "hindi": "महिला आरक्षण",
+    "see": ["gender-quota", "intersectionality"],
+    "source": { "label": "Lok Sabha rejects Constitution (131st) Amendment Bill 2026", "href": "https://www.livelaw.in/top-stories/lok-sabha-rejects-constitution-131st-bill-2026-on-delimitation-530736", "publisher": "LiveLaw", "date": "17 Apr 2026" }
+  }
+]

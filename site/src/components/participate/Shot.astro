@@ -1,0 +1,51 @@
+---
+// Thin wrapper over the shared Photo for the participate pages:
+// - stretches <picture> to fill fixed-aspect boxes (the shared Photo only does this when the photo is taped);
+// - prints an honest short caption with a clean credit line (registry credits mix "Photo:"/"Photo by" and bare licence URLs).
+// Real-event photos get their true what/where/when; stock photos pass caption={false} (credit then lives on /credits/).
+import Photo from '../media/Photo.astro';
+import { photoMeta, type Tone } from '../../lib/photos';
+
+export interface Props {
+  id: string;
+  tone?: Tone;
+  alt: string;
+  caption?: string | false;
+  credit?: boolean;
+  aspect?: string;
+  position?: string;
+  widths?: number[];
+  sizes?: string;
+  tape?: 'tl' | 'tr' | 'both' | false;
+  tilt?: number;
+  priority?: boolean;
+  class?: string;
+}
+const {
+  id, tone = 'red', alt, caption = false, credit = true, aspect, position, tape = false, tilt = 0, priority = false,
+  widths = [360, 560, 800], sizes = '(min-width: 900px) 30vw, 90vw', class: cls,
+} = Astro.props;
+
+const meta = photoMeta(id);
+const clean = meta.credit.replace(/^Photo:\s*/i, '').replace(/\s*\(https?:[^)]*\)/g, '').replace(/\.$/, '');
+const creditText = /^photo by/i.test(clean) ? clean : `Photo: ${clean}`;
+const [before, after] = meta.licence && creditText.includes(meta.licence) ? creditText.split(meta.licence) : [creditText, undefined];
+---
+<div class:list={['shot', cls]}>
+  <Photo id={id} tone={tone} alt={alt} caption={false} aspect={aspect} position={position} widths={widths} sizes={sizes} tape={tape} tilt={tilt} priority={priority} />
+  {caption !== false && (
+    <p class="shot__cap">
+      <span class="shot__text">{caption}</span>
+      {credit && <span class="shot__credit">{before}{after !== undefined && <><a href={meta.licenceUrl} rel="noopener license">{meta.licence}</a>{after}</>}</span>}
+    </p>
+  )}
+</div>
+
+<style>
+  .shot { display: grid; gap: 10px; align-content: start; }
+  .shot :global(.photo--fixed .photo__img picture) { display: block; height: 100%; }
+  .shot__cap { display: grid; gap: 2px; font-size: .82rem; line-height: 1.38; max-width: 52ch; }
+  .shot__text { color: var(--text); font-weight: 600; }
+  .shot__credit { color: var(--muted); font-size: .74rem; }
+  .shot__credit a { color: inherit; }
+</style>

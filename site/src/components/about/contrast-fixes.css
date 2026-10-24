@@ -1,0 +1,10 @@
+/* Contrast fixes for shared components, loaded only by the About, founder and Manifesto pages.
+   The shared SectionHead number and Engine stage number use --red (#CD2E2B) for small label text,
+   which is 4.44:1 on paper (needs 4.5:1), and coral on green is 3.15:1. Reported in the build notes. */
+.section-head__num, .engine__n span { color: var(--red-ink) !important; }
+.ground-ink .section-head__num, .ground-ink .engine__n span { color: var(--coral) !important; }
+.ground-green .section-head__num, .ground-green .engine__n span { color: var(--marigold) !important; }
+.ground-pink .section-head__num, .ground-red .section-head__num { color: var(--ink) !important; }
+.ground-red .section-head__num { color: var(--paper-light) !important; }
+/* JoinBand's paper button inherits the ground's link colour (coral/marigold on paper); keep it ink. */
+.join-band .btn--paper, .join-band .btn--paper:hover { color: var(--ink) !important; }

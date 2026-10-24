@@ -1,0 +1,97 @@
+---
+// Case-study hero: dossier number set huge, title, dek, and a credited documentary photo with a dated annotation.
+// Landscape photos run wide under the headline; portrait photos sit beside it.
+import Photo from '../media/Photo.astro';
+import Breadcrumbs from '../ui/Breadcrumbs.astro';
+import Annotation from '../ui/Annotation.astro';
+import type { PhotoMeta, Tone } from '../../lib/photos';
+import { heroTone, honestCaption, isOwn, photoDate } from './case-utils';
+
+export interface Props {
+  caseId: string;
+  no: string;
+  title: string;
+  dek: string;
+  place: string;
+  region: string;
+  years: string;
+  photo?: PhotoMeta;
+  tone: Tone;
+  crumbs: { name: string; href: string }[];
+}
+const { caseId, no, title, dek, place, region, years, photo, tone, crumbs } = Astro.props;
+const portrait = photo?.orientation === 'portrait';
+const date = photo ? photoDate(photo) : undefined;
+const note = photo && date ? (isOwn(photo, caseId) ? `This photo: ${date}` : `Photographed ${date}`) : undefined;
+const size = title.length > 52 ? 'xl' : title.length > 30 ? 'l' : 'm';
+---
+<section class:list={['chero', { 'chero--split': portrait, 'chero--nophoto': !photo }]}>
+  <div class="wrap chero__inner">
+    <Breadcrumbs items={crumbs} />
+    <div class="chero__head">
+      <p class="chero__no" aria-hidden="true"><span class="label">Case</span><span class="chero__digits">{no}</span></p>
+      <div class="chero__text">
+        <p class="label-row label chero__kicker"><span class="red-ink">Case study {no}</span><span>{region}</span><span>{years}</span></p>
+        <h1 class:list={['h1', 'chero__title', `chero__title--${size}`]}>{title}</h1>
+        <p class="chero__dek">{dek}</p>
+        <p class="label chero__place"><span aria-hidden="true">◉</span> {place}</p>
+      </div>
+    </div>
+    {photo && (
+      <div class="chero__photo">
+        <Photo
+          id={photo.id}
+          tone={heroTone(photo, tone)}
+          caption={honestCaption(photo, caseId)}
+          aspect={portrait ? '4 / 5' : '3 / 2'}
+          priority
+          sizes={portrait ? '(min-width: 900px) 40vw, 92vw' : '(min-width: 1320px) 1240px, 94vw'}
+          widths={portrait ? [400, 600, 800, 1000] : [480, 720, 960, 1280, 1600]}
+        />
+        {note && <Annotation text={note} arrow="down" top="-58px" right="3%" tilt={-5} width="34ch" />}
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .chero { padding-block: clamp(20px, 3vw, 36px) clamp(36px, 6vw, 64px); border-bottom: var(--rule); overflow: hidden; }
+  .chero__inner { display: grid; gap: clamp(20px, 3vw, 32px); }
+  .chero__head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(16px, 3vw, 44px); align-items: start; padding-top: clamp(8px, 2vw, 20px); border-top: var(--rule); }
+  .chero__no { display: grid; justify-items: start; line-height: 1; padding-top: 6px; }
+  .chero__no .label { letter-spacing: .3em; }
+  .chero__digits {
+    font-weight: 900; font-stretch: var(--display-stretch); font-size: clamp(5.5rem, 17vw, 15rem); line-height: .78;
+    color: var(--red); letter-spacing: -.03em; margin-top: 6px;
+  }
+  .chero__text { display: grid; gap: clamp(14px, 1.8vw, 22px); align-content: start; padding-top: 4px; }
+  .chero__title { text-wrap: balance; max-width: 15ch; hyphens: manual; }
+  .chero__title--l { font-size: clamp(2.6rem, 6.6vw, 6rem); max-width: 18ch; }
+  .chero__title--xl { font-size: clamp(2.3rem, 5.2vw, 4.8rem); max-width: 22ch; }
+  .chero__dek { font-family: var(--font-serif); font-size: clamp(1.2rem, 1.9vw, 1.6rem); line-height: 1.35; max-width: 40ch; color: var(--ink-soft); }
+  .chero__place { color: var(--ink-soft); }
+  .chero__photo { position: relative; margin-top: clamp(30px, 4vw, 48px); }
+  .chero__photo :global(figcaption) { max-width: 80ch; }
+  .chero__photo :global(.photo--fixed .photo__img picture) { display: block; height: 100%; }
+
+  /* portrait photos: beside the headline */
+  .chero--split .chero__inner { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); column-gap: clamp(24px, 4vw, 56px); }
+  .chero--split :global(.crumbs), .chero--split .chero__head { grid-column: 1 / -1; }
+  .chero--split .chero__head { grid-column: 1; }
+  .chero--split .chero__photo { grid-column: 2; grid-row: 2; margin-top: 0; }
+
+  @media (min-width: 1000px) {
+    .chero:not(.chero--split) .chero__photo :global(.photo--fixed .photo__img) { aspect-ratio: 2.1 / 1; }
+  }
+  @media (max-width: 900px) {
+    .chero--split .chero__inner { grid-template-columns: 1fr; }
+    .chero--split .chero__head, .chero--split .chero__photo { grid-column: 1; grid-row: auto; }
+    .chero--split .chero__photo { max-width: 520px; margin-top: 40px; }
+  }
+  @media (max-width: 640px) {
+    .chero__head { grid-template-columns: 1fr; gap: 6px; }
+    .chero__no { grid-auto-flow: column; align-items: end; justify-content: start; gap: 10px; }
+    .chero__digits { font-size: clamp(4.6rem, 26vw, 7rem); }
+    .chero__photo { margin-top: 58px; }
+  }
+</style>

@@ -1,0 +1,45 @@
+---
+// A three-circle overlap diagram for explaining intersectionality. Decorative colours; meaning is in the text.
+export interface Props { labels?: [string, string, string]; centre?: string; caption?: string; note?: string }
+const { labels = ['Gender', 'Caste', 'Class'], centre = 'One life', caption, note = 'where the circles overlap, the barriers change shape' } = Astro.props;
+const uid = `ov-${Math.random().toString(36).slice(2, 8)}`;
+---
+<figure class="r-wide overlap">
+  <svg viewBox="0 0 520 360" role="img" aria-labelledby={`${uid}-t ${uid}-d`}>
+    <title id={`${uid}-t`}>{labels.join(', ')}: three overlapping circles</title>
+    <desc id={`${uid}-d`}>Three circles labelled {labels.join(', ')} overlap in the middle, where one person's life sits. The overlap is not the three added together; each changes the others.</desc>
+    <g class="overlap__c">
+      <circle cx="205" cy="150" r="112" fill="#ECAEA4" />
+      <circle cx="315" cy="150" r="112" fill="#F1B362" />
+      <circle cx="260" cy="240" r="112" fill="#F0675E" />
+    </g>
+    <g fill="none" stroke="#1D1C18" stroke-width="3">
+      <circle cx="205" cy="150" r="112" />
+      <circle cx="315" cy="150" r="112" />
+      <circle cx="260" cy="240" r="112" />
+    </g>
+    <g class="overlap__labels" fill="#1D1C18">
+      <text x="140" y="118" text-anchor="middle">{labels[0]}</text>
+      <text x="380" y="118" text-anchor="middle">{labels[1]}</text>
+      <text x="260" y="318" text-anchor="middle">{labels[2]}</text>
+    </g>
+    <circle cx="260" cy="182" r="34" fill="#1D1C18" />
+    <text class="overlap__centre" x="260" y="188" text-anchor="middle" fill="#FBF7EE">{centre}</text>
+  </svg>
+  <figcaption>
+    <span class="hand overlap__note" aria-hidden="true">{note}</span>
+    {caption && <span class="overlap__cap">{caption}</span>}
+  </figcaption>
+</figure>
+
+<style>
+  .overlap { margin-block: 2em; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 20px 32px; align-items: center; font-family: var(--font-sans); }
+  svg { width: 100%; height: auto; }
+  .overlap__c circle { mix-blend-mode: multiply; }
+  .overlap__labels text { font-family: var(--font-sans); font-weight: 900; font-stretch: 62%; font-size: 30px; text-transform: uppercase; letter-spacing: .02em; }
+  .overlap__centre { font-family: var(--font-sans); font-weight: 800; font-size: 13px; text-transform: uppercase; letter-spacing: .08em; }
+  figcaption { display: grid; gap: 12px; }
+  .overlap__note { font-size: clamp(1.5rem, 2.6vw, 2.1rem); line-height: 1.05; color: var(--red-ink); transform: rotate(-3deg); }
+  .overlap__cap { font-size: .95rem; line-height: 1.5; color: var(--ink-soft); }
+  @media (max-width: 640px) { .overlap { grid-template-columns: 1fr; } }
+</style>

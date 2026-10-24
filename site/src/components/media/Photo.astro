@@ -1,0 +1,74 @@
+---
+// A licensed photo from the registry, optionally duotoned, taped or tilted, with an honest caption + credit.
+import { Picture } from 'astro:assets';
+import { getPhoto, type Tone } from '../../lib/photos';
+
+export interface Props {
+  id: string;
+  tone?: Tone;
+  alt?: string;                 // overrides registry alt; use "" only for purely decorative repeats
+  caption?: string | false;     // false hides the caption (credit then lives on /credits/)
+  showCredit?: boolean;
+  aspect?: string;              // e.g. "4 / 5"
+  position?: string;            // object-position, e.g. "50% 30%"
+  widths?: number[];
+  sizes?: string;
+  priority?: boolean;           // LCP image: eager + high fetch priority
+  tape?: 'tl' | 'tr' | 'both' | false;
+  tilt?: number;                // degrees
+  frame?: boolean;              // paper border, like a print
+  class?: string;
+}
+
+const {
+  id, tone = 'natural', alt, caption, showCredit = true, aspect, position, widths = [400, 640, 960, 1280, 1600],
+  sizes = '(min-width: 1100px) 50vw, 100vw', priority = false, tape = false, tilt = 0, frame = false, class: cls,
+} = Astro.props;
+
+const { src, meta } = await getPhoto(id, tone);
+const text = caption === false ? '' : caption ?? meta.caption;
+const style = [aspect && `--aspect:${aspect}`, position && `--pos:${position}`, tilt && `--tilt:${tilt}deg`].filter(Boolean).join(';');
+---
+<figure class:list={['photo', cls, { 'photo--frame': frame, 'photo--tilt': !!tilt, [`photo--tape-${tape}`]: !!tape, 'photo--fixed': !!aspect }]} style={style || undefined}>
+  <div class="photo__img">
+    <Picture
+      src={src}
+      alt={alt ?? meta.alt}
+      widths={widths.filter((w) => w <= src.width)}
+      sizes={sizes}
+      formats={['avif', 'webp']}
+      quality={tone === 'natural' ? 62 : 55}
+      loading={priority ? 'eager' : 'lazy'}
+      fetchpriority={priority ? 'high' : 'auto'}
+      decoding="async"
+    />
+  </div>
+  {(text || showCredit) && caption !== false && (
+    <figcaption>
+      {text && <span class="photo__caption">{text}</span>}
+      {showCredit && <span class="photo__credit">Photo: {meta.credit}</span>}
+    </figcaption>
+  )}
+</figure>
+
+<style>
+  .photo { position: relative; transform: rotate(var(--tilt, 0deg)); }
+  .photo__img { position: relative; overflow: hidden; background: var(--paper-deep); }
+  .photo--fixed .photo__img { aspect-ratio: var(--aspect); }
+  .photo__img :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 50% 50%); }
+  .photo--frame .photo__img { border: 10px solid var(--paper-light); box-shadow: 0 1px 0 rgba(0,0,0,.06), 6px 8px 0 rgba(29,28,24,.18); }
+  figcaption { display: grid; gap: 2px; margin-top: 10px; font-size: .86rem; line-height: 1.4; max-width: 60ch; }
+  .photo__caption { color: var(--text); }
+  .photo__credit { color: var(--muted); font-size: .78rem; }
+  /* masking-tape strips */
+  .photo--tape-tl .photo__img::before, .photo--tape-both .photo__img::before,
+  .photo--tape-tr .photo__img::after, .photo--tape-both .photo__img::after {
+    content: ''; position: absolute; z-index: 2; width: 92px; height: 26px; top: -6px;
+    background: rgba(241, 179, 98, .78); mix-blend-mode: multiply;
+    clip-path: polygon(3% 0, 97% 8%, 100% 92%, 0 100%);
+  }
+  .photo--tape-tl .photo__img::before, .photo--tape-both .photo__img::before { left: -18px; transform: rotate(-24deg); }
+  .photo--tape-tr .photo__img::after, .photo--tape-both .photo__img::after { right: -18px; transform: rotate(22deg); }
+  .photo[class*='photo--tape'] .photo__img { overflow: visible; }
+  .photo[class*='photo--tape'] .photo__img :global(picture) { display: block; overflow: hidden; height: 100%; }
+</style>

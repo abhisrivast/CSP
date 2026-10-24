@@ -1,0 +1,70 @@
+{
+  "id": "06-shock-mark",
+  "name": "The Shock Mark (!)",
+  "idea": "An exclamation mark as the movement's sign: a red wedge snapped by one rising stencil cut, over a bridged ring (the circle of the Venus sign). It can be cut from one sheet of cardboard and sprayed on a wall. The official mark is the red stencil plate with the '!' cut through it.",
+  "rationale": "The '!' is the 'shock' in the name. It needs no translation, anyone can paint it in seconds, and it doubles as punctuation for campaign headlines (EQUAL PAY!). Every piece of the mark and of the stencil wordmark is an island held by working bridges, so the whole identity can be cut and sprayed. The primary sets CULTURAL in ink over SHOCK in red, the same ink-over-red headline as the reference poster ('Empowering' over 'Women'). Because a symbol alone cannot say 'feminist', the system includes a formal descriptor lockup that carries the claim in words (letterhead, press, ballot-adjacent use), and the mark is never introduced without it. A one-line lockup serves website headers, the red plate serves favicons and avatars, and the bridged seal is a formal stamp for institutional-accountability documents.",
+  "fonts": [
+    "Big Shoulders Stencil Display 900 (wordmark, seal; outlined). L and K redrawn: the L keeps its foot joined and is cut horizontally through the stem 38% up; the K keeps its stem joined to the arm and only the leg is bridged",
+    "Big Shoulders Display 900 (source of the solid L and K outlines; same metrics as the stencil cut)",
+    "Space Grotesk 500 (descriptor line in descriptor.svg; outlined)",
+    "Mark is custom geometry, not a font glyph"
+  ],
+  "colors": [
+    "#CB3932",
+    "#221F1D",
+    "#F6EEDD"
+  ],
+  "files": [
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/primary.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/alt.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/mark.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/mark-positive.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/header.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/descriptor.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/reverse.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/mono.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/poster.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/textured.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/primary.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/primary-sheet.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/mark-sheet.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/mark-positive-sheet.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/header.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/header-sheet.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/descriptor.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/alt.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/alt-sheet.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/reverse.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/mono.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/poster.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/textured.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/mark-sprayed.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/build.mjs",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/mark.mjs",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/type.mjs",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/lib.mjs",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/textured.mjs",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/verify.mjs",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/06-shock-mark/concept.json"
+  ],
+  "associationsChecked": "Bolt in a circle (British Union of Fascists flash-and-circle, Singapore PAP): the bar is a straight tapered wedge with one straight diagonal cut, and both halves stay on the same axis, so it never forms a flash. SS sig-runes, double bolts, swastika rotation: no bolts, and no element repeats by rotation. Strajk Kobiet bolt: not a bolt. Indian election symbols, Labour rose, US donkey/elephant: none uses an exclamation or ring-dot. Glass tumbler (ECI symbol of Jana Sena Party, Andhra Pradesh) and plastic party cup: fixed in v2. The wedge now tapers from 28 to 9 units (32%) and ends in a rounded tip, and its top edge is cut on a 9-degree slant, so the silhouette is a classic '!' wedge, not a vessel. IEC power symbol: fixed in v2. The ring bridges moved from 12/6 o'clock to 3/9 o'clock, so there is never a gap under the bar; the seal's inner ring is bridged on the same side axis. Also tested and rejected: a single nick or a diagonal bridge pair on the snap-cut angle, which read as a letter 'C' or as a refresh/empty-set icon. Remaining reading: at icon sizes the side-bridged ring can read as a circled minus, which is weaker than the power-symbol reading it replaces. Venus-with-fist cliche: avoided; Venus appears only as the ring. Yahoo!-style terminal '!': the mark always leads and never follows the name. Red-and-black stencil militancy: use on paper and cream grounds; never place red and black on a diagonal split (anarcho-syndicalist flag); avoid all-black stencil slogans on red. Do not post the '!' alone in a red circle on social media (warning or error badge); use the square plate or the seal, which carries the name. Not cleared: Croatia's Mozemo! ('We can!') uses an exclamation mark in its name and wordmark, and other '!'-led party marks in the target region have not been checked. A human trademark search is needed before adoption.",
+  "strengths": [
+    "It is a stencil system that really works: every piece is an island, the bridges (now 4.2 units on a 27-unit ring) hold the counters, and it cuts from one sheet and sprays cleanly. mark-sprayed.png and textured.svg show the sprayed register",
+    "The '!' now reads as an exclamation mark first. The ring is 0.96x the wedge's top width, the gap is 15% tighter, and the wedge tapers to a rounded tip, so the tumbler, cup and '!-over-O' readings are gone",
+    "The wordmark reads correctly: the redrawn L and K remove the 'CUI.TURAI.' and 'I<' misreads at header sizes while keeping the font's stencil logic (the L's horizontal cut echoes the T's)",
+    "There is a lockup for each job: a one-line header lockup legible at 24-28px tall, the red plate as the official favicon/avatar (it reads at 16px), a formal descriptor lockup that states the feminist claim, a name-only seal, and a stacked poster",
+    "The primary echoes the reference poster's ink-over-red headline, with the red '!' and red SHOCK carrying the emphasis",
+    "All masters are flat analytic geometry built from one script (paths only, palette colours, <title> on each, 1-26KB)"
+  ],
+  "weaknesses": [
+    "The feminist meaning is carried by the descriptor and context, not by the mark. The ring nods to the Venus circle but does not say 'feminist' alone, so the descriptor lockup must lead in formal and first-contact use",
+    "An exclamation mark is a generic glyph, so registrability rests on the snapped wedge plus bridged ring together. Mozemo! and other '!' marks need a trademark check",
+    "The descriptor copy ('feminist politics for the Fourth Wave') is draft wording built from the client's own 'Fourth Wave of Feminism' phrase. It needs client approval before use",
+    "The two-line primary still turns to mush below about 24px tall; header.svg or the plate must be used at small sizes",
+    "Condensed uppercase stencil can still tip toward military or crate marking. The joy comes from the palette, the spray and the paper ground, so the usage rules (paper grounds, no red/black diagonal splits) matter",
+    "The full-colour lockups vanish on a protest-red ground, so red backgrounds need the mono (paper or ink) version",
+    "The seal's ring text reads from about 64px (larger name-only text). A text-less seal was not drawn on purpose, because a '!' in a bare ring reads as an alert badge; the plate covers small sizes",
+    "At icon sizes the side-bridged ring can read as a circled minus"
+  ],
+  "iterations": 10
+}

@@ -1,0 +1,57 @@
+---
+// The four waves compared (paraphrased from research/fourth-wave.md §3). A real <table> on wide screens,
+// one card per wave on phones. The wave labels are a Western shorthand; the article says so.
+export interface Props { caption?: string }
+const { caption = 'The four waves, as they are usually described' } = Astro.props;
+const WAVES = [
+  { n: '1st', name: 'First wave', when: '19th century to the 1920s', fought: 'The vote, legal personhood, the right to own property and to study', tools: 'Petitions, marches, newspapers, civil disobedience', critique: 'Centred white, middle-class women' },
+  { n: '2nd', name: 'Second wave', when: 'Late 1960s to the 1980s', fought: 'Equality at work, reproductive rights, and "the personal is political"', tools: 'Consciousness-raising groups, publishing, court cases', critique: 'Accused of leaving out Black, working-class and lesbian women' },
+  { n: '3rd', name: 'Third wave', when: 'Early 1990s to the 2000s', fought: 'Many identities, sexuality, reclaiming culture, questioning fixed ideas of "woman"', tools: 'Zines, music, media criticism', critique: 'Accused of individualism and consumerism' },
+  { n: '4th', name: 'Fourth wave', when: 'About 2008–2012 to now', fought: 'Ending sexual violence, harassment and online abuse; bodily autonomy; intersectional justice; pay, care and representation', tools: 'Hashtags, testimony at scale, data and digital archives, plus mass street action', critique: 'Accused of slacktivism, leaving out people offline, corporate co-option, call-out culture and a Global North bias', now: true },
+];
+---
+<div class="r-wide waves">
+  <table>
+    <caption class="label">{caption}</caption>
+    <thead>
+      <tr><th scope="col">Wave</th><th scope="col">Roughly when</th><th scope="col">Fought for</th><th scope="col">Main tools</th><th scope="col">Common criticism</th></tr>
+    </thead>
+    <tbody>
+      {WAVES.map((w) => (
+        <tr class:list={{ now: w.now }}>
+          <th scope="row"><span class="waves__n" aria-hidden="true">{w.n}</span><span class="waves__name">{w.name}</span>{w.now && <span class="waves__now">Now</span>}</th>
+          <td data-label="Roughly when">{w.when}</td>
+          <td data-label="Fought for">{w.fought}</td>
+          <td data-label="Main tools">{w.tools}</td>
+          <td data-label="Common criticism">{w.critique}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .waves { margin-block: 2.2em; font-family: var(--font-sans); }
+  table { width: 100%; border-collapse: collapse; font-size: .95rem; line-height: 1.4; }
+  caption { text-align: left; padding-bottom: 10px; caption-side: top; }
+  th, td { text-align: left; vertical-align: top; padding: 14px 12px; border-bottom: 1px solid var(--line-soft); }
+  thead th { font-size: var(--fs-label); letter-spacing: .12em; text-transform: uppercase; border-bottom: 3px solid var(--line); padding-block: 8px; }
+  tbody th { width: 150px; }
+  .waves__n { display: block; font-weight: 900; font-stretch: var(--display-stretch); font-size: 2.6rem; line-height: .85; color: var(--ink); }
+  .waves__name { display: block; font-size: var(--fs-label); letter-spacing: .12em; text-transform: uppercase; font-weight: 700; margin-top: 4px; }
+  .waves__now { display: inline-block; margin-top: 8px; background: var(--paper-light); color: var(--red-ink); font-size: .7rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; padding: .2em .5em; }
+  tr.now { background: var(--red-ink); color: var(--paper-light); }
+  tr.now .waves__n { color: var(--paper-light); }
+  tr.now th, tr.now td { border-bottom: 0; }
+  @media (max-width: 760px) {
+    table, thead, tbody, tr, th, td, caption { display: block; width: 100%; }
+    thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    tr { border: 2px solid var(--ink); margin-bottom: 14px; padding: 6px 14px 10px; background: var(--paper-light); }
+    tbody th { width: auto; display: flex; align-items: baseline; gap: 10px; border-bottom: 1.5px dashed var(--line-soft); padding: 8px 0 10px; }
+    .waves__name, .waves__now { margin-top: 0; }
+    td { padding: 8px 0; border: 0; }
+    td::before { content: attr(data-label); display: block; font-size: var(--fs-label); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; opacity: .75; margin-bottom: 2px; }
+    tr.now { border-color: var(--red-ink); }
+    tr.now th { border-bottom-color: rgba(251, 247, 238, .4); }
+  }
+</style>

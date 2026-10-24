@@ -1,0 +1,45 @@
+---
+// TEMPORARY component smoke test; replaced by the real homepage.
+import Base from '../layouts/Base.astro';
+import SectionHead from '../components/ui/SectionHead.astro';
+import Engine from '../components/blocks/Engine.astro';
+import Receipt from '../components/ui/Receipt.astro';
+import Placard from '../components/ui/Placard.astro';
+import PullQuote from '../components/ui/PullQuote.astro';
+import Ticker from '../components/ui/Ticker.astro';
+import Stamp from '../components/ui/Stamp.astro';
+import Annotation from '../components/ui/Annotation.astro';
+import Timeline from '../components/blocks/Timeline.astro';
+import JoinBand from '../components/blocks/JoinBand.astro';
+import PageHero from '../components/blocks/PageHero.astro';
+import Faq from '../components/ui/Faq.astro';
+import TornEdge from '../components/ui/TornEdge.astro';
+---
+<Base title="Cultural Shock Party | Fourth Wave feminist movement" titleRaw description="Smoke test.">
+  <PageHero label="Component test" title="We are building the Fourth Wave" lead="Ideas into research. Research into public consciousness. Public consciousness into collective political action." crumbs={[{ name: 'Test', href: '/' }]} />
+  <section class="section"><div class="wrap">
+    <SectionHead num="01" label="The engine" title="From ideas to power" lead="Four stages, one movement." />
+    <Engine />
+  </div></section>
+  <Ticker items={['Hope first', 'Receipts always', 'Bring a friend', 'Yes, boys too']} />
+  <section class="section"><div class="wrap" style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;position:relative">
+    <Receipt figure="1 in 3" label="women worldwide experience physical or sexual violence in their lifetime" source="WHO, Violence against women prevalence estimates" href="https://www.who.int" date="2021" tilt={-1.5} />
+    <Receipt figure="13.6%" label="of Lok Sabha MPs elected in 2024 are women" source="Test source" href="https://example.org" date="2024" tone="ink" />
+    <Receipt figure="131" label="India's rank in the Global Gender Gap Index" source="WEF" href="https://www.weforum.org" date="2025" tone="marigold" tilt={1.5} />
+    <Annotation text="every number gets a source" top="-20px" right="10%" arrow="down" />
+  </div></section>
+  <section class="section ground-ink grain"><div class="wrap" style="display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center;position:relative;z-index:2">
+    <PullQuote quote="The defect was in the world, never in the womb." by="Test attribution" role="Founder" size="l" />
+    <div style="display:grid;gap:30px;justify-items:center"><Placard text="Smash the patriarchy, gently" color="pink" stick /><Stamp text="Sourced" sub="Oct 2026" /><Placard text="Hope first" shape="sticker" color="marigold" tilt={4} /></div>
+  </div></section>
+  <TornEdge color="var(--paper)" />
+  <section class="section"><div class="wrap">
+    <SectionHead num="02" label="Public memory" title="The struggles that brought us here" />
+    <Timeline events={[{ date: '1 Jan 1848', title: 'Savitribai and Jyotirao Phule open a girls’ school in Pune', text: 'Test text for the timeline item.', place: 'Pune', tag: 'India' }, { date: '1975', title: 'Iceland’s women strike', text: '90% of women stop work.', place: 'Reykjavík', tag: 'Global' }]} />
+  </div></section>
+  <section class="section"><div class="wrap wrap--narrow">
+    <Faq q="Is Cultural Shock Party a political party?" open><p>Not in the electoral sense.</p><p>More text here.</p></Faq>
+    <Faq q="Can boys join?"><p>Yes.</p></Faq>
+  </div></section>
+  <JoinBand />
+</Base>

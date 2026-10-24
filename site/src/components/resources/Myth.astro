@@ -1,0 +1,50 @@
+---
+// One myth, busted: a numbered "MYTH" stamp, the myth itself struck through (as the markdown H2 inside the slot),
+// the answer, and a Receipt. Usage in MDX:
+//   <Myth n="01">
+//
+//   ## <span class="visually-hidden">Myth: </span><s>"Feminism means hating men"</s>
+//
+//   Answer paragraph…
+//
+//   <Receipt … />
+//
+//   </Myth>
+import Stamp from '../ui/Stamp.astro';
+export interface Props { n: string; verdict?: string }
+const { n, verdict = 'Busted' } = Astro.props;
+---
+<section class="r-wide myth">
+  <div class="myth__rail" aria-hidden="true">
+    <span class="myth__n">{n}</span>
+    <span class="label myth__k">Myth</span>
+    <span class="myth__stamp"><Stamp text={verdict} sub="See receipt" tilt={-12} /></span>
+  </div>
+  <div class="myth__body"><slot /></div>
+</section>
+
+<style>
+  .myth { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 0 clamp(16px, 3vw, 36px); margin-block: 2.6em 1em; padding-top: 18px; border-top: var(--rule); font-family: var(--font-sans); }
+  .myth__rail { display: grid; align-content: start; justify-items: start; gap: 4px; }
+  .myth__n { font-weight: 900; font-stretch: var(--display-stretch); font-size: clamp(4rem, 8vw, 6.4rem); line-height: .8; color: var(--red); }
+  .myth__k { color: var(--muted); }
+  .myth__stamp { margin-top: 18px; }
+  .myth__body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 300px); gap: 0 clamp(18px, 3vw, 36px); align-items: start; }
+  .myth__body > :global(*) { grid-column: 1; margin: 0; }
+  .myth__body > :global(* + *) { margin-top: .9em; }
+  .myth__body > :global(h2) {
+    grid-column: 1 / -1; border: 0 !important; padding: 0 !important; margin: 0 0 .5em !important;
+    font-size: clamp(1.9rem, 4vw, 3rem) !important; line-height: .95 !important; text-wrap: balance;
+  }
+  .myth__body > :global(h2 s) { text-decoration: line-through; text-decoration-color: var(--red); text-decoration-thickness: .1em; text-decoration-skip-ink: none; }
+  .myth__body > :global(p) { font-family: var(--font-serif); font-size: clamp(1.08rem, 1.3vw, 1.18rem); line-height: 1.6; }
+  .myth__body > :global(p:first-of-type) { font-weight: 600; }
+  .myth__body > :global(.receipt) { grid-column: 2; grid-row: 2 / span 6; margin: 0; --tilt: 1.2deg; }
+  @media (max-width: 860px) {
+    .myth { grid-template-columns: 1fr; }
+    .myth__rail { grid-template-columns: auto auto 1fr; align-items: end; gap: 10px; margin-bottom: 10px; }
+    .myth__stamp { margin: 0; justify-self: end; }
+    .myth__body { grid-template-columns: 1fr; }
+    .myth__body > :global(.receipt) { grid-column: 1; grid-row: auto; margin-top: 1.2em; --tilt: -.8deg; max-width: 26rem; }
+  }
+</style>

@@ -1,0 +1,55 @@
+{
+  "id": "04-fourth-wave",
+  "name": "Breaking Four",
+  "idea": "A brush-painted 4 whose rising stroke breaks into a curling wave crest, and whose crossbar runs on as the dry-brush swash that underlines the name.",
+  "rationale": "The Fourth Wave is CSP's founding intellectual project, so the mark makes the numeral and the wave one shape. The 4's diagonal is a concave wave face that rises into a curling crest, the stem is the wave falling, and the crossbar is the sea line. In the primary lockup that crossbar keeps going as the long dry-brush underline, the same move as the 'Empowering' swash on the poster, which ties mark and name into one gesture. Protest-red calligraphic brush on cream, set against an editorial DM Serif ('Cultural' roman, 'Shock' italic for the jolt) and tracked Space Grotesk 'PARTY', reads as street energy with intellectual weight. The stem plus curl also forms a lowercase f, a quiet nod to feminism.",
+  "fonts": [
+    "DM Serif Display Regular (Cultural)",
+    "DM Serif Display Italic (Shock)",
+    "Space Grotesk Bold (PARTY)",
+    "Space Grotesk Medium (captions, textured.svg only)",
+    "Mark: custom brush strokes (elliptical-nib stamp, traced to vector), no font"
+  ],
+  "colors": [
+    "#CB3932",
+    "#221F1D",
+    "#F6EEDD"
+  ],
+  "files": [
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/04-fourth-wave/primary.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/04-fourth-wave/alt.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/04-fourth-wave/mark.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/04-fourth-wave/mark-small.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/04-fourth-wave/reverse.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/04-fourth-wave/mono.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/04-fourth-wave/textured.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/04-fourth-wave/primary.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/04-fourth-wave/primary-sheet.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/04-fourth-wave/mark.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/04-fourth-wave/mark-sheet.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/04-fourth-wave/mark-small-sheet.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/04-fourth-wave/alt.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/04-fourth-wave/reverse.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/04-fourth-wave/mono.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/04-fourth-wave/textured.png"
+  ],
+  "associationsChecked": "No lightning bolt, circle-and-flash, double bolt or rune: the mark has no bolt at all, and its stem/crossbar cross cannot rotate into a swastika-like form. It is not the Strajk Kobiet bolt. Checked against Indian election symbols (hand, lotus, broom, elephant, bicycle, hammer-sickle, conch, kite) and the Labour rose and US donkey/elephant: no match. The curl is a compact spiral, not a crescent blade, so stem plus curl does not read as a sickle. Remaining near-associations: (1) the Fourth International's emblem pairs a 4 with a hammer and sickle; ours has neither, but a numeral 4 in a left political mark may remind Trotskyist-literate readers of it. (2) Hokusai-style wave curls are a common surf and water trope (Quiksilver uses a Great Wave plus mountain); ours is fused into a numeral and reads differently. (3) Stem plus curl reads as a lowercase f, intended as 'feminism', though a few may read '4F' (the old US 'unfit for service' draft code; obscure outside the US). (4) 4 is an unlucky homophone in Chinese, Japanese and Korean, a minor point for the likely South Asian audience. (5) Channel 4's blocky 4 is visually unrelated. Not a plain Venus, fist, megaphone or pink palette, and not ransom-note.",
+  "strengths": [
+    "One gesture with three readings: the numeral 4 (Fourth Wave), a breaking wave crest, and a hidden lowercase f (feminism).",
+    "Mark and wordmark are structurally fused: the 4's crossbar becomes the dry-brush underline, a direct echo of the poster's 'Empowering' swash.",
+    "Genuine brush character (elliptical-nib contrast, hand wobble, dry bristle tail) in protest red, so it carries the poster's energy while staying a flat vector.",
+    "The type pairing signals 'intellectual foundations': editorial DM Serif with an italic 'Shock' jolt, plus tracked Space Grotesk caps that make PARTY feel institutional.",
+    "Holds up small: the master reads at 24-32px and a dedicated heavier small cut (mark-small.svg) keeps the counter open at 16px. The primary lockup stays legible at a 28px header height.",
+    "All masters are clean flat vector (paths only, palette colours only, even 6.1% padding on the lockups) and are rebuilt from scripts, so tweaks are cheap."
+  ],
+  "weaknesses": [
+    "It is still clearly a numeral. Without the 'Fourth Wave' story, a 4 can read as a channel, a sequel or an anniversary, and the wave curl is a familiar surf/water-brand trope.",
+    "It looks like a single gesture but is built from two strokes (wave plus stem), so it is not a true one-line mark.",
+    "At 16px the curl collapses into a knob, and the master needs the separate small cut for favicons. The curl's thin inner tip is fragile below about 48px and in rough print (stamps, fax).",
+    "The primary lockup is wide (about 4.2:1), and PARTY is only about 6.7px cap height in a 28px header: legible, but not generous. A one-line header cut is not yet drawn.",
+    "The flat masters lean elegant and calligraphic, more literary than raw street-poster. The poster's rawness only fully appears in textured.svg.",
+    "In square formats the mark sits slightly right-heavy (stem and curl on the right). The padding in mark.svg is 7.6% left/right against 6.1% top/bottom because the mark is not square.",
+    "The outlines are machine-traced brush, so path data is heavy (about 37KB per lockup) with slight asymmetric wobble. Edits belong in build/*.py, not hand-editing in Illustrator."
+  ],
+  "iterations": 7
+}

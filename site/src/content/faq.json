@@ -1,0 +1,409 @@
+[
+  {
+    "id": "what-is-csp",
+    "group": "About CSP",
+    "order": 1,
+    "q": "What is Cultural Shock Party?",
+    "a": "Cultural Shock Party (CSP) is a Fourth Wave feminist movement, founded in India in 2026. In its own words: “Cultural Shock Party is a political-cultural feminist movement building the intellectual, political and organisational infrastructure of the Fourth Wave of Feminism: turning ideas into research, research into public consciousness, and public consciousness into collective political action.”",
+    "more": "We’re new, so we don’t claim wins we haven’t earned. This site shows what we’re building first, with a source and a date on every number.",
+    "link": { "label": "About Cultural Shock Party", "href": "/about/" }
+  },
+  {
+    "id": "is-csp-a-political-party",
+    "group": "About CSP",
+    "order": 2,
+    "q": "Is Cultural Shock Party a political party?",
+    "a": "No. Cultural Shock Party is a movement, not a registered political party: it is not registered with the Election Commission of India, it does not contest elections and it does not endorse candidates.",
+    "more": "“Party” is in our name, not on a ballot. It is a cultural statement: we want a positive shock to what society treats as normal. If our plans about elections ever change, we will say so publicly before it happens.",
+    "link": { "label": "Our independence and funding commitments", "href": "/about/#independence" }
+  },
+  {
+    "id": "is-csp-linked-to-a-party",
+    "group": "About CSP",
+    "order": 3,
+    "q": "Is Cultural Shock Party linked to any political party?",
+    "a": "No. Cultural Shock Party is independent: no political party, candidate, government, company or foreign funder directs it or funds it.",
+    "more": "We criticise laws, systems and institutions, never voters. We never share supporter data with any political party, candidate or advertiser.",
+    "link": { "label": "Our independence and funding commitments", "href": "/about/#independence" }
+  },
+  {
+    "id": "who-founded-csp",
+    "group": "About CSP",
+    "order": 4,
+    "q": "Who founded Cultural Shock Party?",
+    "a": "Rubby Singh founded Cultural Shock Party in 2026. She is a social worker, a book reviewer and the author of Garbhadosh: The Fault In Our Wombs (Adhyyan Books, 2026), a novel about how the idea of a “defective womb” and everyday patriarchy shape girls’ lives.",
+    "link": { "label": "Rubby Singh, founder", "href": "/about/rubby-singh/" }
+  },
+  {
+    "id": "what-does-csp-believe",
+    "group": "About CSP",
+    "order": 5,
+    "q": "What does Cultural Shock Party believe?",
+    "a": "Cultural Shock Party believes feminism is a political project that needs ideas, institutions, memory and power, not just a mood, a brand or a hashtag. Its Fourth Wave Manifesto sets out 12 positions, from “Safety is a right, not a curfew” to “Boys and men are invited”.",
+    "more": "The manifesto is version 1.0, published for consultation on 24 October 2026. Anyone can sign it, and anyone can suggest an edit to any clause.",
+    "link": { "label": "Read the Fourth Wave Manifesto", "href": "/manifesto/" }
+  },
+  {
+    "id": "what-does-cultural-shock-mean",
+    "group": "About CSP",
+    "order": 6,
+    "q": "What does “cultural shock” mean in our name?",
+    "a": "A cultural shock is the jolt that changes what a society treats as normal: after it, yesterday’s “normal” suddenly looks strange. Cultural Shock Party wants a positive shock, an awakening rather than anger.",
+    "more": "It is not the same thing as “culture shock”, the confusion people feel when they move to a new country. Our kind of shock is peaceful, lawful, creative and collective. Shock the culture, not people.",
+    "link": { "label": "The name, decoded", "href": "/about/#what" }
+  },
+  {
+    "id": "why-the-badge",
+    "group": "About CSP",
+    "order": 7,
+    "q": "Why does the badge show a woman breaking a chain?",
+    "a": "Because Cultural Shock Party is about awakening, not anger: in the badge, one woman breaks a chain and a whole crowd stands behind her.",
+    "more": "The site’s colours come from the badge itself: cream, protest red, forest green and ink, with placard pink and a marigold borrowed from our Women’s Day poster.",
+    "link": { "label": "The badge, explained", "href": "/about/#badge" }
+  },
+  {
+    "id": "where-is-csp-based",
+    "group": "About CSP",
+    "order": 8,
+    "q": "Where is Cultural Shock Party based, and does it work outside India?",
+    "a": "Cultural Shock Party was founded in India and most of its work is about India, but anyone, anywhere, can read, share and learn from it.",
+    "more": "Supporters outside India are welcome to read, share and translate our work and to get the newsletter. Indian law does not let us accept money from foreign citizens or organisations, so please support feminist groups where you live too.",
+    "link": { "label": "Ways to take part from anywhere", "href": "/join/#ladder" }
+  },
+  {
+    "id": "who-funds-csp",
+    "group": "About CSP",
+    "order": 9,
+    "q": "Who funds Cultural Shock Party?",
+    "a": "Nobody, yet: Cultural Shock Party is run by volunteers, does not accept donations and takes no foreign money.",
+    "more": "Before we accept a single rupee, we will publish a funding policy, and then who gives, by category and total. India’s Foreign Contribution (Regulation) Act 2010 bars organisations of a political nature from accepting foreign contributions.",
+    "link": { "label": "Our independence and funding commitments", "href": "/about/#independence" }
+  },
+  {
+    "id": "can-i-donate",
+    "group": "About CSP",
+    "order": 10,
+    "q": "Can I donate to Cultural Shock Party?",
+    "a": "Not yet. Cultural Shock Party does not accept donations, which is why there is no Donate button on this site.",
+    "more": "If that changes, we will publish a funding policy first. If you live outside India: thank you, but Indian law (FCRA) does not let us accept money from foreign citizens, including OCI and PIO card holders, or from foreign organisations. The most useful thing anyone can give today is time.",
+    "link": { "label": "Ways to help that cost nothing", "href": "/join/#no-signup" }
+  },
+  {
+    "id": "what-has-csp-achieved",
+    "group": "About CSP",
+    "order": 11,
+    "q": "What has Cultural Shock Party achieved so far?",
+    "a": "Honestly, it’s early: Cultural Shock Party was founded in 2026, and its first public steps are this website and version 1.0 of the Fourth Wave Manifesto, published for consultation on 24 October 2026.",
+    "more": "We won’t borrow other movements’ wins. Our case studies show what movements in India and around the world achieved and what we are learning from them. Our own receipts will be added here as we earn them.",
+    "link": { "label": "What movements teach us: 15 case studies", "href": "/case-studies/" }
+  },
+  {
+    "id": "how-does-csp-work",
+    "group": "About CSP",
+    "order": 12,
+    "q": "How does Cultural Shock Party actually work?",
+    "a": "Through an engine with four stages: ideas become research, research becomes public consciousness, and public consciousness becomes collective political action.",
+    "more": "Six programmes plug into that engine, from the Receipts Desk (evidence and fact cards) to the Accountability Watch (promise trackers and open letters). All six are being built in 2026.",
+    "link": { "label": "What we do: from ideas to power", "href": "/what-we-do/" }
+  },
+
+  {
+    "id": "how-do-i-join",
+    "group": "Joining and taking part",
+    "order": 13,
+    "q": "How do I join Cultural Shock Party, and is it free?",
+    "a": "Fill in the short form on our Join page: your age band, your email and the things you’d like from us, ticked one by one. Joining is free, and we never ask for payment details.",
+    "more": "You don’t have to sign up to take part. Reading a guide, sending it to your group chat or signing the manifesto all count.",
+    "link": { "label": "Join the movement", "href": "/join/" }
+  },
+  {
+    "id": "how-old-do-i-need-to-be",
+    "group": "Joining and taking part",
+    "order": 14,
+    "q": "How old do I need to be to join?",
+    "a": "You need to be 18 or over to sign up yourself. Under-18s are welcome to read, learn and share everything on this site without signing up.",
+    "more": "India’s Digital Personal Data Protection Act 2023 treats everyone under 18 as a child, and a child’s data needs a parent’s or guardian’s verifiable consent. Until we have a proper consent process, we don’t take sign-ups from under-18s. A parent or guardian can sign up for the newsletter with their own email and share it with you.",
+    "link": { "label": "Start learning: guides and explainers", "href": "/resources/" }
+  },
+  {
+    "id": "under-18-take-part",
+    "group": "Joining and taking part",
+    "order": 15,
+    "q": "I’m under 18. How can I take part?",
+    "a": "Read, learn, ask questions and share what you find with friends, family and teachers. None of that needs a sign-up, and none of it is “too small”.",
+    "more": "Our glossary explains feminist words in plain language, and our public memory timeline shows the women who changed India. If you want to go to any public event, take a parent or guardian with you.",
+    "link": { "label": "The feminist glossary, in plain words", "href": "/resources/glossary/" }
+  },
+  {
+    "id": "can-boys-and-men-join",
+    "group": "Joining and taking part",
+    "order": 16,
+    "q": "Can boys and men join?",
+    "a": "Yes. Boys and men are invited to join Cultural Shock Party: it is the tenth position in our manifesto.",
+    "more": "Feminism is about equal rights and freedom for people of every gender, including freedom from rigid ideas of manhood. Most young men are already closer than you might think: 69% of Gen Z men across 29 countries do not agree that a wife should always obey her husband.",
+    "link": { "label": "Boys, men and the manosphere: a guide for allies", "href": "/resources/boys-men-and-the-manosphere/" }
+  },
+  {
+    "id": "do-i-have-to-protest",
+    "group": "Joining and taking part",
+    "order": 17,
+    "q": "Do I have to go to protests to be involved?",
+    "a": "No. Most of what Cultural Shock Party does happens on phones, in group chats, in classrooms and in reading circles; the street is one rung of five, and it is always optional.",
+    "link": { "label": "The five rungs, from your phone to the institutions", "href": "/join/#ladder" }
+  },
+  {
+    "id": "write-design-research",
+    "group": "Joining and taking part",
+    "order": 18,
+    "q": "Can I write, design or research for Cultural Shock Party?",
+    "a": "Yes. We are looking for writers, designers, researchers, translators, video-makers, people who can code, and people who can read the law.",
+    "more": "Tick your skills on the Join form and choose “Contact me about volunteering”, or write to us with a link to your work. Volunteering is for adults (18 and over) for now.",
+    "link": { "label": "Write to us about making things together", "href": "/contact/#route-make" }
+  },
+  {
+    "id": "start-a-group-at-college",
+    "group": "Joining and taking part",
+    "order": 19,
+    "q": "How do I start a CSP group at my college?",
+    "a": "Start small: find two or three friends, pick one reading or one issue, and meet regularly somewhere safe and public on campus. Then tell us about it through the contact form, so we can connect you with others.",
+    "more": "For now, please don’t call it an official Cultural Shock Party chapter. We are writing the chapter guidelines and will publish them on this site.",
+    "link": { "label": "How to start a feminist group at your college", "href": "/resources/how-to-join-or-start-a-feminist-group/" }
+  },
+  {
+    "id": "partner-with-csp",
+    "group": "Joining and taking part",
+    "order": 20,
+    "q": "How can my organisation partner with Cultural Shock Party?",
+    "a": "Write to us through the contact form and choose “Partnerships and collaborations”: tell us who you are, what you’d like to do together and by when.",
+    "more": "We say yes to collaborations that keep us independent: no party, candidate or funder gets a say in what we publish.",
+    "link": { "label": "Contact us about a partnership", "href": "/contact/#route-partner" }
+  },
+  {
+    "id": "press-and-interviews",
+    "group": "Joining and taking part",
+    "order": 21,
+    "q": "How do I contact Cultural Shock Party for press or interviews?",
+    "a": "Use the contact form and choose “Press and interviews”, with your publication, your deadline and what you’d like to ask.",
+    "more": "We don’t publish personal email addresses or phone numbers, to keep our team safe.",
+    "link": { "label": "Press and interview requests", "href": "/contact/#route-press" }
+  },
+  {
+    "id": "teachers-and-parents",
+    "group": "Joining and taking part",
+    "order": 22,
+    "q": "Can teachers and parents use Cultural Shock Party’s resources?",
+    "a": "Yes. Everything on this site is free to read, print and share, and our explainers are written in plain words for readers aged about 12 and up.",
+    "more": "Teachers can write to us about using our material in class. We never ask for school names or pupils’ details.",
+    "link": { "label": "Schools and teachers: write to us", "href": "/contact/#route-schools" }
+  },
+
+  {
+    "id": "what-is-feminism",
+    "group": "Feminism basics",
+    "order": 23,
+    "q": "What is feminism, in simple words?",
+    "a": "Feminism is the belief that people of every gender should have equal rights, freedom and safety, and the work of making that true at home, in school, at work, online and in law.",
+    "more": "In Hindi it is नारीवाद (naarivaad). India’s Constitution already promises equality (Articles 14 and 15) and dignity (Article 21); feminism is about making those promises real in daily life.",
+    "link": { "label": "Feminism, in the glossary", "href": "/resources/glossary/#feminism" }
+  },
+  {
+    "id": "what-is-the-fourth-wave",
+    "group": "Feminism basics",
+    "order": 24,
+    "q": "What is the Fourth Wave of Feminism?",
+    "a": "The Fourth Wave is the feminism that grew up on phones and on the street from about 2012: hashtags, survivor testimony and mass protest against sexual violence, harassment and online abuse.",
+    "more": "It is a label used more by journalists and activists than by scholars, and it has no founder and no official start date. India helped shape it, from the Delhi protests of December 2012 to Reclaim the Night in West Bengal in 2024.",
+    "link": { "label": "What is the Fourth Wave? A plain-language guide", "href": "/resources/what-is-fourth-wave-feminism/" }
+  },
+  {
+    "id": "when-did-the-fourth-wave-start",
+    "group": "Feminism basics",
+    "order": 25,
+    "q": "When did the Fourth Wave of Feminism start?",
+    "a": "Most writers date it to about 2012, when online campaigns and mass protests against sexual violence took off; the US writer Jennifer Baumgardner placed the start nearer 2008.",
+    "more": "There is no single official start date. In India, December 2012 is often remembered as the turning point.",
+    "link": { "label": "Delhi 2012: from protest to the Justice Verma Committee", "href": "/case-studies/delhi-2012-justice-verma/" }
+  },
+  {
+    "id": "fourth-wave-vs-earlier-waves",
+    "group": "Feminism basics",
+    "order": 26,
+    "q": "How is the Fourth Wave different from earlier waves of feminism?",
+    "a": "It adds three things to what earlier waves won: technology as both a tool and a battleground, survivor testimony at scale, and intersectionality as a starting point rather than an afterthought.",
+    "more": "Very roughly, the first wave (19th century to the 1920s) fought for the vote and legal rights; the second (late 1960s to the 1980s) for equality at work and reproductive rights; the third (1990s and 2000s) for many identities and voices. The labels are a Western shorthand, and India’s own history does not fit them neatly.",
+    "link": { "label": "The waves, compared", "href": "/resources/what-is-fourth-wave-feminism/" }
+  },
+  {
+    "id": "fifth-wave",
+    "group": "Feminism basics",
+    "order": 27,
+    "q": "Is there a fifth wave of feminism?",
+    "a": "Not in any agreed sense: people sometimes talk about a fifth wave, but there is no shared definition or start date.",
+    "more": "Our view is that the Fourth Wave is unfinished, so the job is to build it, not rename it.",
+    "link": { "label": "The Fourth Wave Manifesto", "href": "/manifesto/" }
+  },
+  {
+    "id": "what-is-intersectional-feminism",
+    "group": "Feminism basics",
+    "order": 28,
+    "q": "What is intersectional feminism?",
+    "a": "Intersectional feminism pays attention to how gender combines with caste, class, religion, disability, sexuality and where you live, because those overlaps change what unfairness looks like.",
+    "more": "The US law professor Kimberlé Crenshaw named the idea in 1989. In India it is home-grown: Savitribai Phule took on caste and patriarchy together when she opened a school for girls in 1848, and Dalit feminists have argued for it ever since.",
+    "link": { "label": "Intersectional feminism, explained with Indian examples", "href": "/resources/intersectional-feminism-explained/" }
+  },
+  {
+    "id": "is-feminism-anti-men",
+    "group": "Feminism basics",
+    "order": 29,
+    "q": "Is feminism anti-men?",
+    "a": "No. Feminism is about equal rights and freedom for people of every gender, and that includes freeing boys and men from rigid ideas of what a “real man” has to be.",
+    "more": "Most men already agree with the basic idea: in a 30-country study, 62% of men said gender equality was important to them personally. The problem is an online industry, the manosphere, that profits from turning boys against girls. It is not boys themselves.",
+    "link": { "label": "Ten myths about feminism, and the receipts", "href": "/resources/feminism-myths-and-receipts/" }
+  },
+  {
+    "id": "can-men-be-feminists",
+    "group": "Feminism basics",
+    "order": 30,
+    "q": "Can men be feminists?",
+    "a": "Yes. Anyone who believes people of every gender deserve equal rights, and acts on it, can be a feminist.",
+    "more": "In India, 65% of men in Ipsos’s urban, online sample called themselves feminists, nearly as many as women (71%).",
+    "link": { "label": "Boys, men and the manosphere: a guide for allies", "href": "/resources/boys-men-and-the-manosphere/" }
+  },
+  {
+    "id": "why-feminism-still-matters-india",
+    "group": "Feminism basics",
+    "order": 31,
+    "q": "Why does feminism still matter in India in 2026?",
+    "a": "Because equality written into the Constitution is still not equality in daily life: India ranked 131st of 145 countries in the World Economic Forum’s Global Gender Gap Report 2026.",
+    "more": "Hope first, though: the gap is made by laws, habits and institutions, and all three can change. Every movement in our case studies shows how.",
+    "link": { "label": "What movements teach us", "href": "/case-studies/" }
+  },
+  {
+    "id": "is-gen-z-feminist",
+    "group": "Feminism basics",
+    "order": 32,
+    "q": "Is Gen Z more feminist than older generations?",
+    "a": "Gen Z women are; Gen Z men are split. Across 29 countries, 54% of Gen Z women call themselves feminists, against 36% of Gen Z men.",
+    "more": "India looks different: in Ipsos’s urban, online sample, 71% of women and 65% of men call themselves feminists, yet 52% agree that a wife should always obey her husband. The label is popular; everyday habits are still catching up.",
+    "link": { "label": "Is Gen Z feminist? What the data actually says", "href": "/resources/is-gen-z-feminist/" }
+  },
+
+  {
+    "id": "what-happens-to-my-data",
+    "group": "Safety, data and trust",
+    "order": 33,
+    "q": "What happens to my data if I sign up?",
+    "a": "We use your details only for the things you tick, keep them only as long as we need them, and never share them with any political party, candidate or advertiser.",
+    "more": "We collect the minimum: an email, an age band and, if you choose, a first name, your state or city and your interests. We never ask for your caste, religion, Aadhaar, voter ID, address, school, employer or photos. Forms are processed by Netlify, which hosts this site. India’s Digital Personal Data Protection Act 2023 applies its main duties from 13 May 2027; we follow them now.",
+    "link": { "label": "How we use your data", "href": "/privacy/" }
+  },
+  {
+    "id": "delete-my-data",
+    "group": "Safety, data and trust",
+    "order": 34,
+    "q": "How do I unsubscribe, or get my data deleted?",
+    "a": "Use the unsubscribe link in any email from us, or write to us through the contact form and choose “My data”; we’ll tell you when it’s done.",
+    "more": "You can also ask what we hold about you, or ask us to correct it. We reply to data requests within 30 days at the latest.",
+    "link": { "label": "Ask about your data", "href": "/contact/#route-data" }
+  },
+  {
+    "id": "is-it-safe-to-come-to-an-action",
+    "group": "Safety, data and trust",
+    "order": 35,
+    "q": "Is it safe to come to a Cultural Shock Party action?",
+    "a": "We design every public action to be peaceful and lawful, held only where and when it is permitted, with a safety brief shared beforehand.",
+    "more": "We never publish exact meeting points for women’s gatherings; details go only to people who have signed up, close to the time. Come with a friend, read our safety guide first, and if you are under 18, come with a parent or guardian. In Delhi, check the current Delhi Police order before you plan: in October 2026 Jantar Mantar was de-notified as a protest venue. This is information, not legal advice.",
+    "link": { "label": "How to show up safely: protest safety in India", "href": "/resources/protest-safety-india/" }
+  },
+  {
+    "id": "report-online-abuse",
+    "group": "Safety, data and trust",
+    "order": 36,
+    "q": "How do I report online abuse, a deepfake or a leaked photo in India?",
+    "a": "Report it on the National Cyber Crime Reporting Portal at cybercrime.gov.in, or call 1930; if anyone is in danger, call 112.",
+    "more": "Before you report, take screenshots that show the link, the account name and the time. Under India’s IT Rules as amended in February 2026, platforms must remove intimate images, impersonation and morphed images within 2 hours of a complaint. This is information, not legal advice.",
+    "link": { "label": "Safe online: deepfakes, doxxing and image-based abuse", "href": "/resources/safe-online-toolkit/" }
+  },
+  {
+    "id": "helplines-india",
+    "group": "Safety, data and trust",
+    "order": 37,
+    "q": "Which helplines can I call in India?",
+    "a": "Call 112 in an emergency, 181 for the National Women Helpline, 14490 for the NCW 24×7 Women Helpline (women over 18), 1930 for cyber crime, 1098 for the Child Helpline and 14416 for Tele-MANAS mental health support.",
+    "more": "We checked these numbers against the National Commission for Women’s list on 24 October 2026. Numbers can change, so check before you call.",
+    "link": { "label": "Helplines and how to reach us safely", "href": "/contact/#route-safeguarding" }
+  },
+  {
+    "id": "safeguarding-concern",
+    "group": "Safety, data and trust",
+    "order": 38,
+    "q": "How do I raise a safeguarding concern about Cultural Shock Party?",
+    "a": "Write to us through the contact form and choose “Safeguarding concern”; if anyone is in immediate danger, call 112 first, or 1098 for a child.",
+    "more": "We treat every concern seriously and confidentially. In India, anyone who knows that a child is being sexually abused must tell the police or the Special Juvenile Police Unit (POCSO Act 2012, section 19). This is information, not legal advice.",
+    "link": { "label": "Raise a safeguarding concern", "href": "/contact/#route-safeguarding" }
+  },
+  {
+    "id": "keeping-young-people-safe",
+    "group": "Safety, data and trust",
+    "order": 39,
+    "q": "How does Cultural Shock Party keep young people safe?",
+    "a": "We don’t take sign-ups from under-18s, we never publish photos that identify children, and there are no comments or public uploads on this site.",
+    "more": "Adults in Cultural Shock Party never message under-18s one-to-one, and any activity with young people will always have two adults present.",
+    "link": { "label": "Safeguarding at Cultural Shock Party", "href": "/safeguarding/" }
+  },
+
+  {
+    "id": "womens-reservation-act",
+    "group": "Issues and action",
+    "order": 40,
+    "q": "What is the Women’s Reservation Act, and when will it start?",
+    "a": "The Women’s Reservation Act (the Constitution 106th Amendment, 2023) reserves one-third of seats in the Lok Sabha and state assemblies for women, but no seat is reserved yet: that must wait for delimitation after the next census.",
+    "more": "The Lok Sabha passed it 454 to 2 in September 2023, and it was notified as in force from 16 April 2026. A 2026 bill to bring the reservation forward failed. Our manifesto’s line: a third is the floor, not the ceiling.",
+    "link": { "label": "The Women’s Reservation Act, explained", "href": "/resources/womens-reservation-act-explained/" }
+  },
+  {
+    "id": "unpaid-care-work",
+    "group": "Issues and action",
+    "order": 41,
+    "q": "What is unpaid care work, and why does it matter?",
+    "a": "Unpaid care work is the cooking, cleaning and looking after children and elders that keeps every household running, and in India women do most of it: 289 minutes a day for women who do any, against 88 minutes for men.",
+    "more": "Hours spent on unpaid work are hours not spent on paid work, study, rest or politics. Our manifesto says: count it, share it, fund it.",
+    "link": { "label": "Care is work: India’s 289-minute gap", "href": "/resources/care-is-work/" }
+  },
+  {
+    "id": "what-is-the-manosphere",
+    "group": "Issues and action",
+    "order": 42,
+    "q": "What is the manosphere?",
+    "a": "The manosphere is a loose online network of influencers, podcasts, forums and short videos that sells boys a narrow, “alpha” idea of manhood and a grudge against women.",
+    "more": "Its market is loneliness, and its videos travel on the same apps young Indians use every day. What works against it is connection, not contempt: friendship, curiosity and a better offer.",
+    "link": { "label": "Boys, men and the manosphere: a guide for allies", "href": "/resources/boys-men-and-the-manosphere/" }
+  },
+  {
+    "id": "hold-institutions-accountable",
+    "group": "Issues and action",
+    "order": 43,
+    "q": "How can I hold politicians and institutions accountable on women’s rights?",
+    "a": "Start with the record: write down what was promised, with the date and the source, then ask in public, politely and repeatedly, what has been done.",
+    "more": "Write to your MP or MLA with one issue, one sourced fact and one clear request. Use the Right to Information Act 2005 to ask public bodies for documents. Ask your college or workplace who sits on its Internal Committee under the POSH Act. Official data from the National Crime Records Bureau, the National Family Health Survey and the Ministry of Statistics gives you the facts.",
+    "link": { "label": "The Accountability Watch", "href": "/what-we-do/#accountability-watch" }
+  },
+  {
+    "id": "support-a-survivor",
+    "group": "Issues and action",
+    "order": 44,
+    "q": "How can I support someone who has experienced violence?",
+    "a": "Believe them, listen without judging, let them decide what happens next, and help them reach support: 181 for the National Women Helpline, 112 in an emergency, or 1098 for a child.",
+    "more": "Never share their story, name or photo without their permission. The Supreme Court has ruled that nothing may be published that could identify a survivor of sexual violence, even remotely (Nipun Saxena v Union of India, 2018).",
+    "link": { "label": "Helplines and safeguarding", "href": "/contact/#route-safeguarding" }
+  },
+  {
+    "id": "feminist-organisations-india",
+    "group": "Issues and action",
+    "order": 45,
+    "q": "Which other feminist organisations work in India?",
+    "a": "Many, and we see them as allies, not rivals: for example the Self-Employed Women’s Association (SEWA), Jagori in New Delhi, and the feminist media Feminism in India, BehanBox and Khabar Lahariya.",
+    "more": "Cultural Shock Party is not affiliated with any of them. We learn from their work, and we link to it generously.",
+    "link": { "label": "SEWA: organising India’s self-employed women", "href": "/case-studies/sewa-self-employed-women/" }
+  }
+]

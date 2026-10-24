@@ -1,0 +1,22 @@
+---
+// Two or three Receipts side by side, breaking out of the text column inside an article.
+// Usage in MDX: <ReceiptRow><Receipt … /><Receipt … /></ReceiptRow>
+export interface Props { label?: string }
+const { label } = Astro.props;
+---
+<div class="r-wide receipt-row">
+  {label && <p class="label receipt-row__label">{label}</p>}
+  <div class="receipt-row__grid"><slot /></div>
+</div>
+
+<style>
+  .receipt-row { margin-block: 2.2em; font-family: var(--font-sans); }
+  .receipt-row__label { margin-bottom: 14px; padding-top: 10px; border-top: 1.5px solid var(--line); }
+  .receipt-row__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)); gap: 24px; align-items: start; }
+  .receipt-row__grid > :global(.receipt:nth-child(1)) { --tilt: -1.2deg; }
+  .receipt-row__grid > :global(.receipt:nth-child(2)) { --tilt: .9deg; margin-top: 18px; }
+  .receipt-row__grid > :global(.receipt:nth-child(3)) { --tilt: -.6deg; }
+  .receipt-row__grid > :global(.receipt) { margin: 0; }
+  .receipt-row__grid > :global(.receipt .receipt__figure) { font-size: clamp(3rem, 5.4vw, 4.4rem); }
+  @media (max-width: 600px) { .receipt-row__grid > :global(.receipt:nth-child(2)) { margin-top: 0; } }
+</style>

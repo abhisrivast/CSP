@@ -1,0 +1,345 @@
+---
+import Base from '../layouts/Base.astro';
+import '../components/about/contrast-fixes.css';
+import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
+import ManifestoPoster from '../components/about/ManifestoPoster.astro';
+import Clause from '../components/about/Clause.astro';
+import Pic from '../components/about/Pic.astro';
+import SignForm from '../components/about/SignForm.astro';
+import EditForm from '../components/about/EditForm.astro';
+import Receipt from '../components/ui/Receipt.astro';
+import Stamp from '../components/ui/Stamp.astro';
+import Ticker from '../components/ui/Ticker.astro';
+import TornEdge from '../components/ui/TornEdge.astro';
+import PullQuote from '../components/ui/PullQuote.astro';
+import Sources from '../components/blocks/Sources.astro';
+import ShareBar from '../components/blocks/ShareBar.astro';
+import JoinBand from '../components/blocks/JoinBand.astro';
+import { CLAUSES, MANIFESTO_DATE, MANIFESTO_DATE_LABEL, MANIFESTO_VERSION } from '../components/about/manifesto';
+import { SITE } from '../data/site';
+import { articleNode } from '../lib/schema';
+
+const path = '/manifesto/';
+const title = 'The Fourth Wave Manifesto';
+const description =
+  'The Fourth Wave Manifesto: Cultural Shock Party’s 12 positions on feminism, safety, care, bodily autonomy and power. Version 1.0, open to sign and to edit.';
+const crumbs = [{ name: 'Manifesto', href: path }];
+const t = (n: number) => CLAUSES[n - 1].title;
+
+const S = {
+  reuters: { label: 'Understanding Young News Audiences at a Time of Rapid Change', href: 'https://reutersinstitute.politics.ox.ac.uk/sites/default/files/2026-03/Young_people_and_the_news.pdf', publisher: 'Reuters Institute for the Study of Journalism', date: 'March 2026', note: 'Summary: University of Oxford DPIR, 30 March 2026.' },
+  tribune: { label: 'Women fill streets across West Bengal in midnight protests, demand justice', href: 'https://www.tribuneindia.com/news/india/kolkata-doctor-rape-murder-women-fill-streets-across-west-bengal-in-midnight-protests-demand-justice', publisher: 'The Tribune (PTI)', date: '15 August 2024' },
+  tus: { label: 'Press note: Time Use Survey (January–December 2024), Table 2', href: 'https://mospi.gov.in/sites/default/files/press_release/PR_TUS_25022025.pdf', publisher: 'Ministry of Statistics and Programme Implementation', date: '25 February 2025' },
+  itrules: { label: 'Information Technology (Intermediary Guidelines and Digital Media Ethics Code) Rules 2021, as amended, Rule 3(2)(b)', href: 'https://www.meity.gov.in/static/uploads/2026/02/550681ab908f8afb135b0ad42816a1c9.pdf', publisher: 'Ministry of Electronics and Information Technology', date: 'in force 20 February 2026' },
+  air: { label: 'LS passes Women’s Reservation Bill providing one-third reservation of seats for women', href: 'https://newsonair.gov.in/ls-passes-womens-reservation-bill-providing-one-third-reservation-of-seats-for-women-in-lower-house-and-state-legislative-assemblies', publisher: 'All India Radio News', date: '21 September 2023' },
+  dataful: { label: 'Women in Lok Sabha at 13.8%: slow gains, persistent gaps', href: 'https://insights.dataful.in/articles/women-in-lok-sabha-at-138-slow-gains-persistent-gaps', publisher: 'Dataful (from Election Commission data)', date: '24 April 2026' },
+  president: { label: 'President Droupadi Murmu interacts with Scheduled Tribe women representatives of PRIs', href: 'https://presidentofindia.nic.in/press_releases/president-droupadi-murmu-interacts-scheduled-tribe-women-representatives-panchayati', publisher: 'President’s Secretariat', date: '6 January 2025' },
+  livelaw: { label: 'Lok Sabha rejects Constitution (131st) Amendment Bill 2026', href: 'https://www.livelaw.in/top-stories/lok-sabha-rejects-constitution-131st-bill-2026-on-delimitation-530736', publisher: 'LiveLaw', date: '17 April 2026' },
+  leaflet: { label: 'Supreme Court allows national memorial to commemorate first girls’ school in India', href: 'https://theleaflet.in/supreme-court-allows-national-memorial-to-commemorate-first-girls-school-in-india', publisher: 'The Leaflet', date: '5 November 2023' },
+  ipsos: { label: 'International Women’s Day 2026: global charts', href: 'https://www.ipsos.com/sites/default/files/ct/news/documents/2026-03/IWD%202026%20Global%20Charts%20FINAL.pdf', publisher: 'Ipsos and King’s College London', date: 'March 2026 (fieldwork Dec 2025–Jan 2026)' },
+  kcl: { label: 'Almost a third of Gen Z men agree a wife should obey her husband', href: 'https://www.kcl.ac.uk/news/almost-a-third-of-gen-z-men-agree-a-wife-should-obey-her-husband', publisher: 'King’s College London', date: '5 March 2026' },
+  constitution: { label: 'The Constitution of India (Articles 14, 15 and 21)', href: 'https://www.legislative.gov.in/constitution-of-india/', publisher: 'Legislative Department, Ministry of Law and Justice', date: 'current text' },
+  vishaka: { label: 'Vishaka and Others v State of Rajasthan (1997)', href: 'https://indiankanoon.org/doc/1031794/', publisher: 'Supreme Court of India, via Indian Kanoon', date: '13 August 1997' },
+  behanbox: { label: '“Young feminists today are much more joyful, imaginative, innovative”', href: 'https://behanbox.com/2026/10/22/young-feminists-today-are-much-more-joyful-imaginative-innovative/', publisher: 'BehanBox', date: '22 October 2026' },
+};
+const sources = Object.values(S);
+---
+<Base
+  title={title}
+  description={description}
+  pageType="WebPage"
+  type="article"
+  published={MANIFESTO_DATE}
+  author={SITE.name}
+  tags={['Fourth Wave feminism', 'manifesto', 'India']}
+  breadcrumbs={crumbs}
+  image="/og/manifesto.png"
+  imageAlt="The Fourth Wave Manifesto by Cultural Shock Party: sign it, rewrite it with us"
+  schema={[articleNode({ path, title: 'The Fourth Wave Manifesto', description, image: '/og/manifesto.png', datePublished: MANIFESTO_DATE, authorName: SITE.name, section: 'Manifesto', keywords: ['fourth wave feminism manifesto', 'cultural shock party manifesto', 'feminism India'] })]}
+>
+  <section class="mhero ground-ink grain">
+    <div class="wrap mhero__inner">
+      <Breadcrumbs items={crumbs} />
+      <div class="mhero__top">
+        <div class="mhero__text">
+          <p class="label-row label mhero__label"><span>What we believe</span><span>Version {MANIFESTO_VERSION}</span><span>For consultation</span><span><time datetime={MANIFESTO_DATE}>{MANIFESTO_DATE_LABEL}</time></span></p>
+          <h1 class="mhero__title">The Fourth Wave{' '}<span>Manifesto</span></h1>
+        </div>
+        <div class="mhero__side">
+          <p class="lead mhero__lead">Twelve positions for the next wave of feminism, from Cultural Shock Party. It is version 1.0 and it is open: read it, sign it, and tell us what to change.</p>
+          <div class="mhero__ctas">
+            <a class="btn" href="#sign">Sign the manifesto <span class="arrow" aria-hidden="true">→</span></a>
+            <a class="link-arrow mhero__edit" href="#edit">Suggest an edit <span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
+      </div>
+      <ManifestoPoster />
+    </div>
+  </section>
+
+  <section class="howto" aria-label="How to read this manifesto">
+    <div class="wrap howto__inner">
+      <p class="howto__lede serif">Each clause below has a short argument, the evidence behind it, a link to our research and a link you can send to the group chat. Every number carries its source and its date.</p>
+      <ul class="howto__keys" role="list">
+        <li><span class="howto__chip howto__chip--receipt" aria-hidden="true">✶</span> Receipts: a number, where it comes from, and when</li>
+        <li><span class="howto__chip" aria-hidden="true">→</span> Research: the long version, in our resources</li>
+        <li><span class="howto__chip" aria-hidden="true">#</span> Copy link: share one clause on its own</li>
+      </ul>
+    </div>
+  </section>
+
+  <Clause n={1} title={t(1)} research={[{ href: '/resources/what-is-fourth-wave-feminism/', label: 'What is the Fourth Wave of Feminism?' }]}>
+    <p>Feminism is not a mood, a brand or a month in the calendar. It is a political project: a plan to change who holds power, who does the work and who gets to feel safe.</p>
+    <p>Projects need parts. This one needs ideas worth arguing over, institutions that outlast a trend, memory so we stop starting from zero, and power: in votes, in the rooms where decisions get made, and in culture.</p>
+    <p>That is why Cultural Shock Party exists: to build the intellectual, political and organisational infrastructure of the Fourth Wave.</p>
+    <Fragment slot="aside">
+      <Pic id="in-028-2026-assam-woman-inked-finger-after-voting" tone="red" aspect="4 / 5" position="50% 35%" tape="tr" tilt={1.5} caption="Dimoria, Sonapur, Assam, 9 April 2026. A woman shows the ink mark on her finger after voting in the Assam Assembly election." alt="A smiling woman under a polka-dot umbrella holds up a finger marked with indelible voting ink." />
+    </Fragment>
+  </Clause>
+
+  <Clause n={2} title={t(2)} research={[{ href: '/resources/feminism-myths-and-receipts/', label: 'Ten myths about feminism, and the receipts' }]}>
+    <p>We start with what is possible, because it is. Laws, councils and families have changed in living memory, usually because ordinary people refused to accept “that’s just how it is”.</p>
+    <p>And we prove what we say. Every number on this site comes with its source and its date, like a receipt. When we get something wrong, we correct it in public and say what changed.</p>
+    <p>Doom makes people switch off. We would rather switch them on.</p>
+    <Fragment slot="aside">
+      <Receipt figure="42%" label="of 18 to 24-year-olds sometimes or often avoid the news, mostly because it feels depressing, irrelevant or hard to follow." source="Reuters Institute, Understanding Young News Audiences" href={S.reuters.href} date="Mar 2026" tilt={-1.5} />
+      <Pic id="in-053-greater-noida-student-studying-in-library" tone="ink" aspect="3 / 2" alt="A college student reads closely at a library table." />
+    </Fragment>
+  </Clause>
+
+  <Clause n={3} title={t(3)} research={[{ href: '/resources/intersectional-feminism-explained/', label: 'Intersectional feminism, explained' }]}>
+    <p>Gender never travels alone. Caste, class, religion, region, language, disability, sexuality and gender identity shape every life, and every barrier in it.</p>
+    <p>A feminism that only works for the women who already have the most is not finished. Ours is intersectional or it is nothing: we ask who is missing from the room, from the data and from the demand, and we fix it rather than apologise for it.</p>
+    <Fragment slot="aside">
+      <Pic id="2018-london-feminists-unite-against-racism" tone="ink" aspect="4 / 5" position="38% 50%" tape="tl" tilt={-1.5} caption="London Women’s March, 21 January 2018: “No one is free till every one is free.”" alt="Two smiling women under umbrellas hold hand-lettered placards reading No one is free till every one is free, and Feminists unite against racism." />
+    </Fragment>
+  </Clause>
+
+  <Clause n={4} title={t(4)} ground="ink" research={[{ href: '/case-studies/reclaim-the-night-bengal-2024/', label: 'Reclaim the Night: Bengal, August 2024' }, { href: '/case-studies/delhi-2012-justice-verma/', label: 'Delhi 2012 and the Justice Verma Committee' }]}>
+    <p>Stop telling girls to stay home. Every “be careful” hands the job to the person at risk. We want the opposite: streets, buses, campuses, workplaces, police stations and platforms that are built to be safe.</p>
+    <p>Women in India have already shown what that demand looks like. After a doctor was raped and murdered on duty at Kolkata’s RG Kar Medical College in August 2024, women across West Bengal marched at midnight to reclaim the night.</p>
+    <Fragment slot="aside">
+      <Receipt figure="11:55 pm" label="on 14 August 2024: the minute thousands of women began marching across West Bengal to reclaim the night." source="The Tribune (PTI)" href={S.tribune.href} date="15 Aug 2024" tone="marigold" tilt={1.5} />
+      <Pic id="in-010-2024-kolkata-protest-under-biswa-bangla-gate" tone="red" aspect="4 / 3" caption="New Town, Kolkata, 14 August 2024: the first night of the Reclaim the Night protests." alt="A huge night crowd gathers beneath the curved steel arch of the Biswa Bangla Gate." />
+    </Fragment>
+  </Clause>
+
+  <Clause n={5} title={t(5)} research={[{ href: '/resources/care-is-work/', label: 'Care is work: India’s 289-minute gap' }]}>
+    <p>Cooking, cleaning, fetching, caring for children and elders: this work keeps every household and every economy running. Most of it is unpaid, and most of it is done by women.</p>
+    <p>Count it, share it, fund it. Count it in the national data, as the Time Use Survey does. Share it at home. And fund it in public budgets, with crèches, care leave and decent pay for care workers.</p>
+    <Fragment slot="aside">
+      <Receipt figure="289" label="minutes a day: the time women who do unpaid domestic work spend on it. Men who do it spend 88." note="People aged 6 and over, India, January to December 2024." source="MoSPI, Time Use Survey 2024, Table 2" href={S.tus.href} date="Feb 2025" tone="pink" tilt={-1.5} />
+      <Pic id="in-021-2020-tikri-women-making-rotis-langar" tone="marigold" aspect="3 / 2" caption="Tikri border, 27 December 2020. Women make rotis for the langar, the community kitchen, at the farmers’ protest." alt="Women in headscarves sit together on the ground rolling and cooking rotis." />
+    </Fragment>
+  </Clause>
+
+  <Clause n={6} title={t(6)} research={[{ href: '/resources/safe-online-toolkit/', label: 'Safe online: deepfakes, doxxing and image-based abuse' }]}>
+    <p>Bodily autonomy means the same thing offline and online: nobody decides for you. That covers consent, reproductive rights and the right to control your own image.</p>
+    <p>Deepfakes and image-based abuse are violence, not pranks. The rules are catching up: platforms in India must now take down intimate or morphed images within hours of a complaint. We want that enforced every time, and the people who make and spread them held to account.</p>
+    <Fragment slot="aside">
+      <Receipt figure="2 hrs" label="the time a platform in India has to remove intimate, nude or morphed images of a person after a complaint. It used to be 24 hours." source="MeitY, IT Rules 2021 as amended, Rule 3(2)(b)" href={S.itrules.href} date="Feb 2026" tilt={1.2} />
+      <Pic id="in-038-2019-kolkata-pride-workshop-my-body-my-choice" tone="red" aspect="4 / 3" position="50% 62%" caption="Kolkata Rainbow Pride Walk poster workshop, 21 December 2019: “My Body / My Choice”." alt="A young man holds up a hand-drawn poster of a winged figure, lettered My Body, My Choice." />
+    </Fragment>
+  </Clause>
+
+  <Clause n={7} title={t(7)} wideAside research={[{ href: '/resources/womens-reservation-act-explained/', label: 'The Women’s Reservation Act, explained' }]}>
+    <p>In September 2023 the Lok Sabha voted 454 to 2 to reserve one-third of seats in the Lok Sabha and the state assemblies for women. It became law. But the seats only arrive after a census and a redrawing of constituencies, and a 2026 attempt to bring them forward failed. So far, no seat has been reserved for women under it.</p>
+    <p>We already know reservation works. Since 1993, at least a third of panchayat seats have been reserved for women, and by January 2025 about 14 lakh women were elected panchayat members. Implement the 2023 law. Then keep going.</p>
+    <Fragment slot="aside">
+      <div class="receipts">
+        <Receipt figure="454–2" label="the Lok Sabha vote for one-third reservation for women, 20 September 2023." source="All India Radio News" href={S.air.href} date="Sep 2023" tilt={-1.5} />
+        <Receipt figure="13.6%" label="of the MPs elected to the Lok Sabha in 2024 were women: 74 of 543." note="75 (13.8%) after the Wayanad by-election." source="Dataful, from Election Commission data" href={S.dataful.href} date="Apr 2026" tone="ink" tilt={1} />
+        <Receipt figure="46%" label="of elected panchayat members are women, about 14 lakh in all." source="President’s Secretariat" href={S.president.href} date="Jan 2025" tone="marigold" tilt={-0.6} />
+      </div>
+    </Fragment>
+  </Clause>
+
+  <Ticker items={['Halfway there', 'Still with us?', 'Sign it at the end', 'Or argue with it']} tone="red" />
+
+  <Clause n={8} title={t(8)} research={[{ href: '/resources/indian-feminists-history-forgot/', label: '12 Indian feminists your textbooks skipped' }, { href: '/memory/', label: 'Public memory: the timeline' }]}>
+    <p>From Savitribai Phule and Fatima Sheikh, who taught girls in nineteenth-century Pune, to the women who reclaimed the night in Bengal in 2024: every generation of Indian feminists built on the last.</p>
+    <p>Movements lose when they forget. We keep the record, with names, dates and sources, so nobody has to start from zero again.</p>
+    <Fragment slot="aside">
+      <Receipt figure="1848" label="the year Savitribai and Jyotirao Phule opened a school for girls at Bhide Wada in Pune. In 2023 the Supreme Court cleared the way for a memorial there." source="The Leaflet" href={S.leaflet.href} date="Nov 2023" tone="paper" tilt={-1.2} />
+      <Pic id="in-024-2017-rajni-tilak-savitribai-phule-poems" tone="green" aspect="4 / 5" position="50% 40%" caption="Pune, 20 December 2017. Rajni Tilak holds her translation of Savitribai Phule’s poems." alt="Rajni Tilak, a woman in glasses and a sari, holds a book with Savitribai Phule’s portrait on the cover." />
+    </Fragment>
+  </Clause>
+
+  <Clause n={9} title={t(9)} ground="pink" research={[{ href: '/resources/fourth-wave-reading-list/', label: 'The Fourth Wave reading (and watching) list' }, { href: '/resources/is-gen-z-feminist/', label: 'Is Gen Z feminist?' }]}>
+    <p>Memes, films, songs, books, cricket commentary and the family group chat decide what feels normal long before a law does.</p>
+    <p>That is where the gap is. Plenty of people already like the word “feminist”; the everyday habits have not caught up. So we make culture on purpose: posters, explainers, reels, zines and jokes that make equality feel normal.</p>
+    <Fragment slot="aside">
+      <Receipt figure="68%" label="of urban, online Indians surveyed call themselves feminists. Yet 52% agree that “a wife should always obey her husband”." note="Ipsos says the India sample is urban and online, not the whole country." source="Ipsos and King’s College London, IWD 2026" href={S.ipsos.href} date="Mar 2026" tone="paper" tilt={1.2} />
+      <Pic id="in-036-2019-bhubaneswar-pride-ek-ladki-ko-dekha-placard" tone="marigold" aspect="4 / 3" position="55% 40%" caption="Bhubaneswar Pride Parade, 4 August 2019: a hand-painted “Ek Ladki Ko Dekha To Aisa Laga” placard." alt="A smiling marcher holds a hand-painted placard with hearts, reading Ek Ladki Ko Dekha To Aisa Laga." />
+    </Fragment>
+  </Clause>
+
+  <Clause n={10} title={t(10)} research={[{ href: '/resources/boys-men-and-the-manosphere/', label: 'Boys, men and the manosphere: a guide for allies' }]}>
+    <p>This is not a fight against boys. It is a fight against the rules that box everyone in, including the ones that tell boys not to cry, not to care and not to ask for help.</p>
+    <p>The manosphere is an industry: it sells loneliness and resentment, then sells the cure. We offer something better: friendship, equality and freedom from rigid masculinity. Most young men are already closer to us than to the influencers.</p>
+    <Fragment slot="aside">
+      <Receipt figure="69%" label="of Gen Z men across 29 countries do not agree that “a wife should always obey her husband”." source="King’s College London and Ipsos" href={S.kcl.href} date="Mar 2026" tone="ink" tilt={-1.4} />
+      <Pic id="in-060-new-delhi-college-students-laughing-together" tone="green" aspect="3 / 2" alt="Young women and men laugh together around a table covered in books." />
+    </Fragment>
+  </Clause>
+
+  <Clause n={11} title={t(11)} research={[{ href: '/case-studies/bhanwari-devi-vishaka-posh/', label: 'Bhanwari Devi, Vishaka and the POSH Act' }]}>
+    <p>The Constitution already promises equality before the law (Article 14), no discrimination on grounds of sex (Article 15), and life and personal liberty (Article 21), which the courts have read to include the right to live with dignity.</p>
+    <p>We hold every institution to that promise: parliaments, police, courts, universities, employers and platforms. In public, with records: letters, promise trackers and documents anyone can check. We criticise laws, systems and institutions, never voters.</p>
+    <p>It works. Bhanwari Devi’s fight led the Supreme Court, on 13 August 1997, to lay down India’s first binding rules against sexual harassment at work.</p>
+    <Fragment slot="aside">
+      <div class="articles" aria-label="The articles we hold institutions to">
+        <p class="label articles__head"><span>The Constitution of India</span><span>Part III</span></p>
+        <ul role="list">
+          <li><span class="articles__n">14</span><span class="articles__t">Equality before the law</span></li>
+          <li><span class="articles__n">15</span><span class="articles__t">No discrimination on grounds of religion, race, caste, sex or place of birth</span></li>
+          <li><span class="articles__n">21</span><span class="articles__t">Protection of life and personal liberty</span></li>
+        </ul>
+        <p class="articles__src"><span class="label">Source</span> <a href={S.constitution.href} rel="noopener">Legislative Department, Constitution of India</a></p>
+      </div>
+      <Pic id="in-051-delhi-central-avenue-autos-rashtrapati-bhavan" tone="ink" aspect="3 / 2" caption="New Delhi: the road to Rashtrapati Bhavan." alt="Auto-rickshaws drive up a wide avenue towards domed government buildings." credit={false} />
+    </Fragment>
+  </Clause>
+
+  <Clause n={12} title={t(12)} research={[{ href: '/resources/how-to-join-or-start-a-feminist-group/', label: 'How to join a feminist movement, or start one' }, { href: '/resources/protest-safety-india/', label: 'How to show up safely' }]}>
+    <p>Peaceful, lawful, creative, collective. We march, sing, paint, read and argue in the open, and we put our name on what we publish.</p>
+    <p>Joy is not a distraction from serious politics; it is how movements keep going. In October 2026, Urvashi Butalia, a veteran of India’s 1970s and 80s women’s movement, told BehanBox that today’s young protesters are more innovative, joyful and imaginative, and that they use humour and satire.</p>
+    <p>Shock the culture, not people.</p>
+    <Fragment slot="aside">
+      <Pic id="in-042-kolkata-pride-young-women-under-rainbow-flag" tone="pink" aspect="4 / 5" position="40% 50%" tape="both" tilt={1.5} caption="A pride march in Kolkata." alt="Young women laugh and raise their hands under a giant flag held over the crowd." credit={false} />
+    </Fragment>
+  </Clause>
+
+  <section class="close ground-red grain" aria-label="Closing line">
+    <div class="wrap close__inner">
+      <PullQuote quote="Shock the culture, not people." by="Cultural Shock Party" role="The Fourth Wave Manifesto, clause 12" size="l" />
+      <Stamp text={`Version ${MANIFESTO_VERSION}`} sub="Open for consultation" color="ink" tilt={-8} />
+    </div>
+  </section>
+
+  <!-- Sign -->
+  <section class="section ground-green grain signsec" id="sign" aria-labelledby="sign-title">
+    <div class="wrap signsec__grid">
+      <div class="signsec__text">
+        <p class="label section-label"><span class="num">13</span> / Your turn</p>
+        <h2 class="h2" id="sign-title">Sign the manifesto</h2>
+        <p class="lead">Signing says: I agree with where this is going, and I want to be counted. It is version 1.0, so you don’t have to agree with every comma. Tell us what to change below.</p>
+        <ul class="signsec__points" role="list">
+          <li>Takes under a minute. Only your age band is required.</li>
+          <li>We never publish names without asking first.</li>
+          <li>Under 18? Read it, share it, argue about it. That counts.</li>
+        </ul>
+      </div>
+      <div class="formcard">
+        <SignForm />
+      </div>
+    </div>
+  </section>
+
+  <!-- Edit -->
+  <section class="section ground-deep editsec" id="edit" aria-labelledby="edit-title">
+    <div class="wrap editsec__grid">
+      <div class="editsec__text">
+        <p class="label section-label"><span class="num">14</span> / Rewrite it with us</p>
+        <h2 class="h2" id="edit-title">Suggest an edit</h2>
+        <p class="lead">Spotted a gap, a better word, a group we left out or a source we should read? This manifesto gets better when people argue with it.</p>
+        <p class="editsec__promise">We read every suggestion. When we publish the next version, we will say what changed and why.</p>
+        <span class="editsec__stamp" aria-hidden="true"><Stamp text="Open draft" sub="Edits welcome" color="red" tilt={-6} /></span>
+      </div>
+      <div class="formcard formcard--light">
+        <EditForm />
+      </div>
+    </div>
+  </section>
+
+  <section class="section--tight srcsec" aria-label="Sources and sharing">
+    <div class="wrap wrap--narrow">
+      <div id="share"><ShareBar title="The Fourth Wave Manifesto" path={path} text="Read (and sign) the Fourth Wave Manifesto by Cultural Shock Party" /></div>
+      <Sources sources={sources} title="How we know: sources for the receipts" />
+      <p class="small srcsec__note">Version {MANIFESTO_VERSION}, published {MANIFESTO_DATE_LABEL} by Cultural Shock Party, for consultation. Statistics were checked against their sources on {MANIFESTO_DATE_LABEL}. Legal references are information, not legal advice.</p>
+    </div>
+  </section>
+
+  <JoinBand ground="red" secondary={{ label: 'About Cultural Shock Party', href: '/about/' }} placard="Sign it. Share it." />
+</Base>
+
+<style>
+  .section-label { display: flex; gap: .3em; padding-top: 12px; border-top: 3px solid var(--line); }
+  .num { color: var(--red-ink); font-weight: 900; }
+  :global(.ground-green) .num, :global(.ground-ink) .num { color: var(--marigold); }
+
+  /* hero + poster */
+  .mhero { padding-block: clamp(24px, 4vw, 44px) clamp(56px, 8vw, 110px); overflow: hidden; }
+  .mhero :global(.crumbs a) { color: var(--paper); }
+  .mhero__inner { position: relative; z-index: 2; display: grid; gap: clamp(28px, 4vw, 52px); }
+  .mhero__top { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 28px clamp(28px, 5vw, 72px); align-items: end; }
+  .mhero__label { color: var(--coral); }
+  .mhero__label > * + *::before { color: var(--paper); }
+  .mhero__label span + span { color: var(--paper); }
+  .mhero__title { margin-top: 18px; font-weight: 900; font-stretch: 62%; text-transform: uppercase; line-height: .8; letter-spacing: -.02em; font-size: clamp(3.6rem, 11.5vw, 10.5rem); }
+  .mhero__title span { display: block; color: var(--coral); }
+  .mhero__side { display: grid; gap: 24px; padding-bottom: 10px; }
+  .mhero__lead { color: var(--paper); }
+  .mhero__ctas { display: flex; flex-wrap: wrap; gap: 16px 26px; align-items: center; }
+  .mhero .btn { --btn-shadow: var(--paper); }
+  .mhero__edit { color: var(--paper); border-color: var(--coral); }
+  .mhero__edit:hover { color: var(--coral); }
+
+  /* how to read */
+  .howto { padding-block: clamp(28px, 4vw, 44px); border-bottom: 1px solid var(--line); }
+  .howto__inner { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 20px 48px; align-items: center; }
+  .howto__lede { font-size: clamp(1.15rem, 1.6vw, 1.35rem); line-height: 1.45; max-width: 52ch; }
+  .howto__keys { display: grid; gap: 10px; font-size: .95rem; }
+  .howto__keys li { display: flex; gap: 12px; align-items: center; }
+  .howto__chip { display: grid; place-items: center; flex: none; width: 32px; height: 32px; border: 2px solid var(--ink); font-weight: 900; }
+  .howto__chip--receipt { background: var(--ink); color: var(--paper); }
+
+  /* clause asides */
+  .receipts { display: grid; gap: 22px; }
+  .articles { padding: 18px 20px 20px; background: var(--paper-light); border: 2px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); }
+  .articles__head { display: flex; justify-content: space-between; gap: 10px; padding-bottom: 8px; border-bottom: 3px double var(--ink); color: var(--red-ink); }
+  .articles ul { display: grid; }
+  .articles li { display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 12px; align-items: center; padding-block: 12px; border-bottom: 1px solid var(--line-soft); }
+  .articles__n { font-weight: 900; font-stretch: 62%; font-size: 3.2rem; line-height: .8; color: var(--red); }
+  .articles__n::before { content: 'Art.'; display: block; font-size: .7rem; font-stretch: 100%; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .articles__t { font-weight: 700; line-height: 1.3; }
+  .articles__src { margin-top: 12px; font-size: .82rem; }
+
+  /* close */
+  .close { padding-block: clamp(3.5rem, 8vw, 6rem); border-top: var(--rule); }
+  .close__inner { position: relative; z-index: 2; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 30px; }
+  .close :global(.pull::before) { color: var(--paper-light); }
+  .close :global(.stamp) { --c: var(--paper-light); font-size: 1.7rem; }
+
+  /* sign + edit */
+  .signsec__grid, .editsec__grid { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: clamp(32px, 6vw, 90px); align-items: start; }
+  .signsec__text, .editsec__text { display: grid; gap: 20px; position: sticky; top: 96px; }
+  .signsec__points { display: grid; gap: 10px; margin-top: 4px; }
+  .signsec__points li { padding-left: 28px; position: relative; font-weight: 600; }
+  .signsec__points li::before { content: '✶'; position: absolute; left: 0; color: var(--marigold); }
+  .formcard { padding: clamp(20px, 3vw, 36px); background: var(--paper-light); color: var(--ink); border: 3px solid var(--ink); box-shadow: 10px 10px 0 var(--ink); --text: var(--ink); --ink-soft: #5A554D; --muted: #6B655C; --line: var(--ink); }
+  .formcard :global(a) { color: var(--red-ink); }
+  .formcard :global(.input), .formcard :global(.select), .formcard :global(.textarea) { border-color: var(--ink); }
+  .editsec__promise { font-family: var(--font-serif); font-style: italic; font-size: 1.15rem; max-width: 40ch; }
+  .editsec__stamp { justify-self: start; font-size: 1.7rem; margin-top: 8px; }
+
+  /* sources */
+  .srcsec__note { margin-top: 22px; color: var(--muted); }
+
+  @media (max-width: 960px) {
+    .mhero__top, .howto__inner, .signsec__grid, .editsec__grid { grid-template-columns: 1fr; }
+    .signsec__text, .editsec__text { position: static; }
+  }
+
+  /* print: the whole manifesto prints as a clean document; "Print the poster" prints only the poster */
+  @media print {
+    .mhero, .close, .signsec, .editsec { background: #fff !important; color: #000 !important; }
+    .mhero__ctas, .howto, .signsec, .editsec, .srcsec :global(.share), :global(.join-band), :global(.ticker), :global(.torn), :global(.crumbs), :global(.poster__actions) { display: none !important; }
+    .mhero__title span { color: #000; }
+    .mhero.grain::after { display: none !important; }
+    .mhero { padding: 0 !important; }
+    :global(html.print-poster main > *:not(.mhero)) { display: none !important; }
+    :global(html.print-poster .mhero__top) { display: none !important; }
+    :global(html.print-poster .site-footer) { display: none !important; }
+  }
+</style>

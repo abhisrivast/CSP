@@ -1,0 +1,47 @@
+---
+// Closing call to action used at the end of most pages. One primary CTA, one no-data alternative.
+import Placard from '../ui/Placard.astro';
+export interface Props {
+  title?: string;
+  text?: string;
+  primary?: { label: string; href: string };
+  secondary?: { label: string; href: string };
+  placard?: string;
+  ground?: 'green' | 'red' | 'ink';
+}
+const {
+  title = 'Bring a friend. Yes, boys too.',
+  text = 'Joining is free and takes a minute. Start small: read, share, sign the manifesto. Go big when you are ready.',
+  primary = { label: 'Join the movement', href: '/join/' },
+  secondary = { label: 'Read the manifesto', href: '/manifesto/' },
+  placard = 'The next wave is us',
+  ground = 'green',
+} = Astro.props;
+---
+<section class:list={['join-band', `ground-${ground}`, 'grain']}>
+  <div class="wrap join-band__inner">
+    <div class="join-band__text">
+      <h2 class="h2">{title}</h2>
+      <p class="lead">{text}</p>
+      <div class="join-band__ctas">
+        <a class="btn btn--paper" href={primary.href}>{primary.label} <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="link-arrow" href={secondary.href}>{secondary.label} <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+    <div class="join-band__art" aria-hidden="true">
+      <Placard text={placard} color="marigold" size="l" tilt={-6} stick decorative />
+    </div>
+  </div>
+</section>
+
+<style>
+  .join-band { padding-block: clamp(3.5rem, 8vw, 6rem); position: relative; }
+  .join-band__inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: center; }
+  .join-band__text { display: grid; gap: 22px; }
+  .join-band__text .h2 { max-width: 14ch; }
+  .join-band__ctas { display: flex; flex-wrap: wrap; gap: 18px 28px; align-items: center; }
+  .join-band .link-arrow { color: var(--paper); border-color: var(--marigold); }
+  .join-band__art { display: grid; place-items: center; }
+  .join-band__art :global(.placard__text) { max-width: 9ch; }
+  @media (max-width: 760px) { .join-band__inner { grid-template-columns: 1fr; } .join-band__art { display: none; } }
+</style>

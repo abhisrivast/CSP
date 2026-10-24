@@ -1,0 +1,53 @@
+---
+// The CSP theory of change as a four-stage machine: Ideas → Research → Public consciousness → Collective action.
+export interface Props { compact?: boolean; heading?: 'h2' | 'h3' }
+const { compact = false, heading: H = 'h3' } = Astro.props;
+
+const STAGES = [
+  { n: '01', name: 'Ideas', verb: 'We think', text: 'Essays, manifestos and political theory that ask what the Fourth Wave should demand.', out: 'Arguments' },
+  { n: '02', name: 'Research', verb: 'We prove', text: 'Evidence, data and investigations that test those ideas against real lives and real institutions.', out: 'Receipts' },
+  { n: '03', name: 'Public consciousness', verb: 'We spread', text: 'Culture, media, memory and explainers that move findings out of reports and into group chats.', out: 'Common sense' },
+  { n: '04', name: 'Collective action', verb: 'We act', text: 'Street politics and institutional accountability that turn shared understanding into organised power.', out: 'Change' },
+];
+---
+<ol class:list={['engine', { 'engine--compact': compact }]} role="list">
+  {STAGES.map((s, i) => (
+    <li class="engine__stage">
+      <p class="label engine__n"><span>{s.n}</span> {s.verb}</p>
+      <H class="engine__name">{s.name}</H>
+      {!compact && <p class="engine__text">{s.text}</p>}
+      <p class="engine__out label">Output: <span>{s.out}</span></p>
+      {i < STAGES.length - 1 && <span class="engine__arrow" aria-hidden="true">→</span>}
+    </li>
+  ))}
+</ol>
+
+<style>
+  .engine { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 3px solid var(--line); border-bottom: 3px solid var(--line); counter-reset: s; padding: 0; list-style: none; }
+  .engine__stage { position: relative; display: grid; align-content: start; gap: 12px; padding: 24px clamp(16px, 2vw, 28px) 28px; border-left: 1px solid var(--line); }
+  .engine__stage:first-child { border-left: 0; padding-left: 0; }
+  .engine__n span { color: var(--red); font-weight: 900; }
+  :global(.ground-ink) .engine__n span, :global(.ground-green) .engine__n span { color: var(--coral); }
+  .engine__name { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(1.9rem, 2.9vw, 2.75rem); line-height: .88; min-height: 1.8em; hyphens: manual; }
+  .engine__text { color: var(--ink-soft); font-size: .98rem; line-height: 1.45; }
+  .engine__out { margin-top: auto; padding-top: 10px; }
+  .engine__out span { background: var(--marigold); color: var(--ink); padding: .15em .4em; }
+  .engine__arrow {
+    position: absolute; right: -19px; top: 26px; z-index: 2; display: grid; place-items: center; width: 38px; height: 38px;
+    background: var(--red-ink); color: var(--paper-light); border-radius: 50%; font-weight: 900; font-size: 1.2rem;
+  }
+  .engine--compact .engine__name { min-height: 0; font-size: clamp(1.6rem, 2.6vw, 2.4rem); }
+  @media (max-width: 900px) {
+    .engine { grid-template-columns: 1fr 1fr; }
+    .engine__stage:nth-child(3) { border-left: 0; padding-left: 0; }
+    .engine__stage:nth-child(n+3) { border-top: 1px solid var(--line); }
+    .engine__stage:nth-child(2) .engine__arrow { display: none; }
+  }
+  @media (max-width: 560px) {
+    .engine { grid-template-columns: 1fr; }
+    .engine__stage { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); }
+    .engine__stage:first-child { border-top: 0; }
+    .engine__name { min-height: 0; }
+    .engine__arrow, .engine__stage:nth-child(2) .engine__arrow { display: grid; right: 0; top: auto; bottom: -19px; transform: rotate(90deg); }
+  }
+</style>

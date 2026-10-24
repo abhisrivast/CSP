@@ -1,0 +1,491 @@
+---
+import Base from '../../layouts/Base.astro';
+import '../../components/about/contrast-fixes.css';
+import AboutHero from '../../components/about/AboutHero.astro';
+import Pic from '../../components/about/Pic.astro';
+import FounderCard from '../../components/about/FounderCard.astro';
+import BadgeAnatomy from '../../components/about/BadgeAnatomy.astro';
+import SectionHead from '../../components/ui/SectionHead.astro';
+import Engine from '../../components/blocks/Engine.astro';
+import Placard from '../../components/ui/Placard.astro';
+import Stamp from '../../components/ui/Stamp.astro';
+import Annotation from '../../components/ui/Annotation.astro';
+import Ticker from '../../components/ui/Ticker.astro';
+import TornEdge from '../../components/ui/TornEdge.astro';
+import Faq from '../../components/ui/Faq.astro';
+import JoinBand from '../../components/blocks/JoinBand.astro';
+import { SITE, FOUNDER } from '../../data/site';
+import { founderNode } from '../../lib/schema';
+
+const title = 'About us: a Fourth Wave feminist movement';
+const description =
+  'Cultural Shock Party is a Fourth Wave feminist movement founded in India in 2026 by Rubby Singh. What the name means, how we work and who funds us (no one yet).';
+const crumbs = [{ name: 'About', href: '/about/' }];
+
+const principles = [
+  { n: '01', title: 'Hope first, receipts always.', text: 'We open with what is possible, then show our working. Every number on this site carries its source and its date, like a receipt. When we get something wrong, we correct it in public.', mark: 'stamp', mtext: 'Sourced' },
+  { n: '02', title: 'Intersectional, or nothing.', text: 'Gender never travels alone. Caste, class, religion, region, language, disability, sexuality and gender identity shape every life, so they shape every demand we make. We ask who is missing before we ask who agrees.', mark: 'placard' },
+  { n: '03', title: 'Independent.', text: 'No political party, government, company or foreign funder directs us. We criticise laws, systems and institutions, never voters.', mark: 'stamp', mtext: 'No strings' },
+  { n: '04', title: 'In public.', text: 'Our manifesto is open for edits. Our decisions will be published on this site. If we ever accept money, you will see who gave it.', mark: 'tape', mtext: 'Open book' },
+  { n: '05', title: 'Joyful.', text: 'Peaceful, lawful, creative and good company. Movements that are fun to be part of last longer. Shock the culture, not people.', mark: 'sticker', mtext: 'Joy is a tactic' },
+];
+
+const commitments = [
+  { h: 'Independent of every party, government, company and foreign entity.', p: 'No political party, candidate, government, corporation or foreign entity directs or funds Cultural Shock Party.' },
+  { h: 'A movement, not a registered political party.', p: '“Party” is in our name, not on a ballot. We are not registered with the Election Commission of India as a political party, and we never claim to be.' },
+  { h: 'We don’t contest elections or endorse candidates.', p: 'We will not ask you to vote for CSP or for anyone. If that ever changes, we will say so publicly before it happens.' },
+  { h: 'Your data never goes to a party.', p: 'We never share supporter data with any political party, candidate or advertiser. Not for money, not for favours, not ever.' },
+  { h: 'Volunteer-run, and no donations yet.', p: 'Cultural Shock Party is run by volunteers and does not accept donations, which is why there is no Donate button on this site.' },
+  { h: 'If that changes, we publish who funds us.', p: 'Before we accept a single rupee, we will publish a funding policy on this page, and then who gives, by category and total.' },
+  { h: 'No foreign money.', p: 'We will not accept money or in-kind support from foreign citizens, organisations or governments. Under India’s Foreign Contribution (Regulation) Act 2010, political parties and organisations of a political nature may not accept foreign contributions.' },
+];
+
+const steps = [
+  { n: '01', h: 'Draft', p: 'Version 1.0 of the manifesto is published: twelve positions, every claim sourced.', when: '24 Oct 2026', state: 'done' },
+  { n: '02', h: 'Consult', p: 'Anyone can sign it, and anyone can suggest an edit to any clause.', when: 'Now', state: 'now' },
+  { n: '03', h: 'Decide', p: 'We weigh every suggestion against the evidence and the mission, not against who sent it.', when: 'Next', state: 'next' },
+  { n: '04', h: 'Publish', p: 'We publish what changed and why, together with the next version.', when: 'Next', state: 'next' },
+];
+
+const story = [
+  { when: '2026', h: 'Founded in India', p: `${FOUNDER.name} starts Cultural Shock Party, a Fourth Wave feminist movement.` },
+  { when: '24 Oct 2026', h: 'Manifesto v1.0', p: 'Twelve positions, published for consultation.', href: '/manifesto/', link: 'Read the manifesto' },
+  { when: '24 Oct 2026', h: 'This website', p: 'Goes live, with a source and a date on every number.' },
+];
+---
+<Base
+  title={title}
+  description={description}
+  pageType="AboutPage"
+  breadcrumbs={crumbs}
+  image="/og/about.png"
+  imageAlt="About Cultural Shock Party: who we are"
+  schema={[founderNode()]}
+>
+  <AboutHero
+    label="About us"
+    meta={['Founded 2026', 'India']}
+    crumbs={crumbs}
+    photo="in-022-2021-tikri-iwd-stage-woman-addressing-crowd"
+    tone="red"
+    position="50% 45%"
+    caption="A woman addresses the crowd from the protest stage at the Tikri border, International Women’s Day, 7 March 2021."
+    alt="Seen from behind, a woman on a stage spreads her arms wide to a huge crowd filling the street below a flyover."
+    stamp={{ text: 'Est. 2026', sub: 'Fourth Wave' }}
+    lead="A Fourth Wave feminist movement, founded in India in 2026, for a global generation. Hope first. Receipts always."
+  >
+    <Fragment slot="title"><span class="l">About</span>{' '}<span class="l">Cultural</span>{' '}<span class="l"><span class="red">Shock</span> Party</span></Fragment>
+    <nav class="jump" aria-label="On this page">
+      <ul role="list">
+        <li><a href="#what">What it is</a></li>
+        <li><a href="#badge">The badge</a></li>
+        <li><a href="#how">How we work</a></li>
+        <li><a href="#who">Who we are</a></li>
+        <li><a href="#independence">Independence &amp; funding</a></li>
+      </ul>
+    </nav>
+  </AboutHero>
+
+  <!-- 01 What is CSP + the name -->
+  <section class="section what" id="what" aria-labelledby="what-title">
+    <div class="wrap what__grid">
+      <div class="what__main">
+        <p class="label section-label"><span class="num">01</span> / The short answer</p>
+        <h2 class="h2 what__title" id="what-title">What is Cultural Shock Party?</h2>
+        <p class="what__mission serif">{SITE.mission}</p>
+        <p class="what__plain">In plain words: we’re building the Fourth Wave of Feminism, with the ideas, the evidence, the culture and the organised people it needs. We’re new. Here’s what we’re building first, and the receipts as we go.</p>
+        <p><a class="link-arrow" href="/manifesto/">Read what we believe: the manifesto <span aria-hidden="true">→</span></a></p>
+      </div>
+
+      <aside class="decode" aria-labelledby="decode-title">
+        <p class="label decode__label" id="decode-title">The name, decoded</p>
+        <dl>
+          <div class="decode__entry">
+            <dt><span class="decode__word">cul·tur·al shock</span> <span class="decode__pos">noun</span></dt>
+            <dd>The jolt that changes what a society treats as normal. A protest, a law, a film or a joke, after which yesterday’s “normal” suddenly looks strange.</dd>
+          </div>
+          <div class="decode__entry">
+            <dt><span class="decode__word">pos·i·tive shock</span> <span class="decode__pos">ours</span></dt>
+            <dd>The kind we want: <strong>awakening, not anger</strong>. Look at the badge below. A woman breaks a chain, and a crowd stands behind her.</dd>
+          </div>
+          <div class="decode__entry">
+            <dt><span class="decode__word">party</span> <span class="decode__pos">not that kind</span></dt>
+            <dd>Cultural Shock Party is a movement. It does not contest elections or endorse candidates. <a href="#independence">Independence &amp; funding</a></dd>
+          </div>
+        </dl>
+        <div class="decode__sticker" aria-hidden="true"><Placard text="A positive shock" shape="sticker" color="marigold" size="m" tilt={6} decorative /></div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Wall: Indian jolts we learn from -->
+  <section class="wall ground-deep grain" aria-labelledby="wall-title">
+    <div class="wrap wall__inner">
+      <div class="wall__grid">
+        <header class="wall__head">
+          <p class="label">Jolts we learn from</p>
+          <h2 class="h2" id="wall-title">Every generation gets its shock</h2>
+          <p class="wall__note">None of these was ours: Cultural Shock Party was founded in 2026 and was not part of these events. We study them so the next one goes further.</p>
+        </header>
+        <div class="wall__item wall__item--a">
+          <Pic id="2012-delhi-raisina-hill-protest-crowd" tone="red" aspect="4 / 3" position="100% 50%" tape="tl" tilt={-1.2} caption="Raisina Hill, New Delhi, 22 December 2012. Students protest rising violence against women after the Delhi gang rape." alt="A dense crowd of students fills the steps and road below a sandstone government building on Raisina Hill; a national flag flies above them." sizes="(min-width: 900px) 52vw, 92vw" widths={[480, 720, 960]} />
+          <p class="wall__fact">By April 2013, a new law added offences such as stalking, voyeurism and acid attack. <a href="https://prsindia.org/articles-by-prs-team/the-criminal-laws-amendment-related-to-sexual-offences" rel="noopener">PRS Legislative Research</a></p>
+        </div>
+        <div class="wall__item wall__item--b">
+          <Pic id="in-013-2009-bengaluru-take-back-the-night-placards" tone="marigold" aspect="4 / 5" position="40% 50%" tape="tr" tilt={1.6} caption="Church Street, Bengaluru, 8 March 2009. A Take Back the Night march; students of Srishti made the posters." alt="Women at night on a city street hold hand-made posters reading Stop violence against women." sizes="(min-width: 900px) 34vw, 92vw" />
+        </div>
+        <div class="wall__item wall__item--c">
+          <Pic id="in-035-2018-bhubaneswar-pride-end-phobia-casteism-377" tone="green" aspect="4 / 3" position="55% 50%" tilt={1} caption="Bhubaneswar Pride Parade, Odisha, 1 September 2018. One placard against homophobia, transphobia and casteism together." alt="A rainbow placard reading End homophobia, transphobia, casteism, held up among rainbow umbrellas." sizes="(min-width: 900px) 34vw, 92vw" />
+          <div class="wall__placard" aria-hidden="true"><Placard text="Nobody starts from zero" color="cardboard" size="m" tilt={-4} stick decorative /></div>
+        </div>
+        <div class="wall__item wall__item--d">
+          <Pic id="in-001-2024-kolkata-reclaim-the-night-howrah-crowd" tone="ink" aspect="3 / 2" tape="both" tilt={-0.8} caption="Howrah, 4 September 2024. A ‘Reclaim the Night’ (Raat Dakhal) march, weeks after the rape and murder of a doctor on duty at RG Kar Medical College." alt="A night crowd of mostly women fills a street, some raising phones and fists." sizes="(min-width: 900px) 52vw, 92vw" widths={[480, 720, 960]} />
+          <p class="wall__fact">It began with one call for women to march at midnight on 14 August 2024; thousands did, across West Bengal. <a href="https://www.tribuneindia.com/news/india/kolkata-doctor-rape-murder-women-fill-streets-across-west-bengal-in-midnight-protests-demand-justice" rel="noopener">The Tribune (PTI), 15 Aug 2024</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Ticker items={['Hope first', 'Receipts always', 'Bring a friend', 'Yes, boys too']} tone="marigold" />
+
+  <!-- 02 The badge -->
+  <section class="section ground-ink grain badge-sec" id="badge" aria-labelledby="badge-title">
+    <div class="wrap badge-sec__inner">
+      <SectionHead num="02" label="The badge" id="badge-title" title="Read the badge" lead="Every part of our badge has a job. Here’s what is in the picture, and how we read it." />
+      <BadgeAnatomy />
+    </div>
+  </section>
+
+  <!-- 03 The engine -->
+  <section class="section engine-sec" aria-labelledby="engine-title">
+    <div class="wrap">
+      <SectionHead num="03" label="The engine" id="engine-title" title="Ideas into power, in four stages" lead="Ideas into research. Research into public consciousness. Public consciousness into collective political action. Everything we build plugs into one of these stages." />
+      <Engine />
+      <p class="engine-sec__more"><a class="link-arrow" href="/what-we-do/">What we do: the six programmes <span aria-hidden="true">→</span></a></p>
+    </div>
+  </section>
+
+  <!-- 04 How we work -->
+  <TornEdge color="var(--green)" seed={2} />
+  <section class="section ground-green grain how" id="how" aria-labelledby="how-title">
+    <div class="wrap how__grid">
+      <div class="how__side">
+        <SectionHead num="04" label="How we work" id="how-title" title="Five rules we hold ourselves to" />
+        <div class="how__photos">
+          <Pic id="060-armed-with-a-mind-sign" tone="marigold" aspect="4 / 3" tilt={-3} frame alt="A cardboard protest sign, hand-lettered: Armed with a mind." sizes="(min-width: 900px) 26vw, 70vw" widths={[360, 560]} />
+          <Pic id="084-crochet-does-it-bring-you-joy" tone="pink" aspect="4 / 5" tilt={4} frame class="how__photo2" alt="A crocheted sign on a fence asks: but does it bring you joy?" sizes="(min-width: 900px) 18vw, 50vw" widths={[240, 360, 480]} />
+        </div>
+      </div>
+      <ol class="how__list" role="list">
+        {principles.map((pr) => (
+          <li class="pr">
+            <span class="pr__n" aria-hidden="true">{pr.n}</span>
+            <div class="pr__body">
+              <h3 class="pr__title">{pr.title}</h3>
+              <p>{pr.text}</p>
+            </div>
+            <div class="pr__mark" aria-hidden="true">
+              {pr.mark === 'stamp' && <Stamp text={pr.mtext!} color="ink" tilt={-8} />}
+              {pr.mark === 'placard' && <Placard shape="placard" color="pink" size="s" tilt={-5} decorative><span lang="hi">हम सब</span><br />all of us</Placard>}
+              {pr.mark === 'tape' && <Placard text={pr.mtext} shape="tape" color="marigold" size="s" tilt={3} decorative />}
+              {pr.mark === 'sticker' && <Placard text={pr.mtext} shape="sticker" color="pink" size="s" tilt={-4} decorative />}
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- 05 Who we are -->
+  <TornEdge color="var(--pink)" seed={3} />
+  <section class="section ground-pink grain who" id="who" aria-labelledby="who-title">
+    <div class="wrap">
+      <SectionHead num="05" label="Who we are" id="who-title" title="A founder, and a collective that’s forming" />
+      <div class="who__grid">
+        <div class="who__founder">
+          <FounderCard href={`/about/${FOUNDER.slug}/`} cta="Meet our founder" />
+          <p class="who__bio">{FOUNDER.name} founded Cultural Shock Party in 2026. She is an author, book reviewer and social worker, and wrote the novel <cite>Garbhadosh: The Fault In Our Wombs</cite>.</p>
+        </div>
+        <div class="who__founding">
+          <p class="label">The collective</p>
+          <h3 class="who__title">The collective is forming. This is the moment to be a founding member.</h3>
+          <p class="who__text">We won’t show you a wall of members we don’t have. What we have is a manifesto, a plan and an open door. The people who join first can help shape the next version of the manifesto and decide what we build first.</p>
+          <div class="sheet" aria-hidden="true">
+            <p class="sheet__head"><span>Founding members</span><span>Sheet 01</span></p>
+            <ol role="list">
+              {['001', '002', '003', '004', '005'].map((n) => <li><span>{n}</span><i></i></li>)}
+            </ol>
+            <Annotation text="your name goes here" arrow="left" color="red" top="34%" right="-200px" tilt={-6} width="15ch" />
+            <span class="sheet__stamp"><Stamp text="Open" sub="Since Oct 2026" color="red" tilt={-14} /></span>
+          </div>
+          <div class="who__ctas">
+            <a class="btn" href="/join/">Become a founding member <span class="arrow" aria-hidden="true">→</span></a>
+            <a class="link-arrow" href="/manifesto/">Read the manifesto first <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 Independence & funding -->
+  <section class="section ground-light indep" id="independence" aria-labelledby="independence-title">
+    <div class="wrap indep__grid">
+      <div class="indep__head">
+        <SectionHead num="06" label="Trust" id="independence-title" title="Independence & funding" lead="The short version: nobody funds us, and nobody tells us what to say. Here are the commitments in full." />
+        <span class="indep__stamp" aria-hidden="true"><Stamp text="Independent" sub="Policy v1.0" color="ink" tilt={-7} /></span>
+      </div>
+      <div class="indep__body">
+        <ol class="ledger" role="list">
+          {commitments.map((c, i) => (
+            <li>
+              <span class="ledger__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <div>
+                <h3 class="ledger__h">{c.h}</h3>
+                <p>{c.p}</p>
+              </div>
+              <svg class="ledger__tick" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><path d="M5 17l7 7L27 7" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </li>
+          ))}
+        </ol>
+        <p class="indep__foot small">
+          Policy version 1.0, 24 October 2026. This is our policy, not legal advice. The law on foreign contributions:{' '}
+          <a href="https://prsindia.org/files/bills_acts/acts_parliament/2010/the-foreign-contribution-(regulation)-act,-2010.pdf" rel="noopener">Foreign Contribution (Regulation) Act 2010, section 3 (PRS copy)</a>.
+          How we handle your data:{' '}<a href="/privacy/">privacy notice</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 Decisions + story -->
+  <section class="section decide" aria-labelledby="decide-title">
+    <div class="wrap">
+      <SectionHead num="07" label="Decisions" id="decide-title" title="How decisions get made" lead="Honestly, we are new and still building this part. Here is what we can promise today." />
+      <ol class="steps" role="list">
+        {steps.map((s) => (
+          <li class:list={['step', `step--${s.state}`]}>
+            <p class="label step__when">{s.when}</p>
+            <p class="step__n" aria-hidden="true">{s.n}</p>
+            <h3 class="step__h">{s.h}</h3>
+            <p class="step__p">{s.p}</p>
+            {s.state === 'now' && <a class="step__link" href="/manifesto/#edit">Suggest an edit <span aria-hidden="true">→</span></a>}
+          </li>
+        ))}
+      </ol>
+      <p class="decide__note">As the collective grows, we will publish how decisions are made, and who makes them, right here.</p>
+
+      <div class="story" aria-labelledby="story-title">
+        <div class="story__head">
+          <p class="label"><span class="num">08</span> / Our story so far</p>
+          <h2 class="h2" id="story-title">Our story so far</h2>
+          <Annotation text="it’s short. that’s the point." arrow="down" color="red" tilt={-5} width="16ch" />
+        </div>
+        <ol class="story__line" role="list">
+          {story.map((s) => (
+            <li class="story__item">
+              <p class="story__when">{s.when}</p>
+              <h3 class="story__h">{s.h}</h3>
+              <p class="story__p">{s.p}{s.href && <> <a href={s.href}>{s.link}</a></>}</p>
+            </li>
+          ))}
+          <li class="story__item story__item--next">
+            <p class="story__when">Next</p>
+            <h3 class="story__h">You</h3>
+            <p class="story__p">The first founding members join. <a href="/join/">Be one of them</a></p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 FAQ teaser -->
+  <section class="section ground-deep faq-sec" aria-labelledby="faq-title">
+    <div class="wrap faq-sec__grid">
+      <SectionHead num="09" label="FAQ" id="faq-title" title="Straight answers" lead="The three questions we get most. There are more in the FAQ." />
+      <div class="faq-sec__list">
+        <Faq q="Is Cultural Shock Party a political party?" open>
+          <p>No. Cultural Shock Party is a movement, not a registered political party: it does not contest elections or endorse candidates.</p>
+          <p>“Party” is part of the name, not a place on the ballot. We work on ideas, research, culture and peaceful public action. <a href="#independence">Read our independence commitments</a>.</p>
+        </Faq>
+        <Faq q="Who founded Cultural Shock Party?">
+          <p>{FOUNDER.name} founded Cultural Shock Party in 2026. She is an author, book reviewer and social worker, and wrote the novel <cite>Garbhadosh: The Fault In Our Wombs</cite> (2026).</p>
+          <p><a href={`/about/${FOUNDER.slug}/`}>Read about Rubby Singh</a>.</p>
+        </Faq>
+        <Faq q="Who funds Cultural Shock Party?">
+          <p>No one yet. Cultural Shock Party is volunteer-run and does not accept donations.</p>
+          <p>If that changes, we will publish a funding policy and who funds us first, and we will never take foreign money. <a href="#independence">See the full policy</a>.</p>
+        </Faq>
+        <p class="faq-sec__more"><a class="link-arrow" href="/faq/">All the straight answers in our FAQ <span aria-hidden="true">→</span></a></p>
+      </div>
+    </div>
+  </section>
+
+  <JoinBand ground="green" title="Bring a friend. Yes, boys too." text="Joining is free and takes a minute. Start small: read the manifesto, sign it, send it to the group chat. Go big when you are ready." placard="Be first" />
+</Base>
+
+<style>
+  .jump ul { display: flex; flex-wrap: wrap; gap: 8px; }
+  .jump a {
+    display: inline-flex; align-items: center; min-height: 40px; padding: 0 12px; border: 2px solid var(--ink); color: var(--ink);
+    background: var(--paper-light); font-weight: 750; font-size: .86rem; text-decoration: none;
+  }
+  .jump a:hover { background: var(--ink); color: var(--paper); }
+
+  .section-label { display: flex; gap: .3em; padding-top: 12px; border-top: 3px solid var(--line); }
+  .num { color: var(--red-ink); font-weight: 900; }
+
+  /* 01 what */
+  .what__grid { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 80px); align-items: start; }
+  .what__main { display: grid; gap: 22px; }
+  .what__title { max-width: 14ch; }
+  .what__mission { font-size: clamp(1.45rem, 2.5vw, 2.05rem); line-height: 1.28; font-weight: 500; letter-spacing: -.01em; max-width: 34ch; }
+  .what__mission::first-line { font-weight: 650; }
+  .what__plain { font-size: 1.1rem; line-height: 1.55; color: var(--ink-soft); max-width: 56ch; }
+  .decode { position: relative; padding: 26px 24px 30px; background: var(--paper-light); border: 3px solid var(--ink); box-shadow: 8px 8px 0 var(--ink); margin-top: 10px; }
+  .decode__label { color: var(--red-ink); padding-bottom: 10px; border-bottom: 3px double var(--ink); }
+  .decode dl { display: grid; gap: 18px; margin-top: 16px; }
+  .decode__entry { display: grid; gap: 4px; }
+  .decode dt { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+  .decode__word { font-family: var(--font-serif); font-weight: 700; font-size: 1.55rem; line-height: 1.05; }
+  .decode__pos { font-family: var(--font-serif); font-style: italic; color: var(--muted); font-size: .98rem; }
+  .decode dd { font-size: 1rem; line-height: 1.5; color: var(--ink-soft); }
+  .decode dd strong { color: var(--red-ink); }
+  .decode__sticker { position: absolute; right: -18px; top: -30px; }
+
+  /* wall */
+  .wall { padding-block: clamp(3.5rem, 8vw, 6.5rem); border-top: var(--rule); overflow: hidden; }
+  .wall__inner { position: relative; z-index: 2; display: grid; gap: clamp(28px, 4vw, 48px); }
+  .wall__head { display: grid; gap: 14px; max-width: 760px; }
+  .wall__head .label { color: var(--red-ink); }
+  .wall__note { font-size: 1.05rem; color: var(--ink-soft); max-width: 56ch; }
+  .wall__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(28px, 4vw, 56px) clamp(18px, 3vw, 40px); align-items: start; }
+  .wall__item { display: grid; gap: 10px; }
+  .wall__head { grid-column: 1 / span 6; grid-row: 1; align-self: end; }
+  .wall__item--a { grid-column: 1 / span 7; grid-row: 2; }
+  .wall__item--b { grid-column: 8 / span 5; grid-row: 1 / span 2; padding-left: clamp(0px, 2vw, 30px); }
+  .wall__item--c { grid-column: 1 / span 5; grid-row: 3; margin-top: 10px; }
+  .wall__item--d { grid-column: 6 / span 7; grid-row: 3; margin-top: clamp(0px, 4vw, 60px); }
+  .wall__placard { justify-self: center; margin-top: clamp(20px, 4vw, 60px); }
+  .wall__placard :global(.placard__text) { max-width: 10ch; }
+  .wall__fact { font-size: .92rem; line-height: 1.45; max-width: 52ch; padding-left: 12px; border-left: 4px solid var(--red); }
+  .wall__fact a { font-size: .86rem; }
+
+  /* badge */
+  .badge-sec__inner :global(.section-head) { max-width: 760px; }
+  /* engine */
+  .engine-sec__more { margin-top: 28px; }
+
+  /* how */
+  .how { overflow-x: clip; }
+  .who { overflow-x: clip; }
+  .how__grid { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr); gap: clamp(32px, 6vw, 90px); align-items: start; }
+  .how__side { position: sticky; top: 96px; }
+  .how__photos { position: relative; display: grid; grid-template-columns: 1.4fr 1fr; gap: 12px; align-items: end; max-width: 520px; }
+  .how__photos :global(.how__photo2) { margin-bottom: -30px; }
+  .how__list { display: grid; }
+  .pr { display: grid; grid-template-columns: 76px minmax(0, 1fr) 150px; gap: 18px 22px; align-items: start; padding-block: 28px; border-top: 1px solid rgba(243, 236, 220, .4); }
+  .pr:first-child { border-top: 3px solid var(--paper); }
+  .pr__n { font-weight: 900; font-stretch: 62%; font-size: 4.2rem; line-height: .8; color: var(--marigold); }
+  .pr__body { display: grid; gap: 8px; }
+  .pr__title { font-weight: 900; font-stretch: 62%; text-transform: uppercase; font-size: clamp(1.9rem, 3.2vw, 2.8rem); line-height: .9; }
+  .pr__body p { color: var(--ink-soft); font-size: 1.04rem; line-height: 1.5; max-width: 52ch; }
+  .pr__mark { justify-self: center; padding-top: 6px; }
+  .pr__mark :global(.stamp) { --c: var(--paper); }
+  .pr__mark :global(.placard--s .placard__text) { font-size: 1.05rem; }
+
+  /* who */
+  .who :global(.section-head .h2) { max-width: 15ch; text-wrap: balance; }
+  .who__grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.3fr); gap: clamp(32px, 6vw, 90px); align-items: start; }
+  .who__founder { display: grid; gap: 22px; max-width: 420px; }
+  .who__bio { font-size: 1rem; line-height: 1.5; }
+  .who__founding { display: grid; gap: 18px; }
+  .who__founding > .label { color: var(--ink); }
+  .who__title { font-weight: 900; font-stretch: 62%; text-transform: uppercase; font-size: clamp(2.2rem, 4.6vw, 4rem); line-height: .88; max-width: 15ch; text-wrap: balance; }
+  .who__text { font-size: 1.08rem; line-height: 1.55; max-width: 52ch; }
+  .sheet { position: relative; margin: 10px 0 8px; padding: 18px 22px 22px; background: var(--paper-light); border: 2px solid var(--ink); max-width: 460px; transform: rotate(-1.2deg); box-shadow: 6px 7px 0 rgba(29, 28, 24, .25); }
+  .sheet__head { display: flex; justify-content: space-between; font-weight: 800; font-stretch: 80%; text-transform: uppercase; letter-spacing: .08em; font-size: .8rem; border-bottom: 3px solid var(--ink); padding-bottom: 8px; }
+  .sheet ol { display: grid; }
+  .sheet li { display: grid; grid-template-columns: 44px 1fr; align-items: end; gap: 10px; height: 38px; border-bottom: 1px solid var(--line-soft); }
+  .sheet li span { font-weight: 800; color: var(--red-ink); font-size: .85rem; padding-bottom: 6px; }
+  .sheet__stamp { position: absolute; right: 18px; bottom: 14px; font-size: 1.2rem; }
+  .sheet :global(.annot) { z-index: 4; }
+  .who__ctas { display: flex; flex-wrap: wrap; gap: 16px 26px; align-items: center; margin-top: 6px; }
+
+  /* independence */
+  .indep__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.55fr); gap: clamp(28px, 6vw, 90px); align-items: start; }
+  .indep__head { position: sticky; top: 96px; display: grid; gap: 10px; }
+  .indep__stamp { justify-self: start; font-size: 1.3rem; margin-left: 6px; }
+  .ledger { display: grid; }
+  .ledger li { display: grid; grid-template-columns: 52px minmax(0, 1fr) 34px; gap: 16px; padding-block: 20px; border-top: 1px solid var(--line); }
+  .ledger li:first-child { border-top: 3px solid var(--line); }
+  .ledger__n { font-weight: 900; font-stretch: 62%; font-size: 2.2rem; line-height: .9; color: var(--red); }
+  .ledger__h { font-size: clamp(1.2rem, 1.8vw, 1.45rem); font-weight: 800; font-stretch: var(--head-stretch); line-height: 1.12; margin-bottom: 6px; }
+  .ledger p { color: var(--ink-soft); line-height: 1.55; max-width: 60ch; }
+  .ledger__tick { color: var(--green); margin-top: 2px; }
+  .indep__foot { margin-top: 22px; padding-top: 14px; border-top: 3px solid var(--line); color: var(--muted); max-width: 70ch; }
+
+  /* decisions + story */
+  .steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 3px solid var(--line); border-bottom: 3px solid var(--line); }
+  .step { position: relative; display: grid; align-content: start; gap: 10px; padding: 22px clamp(14px, 2vw, 26px) 26px; border-left: 1px solid var(--line); }
+  .step:first-child { border-left: 0; padding-left: 0; }
+  .step__when { color: var(--muted); }
+  .step--now { background: var(--marigold); padding-left: clamp(14px, 2vw, 26px); }
+  .step--now .step__when { color: var(--ink); }
+  .step--now .step__n { color: var(--ink); }
+  .step__n { font-weight: 900; font-stretch: 62%; font-size: 3.6rem; line-height: .8; color: var(--red); }
+  .step--next .step__n { color: transparent; -webkit-text-stroke: 2px var(--red); }
+  .step__h { font-weight: 900; font-stretch: 62%; text-transform: uppercase; font-size: 2rem; line-height: .9; }
+  .step__p { color: var(--ink-soft); font-size: .98rem; line-height: 1.45; }
+  .step--now .step__p { color: var(--ink); }
+  .step__link { font-weight: 800; color: var(--ink); }
+  .decide__note { margin-top: 18px; font-family: var(--font-serif); font-style: italic; font-size: 1.15rem; }
+  .story { margin-top: clamp(56px, 8vw, 100px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr); gap: clamp(24px, 5vw, 70px); align-items: start; }
+  .story__head { display: grid; gap: 14px; }
+  .story__head .label { display: flex; gap: .3em; padding-top: 12px; border-top: 3px solid var(--line); }
+  .story__line { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; position: relative; }
+  .story__line::before { content: ''; position: absolute; left: 0; right: 0; top: 30px; border-top: 6px solid var(--ink); }
+  .story__item { position: relative; display: grid; gap: 8px; align-content: start; padding: 52px 18px 0 0; }
+  .story__item::before { content: ''; position: absolute; left: 0; top: 22px; width: 22px; height: 22px; border-radius: 50%; background: var(--red); border: 4px solid var(--ink); }
+  .story__item--next::before { background: var(--paper); border-style: dashed; }
+  .story__item--next { opacity: .95; }
+  .story__when { font-weight: 900; font-stretch: 62%; font-size: 2rem; line-height: .9; color: var(--red); text-transform: uppercase; }
+  .story__item--next .story__when { color: var(--ink); }
+  .story__h { font-weight: 800; font-stretch: var(--head-stretch); font-size: 1.25rem; line-height: 1.1; }
+  .story__p { color: var(--ink-soft); font-size: .96rem; line-height: 1.45; }
+
+  /* faq */
+  .faq-sec__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: clamp(24px, 5vw, 80px); align-items: start; }
+  .faq-sec__more { margin-top: 26px; }
+
+  @media (max-width: 1000px) {
+    .what__grid, .how__grid, .who__grid, .indep__grid, .faq-sec__grid, .story { grid-template-columns: 1fr; }
+    .how__side, .indep__head { position: static; }
+    .how__photos { max-width: 460px; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .step:nth-child(3) { border-left: 0; padding-left: 0; }
+    .step:nth-child(n + 3) { border-top: 1px solid var(--line); }
+    .step--now { padding-left: clamp(14px, 2vw, 26px); }
+    .decode__sticker { right: 6px; }
+  }
+  @media (max-width: 900px) {
+    .wall__head, .wall__item--a, .wall__item--b, .wall__item--c, .wall__item--d { grid-column: 1 / -1; grid-row: auto; margin-top: 0; padding-left: 0; }
+    .wall__item--b, .wall__item--c { max-width: 440px; }
+    .wall__item--b { justify-self: end; width: 86%; }
+    .wall__item--c { width: 86%; }
+  }
+  @media (max-width: 640px) {
+    .pr { grid-template-columns: 54px minmax(0, 1fr); }
+    .pr__n { font-size: 3.2rem; }
+    .pr__mark { grid-column: 2; justify-self: start; }
+    .steps { grid-template-columns: 1fr; }
+    .step, .step:nth-child(3) { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); }
+    .step:first-child { border-top: 0; }
+    .step--now { padding-left: 16px; padding-right: 16px; }
+    .story__line { grid-template-columns: 1fr; }
+    .story__line::before { left: 9px; right: auto; top: 0; bottom: 0; border-top: 0; border-left: 6px solid var(--ink); }
+    .story__item { padding: 4px 0 26px 44px; }
+    .story__item::before { top: 6px; left: 0; }
+    .ledger li { grid-template-columns: 40px minmax(0, 1fr); }
+    .ledger__tick { display: none; }
+    .sheet :global(.annot) { display: none; }
+  }
+</style>

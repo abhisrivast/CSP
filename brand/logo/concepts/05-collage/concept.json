@@ -1,0 +1,47 @@
+{
+  "id": "05-collage",
+  "name": "Cut & Paste",
+  "idea": "The name is pasted together from three scraps: CULTURAL reversed out of a red strip, SHOCK brush-painted on torn cardboard, PARTY on a black tape strip. The mark is the same three scraps cut down to C, S and P tiles.",
+  "rationale": "It takes the poster's collage straight across: a printed-headline strip (Anton), a hand-painted cardboard placard (Knewave, ink on #B49073) and black tape, each tilted 2-4 degrees and layered flat with no shadows. That reads as zine and protest paste-up, which suits the movement's digital-culture and media side and its street politics. Each colour belongs to a whole word, never to a single letter, and only two typefaces are used, so it stays playful-political and legible instead of a threatening ransom note. The near-flat horizontal primary holds up in a 28px header, and the stacked alt is the poster and avatar-scale hero.",
+  "fonts": ["Anton-400 (OFL) - CULTURAL, PARTY, C and P", "Knewave-400 (OFL) - SHOCK and S; per-letter wobble of +/-3 deg rotation, 3.5% baseline and 3% size added in build.py"],
+  "colors": ["#CB3932 protest red (CULTURAL strip, C tile)", "#B49073 cardboard (SHOCK scrap, S tile)", "#221F1D ink (PARTY strip, P tile, SHOCK lettering)", "#F6EEDD paper (reversed lettering; replaces the ink scraps in reverse.svg)", "textured.svg only: #36B024 signal green, #1F92B2 electric blue, #F1B362 marigold tape"],
+  "files": [
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/05-collage/primary.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/05-collage/alt.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/05-collage/mark.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/05-collage/reverse.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/05-collage/mono.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/05-collage/mark-mono.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/05-collage/textured.svg",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/05-collage/primary.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/05-collage/primary-sheet.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/05-collage/mark-sheet.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/05-collage/alt.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/05-collage/reverse.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/05-collage/mono.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/05-collage/mark-mono.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/05-collage/textured.png",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/05-collage/build.py",
+    "/Users/Abhi/Developer/CSP/brand/logo/concepts/05-collage/lib.py"
+  ],
+  "associationsChecked": "Bolt and circle (BUF, PAP), double bolts or sig-runes, Strajk Kobiet: there is no bolt or circle anywhere. Swastika risk: three tiles in a single diagonal have no four-fold rotational symmetry. Indian election symbols, Labour rose, US donkey or elephant, Venus-and-fist, megaphone: there are no pictograms at all. Flags: I rejected a side-by-side row of red, tan and black tiles because at 16px it read like a mirrored Belgian tricolour, and it sat near Germany's black-red-gold. The diagonal cascade and the tilted word strips avoid bands. A red tile at top-left and a black tile at bottom-right could faintly echo the red-black diagonal anarcho-syndicalist flag. The cardboard middle tile and the letters break that up, and the P tile can switch to electric blue (tested in work/party-blue.svg) if anyone is concerned. Ransom note: colour follows whole words, only two faces are used, nothing is cut letter by letter, and the playful brush SHOCK with even spacing keeps it from reading as threatening. The CSP mark is the closest to that trope. Punk cut-ups (Jamie Reid-style ransom lettering) share the genre but not the construction. Naming, not visual: CSP is also used by Christian-social parties (for example the Christlich Soziale Partei in East Belgium and Swiss cantonal CSPs) and in tech (Content Security Policy). This is worth a trademark search; no visual overlap.",
+  "strengths": [
+    "Directly continues the poster: cardboard placard plus black marker-style lettering, a red headline strip, duotone scraps in textured.svg",
+    "Very legible. Whole words sit on strips with only +/-2-3 deg tilt, and the primary still reads at 24-32px tall in a header (checked in primary-sheet.png and an 8x zoom of a 28px render)",
+    "Built-in emphasis: SHOCK is the loud, hand-made voice and CULTURAL / PARTY are the printed, institutional voice, which mirrors 'street politics + institutional accountability'",
+    "Clean system logic: mark = wordmark scraps cut down to initials, same colour order (red / cardboard / ink) and alternating tilts",
+    "Mono version is real one-ink: every letter is a true knock-out (only overlap-free fonts were used; PermanentMarker was rejected because its contours overlap), and upper scraps cut a 0.07-cap gap from lower ones so the layering survives as a stamp or stencil",
+    "Fully parametric (build.py / lib.py): seeded scissor-cut and torn polygons, automatic clearance so no scrap ever covers a letter, even viewBox padding (primary 24.6 units on every side; mark 5.4%; alt 6.1-6.7%)"
+  ],
+  "weaknesses": [
+    "At 16px the mark is only a colour signature of three scraps. The letters resolve from about 24-32px. A straight-tile favicon cut I tested helped 32px slightly and 16px not at all, so I dropped it; a hand-hinted pixel favicon would still be needed",
+    "The ink PARTY strip and P tile disappear on dark grounds (visible on the ink cell of mark-sheet.png). Dark backgrounds must use reverse.svg, where the ink scraps become paper; there is no separate reverse mark file yet",
+    "It uses three colours plus paper (red, cardboard, ink), more than a strict 'red + ink' core. The cardboard edge against the paper ground is soft (about 2.5:1), so the SHOCK scrap shape fades on cream at small sizes, although ink-on-cardboard lettering is about 5.6:1",
+    "The primary is long (about 5.5:1) and repeats CSP next to the full name; at 16px tall the wordmark is unreadable",
+    "alt.svg is the stacked wordmark pile without the CSP tiles. A mark-beside-pile version (work/alt-b.svg) looked cluttered and redundant, but reviewers expecting a symbol in every lockup may disagree",
+    "Distinctiveness comes from the composition, not the type: Anton is a very common free font, and collage is a well-known zine idiom, so the system needs discipline (fixed scrap shapes, no improvised extra scraps) or it drifts into generic 'protest template'",
+    "Knock-out gaps in mono.svg are thin (0.07 cap) and could fill in on newsprint at very small print sizes",
+    "The C/S/P tile mark sits closest to ransom-note territory of everything in the system"
+  ],
+  "iterations": 6
+}

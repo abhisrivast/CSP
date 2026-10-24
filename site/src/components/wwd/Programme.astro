@@ -1,0 +1,170 @@
+---
+// One programme from STRATEGY §6, as a full-bleed section: giant number, engine stage, one-liner,
+// honest planned outputs, "How you can take part" links and a taped photo collage with evidence markers.
+// Extra full-width content (charts, receipts) goes in the default slot.
+import Photo from '../media/Photo.astro';
+import Stamp from '../ui/Stamp.astro';
+import Annotation from '../ui/Annotation.astro';
+import Placard from '../ui/Placard.astro';
+import StageMeter from './StageMeter.astro';
+import type { Tone } from '../../lib/photos';
+
+export type ProgPhoto = { id: string; tone?: Tone; note: string; alt?: string; position?: string };
+export type ProgOutput = { title: string; text: string; href?: string; linkLabel?: string };
+export interface Props {
+  id: string;
+  num: string;
+  name: string;
+  stage: 1 | 2 | 3 | 4;
+  line: string;
+  ground?: 'paper' | 'light' | 'deep' | 'ink' | 'green' | 'pink';
+  flip?: boolean;
+  outputs: ProgOutput[];
+  take: { label: string; href: string }[];
+  photos: ProgPhoto[];
+  placard?: string;            // a decorative placard under the photo notes
+  annotate?: { text: string; arrow?: 'left' | 'right' | 'down' | 'up'; top?: string; left?: string; right?: string; bottom?: string; color?: 'red' | 'ink' | 'paper'; width?: string; tilt?: number };
+}
+const { id, num, name, stage, line, ground = 'paper', flip = false, outputs, take, photos, annotate, placard } = Astro.props;
+const dark = ground === 'ink' || ground === 'green';
+const tilts = [0, 3, -2.5];
+---
+<section id={id} class:list={['prog', `ground-${ground}`, { 'prog--flip': flip, 'prog--dark': dark }]} aria-labelledby={`${id}-name`}>
+  <div class="wrap prog__grid">
+    <div class="prog__intro">
+      <div class="prog__head">
+        <span class="prog__num" aria-hidden="true">{num}</span>
+        <Stamp text="Now building" sub="Status · 2026" tilt={-7} color={ground === 'pink' ? 'ink' : 'red'} decorative={false} />
+      </div>
+      <StageMeter stage={stage} />
+      <h2 class="h2 prog__name" id={`${id}-name`}><span class="visually-hidden">Programme {num}: </span>{name}</h2>
+      <p class="serif-display prog__line">{line}</p>
+    </div>
+
+    <div class="prog__media">
+      {photos.map((p, i) => (
+        <div class:list={['prog__pic', `prog__pic--${i + 1}`]}>
+          <Photo
+            id={p.id}
+            tone={p.tone ?? 'natural'}
+            alt={p.alt}
+            aspect={i === 0 ? '4 / 5' : '1 / 1'}
+            position={p.position}
+            caption={false}
+            tape={i === 0 ? 'tr' : i === 1 ? 'tl' : false}
+            tilt={tilts[i]}
+            frame={i > 0}
+            sizes={i === 0 ? '(min-width: 900px) 34vw, 86vw' : '(min-width: 900px) 18vw, 46vw'}
+            widths={i === 0 ? [360, 560, 800] : [240, 360, 480]}
+          />
+          <span class="prog__marker" aria-hidden="true">{i + 1}</span>
+          {i === 0 && annotate && <Annotation {...annotate} />}
+        </div>
+      ))}
+      <ol class="prog__notes" role="list" aria-label="About these photos">
+        {photos.map((p, i) => <li><span class="prog__notes-n" aria-hidden="true">{i + 1}</span>{p.note}</li>)}
+      </ol>
+      {placard && <div class="prog__placard"><Placard text={placard} color="marigold" tilt={-4} size="l" stick decorative /></div>}
+    </div>
+
+    <div class="prog__body">
+      <div class="prog__first">
+        <h3 class="label prog__sub">What it will make first</h3>
+        <ol class="prog__outputs" role="list">
+          {outputs.map((o, i) => (
+            <li>
+              <span class="prog__tick" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <div>
+                <h4 class="prog__otitle">{o.title}</h4>
+                <p class="prog__otext">{o.text}</p>
+                {o.href && <a class="prog__olink" href={o.href}>{o.linkLabel}</a>}
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+      <div class="prog__take">
+        <h3 class="label prog__sub">How you can take part</h3>
+        <ul role="list">
+          {take.map((t) => <li><a class="link-arrow" href={t.href}>{t.label} <span aria-hidden="true">→</span></a></li>)}
+        </ul>
+      </div>
+    </div>
+  </div>
+  <slot />
+</section>
+
+<style>
+  .prog { position: relative; padding-block: clamp(4rem, 9vw, 7.5rem); overflow: hidden; }
+  /* keep secondary text at AA on the lighter grounds */
+  .prog.ground-deep { --muted: var(--ink-soft); }
+  .prog.ground-pink { --ink-soft: #3E3A33; --muted: #3E3A33; }
+  .prog.ground-pink :global(.meter__n) { color: var(--ink); }
+  .prog.ground-pink .prog__olink { color: var(--ink); text-decoration-color: var(--red-ink); }
+  .prog__grid {
+    display: grid; gap: clamp(28px, 4vw, 64px) clamp(32px, 5vw, 88px);
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    grid-template-areas: 'intro media' 'body media';
+    align-items: start;
+  }
+  .prog--flip .prog__grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); grid-template-areas: 'media intro' 'media body'; }
+  .prog__intro { grid-area: intro; display: grid; gap: 18px; }
+  .prog__body { grid-area: body; display: grid; gap: 34px; }
+  .prog__media { grid-area: media; position: relative; padding-top: 10px; }
+
+  .prog__head { display: flex; align-items: flex-start; gap: clamp(14px, 2vw, 26px); margin-bottom: 4px; }
+  .prog__num {
+    font-weight: 900; font-stretch: var(--display-stretch); font-size: clamp(6.5rem, 15vw, 12.5rem); line-height: .72;
+    color: transparent; -webkit-text-stroke: 2.5px var(--red); letter-spacing: -.02em; margin-left: -.04em;
+  }
+  .prog--dark .prog__num { -webkit-text-stroke-color: var(--coral); }
+  .ground-pink .prog__num { -webkit-text-stroke-color: var(--ink); }
+  .prog__head :global(.stamp) { margin-top: clamp(10px, 2vw, 26px); flex: none; }
+  .prog--dark .prog__head :global(.stamp) { --c: var(--marigold); }
+
+  .prog__name { max-width: 14ch; text-wrap: balance; overflow-wrap: normal; hyphens: manual; }
+  .prog__line { font-size: clamp(1.45rem, 2.4vw, 2.05rem); line-height: 1.12; max-width: 24ch; font-style: italic; }
+
+  .prog__sub { padding-top: 10px; border-top: 3px solid var(--line); margin-bottom: 16px; }
+  .prog__outputs { display: grid; gap: 18px; }
+  .prog__outputs li { display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start; }
+  .prog__tick {
+    display: grid; place-items: center; height: 34px; font-weight: 900; font-stretch: 80%; font-size: .9rem;
+    background: var(--marigold); color: var(--ink); border: 2px solid var(--ink);
+  }
+  .prog__otitle { font-size: 1.18rem; font-weight: 800; font-stretch: var(--head-stretch); line-height: 1.15; }
+  .prog__otext { color: var(--ink-soft); font-size: 1rem; line-height: 1.5; margin-top: 4px; max-width: 52ch; }
+  .prog__olink { display: inline-block; margin-top: 6px; font-weight: 700; font-size: .95rem; }
+  .prog__take ul { display: flex; flex-wrap: wrap; gap: 14px 28px; }
+  .prog__take .link-arrow { min-height: 44px; }
+
+  /* collage */
+  .prog__pic { position: relative; }
+  /* make the image fill fixed-aspect frames even without tape (Photo only sizes <picture> when taped) */
+  .prog__pic :global(.photo--fixed .photo__img picture) { display: block; height: 100%; }
+  .prog__placard { display: flex; justify-content: center; margin-top: clamp(36px, 5vw, 64px); }
+  .prog__placard :global(.placard__text) { max-width: 12ch; }
+  .prog__pic--1 { width: 88%; }
+  .prog--flip .prog__pic--1 { margin-left: auto; }
+  .prog__pic--2 { width: 54%; margin: -26% 0 0 auto; z-index: 2; }
+  .prog--flip .prog__pic--2 { margin: -26% auto 0 0; }
+  .prog__pic--3 { width: 44%; margin: -12% 0 0 6%; z-index: 3; }
+  .prog--flip .prog__pic--3 { margin: -12% 0 0 auto; }
+  .prog__marker {
+    position: absolute; top: 12px; left: 12px; z-index: 4; display: grid; place-items: center; width: 30px; height: 30px;
+    border-radius: 50%; background: var(--ink); color: var(--paper-light); font-weight: 900; font-size: .85rem; box-shadow: 0 0 0 2px var(--paper-light);
+  }
+  .prog__pic--2 .prog__marker, .prog__pic--3 .prog__marker { top: 18px; left: 18px; }
+  .prog__notes { display: grid; gap: 6px; margin-top: 22px; font-size: .84rem; line-height: 1.4; color: var(--muted); max-width: 48ch; }
+  .prog__notes li { display: grid; grid-template-columns: 22px 1fr; gap: 8px; }
+  .prog__notes-n {
+    display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid currentColor;
+    font-weight: 800; font-size: .7rem; color: var(--text);
+  }
+
+  @media (max-width: 900px) {
+    .prog__grid, .prog--flip .prog__grid { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'intro' 'media' 'body'; }
+    .prog__media { max-width: 560px; }
+    .prog__num { font-size: clamp(5.5rem, 30vw, 8rem); }
+  }
+</style>

@@ -1,0 +1,146 @@
+---
+// Case browser for /case-studies/: a CSS-only region filter (radio buttons + :has(), no JavaScript),
+// a hairline-ruled dossier index and a duotone card grid. Without :has() support everything shows.
+import Card from '../blocks/Card.astro';
+import { type CaseEntry, caseNo, heroOf, isIndia, lever, shortPlace, slug } from './case-utils';
+
+export interface Props { cases: CaseEntry[] }
+const { cases } = Astro.props;
+
+const keysOf = (c: CaseEntry) => ['all', isIndia(c) ? 'india' : 'world', `r-${slug(c.data.region)}`].join(' ');
+const regions = [...new Set(cases.filter((c) => !isIndia(c)).map((c) => c.data.region))];
+const count = (k: string) => cases.filter((c) => keysOf(c).split(' ').includes(k)).length;
+const filters = [
+  { key: 'all', label: 'All' },
+  { key: 'india', label: 'India' },
+  { key: 'world', label: 'Rest of the world' },
+  ...regions.map((r) => ({ key: `r-${slug(r)}`, label: r })),
+].filter((f) => count(f.key) > 0);
+// Drop region chips that would duplicate "Rest of the world".
+const shown = filters.filter((f, _, arr) => !(f.key.startsWith('r-') && count(f.key) === count('world') && arr.some((x) => x.key === 'world')));
+
+const css = shown
+  .filter((f) => f.key !== 'all')
+  .map((f) => `.cb:has(#cb-${f.key}:checked) [data-f]:not([data-f~="${f.key}"]){display:none}`)
+  .join('');
+---
+<div class="cb">
+  <fieldset class="cb__filter">
+    <legend class="label">Show cases from</legend>
+    <div class="cb__chips">
+      {shown.map((f, i) => (
+        <span class="cb__chip">
+          <input type="radio" name="case-region" id={`cb-${f.key}`} value={f.key} checked={i === 0} />
+          <label for={`cb-${f.key}`}>{f.label} <span class="cb__count">{count(f.key)}</span></label>
+        </span>
+      ))}
+    </div>
+  </fieldset>
+
+  <section class="cb__index" aria-labelledby="index-title">
+    <div class="cb__index-head">
+      <h2 class="h2" id="index-title">The index</h2>
+      <p class="label cb__index-note">Numbered in reading order. India first.</p>
+    </div>
+    <ol class="cbi" role="list">
+      <li class="cbi__row cbi__row--head" aria-hidden="true">
+        <span class="label">Case</span><span class="label">Movement</span><span class="label">Place</span><span class="label">Years</span><span class="label">Main lever</span>
+      </li>
+      {cases.map((c) => (
+        <li class="cbi__row" data-f={keysOf(c)}>
+          <span class="cbi__no"><span class="visually-hidden">Case </span>{caseNo(c, cases)}</span>
+          <span class="cbi__title"><a href={`/case-studies/${c.id}/`}>{c.data.title}</a></span>
+          <span class="cbi__place">{c.data.place}</span>
+          <span class="cbi__years">{c.data.years}</span>
+          <span class="cbi__lever">{lever(c) ?? c.data.region}</span>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="cb__cards" aria-labelledby="cards-title">
+    <h2 class="label cb__cards-title" id="cards-title">Every case, in pictures</h2>
+    <ul class="cb__grid" role="list">
+      {cases.map((c, i) => (
+        <li data-f={keysOf(c)} class:list={{ 'cb__card--wide': i === 0 }}>
+          <Card
+            href={`/case-studies/${c.id}/`}
+            title={c.data.title}
+            kicker={`Case ${caseNo(c, cases)}`}
+            meta={[shortPlace(c), c.data.years]}
+            dek={c.data.dek}
+            photo={heroOf(c)?.id}
+            tone={c.data.tone === 'natural' ? 'ink' : c.data.tone}
+            aspect={i === 0 ? '4 / 3' : '3 / 2'}
+            size={i === 0 ? 'l' : 'm'}
+          />
+        </li>
+      ))}
+    </ul>
+  </section>
+</div>
+
+<style is:inline set:html={css}></style>
+
+<style>
+  .cb { display: grid; gap: clamp(40px, 6vw, 72px); }
+  .cb__filter { border: 0; margin: 0; padding: 14px 0; position: sticky; top: 71px; z-index: 5; background: var(--paper-deep); border-bottom: 1px solid var(--line); }
+  .cb__filter legend { float: left; width: 100%; margin-bottom: 10px; padding: 0; }
+  .cb__filter legend + * { clear: both; }
+  .cb__chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .cb__chip { position: relative; }
+  .cb__chip input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .cb__chip label {
+    display: inline-flex; align-items: center; gap: .55em; min-height: 44px; padding: 0 16px; border: 2px solid var(--ink);
+    border-radius: 999px; font-weight: 800; font-stretch: 85%; font-size: .98rem; cursor: pointer; background: var(--paper-light);
+  }
+  .cb__count { font-size: .78rem; font-weight: 900; color: var(--red-ink); }
+  .cb__chip label:hover { background: var(--paper-deep); }
+  .cb__chip input:checked + label { background: var(--ink); color: var(--paper); }
+  .cb__chip input:checked + label .cb__count { color: var(--marigold); }
+  .cb__chip input:focus-visible + label { outline: 3px solid var(--ink); outline-offset: 3px; box-shadow: 0 0 0 6px var(--marigold); }
+
+  .cb__index-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 10px 24px; margin-bottom: 18px; }
+  .cb__index-note { color: var(--ink-soft); }
+  .cbi { border-top: 3px solid var(--line); }
+  .cbi__row {
+    position: relative; display: grid; grid-template-columns: 74px minmax(0, 2.2fr) minmax(0, 1.3fr) minmax(0, .9fr) minmax(0, 1fr);
+    gap: 18px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid var(--line);
+  }
+  .cbi__row--head { padding-block: 10px; color: var(--ink-soft); }
+  .cbi__row:not(.cbi__row--head):hover { background: var(--paper-light); }
+  .cbi__row:not(.cbi__row--head):hover .cbi__title a { color: var(--red-ink); text-decoration: underline; text-decoration-thickness: 3px; }
+  .cbi__no { font-weight: 900; font-stretch: var(--display-stretch); font-size: 2.3rem; line-height: .8; color: var(--red); }
+  .cbi__title { font-weight: 900; font-stretch: var(--head-stretch); font-size: clamp(1.2rem, 1.8vw, 1.55rem); line-height: 1.05; }
+  .cbi__title a { color: var(--ink); text-decoration: none; }
+  .cbi__title a::after { content: ''; position: absolute; inset: 0; }
+  .cbi__title a:focus-visible { outline: none; box-shadow: none; }
+  .cbi__row:has(a:focus-visible) { outline: 3px solid var(--ink); outline-offset: 2px; background: var(--paper-light); }
+  .cbi__place, .cbi__years, .cbi__lever { font-size: .95rem; color: var(--ink-soft); }
+  .cbi__years { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--ink); }
+
+  .cb__cards-title { padding-top: 12px; border-top: 3px solid var(--line); margin-bottom: 26px; }
+  .cb__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(28px, 3.5vw, 48px) clamp(20px, 2.6vw, 36px); }
+  .cb__card--wide { grid-column: span 2; grid-row: span 2; }
+  .cb__grid :global(.photo--fixed .photo__img picture) { display: block; height: 100%; }
+
+  @media (max-width: 1000px) {
+    .cbi__row { grid-template-columns: 60px minmax(0, 1fr) minmax(0, .8fr); }
+    .cbi__years { grid-column: 3; }
+    .cbi__place { grid-column: 3; grid-row: 1; }
+    .cbi__lever { display: none; }
+    .cbi__row--head span:nth-child(n+4) { display: none; }
+    .cb__grid { grid-template-columns: 1fr 1fr; }
+    .cb__card--wide { grid-row: auto; }
+  }
+  @media (max-width: 640px) {
+    .cb__filter { position: static; }
+    .cbi__row { grid-template-columns: 48px minmax(0, 1fr); gap: 4px 14px; }
+    .cbi__row--head { display: none; }
+    .cbi__no { grid-row: span 2; font-size: 2rem; }
+    .cbi__place, .cbi__years { grid-column: 2; grid-row: auto; font-size: .88rem; }
+    .cbi__place { order: 3; }
+    .cb__grid { grid-template-columns: 1fr; }
+    .cb__card--wide { grid-column: auto; }
+  }
+</style>

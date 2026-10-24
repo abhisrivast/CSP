@@ -1,0 +1,36 @@
+---
+// "Three lessons for CSP": big numbered, written as what to do.
+export interface Props { lessons: { title: string; text: string }[] }
+const { lessons } = Astro.props;
+---
+<ol class:list={['lessons', `lessons--${Math.min(lessons.length, 3)}`]} role="list">
+  {lessons.map((l, i) => (
+    <li class="lesson">
+      <span class="lesson__n" aria-hidden="true">{i + 1}</span>
+      <div class="lesson__body">
+        <h3 class="lesson__title"><span class="visually-hidden">Lesson {i + 1}: </span>{l.title}</h3>
+        <p class="lesson__text">{l.text}</p>
+      </div>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .lessons { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px); }
+  .lessons--1 { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
+  .lessons--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lesson { display: grid; align-content: start; gap: 16px; padding-top: 18px; border-top: 3px solid var(--line); }
+  .lesson__n {
+    font-weight: 900; font-stretch: var(--display-stretch); font-size: clamp(6rem, 13vw, 11rem); line-height: .74;
+    color: var(--paper-light); letter-spacing: -.04em;
+    -webkit-text-stroke: 0;
+  }
+  .lesson__body { display: grid; gap: 10px; }
+  .lesson__title { font-weight: 900; font-stretch: var(--head-stretch); font-size: clamp(1.45rem, 2.2vw, 1.9rem); line-height: 1.04; }
+  .lesson__text { color: var(--ink-soft); font-size: 1.02rem; line-height: 1.55; max-width: 44ch; }
+  @media (max-width: 860px) {
+    .lessons, .lessons--2 { grid-template-columns: 1fr; }
+    .lesson { grid-template-columns: auto 1fr; column-gap: 18px; }
+    .lesson__n { font-size: clamp(4.8rem, 22vw, 6.5rem); }
+  }
+</style>

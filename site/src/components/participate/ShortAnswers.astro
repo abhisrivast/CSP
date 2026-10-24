@@ -1,0 +1,58 @@
+---
+// "The short version": the five questions people ask first, each answered with one poster-sized word and one line.
+export interface Props { items: { id: string; q: string; big: string; short: string }[]; title?: string }
+const { items, title = 'The five we get asked most' } = Astro.props;
+---
+<section class="short ground-ink grain" aria-labelledby="short-title">
+  <div class="wrap short__inner">
+    <header class="short__head">
+      <p class="label short__label"><span class="short__num">00</span> / The short version</p>
+      <h2 class="h2" id="short-title">{title}</h2>
+    </header>
+    <ol class="short__grid" role="list">
+      {items.map((it, i) => (
+        <li class:list={['short__item', `short__item--${i + 1}`]}>
+          <p class="short__q label"><span class="short__qn" aria-hidden="true">Q{String(i + 1).padStart(2, '0')}</span> {it.q}</p>
+          <p class="short__big" aria-hidden="true">{it.big}</p>
+          <p class="short__a">{it.short}</p>
+          <a class="short__more" href={`#${it.id}`}>The full answer<span class="visually-hidden">: {it.q}</span> <span aria-hidden="true">↓</span></a>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .short { padding-block: clamp(3.5rem, 8vw, 6.5rem); }
+  .short__inner { position: relative; z-index: 2; display: grid; gap: clamp(24px, 4vw, 44px); }
+  .short__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px 40px; padding-top: 12px; border-top: 3px solid var(--paper); }
+  .short__num { color: var(--coral); font-weight: 900; }
+  .short__head .h2 { max-width: 16ch; }
+  .short__label { order: 2; }
+  .short__grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0; border-top: 1px solid rgba(243, 236, 220, .3); }
+  .short__item { grid-column: span 2; display: grid; align-content: start; gap: 12px; padding: clamp(20px, 2.6vw, 32px) clamp(16px, 2.2vw, 30px) clamp(24px, 3vw, 36px); border-bottom: 1px solid rgba(243, 236, 220, .3); }
+  .short__item + .short__item { border-left: 1px solid rgba(243, 236, 220, .3); }
+  .short__item--1 { padding-left: 0; }
+  .short__item--4, .short__item--5 { grid-column: span 3; }
+  .short__item--4 { border-left: 0 !important; padding-left: 0; }
+  .short__q { color: var(--marigold); display: flex; gap: .8em; align-items: baseline; min-height: 2.6em; }
+  .short__qn { color: var(--coral); }
+  .short__big {
+    font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; letter-spacing: -.01em;
+    font-size: clamp(3.2rem, 6.4vw, 6rem); line-height: .82; color: var(--paper-light);
+  }
+  .short__item--1 .short__big, .short__item--3 .short__big { color: var(--coral); }
+  .short__a { font-family: var(--font-serif); font-weight: 500; font-size: clamp(1.2rem, 1.7vw, 1.45rem); line-height: 1.22; max-width: 30ch; color: #E9E2D2; text-wrap: pretty; }
+  .short__more { justify-self: start; display: inline-flex; align-items: center; min-height: 44px; font-weight: 800; font-stretch: 85%; text-transform: uppercase; letter-spacing: .06em; font-size: .82rem; }
+  @media (max-width: 900px) {
+    .short__grid { grid-template-columns: 1fr 1fr; }
+    .short__item, .short__item--4, .short__item--5 { grid-column: span 1; padding-left: 18px; }
+    .short__item:nth-child(odd) { border-left: 0 !important; padding-left: 0; }
+    .short__item--5 { grid-column: span 2; }
+  }
+  @media (max-width: 560px) {
+    .short__grid { grid-template-columns: 1fr; }
+    .short__item, .short__item--5 { grid-column: span 1; padding-left: 0; border-left: 0 !important; }
+    .short__q { min-height: 0; }
+  }
+</style>

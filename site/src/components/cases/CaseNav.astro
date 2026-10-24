@@ -1,0 +1,39 @@
+---
+// Previous / next case in the dossier order.
+export interface Props {
+  prev?: { href: string; no: string; title: string; place: string };
+  next?: { href: string; no: string; title: string; place: string };
+}
+const { prev, next } = Astro.props;
+---
+<nav class="cnav" aria-label="More case studies">
+  {prev && (
+    <a class="cnav__link cnav__link--prev" href={prev.href} rel="prev">
+      <span class="label"><span aria-hidden="true">← </span>Previous · Case {prev.no}</span>
+      <span class="cnav__title">{prev.title}</span>
+      <span class="label cnav__place">{prev.place}</span>
+    </a>
+  )}
+  {next && (
+    <a class="cnav__link cnav__link--next" href={next.href} rel="next">
+      <span class="label">Next · Case {next.no}<span aria-hidden="true"> →</span></span>
+      <span class="cnav__title">{next.title}</span>
+      <span class="label cnav__place">{next.place}</span>
+    </a>
+  )}
+</nav>
+
+<style>
+  .cnav { display: grid; grid-template-columns: 1fr 1fr; border-block: 3px solid var(--line); }
+  .cnav__link { display: grid; align-content: start; gap: 10px; padding: clamp(18px, 3vw, 30px) clamp(0px, 2vw, 24px); color: var(--ink); text-decoration: none; min-height: 44px; }
+  .cnav__link--prev { padding-left: 0; }
+  .cnav__link--next { text-align: right; justify-items: end; border-left: 1px solid var(--line); padding-right: 0; }
+  .cnav__link:only-child { grid-column: 1 / -1; }
+  .cnav__title { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(1.7rem, 3.6vw, 3rem); line-height: .9; max-width: 18ch; text-wrap: balance; }
+  .cnav__place { color: var(--ink-soft); }
+  .cnav__link:hover .cnav__title { color: var(--red-ink); text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: .12em; }
+  @media (max-width: 640px) {
+    .cnav { grid-template-columns: 1fr; }
+    .cnav__link--next { border-left: 0; border-top: 1px solid var(--line); padding-left: 0; }
+  }
+</style>

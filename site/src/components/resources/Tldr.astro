@@ -1,0 +1,40 @@
+---
+// "In 30 seconds": the article's TL;DR as a stamped till-receipt note. Answer engines and skimmers read this first.
+import Stamp from '../ui/Stamp.astro';
+export interface Props { items: string[]; minutes?: number; title?: string }
+const { items, minutes, title = 'In 30 seconds' } = Astro.props;
+---
+<aside class="tldr" aria-labelledby="tldr-title">
+  <div class="tldr__head">
+    <h2 class="label tldr__title" id="tldr-title">{title}</h2>
+    <span class="label tldr__time">{minutes ? `Full read: ${minutes} min` : 'The short version'}</span>
+  </div>
+  <ol class="tldr__list" role="list">
+    {items.map((t, i) => (
+      <li><span class="tldr__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span><span>{t}</span></li>
+    ))}
+  </ol>
+  <span class="tldr__stamp"><Stamp text="TL;DR" sub="Receipts below" tilt={9} /></span>
+</aside>
+
+<style>
+  .tldr {
+    position: relative; background: var(--paper-light); color: var(--ink); padding: 20px clamp(18px, 3vw, 30px) 38px;
+    border-top: 8px solid var(--ink); transform: rotate(-.4deg);
+    -webkit-mask: linear-gradient(#000 0 0) top / 100% calc(100% - 10px) no-repeat, radial-gradient(circle 7px at 50% 100%, transparent 6px, #000 7px) bottom / 16px 11px repeat-x;
+    mask: linear-gradient(#000 0 0) top / 100% calc(100% - 10px) no-repeat, radial-gradient(circle 7px at 50% 100%, transparent 6px, #000 7px) bottom / 16px 11px repeat-x;
+    filter: drop-shadow(4px 5px 0 rgba(29, 28, 24, .16));
+  }
+  .tldr__head { padding-right: 140px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 14px; padding-bottom: 10px; border-bottom: 1.5px dashed currentColor; }
+  .tldr__title { font-size: .86rem; }
+  .tldr__time { color: var(--muted); }
+  .tldr__list { display: grid; gap: 0; margin-top: 4px; }
+  .tldr__list li {
+    display: grid; grid-template-columns: 2.4rem 1fr; gap: 10px; align-items: baseline; padding: 12px 0;
+    font-size: clamp(1.02rem, 1.3vw, 1.12rem); line-height: 1.45; font-weight: 600;
+  }
+  .tldr__list li + li { border-top: 1.5px dashed var(--line-soft); }
+  .tldr__n { font-weight: 900; font-stretch: var(--display-stretch); font-size: 1.6rem; line-height: .8; color: var(--red); }
+  .tldr__stamp { position: absolute; right: 18px; top: 12px; }
+  @media (max-width: 560px) { .tldr__head { padding-right: 104px; } .tldr__stamp { right: 8px; top: 14px; transform: scale(.82); transform-origin: top right; } }
+</style>

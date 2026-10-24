@@ -1,0 +1,79 @@
+---
+// The CSP badge, large, with handwritten callouts. Describe only what is visibly in the artwork.
+import { Image } from 'astro:assets';
+import badge from '../../assets/brand/csp-badge.png';
+import Annotation from '../ui/Annotation.astro';
+
+type Note = { n: number; x: number; y: number; title: string; text: string; side: 'l' | 'r' };
+const NOTES: Note[] = [
+  { n: 1, x: 58, y: 3, side: 'l', title: 'The broken chain', text: 'A chain bursting apart in the middle, gripped in both of her raised fists. She breaks it herself.' },
+  { n: 2, x: 72, y: 24, side: 'r', title: 'The sunburst', text: 'Red rays fan out behind her, like the sunrise on an old protest poster. A new day, not a dark one.' },
+  { n: 3, x: 15, y: 41, side: 'l', title: 'The placards', text: 'Square placards held up in the crowd, and every one is blank. The slogans are still ours to write.' },
+  { n: 4, x: 16, y: 61, side: 'l', title: 'The crowd behind her', text: 'Women with fists in the air, some mid-chant. She is at the front, but she is not on her own.' },
+  { n: 5, x: 60, y: 64, side: 'r', title: 'Shock, in red', text: 'On the banner, “Cultural” and “Party” are lettered in black. “Shock” is in red: the jolt is the point.' },
+  { n: 6, x: 59, y: 92, side: 'r', title: 'The star', text: 'A white star at the base, with red rays bursting out of it. Read it as the moment of the shock itself.' },
+];
+const left = NOTES.filter((n) => n.side === 'l');
+const right = NOTES.filter((n) => n.side === 'r');
+---
+<figure class="anatomy">
+  <ul class="anatomy__notes anatomy__notes--l" role="list">
+    {left.map((n) => (
+      <li class="anatomy__note" style={`order:${n.n}`}>
+        <span class="anatomy__num" aria-hidden="true">{n.n}</span>
+        <Annotation text={n.title} arrow="right" color="paper" tilt={-3} width="30ch" />
+        <p>{n.text}</p>
+      </li>
+    ))}
+  </ul>
+
+  <div class="anatomy__art">
+    <Image src={badge} alt="The Cultural Shock Party badge: a woman with curly hair raises both fists and snaps a chain above her head; red rays fan out behind her; women with raised fists and blank placards crowd behind her; a banner reads Cultural Shock Party above a white star." widths={[420, 640, 900, 1215]} sizes="(min-width: 1000px) 520px, 88vw" loading="lazy" decoding="async" class="anatomy__img" />
+    {NOTES.map((n) => <span class="anatomy__pin" style={`left:${n.x}%;top:${n.y}%`} aria-hidden="true">{n.n}</span>)}
+  </div>
+
+  <ul class="anatomy__notes anatomy__notes--r" role="list">
+    {right.map((n) => (
+      <li class="anatomy__note" style={`order:${n.n}`}>
+        <span class="anatomy__num" aria-hidden="true">{n.n}</span>
+        <Annotation text={n.title} arrow="left" color="paper" tilt={3} width="30ch" />
+        <p>{n.text}</p>
+      </li>
+    ))}
+  </ul>
+  <figcaption class="visually-hidden">The badge, annotated: six details and what they mean.</figcaption>
+</figure>
+
+<style>
+  .anatomy { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 520px) minmax(0, 1fr); gap: clamp(20px, 3vw, 48px); align-items: center; }
+  .anatomy__art { position: relative; }
+  .anatomy__img { width: 100%; height: auto; filter: drop-shadow(0 18px 30px rgba(0, 0, 0, .35)); }
+  .anatomy__pin, .anatomy__num {
+    display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%;
+    background: var(--marigold); color: var(--ink); font-weight: 900; font-size: 1rem; border: 2px solid var(--ink); line-height: 1;
+  }
+  .anatomy__pin { position: absolute; transform: translate(-50%, -50%); box-shadow: 0 0 0 4px rgba(29, 28, 24, .35); }
+  .anatomy__notes { display: grid; gap: clamp(26px, 4vw, 54px); }
+  .anatomy__note { position: relative; display: grid; gap: 8px; padding-left: 48px; }
+  .anatomy__num { position: absolute; left: 0; top: 2px; }
+  .anatomy__note :global(.annot) { color: var(--marigold); }
+  .anatomy__note :global(.annot .hand) { font-size: clamp(1.45rem, 2.2vw, 1.85rem); }
+  .anatomy__note p { color: var(--ink-soft); font-size: .98rem; line-height: 1.45; max-width: 34ch; }
+  .anatomy__notes--l .anatomy__note { justify-items: start; }
+  @media (min-width: 1000px) {
+    .anatomy__notes--l .anatomy__note { padding-left: 0; padding-right: 48px; justify-items: end; text-align: right; }
+    .anatomy__notes--l .anatomy__num { left: auto; right: 0; }
+  }
+  @media (max-width: 999px) {
+    /* one reading order (1–6) on smaller screens: let both lists' items join the figure's grid */
+    .anatomy { grid-template-columns: 1fr 1fr; gap: 28px 32px; }
+    .anatomy__art { grid-column: 1 / -1; order: 0; max-width: 560px; justify-self: center; width: 100%; }
+    .anatomy__notes { display: contents; }
+    .anatomy__note :global(.annot__arrow) { display: none; }
+    .anatomy__note :global(.annot) { flex-direction: row; justify-self: start; }
+  }
+  @media (max-width: 620px) {
+    .anatomy { grid-template-columns: 1fr; }
+    .anatomy__pin { width: 28px; height: 28px; font-size: .85rem; }
+  }
+</style>

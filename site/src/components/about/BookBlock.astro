@@ -1,0 +1,51 @@
+---
+// A typographic stand-in for the book, clearly labelled as not the publisher's cover.
+import { FOUNDER } from '../../data/site';
+const [main, sub] = FOUNDER.book.title.split(':').map((s) => s.trim());
+---
+<figure class="book">
+  <div class="book__obj" aria-hidden="true">
+    <div class="book__cover">
+      <span class="book__rings"></span>
+      <span class="book__crack"></span>
+      <span class="book__kicker">A novel</span>
+      <span class="book__title">{main}</span>
+      <span class="book__sub">{sub}</span>
+      <span class="book__author">{FOUNDER.name}</span>
+    </div>
+  </div>
+  <figcaption class="book__note"><span class="label">Not the real cover</span> A typographic tribute made for this page by Cultural Shock Party. It is not the publisher's cover design.</figcaption>
+</figure>
+
+<style>
+  .book { display: grid; gap: 40px; justify-items: center; }
+  .book__obj { position: relative; width: min(100%, 360px); perspective: 1200px; }
+  .book__cover {
+    position: relative; display: flex; flex-direction: column; gap: 4cqi; aspect-ratio: 2 / 3; padding: 11% 9% 10% 15%; overflow: hidden; container-type: inline-size;
+    background: linear-gradient(90deg, rgba(0, 0, 0, .38) 0 3.5%, rgba(255, 255, 255, .12) 3.5% 4.6%, transparent 4.6% 9%), var(--red-ink);
+    color: var(--paper-light); transform: rotateY(-14deg) rotate(2deg); transform-origin: left center;
+    box-shadow: 18px 22px 0 rgba(0, 0, 0, .4), inset -2px 0 0 rgba(255, 255, 255, .15); border-radius: 2px 6px 6px 2px;
+  }
+  .book__rings {
+    position: absolute; right: -38%; bottom: 8%; width: 100%; aspect-ratio: 1; border-radius: 50%;
+    background: repeating-radial-gradient(circle, transparent 0 4.2cqi, rgba(251, 247, 238, .16) 4.2cqi 4.8cqi);
+  }
+  .book__crack {
+    position: absolute; left: 0; right: 0; top: 63%; height: 7cqi;
+    background: var(--paper-light); clip-path: polygon(0 40%, 12% 55%, 22% 30%, 34% 62%, 47% 35%, 58% 70%, 70% 38%, 82% 60%, 92% 34%, 100% 50%, 100% 62%, 92% 46%, 82% 72%, 70% 50%, 58% 82%, 47% 47%, 34% 74%, 22% 42%, 12% 67%, 0 52%);
+    opacity: .9;
+  }
+  .book__kicker { position: relative; font-weight: 800; font-size: 3.6cqi; letter-spacing: .22em; text-transform: uppercase; color: var(--marigold); }
+  .book__title {
+    position: relative; margin-top: 4cqi; font-weight: 900; font-stretch: 62%; text-transform: uppercase; line-height: .82; letter-spacing: -.01em;
+    font-size: 17.5cqi; white-space: nowrap;
+  }
+  .book__sub { position: relative; font-family: var(--font-serif); font-style: italic; font-size: 7cqi; line-height: 1.08; max-width: 8em; }
+  .book__author { position: relative; margin-top: auto; font-weight: 800; font-stretch: 80%; letter-spacing: .16em; text-transform: uppercase; font-size: 4.2cqi; border-top: 2px solid currentColor; padding-top: .6em; }
+  .book__note { max-width: 36ch; font-size: .84rem; line-height: 1.4; color: var(--ink-soft); text-align: center; }
+  .book__note .label { display: block; color: var(--text); margin-bottom: 4px; }
+  @media (prefers-reduced-motion: no-preference) {
+    .book__cover { transition: transform .5s var(--ease); }
+    .book__obj:hover .book__cover { transform: rotateY(-4deg) rotate(1deg); }
+  }
+</style>

@@ -1,0 +1,55 @@
+---
+// Six roles as lanyard tags on one cord: Reader → Sharer → Signer → Member → Organiser → Lead.
+export type Role = { name: string; how: string; needs: string; adult?: boolean };
+export interface Props { roles: Role[] }
+const { roles } = Astro.props;
+---
+<ol class="roles" role="list">
+  {roles.map((r, i) => (
+    <li class:list={['rtag', `rtag--${i + 1}`]} style={`--t:${[-2.5, 1.5, -1, 2, -1.8, 1.2][i % 6]}deg`}>
+      <span class="rtag__hole" aria-hidden="true"></span>
+      <p class="rtag__n label" aria-hidden="true">{String(i + 1).padStart(2, '0')}</p>
+      <h3 class="rtag__name">{r.name}</h3>
+      <p class="rtag__how">{r.how}</p>
+      <p class="rtag__needs label"><span class="visually-hidden">What it takes: </span>{r.needs}</p>
+      {i < roles.length - 1 && <span class="rtag__arrow" aria-hidden="true">→</span>}
+    </li>
+  ))}
+</ol>
+
+<style>
+  .roles { position: relative; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(10px, 1.4vw, 20px); padding-top: 34px; }
+  .roles::before { content: ''; position: absolute; left: -2%; right: -2%; top: 14px; height: 3px; background: var(--marigold); border-radius: 3px; transform: rotate(-.4deg); }
+  .rtag {
+    --bg: var(--paper-light); --fg: var(--ink);
+    position: relative; display: grid; align-content: start; gap: 10px; padding: 34px 16px 18px; min-height: 220px;
+    background: var(--bg); color: var(--fg); border-radius: 10px 10px 4px 4px; transform: rotate(var(--t));
+    box-shadow: 4px 5px 0 rgba(0, 0, 0, .35);
+  }
+  .rtag--2 { --bg: var(--pink); }
+  .rtag--3 { --bg: var(--marigold); }
+  .rtag--4 { --bg: var(--paper); }
+  .rtag--5 { --bg: var(--coral); }
+  .rtag--6 { --bg: var(--paper-light); outline: 3px solid var(--marigold); outline-offset: -9px; }
+  .rtag__hole { position: absolute; top: 12px; left: 50%; width: 30px; height: 10px; transform: translateX(-50%); border-radius: 6px; background: var(--ink); box-shadow: inset 0 1px 2px rgba(0,0,0,.6); }
+  .rtag__hole::before { content: ''; position: absolute; left: 50%; bottom: 100%; width: 3px; height: 24px; transform: translateX(-50%); background: var(--marigold); }
+  .rtag__n { color: var(--red-ink); font-size: .72rem; }
+  .rtag--5 .rtag__n { color: var(--ink); }
+  .rtag__name { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(1.6rem, 2.15vw, 2.3rem); line-height: .86; letter-spacing: -.01em; }
+  .rtag__how { font-size: .95rem; line-height: 1.38; }
+  .rtag__needs { margin-top: auto; justify-self: start; padding: .3em .5em .25em; background: var(--ink); color: var(--paper-light); }
+  .rtag__arrow { position: absolute; right: calc(-1 * clamp(10px, 1.4vw, 20px) / 2 - 12px); top: 50%; z-index: 2; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--red-ink); color: var(--paper-light); font-weight: 900; font-size: .9rem; transform: rotate(calc(-1 * var(--t))); }
+  @media (max-width: 1100px) {
+    .roles { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 54px; }
+    .roles::before { display: none; }
+    .rtag__hole::before { height: 16px; }
+    .rtag--3 .rtag__arrow { display: none; }
+  }
+  @media (max-width: 600px) {
+    .roles { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 44px; column-gap: 14px; padding-top: 20px; }
+    .rtag { min-height: 0; padding: 30px 14px 16px; }
+    .rtag__how { font-size: .9rem; }
+    .rtag__arrow { display: none; }
+    .rtag__name { font-size: 1.7rem; }
+  }
+</style>

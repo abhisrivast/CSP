@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import Placard from '../components/ui/Placard.astro';
+---
+<Base title="Page not found" description="This page doesn't exist, or it moved. Here's where to go next on Cultural Shock Party." noindex>
+  <section class="section grain lost">
+    <div class="wrap lost__inner">
+      <div>
+        <p class="label red-ink">Error 404</p>
+        <h1 class="h-hero">This page<br />took the<br /><span class="red">day off.</span></h1>
+        <p class="lead">It doesn't exist, or it moved. The movement is still here, though.</p>
+        <ul class="lost__links" role="list">
+          <li><a class="btn" href="/">Go home <span class="arrow" aria-hidden="true">→</span></a></li>
+          <li><a class="link-arrow" href="/manifesto/">Read the manifesto</a></li>
+          <li><a class="link-arrow" href="/resources/">Browse resources</a></li>
+          <li><a class="link-arrow" href="/faq/">FAQ</a></li>
+        </ul>
+      </div>
+      <Placard text="On strike: this URL" color="pink" size="l" tilt={6} stick decorative />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .lost__inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: center; }
+  .lost .h-hero { margin-block: 16px 24px; font-size: clamp(3.4rem, 12vw, 9rem); }
+  .lost__links { display: flex; flex-wrap: wrap; gap: 18px 28px; align-items: center; margin-top: 32px; }
+  @media (max-width: 760px) { .lost__inner { grid-template-columns: 1fr; } }
+</style>

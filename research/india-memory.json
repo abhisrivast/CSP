@@ -1,0 +1,2445 @@
+[
+  {
+    "n": 1,
+    "id": "phule-school-1848",
+    "date_display": "January 1848",
+    "date_start": "1848-01",
+    "date_end": null,
+    "date_precision": "month",
+    "region": "India",
+    "place": "Bhide Wada, Budhwar Peth, Pune",
+    "title": "Savitribai and Jyotirao Phule open a girls' school in Pune",
+    "description": "In January 1848 Savitribai Phule, Jyotirao Phule and Sagunabai Kshirsagar started a school for girls at Bhide Wada in Pune, and Savitribai's colleague Fatima Sheikh later opened a school with her in the Sheikh family home.",
+    "why_it_matters": "Indian feminism starts with a Dalit-Bahujan woman and a Muslim woman claiming education against caste and patriarchy at the same time, so intersectionality here is home-grown, not imported, and education is the first piece of movement infrastructure.",
+    "sources": [
+      {
+        "title": "Savitribai Phule",
+        "url": "https://en.wikipedia.org/wiki/Savitribai_Phule",
+        "publisher": "Wikipedia",
+        "date": "rev. 2026-10-15",
+        "note": "January 1848, Bhidewada, with Sagunabai; Fatima Sheikh school in 1849",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Supreme Court allows national memorial to commemorate first girls' school in India",
+        "url": "https://theleaflet.in/supreme-court-allows-national-memorial-to-commemorate-first-girls-school-in-india",
+        "publisher": "The Leaflet",
+        "date": "2023-11-05",
+        "note": "1848, Bhidewada, Budhwar Peth; SC dismissed occupiers' appeal so the Pune Municipal Corporation can build a memorial",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Activist Dilip Mandal's claim that Fatima Sheikh is a non-existent character is a travesty of historical truth",
+        "url": "https://www.altnews.in/activist-dilip-mandals-claim-that-fatima-sheikh-is-a-non-existent-character-is-a-travesty-of-historical-truth/",
+        "publisher": "Alt News",
+        "date": "2025-01-29",
+        "note": "Fatima Sheikh historicity dispute and the evidence for her",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high (year and place); medium (exact day; Fatima Sheikh's role)",
+    "caveats": "Most sources call this India's first girls' school. Safer wording: 'one of the first girls' schools started by Indians', unless a scholarly history confirms the stronger claim. Fatima Sheikh's existence was publicly questioned in January 2025. Alt News points to a letter Savitribai wrote in 1856 and to books by M.G. Mali (1980, 1988), and it also notes that primary records are thin. Present her with that care. Note for design: the Supreme Court cleared a national memorial at Bhide Wada in 2023.",
+    "sensitivity": "medium: caste history; the Fatima Sheikh debate is politically charged",
+    "image": {
+      "file": "File:Jotirao Phule Savitribai Phule Phulewada Pune.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Jotirao_Phule_Savitribai_Phule_Phulewada_Pune.jpg",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "licence_basis": null,
+      "author": "Wander-earth",
+      "source_date": "2024-02-03 12:22:20",
+      "depicts": "Statue of Jyotirao Phule teaching Savitribai Phule, Phulewada, Pune (photo 2024)",
+      "credit_line": "Wander-earth, CC BY-SA 4.0, via Wikimedia Commons",
+      "attribution_required": true,
+      "share_alike": true,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": {
+      "file": "File:Bhide Wada.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Bhide_Wada.jpg",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "licence_basis": null,
+      "author": "Rohanpawar1812",
+      "source_date": "2021-09-29 08:38:37",
+      "depicts": "Bhide Wada, Pune (photo 2021)",
+      "credit_line": "Rohanpawar1812, CC BY-SA 4.0, via Wikimedia Commons",
+      "attribution_required": true,
+      "share_alike": true,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "image_note": null
+  },
+  {
+    "n": 2,
+    "id": "seneca-falls-1848",
+    "date_display": "19–20 July 1848",
+    "date_start": "1848-07-19",
+    "date_end": "1848-07-20",
+    "date_precision": "day",
+    "region": "Global (USA)",
+    "place": "Wesleyan Chapel, Seneca Falls, New York",
+    "title": "Seneca Falls: the first women's rights convention in the US",
+    "description": "At the Wesleyan Chapel in Seneca Falls, New York, on 19–20 July 1848, the first women's rights convention ended with 68 women and 32 men signing the Declaration of Sentiments, drafted by Elizabeth Cady Stanton and the M'Clintock family.",
+    "why_it_matters": "It happened in the same year the Phules opened their school in Pune. 1848 makes a neat 'two origins' moment showing that feminism started in many places at once, not only in the West.",
+    "sources": [
+      {
+        "title": "The First Women's Rights Convention",
+        "url": "https://www.nps.gov/wori/learn/historyculture/the-first-womens-rights-convention.htm",
+        "publisher": "US National Park Service",
+        "date": "updated 2023-02-06",
+        "note": "19–20 July 1848; 68 women and 32 men signed",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Background: International Women's Day",
+        "url": "https://www.un.org/en/observances/womens-day/background",
+        "publisher": "United Nations",
+        "date": "undated",
+        "note": "1848 convention and Declaration of Sentiments",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high",
+    "caveats": null,
+    "sensitivity": "low",
+    "image": {
+      "file": "File:Wesleyan Chapel, Seneca Falls, exterior.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Wesleyan_Chapel,_Seneca_Falls,_exterior.jpg",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "licence_basis": null,
+      "author": "Jane023",
+      "source_date": "2019-06-19",
+      "depicts": "Wesleyan Chapel, Seneca Falls (photo 2019)",
+      "credit_line": "Jane023, CC BY-SA 4.0, via Wikimedia Commons",
+      "attribution_required": true,
+      "share_alike": true,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": null,
+    "image_note": null
+  },
+  {
+    "n": 3,
+    "id": "tarabai-shinde-1882",
+    "date_display": "1882",
+    "date_start": "1882",
+    "date_end": null,
+    "date_precision": "year",
+    "region": "India",
+    "place": "Pune (Poona)",
+    "title": "Tarabai Shinde publishes 'Stri Purush Tulana'",
+    "description": "Tarabai Shinde's Marathi pamphlet 'Stri Purush Tulana' (A Comparison of Women and Men) turned the tables on writers who blamed women, arguing that men had every fault they pinned on women.",
+    "why_it_matters": "Calling out double standards has an Indian history of more than 140 years. The pamphlet was met with hostility, written off, and rediscovered only in 1975, which shows why a movement has to archive and amplify women's writing itself.",
+    "sources": [
+      {
+        "title": "Stri Purush Tulana",
+        "url": "https://en.wikipedia.org/wiki/Stri_Purush_Tulana",
+        "publisher": "Wikipedia",
+        "date": "rev. 2026-09-13",
+        "note": "published in Marathi in 1882; republished 1975 by S.G. Malshe; triggered by the Vijayalakshmi case",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Tarabai Shinde: Breaking Caste & Patriarchy Glass Ceilings",
+        "url": "https://feminisminindia.com/2017/03/01/remembering-tarabai-shinde-essay/",
+        "publisher": "Feminism in India",
+        "date": "2017-03-01",
+        "note": "content, trigger and hostile reception (article itself gives no year)",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high",
+    "caveats": "Translations of the title vary. Describe it as 'one of the earliest modern feminist texts in India' rather than 'the first'.",
+    "sensitivity": "low",
+    "image": null,
+    "alt_image": null,
+    "image_note": "No portrait or cover of the pamphlet was found on Commons (search 'Tarabai Shinde', 2026-10-24). Use a typographic card with the title in Marathi and English."
+  },
+  {
+    "n": 4,
+    "id": "pandita-ramabai-1889",
+    "date_display": "1889",
+    "date_start": "1889",
+    "date_end": null,
+    "date_precision": "year",
+    "region": "India",
+    "place": "Bombay or Pune (sources differ)",
+    "title": "Pandita Ramabai opens Sharada Sadan, a home and school for widows",
+    "description": "Pandita Ramabai was the first woman in India to earn the titles 'Pandita' and 'Sarasvati'. In 1889 she opened Sharada Sadan, a place where widowed girls and women could live and study.",
+    "why_it_matters": "She put shelter, schooling and a route to independence under one roof, funded partly with money she raised abroad. It is an early Indian model of a feminist organisation that both serves people and campaigns.",
+    "sources": [
+      {
+        "title": "Women's History Month 2020: Pandita Ramabai Sarasvati",
+        "url": "https://blogs.soas.ac.uk/archives/?p=5581",
+        "publisher": "SOAS Archives & Special Collections blog",
+        "date": "2020-03-23",
+        "note": "titles Pandita and Sarasvati; Sharada Sadan 1889 in Chowpatty, Bombay; Arya Mahila Samaj in Pune after 1882",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Pandita Ramabai",
+        "url": "https://en.wikipedia.org/wiki/Pandita_Ramabai",
+        "publisher": "Wikipedia",
+        "date": "rev. 2026-09-01",
+        "note": "1889 Sharada Sadan for child widows (says Pune); funds raised abroad; Mukti Mission",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high (year); low (location)",
+    "caveats": "The sources disagree on the location: SOAS says Chowpatty, Bombay, and Wikipedia says Pune. Confirm before printing a place. Her later Christian mission work was controversial in her time, so present it factually.",
+    "sensitivity": "low to medium: religious conversion",
+    "image": {
+      "file": "File:Pandita Ramabai herself (a photo from the book).jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Pandita_Ramabai_herself_(a_photo_from_the_book).jpg",
+      "licence": "Public domain",
+      "licence_url": null,
+      "licence_basis": "PD-US (published 1888)",
+      "author": "Pandita Ramabai Sarasvati",
+      "source_date": "1888",
+      "depicts": "Portrait of Pandita Ramabai published in 1888",
+      "credit_line": "Pandita Ramabai Sarasvati — public domain, via Wikimedia Commons",
+      "attribution_required": false,
+      "share_alike": false,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": null,
+    "image_note": null
+  },
+  {
+    "n": 5,
+    "id": "new-zealand-suffrage-1893",
+    "date_display": "19 September 1893",
+    "date_start": "1893-09-19",
+    "date_end": null,
+    "date_precision": "day",
+    "region": "Global (New Zealand)",
+    "place": "Wellington",
+    "title": "New Zealand becomes the first self-governing country where women can vote",
+    "description": "On 19 September 1893 New Zealand's governor signed the Electoral Act, making it the first self-governing country where women could vote in parliamentary elections, after a petition of 31,872 signatures organised by Kate Sheppard and the WCTU.",
+    "why_it_matters": "It shows petitions plus persistence work. Māori and Pākehā women both voted in the elections of 1893.",
+    "sources": [
+      {
+        "title": "Suffrage petition submitted to Parliament on 28 July 1893",
+        "url": "https://digitalnz.org/stories/6690b848465c01001ecee026",
+        "publisher": "DigitalNZ (National Library of New Zealand)",
+        "date": "undated",
+        "note": "31,872 signatures; Act signed 19 Sep 1893; 'first self-governing country'",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Women's suffrage in New Zealand",
+        "url": "https://en.wikipedia.org/wiki/Women%27s_suffrage_in_New_Zealand",
+        "publisher": "Wikipedia",
+        "date": "rev. 2026-09-09",
+        "note": "assent 19 Sep 1893; women voted 28 Nov 1893; Māori electorates 20 Dec 1893",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high",
+    "caveats": "Keep the qualifier 'self-governing country': New Zealand was then a British colony.",
+    "sensitivity": "low",
+    "image": {
+      "file": "File:Women's Suffrage Petition 1893 (9365778997).jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Women%27s_Suffrage_Petition_1893_(9365778997).jpg",
+      "licence": "Public domain",
+      "licence_url": null,
+      "licence_basis": "PD (petition text; author died 1934) per file page",
+      "author": "Archives New Zealand (digitised); petition organised by Kate Sheppard (d. 1934)",
+      "source_date": "2011-12-06 12:32",
+      "depicts": "The 1893 suffrage petition (Archives New Zealand)",
+      "credit_line": "Archives New Zealand (digitised); petition organised by Kate Sheppard (d. 1934) — public domain, via Wikimedia Commons",
+      "attribution_required": false,
+      "share_alike": false,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": {
+      "file": "File:Kate Sheppard.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Kate_Sheppard.jpg",
+      "licence": "Public domain",
+      "licence_url": null,
+      "licence_basis": "PD-New Zealand (published 1905)",
+      "author": "H. H. Clifford",
+      "source_date": "circa 1905",
+      "depicts": "Kate Sheppard, c. 1905",
+      "credit_line": "H. H. Clifford — public domain, via Wikimedia Commons",
+      "attribution_required": false,
+      "share_alike": false,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "image_note": null
+  },
+  {
+    "n": 6,
+    "id": "sultanas-dream-1905",
+    "date_display": "1905",
+    "date_start": "1905",
+    "date_end": null,
+    "date_precision": "year",
+    "region": "India (Bengal)",
+    "place": "Published in Madras; author from Bengal",
+    "title": "Rokeya Sakhawat Hossain imagines 'Ladyland'",
+    "description": "Rokeya Sakhawat Hossain's 'Sultana's Dream' was first published in The Indian Ladies' Magazine in Madras in 1905. It imagines Ladyland, a science-fiction utopia where women run everything and men are kept in seclusion.",
+    "why_it_matters": "Imagining the world you want is itself a political act. The story is among the earliest known Indian science fiction in English, and a model for CSP's creative and speculative work.",
+    "sources": [
+      {
+        "title": "Sultana's Dream by Rokeya Sakhawat Hossain (review)",
+        "url": "https://strangehorizons.com/wordpress/non-fiction/reviews/sultanas-dream-by-rokeya-sakhawat-hossain/",
+        "publisher": "Strange Horizons",
+        "date": "2013-09-30",
+        "note": "Indian Ladies Magazine, Madras, 1905; book 1908; among earliest Indian SF in English",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Sultana's Dream",
+        "url": "https://en.wikipedia.org/wiki/Sultana%27s_Dream",
+        "publisher": "Wikipedia",
+        "date": "rev. 2026-09-12",
+        "note": "Ladyland; men secluded, a mirror image of purdah",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high",
+    "caveats": "Bangladesh also claims Rokeya as part of its heritage, so the region tag could read 'Bengal'.",
+    "sensitivity": "low",
+    "image": {
+      "file": "File:Begum Rokeya.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Begum_Rokeya.jpg",
+      "licence": "Public domain",
+      "licence_url": null,
+      "licence_basis": "PD-1996, PD-Bangladesh, PD-India tags on file page",
+      "author": "Unknown author",
+      "source_date": "before 1932",
+      "depicts": "Portrait of Rokeya Sakhawat Hossain (before 1932)",
+      "credit_line": "Unknown author — public domain, via Wikimedia Commons",
+      "attribution_required": false,
+      "share_alike": false,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": null,
+    "image_note": null
+  },
+  {
+    "n": 7,
+    "id": "first-iwd-1911",
+    "date_display": "19 March 1911",
+    "date_start": "1911-03-19",
+    "date_end": null,
+    "date_precision": "day",
+    "region": "Global (Europe, USA)",
+    "place": "Several European countries and the US",
+    "title": "The first International Women's Day",
+    "description": "A year after socialist women meeting in Copenhagen agreed to hold an international women's day, the first celebrations took place on 19 March 1911 in several European countries and the US. Marchers demanded the vote, the right to work and an end to discrimination at work.",
+    "why_it_matters": "International Women's Day began as a working women's protest, not a branding day, which is worth remembering in CSP's 8 March content.",
+    "sources": [
+      {
+        "title": "Background: International Women's Day",
+        "url": "https://www.un.org/en/observances/womens-day/background",
+        "publisher": "United Nations",
+        "date": "undated",
+        "note": "Copenhagen 1910; first celebrations on 19 March (1911); demands",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high",
+    "caveats": null,
+    "sensitivity": "low",
+    "image": {
+      "file": "File:Zum Frauentag 1.gif",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Zum_Frauentag_1.gif",
+      "licence": "Public domain",
+      "licence_url": null,
+      "licence_basis": "PD-old-70 (Adelheid Popp died 1939)",
+      "author": "Adelheid Popp (1869–1939)",
+      "source_date": "1911",
+      "depicts": "Page 1 of Adelheid Popp's article 'Zum Frauentag!' in Die Neue Zeit, 1911",
+      "credit_line": "Adelheid Popp (1869–1939) — public domain, via Wikimedia Commons",
+      "attribution_required": false,
+      "share_alike": false,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": {
+      "file": "File:Frauentag 1914 Heraus mit dem Frauenwahlrecht (cropped).jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Frauentag_1914_Heraus_mit_dem_Frauenwahlrecht_(cropped).jpg",
+      "licence": "Public domain",
+      "licence_url": null,
+      "licence_basis": "PD-old-70-expired tag; artist's death date is given only as 'after 1943', so medium certainty",
+      "author": "Karl Maria Stadler (1888 – nach 1943)",
+      "source_date": "1914",
+      "depicts": "Poster for Women's Day, 8 March 1914 (caption must say 1914)",
+      "credit_line": "Karl Maria Stadler (1888 – nach 1943) — public domain, via Wikimedia Commons",
+      "attribution_required": false,
+      "share_alike": false,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "image_note": null
+  },
+  {
+    "n": 8,
+    "id": "petrograd-strike-1917",
+    "date_display": "8 March 1917 (23 February in the old Russian calendar)",
+    "date_start": "1917-03-08",
+    "date_end": null,
+    "date_precision": "day",
+    "region": "Global (Russia)",
+    "place": "Petrograd (St Petersburg)",
+    "title": "Petrograd women strike for 'bread and peace'",
+    "description": "On 8 March 1917 (23 February in Russia's old calendar), women in Petrograd went on strike for 'bread and peace'. Within days the Tsar abdicated, and the new provisional government granted women the vote.",
+    "why_it_matters": "This strike is why International Women's Day falls on 8 March: women's economic protest helped topple an empire.",
+    "sources": [
+      {
+        "title": "Background: International Women's Day",
+        "url": "https://www.un.org/en/observances/womens-day/background",
+        "publisher": "United Nations",
+        "date": "undated",
+        "note": "'Bread and Peace' on the last Sunday in February, which fell on 8 March; abdication four days later; vote granted",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high",
+    "caveats": "The UN wording runs the abdication and the vote together. 'Later granted' is the safer phrasing.",
+    "sensitivity": "low",
+    "image": {
+      "file": "File:Petrograd. Women parading to the Duma. LCCN2011647887 (cropped).jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Petrograd._Women_parading_to_the_Duma._LCCN2011647887_(cropped).jpg",
+      "licence": "Public domain",
+      "licence_url": null,
+      "licence_basis": "PD-old-70-expired (Library of Congress item)",
+      "author": "Pringle, James Maxwell, photographer",
+      "source_date": "1917",
+      "depicts": "Women parading to the Duma, Petrograd, 1917 (exact date not given)",
+      "credit_line": "Pringle, James Maxwell, photographer — public domain, via Wikimedia Commons",
+      "attribution_required": false,
+      "share_alike": false,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": {
+      "file": "File:Women's manifestation inPetrograd, 1917.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Women%27s_manifestation_inPetrograd,_1917.jpg",
+      "licence": "Public domain",
+      "licence_url": null,
+      "licence_basis": "PD in country of origin (Bulla atelier, 1917)",
+      "author": "Ателье Буллы",
+      "source_date": "1917",
+      "depicts": "Women's demonstration, Petrograd, archive-dated 19.04.1917 (not 8 March)",
+      "credit_line": "Ателье Буллы — public domain, via Wikimedia Commons",
+      "attribution_required": false,
+      "share_alike": false,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "image_note": null
+  },
+  {
+    "n": 9,
+    "id": "wia-suffrage-1917",
+    "date_display": "1917 (deputation 15 December 1917)",
+    "date_start": "1917",
+    "date_end": "1917-12-15",
+    "date_precision": "year",
+    "region": "India",
+    "place": "Adyar, Madras",
+    "title": "Women's Indian Association founded; women ask for the vote",
+    "description": "The Women's Indian Association was founded in Adyar, Madras, in 1917. That December an all-women delegation asked the Montagu–Chelmsford inquiry to give Indian women the vote.",
+    "why_it_matters": "This was the first organised campaign for Indian women's suffrage. The vote was then won step by step: Madras city in 1919, and the Madras and Bombay presidencies in 1921. Rights came from persistent organising, not a single event.",
+    "sources": [
+      {
+        "title": "The Women's Indian Association and Indian Constitutional Thought",
+        "url": "https://www.constitutionofindia.net/blogs/the_women_s_indian_association_and_indian_constitutional_thought",
+        "publisher": "Constitution of India (CLPR)",
+        "date": "2026-03-06",
+        "note": "founded 1917 in Adyar; 14-member all-women delegation demanded the franchise; rejected",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Women's suffrage in India",
+        "url": "https://en.wikipedia.org/wiki/Women%27s_suffrage_in_India",
+        "publisher": "Wikipedia",
+        "date": "rev. 2026-03-25",
+        "note": "15 Dec 1917 deputation led by Sarojini Naidu; Madras city 1919; Madras and Bombay presidencies 1921",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high (1917 founding); medium (exact deputation date and leader)",
+    "caveats": "One unverified search result gives 18 December 1917 for the deputation. The founders are listed differently across sources (Margaret Cousins, Annie Besant, Muthulakshmi Reddy, Kamaladevi Chattopadhyay and others).",
+    "sensitivity": "low",
+    "image": {
+      "file": "File:MargaretCousins1930.png",
+      "file_page": "https://commons.wikimedia.org/wiki/File:MargaretCousins1930.png",
+      "licence": "Public domain",
+      "licence_url": null,
+      "licence_basis": "PD in the US (published 1930; US term expired); photographer unknown",
+      "author": "Unknown author",
+      "source_date": "1930-02-01",
+      "depicts": "Margaret Cousins, a founder of the WIA (published 1930)",
+      "credit_line": "Unknown author — public domain, via Wikimedia Commons",
+      "attribution_required": false,
+      "share_alike": false,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": null,
+    "image_note": null
+  },
+  {
+    "n": 10,
+    "id": "aiwc-1927",
+    "date_display": "1927",
+    "date_start": "1927",
+    "date_end": null,
+    "date_precision": "year",
+    "region": "India",
+    "place": "Poona (Pune)",
+    "title": "The All India Women's Conference meets for the first time",
+    "description": "The All India Women's Conference was founded in 1927, and its first meeting at Fergusson College in Poona drew about 2,000 people to push for girls' education and women's welfare.",
+    "why_it_matters": "It is a national federation of local women's groups that still exists almost a century later. Its centenary in 2027 is a ready-made public-memory moment.",
+    "sources": [
+      {
+        "title": "History",
+        "url": "https://aiwc.org.in/history.html",
+        "publisher": "All India Women's Conference (official)",
+        "date": "undated",
+        "note": "founded 1927; registered 1930",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "All India Women's Conference",
+        "url": "https://en.wikipedia.org/wiki/All_India_Women%27s_Conference",
+        "publisher": "Wikipedia",
+        "date": "rev. 2026-09-26",
+        "note": "founded 1927 in Pune; first meeting 2,000 attendees at Fergusson College Hall",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high (year); medium (venue and attendance)",
+    "caveats": "No source we opened confirmed the month (often given as January 1927). Britannica blocked our fetch.",
+    "sensitivity": "low",
+    "image": {
+      "file": "File:Fergusson College , Main Building.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Fergusson_College_,_Main_Building.jpg",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "licence_basis": null,
+      "author": "Himanshu Rane",
+      "source_date": "2021-09-29 14:21:23",
+      "depicts": "Fergusson College main building, Pune (photo 2021); venue of the first session per Wikipedia",
+      "credit_line": "Himanshu Rane, CC BY-SA 4.0, via Wikimedia Commons",
+      "attribution_required": true,
+      "share_alike": true,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": null,
+    "image_note": null
+  },
+  {
+    "n": 11,
+    "id": "salt-satyagraha-1930",
+    "date_display": "6 April 1930 (Chowpatty); Dharasana later in 1930",
+    "date_start": "1930-04-06",
+    "date_end": null,
+    "date_precision": "day",
+    "region": "India",
+    "place": "Chowpatty, Bombay; Dharasana, Gujarat",
+    "title": "Women break the salt law",
+    "description": "On 6 April 1930 Kamaladevi Chattopadhyay led women to Chowpatty beach in Bombay to make salt against British law. After Gandhi's arrest, Sarojini Naidu led the protest at the Dharasana salt works.",
+    "why_it_matters": "Mass civil disobedience made women visible as political actors in public space, which is the same move today's Gen Z protest culture makes.",
+    "sources": [
+      {
+        "title": "The Chowpatty Satyagraha",
+        "url": "https://www.livehistoryindia.com/story/people/the-chowpatty-satyagraha",
+        "publisher": "Live History India",
+        "date": "2017-08-09",
+        "note": "6 April 1930 women led by Kamaladevi made salt at Chowpatty; she was hit by a lathi",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Women of Dandi March",
+        "url": "https://www.mkgandhi.org/articles/women-of-dandi-march.php",
+        "publisher": "mkgandhi.org (reprint from HerCircle)",
+        "date": "2025-03-12",
+        "note": "Kamaladevi among first women arrested; Sarojini Naidu led Dharasana after Gandhi's arrest",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high (Chowpatty date); medium (Dharasana details)",
+    "caveats": "Freedom-movement entries feature Congress-era leaders. Given CSP's need to read as independent, keep the focus on what the women did, not on the party.",
+    "sensitivity": "medium: party association",
+    "image": {
+      "file": "File:The attack of the tigress of India on Dharsana's salt factory.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:The_attack_of_the_tigress_of_India_on_Dharsana%27s_salt_factory.jpg",
+      "licence": "Public domain",
+      "licence_url": null,
+      "licence_basis": "PD-India (1940s print; term expired)",
+      "author": "Unknown author",
+      "source_date": "bazaar art, 1940's",
+      "depicts": "1940s bazaar print of Sarojini Naidu leading the Dharasana salt raid",
+      "credit_line": "Unknown author — public domain, via Wikimedia Commons",
+      "attribution_required": false,
+      "share_alike": false,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": null,
+    "image_note": null
+  },
+  {
+    "n": 12,
+    "id": "aruna-asaf-ali-1942",
+    "date_display": "9 August 1942",
+    "date_start": "1942-08-09",
+    "date_end": null,
+    "date_precision": "day",
+    "region": "India",
+    "place": "Gowalia Tank Maidan, Bombay",
+    "title": "Aruna Asaf Ali raises the flag at Gowalia Tank",
+    "description": "The morning after the Quit India resolution, with the top leaders arrested and gatherings banned, Aruna Asaf Ali hoisted the flag of the freedom movement at Gowalia Tank Maidan in Bombay while police used lathis and tear gas on the crowd.",
+    "why_it_matters": "A movement survives the arrest of its leaders when others are ready to step up. This is a lesson in distributed leadership, and in a woman taking the lead.",
+    "sources": [
+      {
+        "title": "Quit India (Gandhi Comes Alive)",
+        "url": "https://gandhi-manibhavan.org/gandhi-comes-alive/quit-india.html",
+        "publisher": "Mani Bhavan Gandhi Sangrahalaya",
+        "date": "undated",
+        "note": "session ended 8/9 Aug; arrests on 9 Aug; Aruna Asaf Ali hoisted the flag despite the ban; lathi charge and tear gas",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Aruna Asaf Ali",
+        "url": "https://en.wikipedia.org/wiki/Aruna_Asaf_Ali",
+        "publisher": "Wikipedia",
+        "date": "rev. 2026-10-04",
+        "note": "presided over the rest of the session and hoisted the flag on 9 August",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high",
+    "caveats": "Wikipedia calls it both the 'Indian National flag' and the 'Congress flag'. 'The flag of the freedom movement' is the neutral wording. One search summary wrongly said the ground is now Azad Maidan; Commons files call it August Kranti Maidan. We did not verify the modern name on a source we opened.",
+    "sensitivity": "medium: party association",
+    "image": {
+      "file": "File:People teargassed at Gowalia Tank Maidan.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:People_teargassed_at_Gowalia_Tank_Maidan.jpg",
+      "licence": "Public domain",
+      "licence_url": null,
+      "licence_basis": "PD-India (1942 photograph)",
+      "author": "Unknown author",
+      "source_date": "1942-08",
+      "depicts": "Crowd teargassed at Gowalia Tank Maidan, August 1942",
+      "credit_line": "Unknown author — public domain, via Wikimedia Commons",
+      "attribution_required": false,
+      "share_alike": false,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": {
+      "file": "File:Aruna Asaf Ali in the 1940s.png",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Aruna_Asaf_Ali_in_the_1940s.png",
+      "licence": "Public domain",
+      "licence_url": null,
+      "licence_basis": "PD-India claimed; source is a modern news web story, so provenance is weak",
+      "author": "Unknown author",
+      "source_date": "circa 1940s",
+      "depicts": "Portrait of Aruna Asaf Ali, 1940s (weak provenance: copied from a news web story)",
+      "credit_line": "Unknown author — public domain, via Wikimedia Commons",
+      "attribution_required": false,
+      "share_alike": false,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "image_note": null
+  },
+  {
+    "n": 13,
+    "id": "constituent-assembly-1946",
+    "date_display": "9 December 1946 to 24 January 1950",
+    "date_start": "1946-12-09",
+    "date_end": "1950-01-24",
+    "date_precision": "day",
+    "region": "India",
+    "place": "New Delhi",
+    "title": "Fifteen women help write India's Constitution",
+    "description": "Fifteen women sat in the Constituent Assembly that debated India's Constitution from December 1946 to January 1950, among them Dakshayani Velayudhan, its only Dalit woman member.",
+    "why_it_matters": "Women were co-authors of the Republic. 'Founding mothers' is a non-partisan, constitution-first identity that suits CSP's rights-based voice.",
+    "sources": [
+      {
+        "title": "These Are The 15 Women Who Helped Draft The Indian Constitution",
+        "url": "https://feminisminindia.com/2018/01/26/15-women-draft-indian-constitution/",
+        "publisher": "Feminism in India",
+        "date": "2018-01-26",
+        "note": "names all 15",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Dakshayani Velayudhan",
+        "url": "https://www.constitutionofindia.net/members/dakshayani-velayudhan/",
+        "publisher": "Constitution of India (CLPR)",
+        "date": "undated",
+        "note": "only Dalit woman member; elected 1946 from Madras; debates 9 Dec 1946 to 24 Jan 1950",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high",
+    "caveats": "The fifteen were Ammu Swaminathan, Dakshayani Velayudhan, Begum Aizaz Rasul, Durgabai Deshmukh, Hansa Mehta, Kamla Chaudhary, Leela Roy, Malati Choudhury, Purnima Banerjee, Rajkumari Amrit Kaur, Renuka Ray, Sarojini Naidu, Sucheta Kripalani, Vijaya Lakshmi Pandit and Annie Mascarene. Membership changed over time, so do not quote the Assembly's total size (389 or 299) without a source. The claim that Begum Aizaz Rasul was the only Muslim woman member was not verified.",
+    "sensitivity": "low",
+    "image": {
+      "file": "File:AmmuSwaminathan1945.png",
+      "file_page": "https://commons.wikimedia.org/wiki/File:AmmuSwaminathan1945.png",
+      "licence": "Public domain",
+      "licence_url": null,
+      "licence_basis": "PD-India (photo published before 1958) and PD-1996",
+      "author": "No photographer credited",
+      "source_date": "1945-12-04",
+      "depicts": "Ammu Swaminathan, one of the 15 (Indian Express, 4 Dec 1945)",
+      "credit_line": "No photographer credited — public domain, via Wikimedia Commons",
+      "attribution_required": false,
+      "share_alike": false,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": null,
+    "image_note": null
+  },
+  {
+    "n": 14,
+    "id": "udhr-hansa-mehta-1948",
+    "date_display": "10 December 1948",
+    "date_start": "1948-12-10",
+    "date_end": null,
+    "date_precision": "day",
+    "region": "India + Global",
+    "place": "Paris (UN General Assembly)",
+    "title": "Hansa Mehta helps make the Universal Declaration say 'human beings'",
+    "description": "When the UN adopted the Universal Declaration of Human Rights in Paris on 10 December 1948, Article 1 said 'All human beings are born free and equal', a change widely credited to India's delegate Hansa Mehta.",
+    "why_it_matters": "Words are policy. An Indian woman helped make the world's rights charter gender-inclusive, which is a direct ancestor of today's fights over inclusive language.",
+    "sources": [
+      {
+        "title": "Women Who Shaped the Universal Declaration",
+        "url": "https://www.un.org/en/observances/human-rights-day/women-who-shaped-the-universal-declaration",
+        "publisher": "United Nations",
+        "date": "undated",
+        "note": "Mehta 'widely credited' with changing 'All men' to 'All human beings'",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Universal Declaration of Human Rights",
+        "url": "https://www.un.org/en/about-us/universal-declaration-of-human-rights",
+        "publisher": "United Nations",
+        "date": "undated",
+        "note": "proclaimed in Paris on 10 December 1948, GA resolution 217 A",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high (date); medium (sole credit to Mehta: the UN itself says 'widely credited')",
+    "caveats": "Keep the UN's hedge, 'widely credited'. Mehta was also one of the 15 women in the Constituent Assembly.",
+    "sensitivity": "low",
+    "image": {
+      "file": "File:Eleanor Roosevelt UDHR.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Eleanor_Roosevelt_UDHR.jpg",
+      "licence": "CC BY 2.0",
+      "licence_url": "https://creativecommons.org/licenses/by/2.0",
+      "licence_basis": null,
+      "author": "FDR Presidential Library & Museum",
+      "source_date": "2008-02-28 04:10:36",
+      "depicts": "Eleanor Roosevelt holding the UDHR poster, Lake Success, Nov 1949 (Mehta not pictured)",
+      "credit_line": "FDR Presidential Library & Museum, CC BY 2.0, via Wikimedia Commons",
+      "attribution_required": true,
+      "share_alike": false,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": null,
+    "image_note": "We found no Hansa Mehta photo with a credible free licence. File:Hansa_Jivraj_Mehta.jpg is tagged CC BY-SA 4.0 but was copied from alchetron.com, so it was rejected."
+  },
+  {
+    "n": 15,
+    "id": "universal-franchise-1950",
+    "date_display": "26 January 1950",
+    "date_start": "1950-01-26",
+    "date_end": null,
+    "date_precision": "day",
+    "region": "India",
+    "place": "India",
+    "title": "The Constitution gives every adult an equal vote",
+    "description": "When the Constitution came into force on 26 January 1950, Article 326 based elections on adult suffrage, so women voted as equals in the first general election of 1951–52, when about 173 million voters were registered.",
+    "why_it_matters": "Indian women did not have to win the national vote separately. But equal votes did not bring equal seats, which is why the reservation story runs all the way to 2026.",
+    "sources": [
+      {
+        "title": "Constitution of India",
+        "url": "https://en.wikipedia.org/wiki/Constitution_of_India",
+        "publisher": "Wikipedia",
+        "date": "rev. 2026-10-13",
+        "note": "adopted 26 Nov 1949; effective 26 Jan 1950",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Universal Adult Franchise: A Brief Constitutional History",
+        "url": "https://www.constitutionofindia.net/blog/universal-adult-franchise-a-brief-constitutional-history/",
+        "publisher": "Constitution of India (CLPR)",
+        "date": "2026-02-14",
+        "note": "Article 326 text; 173 million voters in 1951–52",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high",
+    "caveats": "Some women could vote earlier, under narrow colonial-era rules (see the 1917 entry). So 'from day one' means from day one of the Republic.",
+    "sensitivity": "low",
+    "image": {
+      "file": "File:A long queue of women voters are seen waiting for their turn to cast their votes at a polling booth at Modern High School, in New Delhi (1952).jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:A_long_queue_of_women_voters_are_seen_waiting_for_their_turn_to_cast_their_votes_at_a_polling_booth_at_Modern_High_School,_in_New_Delhi_(1952).jpg",
+      "licence": "Public domain",
+      "licence_url": null,
+      "licence_basis": "PD-India (Government Photo Division, 1952)",
+      "author": "Photo Division, Ministry of Information & Broadcasting, Government of India",
+      "source_date": "1952-01",
+      "depicts": "Women voters queueing in New Delhi, January 1952 (Photo Division)",
+      "credit_line": "Photo Division, Ministry of Information & Broadcasting, Government of India — public domain, via Wikimedia Commons",
+      "attribution_required": false,
+      "share_alike": false,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": {
+      "file": "File:A Polling Officer applies indelible ink mark on the forefinger of a female voter in Delhi (1952).jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:A_Polling_Officer_applies_indelible_ink_mark_on_the_forefinger_of_a_female_voter_in_Delhi_(1952).jpg",
+      "licence": "Public domain",
+      "licence_url": null,
+      "licence_basis": "PD-India (Government Photo Division, 1952)",
+      "author": "Photo Division, Ministry of Information & Broadcasting, Government of India",
+      "source_date": "1952-01-14",
+      "depicts": "Polling officer inking a woman voter's finger, Delhi, 14 Jan 1952",
+      "credit_line": "Photo Division, Ministry of Information & Broadcasting, Government of India — public domain, via Wikimedia Commons",
+      "attribution_required": false,
+      "share_alike": false,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "image_note": null
+  },
+  {
+    "n": 16,
+    "id": "sewa-1972",
+    "date_display": "12 April 1972",
+    "date_start": "1972-04-12",
+    "date_end": null,
+    "date_precision": "day",
+    "region": "India",
+    "place": "Ahmedabad",
+    "title": "SEWA becomes a union for self-employed women",
+    "description": "The Self Employed Women's Association, founded by labour lawyer Ela Bhatt in Ahmedabad, was registered as a trade union on 12 April 1972. It organised women such as vegetable vendors and waste-recyclers, who were outside the reach of existing unions.",
+    "why_it_matters": "Feminism here is economic infrastructure: organising women in informal work. It is a model for CSP's move from research to action.",
+    "sources": [
+      {
+        "title": "History",
+        "url": "https://www.sewa.org/about-us/history/",
+        "publisher": "SEWA (official)",
+        "date": "undated",
+        "note": "registered as a trade union on 12 April 1972, reg. no. G.938; trades organised",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Self Employed Women's Association",
+        "url": "https://en.wikipedia.org/wiki/Self_Employed_Women%27s_Association",
+        "publisher": "Wikipedia",
+        "date": "rev. 2026-10-11",
+        "note": "founded 1972 by Ela Bhatt; based in Ahmedabad",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high",
+    "caveats": null,
+    "sensitivity": "low",
+    "image": {
+      "file": "File:MJ-Ela-Bhatt-October-2013.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:MJ-Ela-Bhatt-October-2013.jpg",
+      "licence": "CC BY-SA 3.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+      "licence_basis": null,
+      "author": "Mohan Juneja",
+      "source_date": "2013-10-31 15:38:12",
+      "depicts": "Ela Bhatt at McMaster University, 2013",
+      "credit_line": "Mohan Juneja, CC BY-SA 3.0, via Wikimedia Commons",
+      "attribution_required": true,
+      "share_alike": true,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": {
+      "file": "File:SEWA 5949054537 fc4bdcd4c5 o.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:SEWA_5949054537_fc4bdcd4c5_o.jpg",
+      "licence": "Public domain",
+      "licence_url": null,
+      "licence_basis": "PD-USGov (US Embassy New Delhi)",
+      "author": "United States Embassy in New Delhi",
+      "source_date": "1995",
+      "depicts": "At SEWA, 1995 (US Embassy New Delhi)",
+      "credit_line": "United States Embassy in New Delhi — public domain, via Wikimedia Commons",
+      "attribution_required": false,
+      "share_alike": false,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "image_note": null
+  },
+  {
+    "n": 17,
+    "id": "chipko-1973",
+    "date_display": "24 April 1973 (Mandal) and 26 March 1974 (Reni)",
+    "date_start": "1973-04-24",
+    "date_end": "1974-03-26",
+    "date_precision": "day",
+    "region": "India",
+    "place": "Chamoli district, Uttarakhand Himalaya",
+    "title": "Chipko: village women hug trees to stop logging",
+    "description": "Chipko began on 24 April 1973, when villagers at Mandal in the Himalayan hills turned back loggers. On 26 March 1974 Gaura Devi led 27 women of Reni village to face down contractors and save their forest.",
+    "why_it_matters": "This is ecofeminism from India's hills. Rural women defended forests as their livelihood, linking climate justice and feminism decades before school climate strikes.",
+    "sources": [
+      {
+        "title": "Chipko movement",
+        "url": "https://en.wikipedia.org/wiki/Chipko_movement",
+        "publisher": "Wikipedia",
+        "date": "rev. 2026-09-14",
+        "note": "Mandal 24 Apr 1973; Reni action 26 Mar 1974; Gaura Devi led 27 women; 1980 ban on felling for 15 years",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high (dates); medium (only one source opened, because Britannica and India Environment Portal failed to load)",
+    "caveats": "Men such as Chandi Prasad Bhatt and Sundarlal Bahuguna are often centred in the story. A feminist timeline should lead with Gaura Devi and the Reni women.",
+    "sensitivity": "low",
+    "image": {
+      "file": "File:Chipko Andolan.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Chipko_Andolan.jpg",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "licence_basis": null,
+      "author": "Samruddhi2897",
+      "source_date": "2023-04-29 17:40:17",
+      "depicts": "A 2023 tree-hugging protest in Pune named after Chipko, NOT the 1973–74 events",
+      "credit_line": "Samruddhi2897, CC BY-SA 4.0, via Wikimedia Commons",
+      "attribution_required": true,
+      "share_alike": true,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": null,
+    "image_note": "We found no free photo of the 1973–74 actions. Use the 2023 Pune image only with a 'Chipko's legacy, 2023' caption, or commission an illustration."
+  },
+  {
+    "n": 18,
+    "id": "towards-equality-1974",
+    "date_display": "1974",
+    "date_start": "1974",
+    "date_end": null,
+    "date_precision": "year",
+    "region": "India",
+    "place": "New Delhi",
+    "title": "'Towards Equality' shows how far women had been left behind",
+    "description": "In 1974 the government-appointed Committee on the Status of Women in India published 'Towards Equality'. It found that independent India had left many women behind, and it drew attention to the declining sex ratio.",
+    "why_it_matters": "This is research turning into a movement, the same pipeline CSP plans: the report is said to have laid the foundation of the modern Indian women's movement. Members Vina Mazumdar and Lotika Sarkar also dissented when the committee rejected reserved seats for women in legislatures, a debate that ended with the 2023 Act.",
+    "sources": [
+      {
+        "title": "Towards Equality",
+        "url": "https://en.wikipedia.org/wiki/Towards_Equality",
+        "publisher": "Wikipedia",
+        "date": "rev. 2026-09-26",
+        "note": "1974; said to lay the foundation of the women's movement; declining sex ratio; Mazumdar–Sarkar note of dissent on reservations",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Vina Mazumdar",
+        "url": "https://en.wikipedia.org/wiki/Vina_Mazumdar",
+        "publisher": "Wikipedia",
+        "date": "rev. 2026-09-30",
+        "note": "committee appointed 1971, reconstituted 1973 with her as Member Secretary",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high (year); medium (exact dates)",
+    "caveats": "PARI hosts the original report (https://ruralindiaonline.org/en/library/resource/towards-equality-report-of-the-committee-on-the-status-of-women-in-india/) but the page did not render for us. The exact dates (committee set up 22 Sep 1971, report presented 31 Dec 1974) come only from a search snippet. Verify them before using.",
+    "sensitivity": "low",
+    "image": {
+      "file": "File:Vina 1.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Vina_1.jpg",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "licence_basis": null,
+      "author": "Payasam (Mukul Dube)",
+      "source_date": "2010-03-20",
+      "depicts": "Vina Mazumdar in 2010",
+      "credit_line": "Payasam (Mukul Dube), CC BY-SA 4.0, via Wikimedia Commons",
+      "attribution_required": true,
+      "share_alike": true,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": null,
+    "image_note": null
+  },
+  {
+    "n": 19,
+    "id": "iceland-strikes-1975-2023",
+    "date_display": "24 October 1975 and 24 October 2023",
+    "date_start": "1975-10-24",
+    "date_end": "2023-10-24",
+    "date_precision": "day",
+    "region": "Global (Iceland)",
+    "place": "Reykjavík and across Iceland",
+    "title": "Iceland's women take the day off, and do it again in 2023",
+    "description": "On 24 October 1975 about 90% of Iceland's women walked off their jobs and their housework for a day. On 24 October 2023 women and non-binary people, including the prime minister, held a full-day strike against the pay gap and gender-based violence.",
+    "why_it_matters": "The strike showed how much the country depended on women's work. In 1980 Iceland elected Vigdís Finnbogadóttir, the first woman in the world to be democratically elected president. Today, 24 October 2026, is the 51st anniversary: a natural 'on this day' post.",
+    "sources": [
+      {
+        "title": "50 years ago, the women of Iceland took a day off—and inspired the world",
+        "url": "https://www.nationalgeographic.com/history/article/icelandic-womens-strike",
+        "publisher": "National Geographic",
+        "date": "2025-10-24",
+        "note": "24 Oct 1975; 90 percent of women",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Women, nonbinary people in Iceland strike for 24 hours to fight gender pay gap",
+        "url": "https://www.npr.org/2023/10/24/1208264449/iceland-women-nonbinary-strike",
+        "publisher": "NPR",
+        "date": "2023-10-24",
+        "note": "seventh strike since 1975; first 24-hour one since; PM took part; >90% in 1975",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Vigdís Finnbogadóttir",
+        "url": "https://en.wikipedia.org/wiki/Vigd%C3%ADs_Finnbogadóttir",
+        "publisher": "Wikipedia",
+        "date": "rev. 2026-10-23",
+        "note": "president 1980–96; first democratically elected woman president",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high",
+    "caveats": null,
+    "sensitivity": "low",
+    "image": {
+      "file": "File:Kvinnostrejk i Reykjavik (2).jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Kvinnostrejk_i_Reykjavik_(2).jpg",
+      "licence": "CC BY 2.5 dk",
+      "licence_url": "https://creativecommons.org/licenses/by/2.5/dk/deed.en",
+      "licence_basis": null,
+      "author": "Magnus Fröderberg",
+      "source_date": "Taken on 24 October 2005, 17:18:46 (according to Exif data)",
+      "depicts": "Women's strike in Reykjavík, 24 Oct 2005 (30th-anniversary strike, not 1975)",
+      "credit_line": "Magnus Fröderberg, CC BY 2.5 dk, via Wikimedia Commons",
+      "attribution_required": true,
+      "share_alike": false,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": null,
+    "image_note": null
+  },
+  {
+    "n": 20,
+    "id": "mathura-1983",
+    "date_display": "15 September 1978 judgment; 1979 open letter; 1983 law",
+    "date_start": "1978-09-15",
+    "date_end": "1983",
+    "date_precision": "day",
+    "region": "India",
+    "place": "Maharashtra; New Delhi",
+    "title": "The Mathura case sparks India's first national campaign on consent",
+    "description": "On 15 September 1978 the Supreme Court acquitted two policemen in the custodial rape of a tribal teenager known as Mathura. In 1979 four law professors wrote an open letter, and women's groups campaigned until Parliament changed rape law in 1983.",
+    "why_it_matters": "It is the template for consent politics: an open letter, new feminist groups such as the Forum Against Rape (1980), street protest and law reform all working together. The 1983 law said courts should presume a survivor did not consent if she says so in custodial-rape cases.",
+    "sources": [
+      {
+        "title": "Tuka Ram and Anr vs State of Maharashtra, 15 September 1978",
+        "url": "https://indiankanoon.org/doc/1092711/",
+        "publisher": "Indian Kanoon (Supreme Court judgment)",
+        "date": "1978-09-15",
+        "note": "judgment date and facts",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Mathura rape case",
+        "url": "https://en.wikipedia.org/wiki/Mathura_rape_case",
+        "publisher": "Wikipedia",
+        "date": "rev. 2026-09-19",
+        "note": "open letter by Baxi, Kelkar, Sarkar and Dhagamwar; Forum Against Rape (Jan 1980); Criminal Law Amendment Act 1983 (No. 43) and Evidence Act s.114A",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high",
+    "caveats": "Wikipedia dates the judgment to September 1979, but the judgment record says 15 September 1978, so use 1978. She was a minor, and Indian law restricts identifying rape survivors. 'Mathura' is the name in the public legal record, but use it sparingly and add no personal details.",
+    "sensitivity": "high: sexual violence against a minor",
+    "image": null,
+    "alt_image": null,
+    "image_note": "No suitable image. Use a typographic 'consent' card. Do not use photos of the survivor."
+  },
+  {
+    "n": 21,
+    "id": "cedaw-1979",
+    "date_display": "18 December 1979",
+    "date_start": "1979-12-18",
+    "date_end": null,
+    "date_precision": "day",
+    "region": "Global (UN) + India",
+    "place": "UN General Assembly, New York",
+    "title": "The UN adopts CEDAW, the women's bill of rights",
+    "description": "The UN General Assembly adopted the Convention on the Elimination of All Forms of Discrimination against Women on 18 December 1979, by 130 votes to none. It came into force in 1981, and India ratified it on 9 July 1993.",
+    "why_it_matters": "It is international law that Indian courts can and do use: the Supreme Court quoted CEDAW when it wrote the Vishaka guidelines.",
+    "sources": [
+      {
+        "title": "Status of treaties: CEDAW (IV-8)",
+        "url": "https://treaties.un.org/Pages/ViewDetails.aspx?src=TREATY&mtdsg_no=IV-8&chapter=4&clang=_en",
+        "publisher": "UN Treaty Collection",
+        "date": "status as at 2026-10-23",
+        "note": "New York, 18 Dec 1979; in force 3 Sep 1981; India signed 30 Jul 1980, ratified 9 Jul 1993",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Short History of CEDAW Convention",
+        "url": "https://www.un.org/womenwatch/daw/cedaw/history.htm",
+        "publisher": "UN Division for the Advancement of Women",
+        "date": "undated",
+        "note": "adopted 130 to none, 10 abstentions; in force 3 Sep 1981",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Convention on the Elimination of All Forms of Discrimination against Women (overview)",
+        "url": "https://www.un.org/womenwatch/daw/cedaw/",
+        "publisher": "UN Division for the Advancement of Women",
+        "date": "undated",
+        "note": "'often described as an international bill of rights for women'",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high",
+    "caveats": null,
+    "sensitivity": "low",
+    "image": {
+      "file": "File:United Nations - Convention on the Elimination of All Forms of Discrimination against Women (1979).pdf",
+      "file_page": "https://commons.wikimedia.org/wiki/File:United_Nations_-_Convention_on_the_Elimination_of_All_Forms_of_Discrimination_against_Women_(1979).pdf",
+      "licence": "Public domain",
+      "licence_url": null,
+      "licence_basis": "PD-UN-doc",
+      "author": "United Nations",
+      "source_date": "1979-12-18",
+      "depicts": "Certified true copy of the CEDAW text (use page 1 as the image)",
+      "credit_line": "United Nations — public domain, via Wikimedia Commons",
+      "attribution_required": false,
+      "share_alike": false,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": null,
+    "image_note": null
+  },
+  {
+    "n": 22,
+    "id": "shah-bano-1985",
+    "date_display": "23 April 1985",
+    "date_start": "1985-04-23",
+    "date_end": null,
+    "date_precision": "day",
+    "region": "India",
+    "place": "Supreme Court, New Delhi",
+    "title": "Shah Bano wins maintenance in the Supreme Court",
+    "description": "On 23 April 1985, in Mohd. Ahmed Khan v. Shah Bano Begum, the Supreme Court held that a divorced Muslim woman who could not support herself could claim maintenance under Section 125 of the general criminal-procedure law.",
+    "why_it_matters": "The case shows how women's rights get caught between personal law, religion and party politics. Parliament's 1986 response, the Muslim Women (Protection of Rights on Divorce) Act, which critics said diluted the ruling, shows why rights claims need to be framed beyond party lines.",
+    "sources": [
+      {
+        "title": "Mohd. Ahmed Khan vs Shah Bano Begum and Ors, 23 April 1985",
+        "url": "https://indiankanoon.org/doc/823221/",
+        "publisher": "Indian Kanoon (Supreme Court judgment)",
+        "date": "1985-04-23",
+        "note": "date; Section 125 CrPC",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Mohd. Ahmed Khan v. Shah Bano Begum",
+        "url": "https://en.wikipedia.org/wiki/Mohd._Ahmed_Khan_v._Shah_Bano_Begum",
+        "publisher": "Wikipedia",
+        "date": "rev. 2026-09-25",
+        "note": "1986 Act diluted the judgment",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high",
+    "caveats": "Wikipedia ties the 1986 Act to the then Congress government. Stating that plainly and neutrally can actually help show CSP's independence. We did not verify later Supreme Court rulings (2001, 2024) on sources we opened, so leave them out or verify them first. Do not use Wikipedia's claim that the 1986 Act was 'nullified'.",
+    "sensitivity": "high: religion, personal law, party politics",
+    "image": {
+      "file": "File:Supreme Court of India front view 04.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Supreme_Court_of_India_front_view_04.jpg",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "licence_basis": null,
+      "author": "Pinakpani",
+      "source_date": "2019-01-08 17:41:39",
+      "depicts": "Supreme Court of India, New Delhi (photo 2019)",
+      "credit_line": "Pinakpani, CC BY-SA 4.0, via Wikimedia Commons",
+      "attribution_required": true,
+      "share_alike": true,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": null,
+    "image_note": null
+  },
+  {
+    "n": 23,
+    "id": "local-reservation-1993",
+    "date_display": "24 April 1993 (73rd in force); 1 June 1993 (74th in force)",
+    "date_start": "1993-04-24",
+    "date_end": "1993-06-01",
+    "date_precision": "day",
+    "region": "India",
+    "place": "Village panchayats and municipalities nationwide",
+    "title": "One-third of local council seats reserved for women",
+    "description": "The 73rd and 74th Constitutional Amendments, passed in 1992 and in force in 1993, reserved at least one-third of seats in village panchayats and town councils for women. By January 2025 about 14 lakh women were elected panchayat members, 46% of the total.",
+    "why_it_matters": "It is proof that reservation changes who holds power, and the strongest evidence base for the 2023 law on seats in Parliament.",
+    "sources": [
+      {
+        "title": "Decentralisation @75: How the third-tier institutions have deepened India's Democracy?",
+        "url": "https://www.orfonline.org/expert-speak/decentralisation-75-how-the-third-tier-institutions-have-deepened-indias-democracy/",
+        "publisher": "Observer Research Foundation",
+        "date": "2022-08-15",
+        "note": "one-third of seats at all levels reserved; 1.3 million of 3.1 million elected representatives are women",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "National Panchayati Raj Day bulletin",
+        "url": "https://www.newsonair.gov.in/bulletins-detail/209358/",
+        "publisher": "All India Radio (Akashvani)",
+        "date": "2024-04-24",
+        "note": "24 April marks the 73rd Amendment coming into force in 1993",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "President Droupadi Murmu interacts with Scheduled Tribe women representatives of PRIs",
+        "url": "https://presidentofindia.nic.in/press_releases/president-droupadi-murmu-interacts-scheduled-tribe-women-representatives-panchayati",
+        "publisher": "President of India",
+        "date": "2025-01-06",
+        "note": "about 14 lakh women, 46% of elected representatives",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Seventy-fourth Amendment of the Constitution of India",
+        "url": "https://en.wikipedia.org/wiki/Seventy-fourth_Amendment_of_the_Constitution_of_India",
+        "publisher": "Wikipedia",
+        "date": "rev. 2025-09-19",
+        "note": "in force 1 June 1993",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high",
+    "caveats": "Many states have since raised the quota to 50%. We saw that only in search snippets, not on a page we opened.",
+    "sensitivity": "low",
+    "image": {
+      "file": "File:Women in Panchayat.webm",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Women_in_Panchayat.webm",
+      "licence": "CC BY 3.0",
+      "licence_url": "https://creativecommons.org/licenses/by/3.0",
+      "licence_basis": null,
+      "author": "Indian Diplomacy (Ministry of External Affairs, India) YouTube channel",
+      "source_date": "2012-03-27",
+      "depicts": "2012 film about women in panchayats (video; take a still frame)",
+      "credit_line": "Indian Diplomacy (Ministry of External Affairs, India) YouTube channel, CC BY 3.0, via Wikimedia Commons",
+      "attribution_required": true,
+      "share_alike": false,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": null,
+    "image_note": null
+  },
+  {
+    "n": 24,
+    "id": "beijing-1995",
+    "date_display": "4–15 September 1995",
+    "date_start": "1995-09-04",
+    "date_end": "1995-09-15",
+    "date_precision": "day",
+    "region": "Global (UN)",
+    "place": "Beijing, China",
+    "title": "Beijing: 189 countries sign up to a women's rights roadmap",
+    "description": "At the Fourth World Conference on Women in Beijing, 4–15 September 1995, 189 countries unanimously adopted the Beijing Declaration and Platform for Action, covering 12 critical areas from poverty and violence to the media and the girl child.",
+    "why_it_matters": "It is still the main global yardstick. It names 'women in power and decision-making' and 'the girl-child' as priorities, the two themes closest to CSP's Gen Z political mission.",
+    "sources": [
+      {
+        "title": "Fourth World Conference on Women",
+        "url": "https://www.un.org/en/conferences/women/beijing1995",
+        "publisher": "United Nations",
+        "date": "undated",
+        "note": "4–15 Sep 1995; adopted unanimously by 189 countries",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "World Conferences on Women",
+        "url": "https://www.unwomen.org/en/how-we-work/intergovernmental-support/world-conferences-on-women",
+        "publisher": "UN Women",
+        "date": "undated",
+        "note": "12 critical areas; 17,000 participants; NGO Forum in Huairou ~30,000",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high",
+    "caveats": null,
+    "sensitivity": "low",
+    "image": {
+      "file": "File:Políticas chilenas en Beijing.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Pol%C3%ADticas_chilenas_en_Beijing.jpg",
+      "licence": "CC BY 3.0 cl",
+      "licence_url": "https://creativecommons.org/licenses/by/3.0/cl/deed.en",
+      "licence_basis": null,
+      "author": "Biblioteca del Congreso Nacional",
+      "source_date": "1995-09-07",
+      "depicts": "Chilean women politicians at the Beijing conference, 7 Sep 1995",
+      "credit_line": "Biblioteca del Congreso Nacional, CC BY 3.0 cl, via Wikimedia Commons",
+      "attribution_required": true,
+      "share_alike": false,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": {
+      "file": "File:Hillary Rodham Clinton Addresses the Fourth United Nations Conference on Women at the Beijing International Conference Center in Bejiing, China - DPLA - f930a22fe8ca15312130e94f4f201f45.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Hillary_Rodham_Clinton_Addresses_the_Fourth_United_Nations_Conference_on_Women_at_the_Beijing_International_Conference_Center_in_Bejiing,_China_-_DPLA_-_f930a22fe8ca15312130e94f4f201f45.jpg",
+      "licence": "Public domain",
+      "licence_url": null,
+      "licence_basis": "PD-USGov (White House photo)",
+      "author": "Sharon Farmer, White House Photograph Office",
+      "source_date": "5 September 1995",
+      "depicts": "Hillary Rodham Clinton addressing the conference, 5 Sep 1995 (White House photo)",
+      "credit_line": "Sharon Farmer, White House Photograph Office — public domain, via Wikimedia Commons",
+      "attribution_required": false,
+      "share_alike": false,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "image_note": null
+  },
+  {
+    "n": 25,
+    "id": "vishaka-1997",
+    "date_display": "13 August 1997",
+    "date_start": "1997-08-13",
+    "date_end": null,
+    "date_precision": "day",
+    "region": "India",
+    "place": "Rajasthan; Supreme Court, New Delhi",
+    "title": "Bhanwari Devi's fight leads to the Vishaka guidelines",
+    "description": "Bhanwari Devi, a worker in Rajasthan's Women Development Programme, reported being gang-raped in 1992 for trying to stop a child marriage. Women's groups took the issue to the Supreme Court, which on 13 August 1997 laid down India's first binding rules against sexual harassment at work.",
+    "why_it_matters": "A grassroots worker's courage created rights for every working woman in India. The Court also drew on CEDAW, so global and local feminism reinforced each other.",
+    "sources": [
+      {
+        "title": "Vishaka and Ors vs State of Rajasthan and Ors, 13 August 1997",
+        "url": "https://indiankanoon.org/doc/1031794/",
+        "publisher": "Indian Kanoon (Supreme Court judgment)",
+        "date": "1997-08-13",
+        "note": "'alleged brutal gang rape of social worker'; guidelines to fill the legislative vacuum; quotes CEDAW Art. 11",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Vishakha and Others v. State of Rajasthan",
+        "url": "https://en.wikipedia.org/wiki/Vishakha_and_Others_v._State_of_Rajasthan",
+        "publisher": "Wikipedia",
+        "date": "rev. 2025-11-06",
+        "note": "Women Development Programme worker; tried to prevent a child marriage",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high",
+    "caveats": "The criminal trial of her attackers ended in acquittal (search snippet, not verified). Use the Court's wording ('alleged') or 'reported'. Bhanwari Devi is a public figure who has spoken about the case herself.",
+    "sensitivity": "high: sexual violence; caste",
+    "image": {
+      "file": "File:Supreme Court of India 01.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Supreme_Court_of_India_01.jpg",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "licence_basis": null,
+      "author": "Subhashish Panigrahi",
+      "source_date": "2019-12-11 16:13:56",
+      "depicts": "Central wing of the Supreme Court of India (photo 2019)",
+      "credit_line": "Subhashish Panigrahi, CC BY-SA 4.0, via Wikimedia Commons",
+      "attribution_required": true,
+      "share_alike": true,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": null,
+    "image_note": null
+  },
+  {
+    "n": 26,
+    "id": "pwdva-2006",
+    "date_display": "26 October 2006 (Act of 2005)",
+    "date_start": "2006-10-26",
+    "date_end": null,
+    "date_precision": "day",
+    "region": "India",
+    "place": "India",
+    "title": "India's domestic violence law comes into force",
+    "description": "The Protection of Women from Domestic Violence Act, 2005 came into force on 26 October 2006. It recognised physical, sexual, verbal, emotional and economic abuse at home and gave women civil remedies such as protection orders.",
+    "why_it_matters": "It made the personal legally political. Abuse at home, including control of money, became something a woman could take to court through civil remedies, without starting with a criminal case.",
+    "sources": [
+      {
+        "title": "Protection of Women from Domestic Violence Act",
+        "url": "https://data.unwomen.org/global-database-on-violence-against-women/country-profile/India/measures/Protection%20of%20Women%20from%20Domestic%20Violence%20Act",
+        "publisher": "UN Women Data Hub",
+        "date": "undated",
+        "note": "in force 26 Oct 2006; combines civil remedies with criminal procedure; physical, sexual, verbal, emotional, economic abuse",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Protection of Women from Domestic Violence Act, 2005",
+        "url": "https://en.wikipedia.org/wiki/Protection_of_Women_from_Domestic_Violence_Act,_2005",
+        "publisher": "Wikipedia",
+        "date": "rev. 2026-03-26",
+        "note": "civil law primarily for protection orders",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high",
+    "caveats": null,
+    "sensitivity": "medium",
+    "image": null,
+    "alt_image": null,
+    "image_note": "No suitable image. Use a typographic card listing the five forms of abuse."
+  },
+  {
+    "n": 27,
+    "id": "delhi-protests-2012",
+    "date_display": "16 December 2012 to 2 April 2013",
+    "date_start": "2012-12-16",
+    "date_end": "2013-04-02",
+    "date_precision": "day",
+    "region": "India",
+    "place": "New Delhi (Raisina Hill, India Gate, Jantar Mantar)",
+    "title": "Delhi's December protests rewrite the law on sexual violence",
+    "description": "After a young woman was gang-raped and murdered on a Delhi bus on 16 December 2012, young people filled Raisina Hill and India Gate. Within weeks the Justice Verma Committee reported (23 January 2013), and the Criminal Law (Amendment) Act 2013 added offences such as stalking, voyeurism and acid attack.",
+    "why_it_matters": "Youth-led street protest, plus public suggestions sent to a committee, changed national law in under four months. It is the clearest Indian proof of the protest-to-policy pipeline.",
+    "sources": [
+      {
+        "title": "Justice Verma Committee Report Summary",
+        "url": "https://prsindia.org/policy/report-summaries/justice-verma-committee-report-summary",
+        "publisher": "PRS Legislative Research",
+        "date": "2013",
+        "note": "committee constituted 23 Dec 2012; report 23 Jan 2013; recommended removing the marital-rape exception",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "The Criminal Laws Amendment related to sexual offences",
+        "url": "https://prsindia.org/articles-by-prs-team/the-criminal-laws-amendment-related-to-sexual-offences",
+        "publisher": "PRS Legislative Research",
+        "date": "2013",
+        "note": "acid attack, sexual harassment, stalking and voyeurism added to the IPC",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Criminal Law (Amendment) Act, 2013",
+        "url": "https://en.wikipedia.org/wiki/Criminal_Law_(Amendment)_Act,_2013",
+        "publisher": "Wikipedia",
+        "date": "rev. 2026-10-04",
+        "note": "ordinance 3 Feb 2013; assent 2 Apr 2013",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "2012 Delhi gang rape and murder",
+        "url": "https://en.wikipedia.org/wiki/2012_Delhi_gang_rape_and_murder",
+        "publisher": "Wikipedia",
+        "date": "rev. 2026-10-12",
+        "note": "16 Dec 2012; protests at India Gate and Raisina Hill from 21 Dec; committee took public suggestions",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high",
+    "caveats": "Her mother has publicly named her (Jyoti Singh), but Indian law restricts naming survivors. Take legal advice and follow the family's wishes. The 2013 Act did not adopt the Verma Committee's call to remove the marital-rape exception, which remains a live Fourth Wave demand.",
+    "sensitivity": "high: sexual violence",
+    "image": {
+      "file": "File:Delhi protests-students, Raisina Hill.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Delhi_protests-students,_Raisina_Hill.jpg",
+      "licence": "CC BY-SA 3.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+      "licence_basis": null,
+      "author": "Nilroy (Nilanjana Roy)",
+      "source_date": "2012-12-22 13:20:54",
+      "depicts": "Students protesting at Raisina Hill, 22 December 2012",
+      "credit_line": "Nilroy (Nilanjana Roy), CC BY-SA 3.0, via Wikimedia Commons",
+      "attribution_required": true,
+      "share_alike": true,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": null,
+    "image_note": null
+  },
+  {
+    "n": 28,
+    "id": "posh-act-2013",
+    "date_display": "9 December 2013 (assent 23 April 2013)",
+    "date_start": "2013-12-09",
+    "date_end": null,
+    "date_precision": "day",
+    "region": "India",
+    "place": "India",
+    "title": "The POSH Act turns the Vishaka rules into law",
+    "description": "The Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013 came into force on 9 December 2013. It made complaint committees at workplaces a legal duty and replaced the 1997 Vishaka guidelines.",
+    "why_it_matters": "It took 16 years to get from a grassroots worker's case to a statute, a reminder that a win in court needs a follow-through campaign to become law.",
+    "sources": [
+      {
+        "title": "Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013",
+        "url": "https://en.wikipedia.org/wiki/Sexual_Harassment_of_Women_at_Workplace_(Prevention,_Prohibition_and_Redressal)_Act,_2013",
+        "publisher": "Wikipedia",
+        "date": "rev. 2026-09-26",
+        "note": "assent 23 Apr 2013; in force 9 Dec 2013; superseded Vishaka guidelines",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "medium (one source opened; India Code timed out and the search budget ran out)",
+    "caveats": "Check the dates against India Code or the Gazette before publishing.",
+    "sensitivity": "low",
+    "image": null,
+    "alt_image": null,
+    "image_note": "No suitable image. Reuse the Supreme Court image from the Vishaka entry or a typographic card."
+  },
+  {
+    "n": 29,
+    "id": "ni-una-menos-2015",
+    "date_display": "3 June 2015",
+    "date_start": "2015-06-03",
+    "date_end": null,
+    "date_precision": "day",
+    "region": "Global (Argentina)",
+    "place": "Buenos Aires (Plaza del Congreso)",
+    "title": "Ni Una Menos: 'not one woman less'",
+    "description": "After the femicide of 14-year-old Chiara Páez and a tweet by radio journalist Marcela Ojeda, about 200,000 people marched in Buenos Aires on 3 June 2015 under the slogan Ni Una Menos, starting a movement that became a global phenomenon.",
+    "why_it_matters": "It went from hashtag to street to an annual mobilisation. It is also a warning: the movement's own website domain has lapsed (see peers.md), so public memory needs archives the movement owns.",
+    "sources": [
+      {
+        "title": "Ten years of Ni Una Menos: How one tweet led to a global phenomenon",
+        "url": "https://buenosairesherald.com/society/ten-years-of-ni-una-menos-how-one-tweet-led-to-a-global-phenomenon",
+        "publisher": "Buenos Aires Herald",
+        "date": "2025-06-03",
+        "note": "3 June 2015; ~200,000; Chiara Páez; Marcela Ojeda's 11 May tweet",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high",
+    "caveats": "Crowd estimates vary (200,000 to 300,000).",
+    "sensitivity": "low",
+    "image": {
+      "file": "File:Congreso de la Nación Argentiina, on the first NiUnaMenos demonstration.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Congreso_de_la_Naci%C3%B3n_Argentiina,_on_the_first_NiUnaMenos_demonstration.jpg",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "licence_basis": null,
+      "author": "Vicpics",
+      "source_date": "2015-06-03 18:14:28",
+      "depicts": "Argentine Congress during the first Ni Una Menos march, 3 June 2015",
+      "credit_line": "Vicpics, CC BY-SA 4.0, via Wikimedia Commons",
+      "attribution_required": true,
+      "share_alike": true,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": {
+      "file": "File:Marcha Ni una menos 1.JPG",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Marcha_Ni_una_menos_1.JPG",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "licence_basis": null,
+      "author": "Jaluj",
+      "source_date": "2015-06-03 16:49:00",
+      "depicts": "Ni Una Menos march, Buenos Aires, 3 June 2015",
+      "credit_line": "Jaluj, CC BY-SA 4.0, via Wikimedia Commons",
+      "attribution_required": true,
+      "share_alike": true,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "image_note": null
+  },
+  {
+    "n": 30,
+    "id": "pinjra-tod-2015",
+    "date_display": "9 September 2015",
+    "date_start": "2015-09-09",
+    "date_end": null,
+    "date_precision": "day",
+    "region": "India",
+    "place": "Delhi (Jamia Millia Islamia, Delhi University)",
+    "title": "Pinjra Tod: students say 'break the cage'",
+    "description": "On 9 September 2015 women students covered Jamia Millia Islamia and nearby hostels in Delhi with 'Pinjra Tod' ('break the cage') posters, starting a campaign against hostel curfews that locked women in at night.",
+    "why_it_matters": "It was a campus campaign about women's right to the city and to public space at night, the same idea that powered Reclaim the Night in 2024.",
+    "sources": [
+      {
+        "title": "#PinjraTod Gives Voice to Indian Women Fed Up With Draconian University Hostel Rules",
+        "url": "https://globalvoices.org/2015/09/23/pinjratod-gives-voice-to-indian-women-fed-up-with-draconian-university-hostel-rules/",
+        "publisher": "Global Voices",
+        "date": "2015-09-23",
+        "note": "posters on 9 Sep 2015; 'break the cage'; hostel curfews",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high (start); one source",
+    "caveats": "The collective later became politically contested. Describe the 2015 campaign specifically, and check the current context before publishing.",
+    "sensitivity": "medium to high",
+    "image": null,
+    "alt_image": null,
+    "image_note": "No free image found on Commons. Ask the collective for permission, or use a typographic card."
+  },
+  {
+    "n": 31,
+    "id": "metoo-2017",
+    "date_display": "15 October 2017",
+    "date_start": "2017-10-15",
+    "date_end": null,
+    "date_precision": "day",
+    "region": "Global (USA, online)",
+    "place": "Online",
+    "title": "#MeToo goes global",
+    "description": "On 15 October 2017 the actor Alyssa Milano asked people who had been sexually harassed or assaulted to reply 'me too'. The hashtag spread worldwide, building on a phrase activist Tarana Burke had used for more than a decade.",
+    "why_it_matters": "It is the defining Fourth Wave tool: survivor testimony at scale, online. It also shows the risk of erasing founders, so credit Burke.",
+    "sources": [
+      {
+        "title": "#MeToo: An activist, a little girl and the heartbreaking origin of 'Me too'",
+        "url": "https://edition.cnn.com/2017/10/17/us/me-too-tarana-burke-origin-trnd",
+        "publisher": "CNN",
+        "date": "2017-10-17",
+        "note": "Milano's Sunday call-out; Burke started it more than 10 years earlier; 825,000 uses by Tuesday",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high",
+    "caveats": null,
+    "sensitivity": "medium",
+    "image": {
+      "file": "File:Can You Hear Me Now? -MeToo (39787332552).jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Can_You_Hear_Me_Now%3F_-MeToo_(39787332552).jpg",
+      "licence": "CC BY 2.0",
+      "licence_url": "https://creativecommons.org/licenses/by/2.0",
+      "licence_basis": null,
+      "author": "Alec Perkins from Hoboken, USA",
+      "source_date": "2018-01-20 16:23",
+      "depicts": "#MeToo sign at a Women's March, 20 Jan 2018",
+      "credit_line": "Alec Perkins from Hoboken, USA, CC BY 2.0, via Wikimedia Commons",
+      "attribution_required": true,
+      "share_alike": false,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": null,
+    "image_note": null
+  },
+  {
+    "n": 32,
+    "id": "sabarimala-womens-wall-2019",
+    "date_display": "28 September 2018 (verdict); 1 January 2019 (Women's Wall)",
+    "date_start": "2018-09-28",
+    "date_end": "2019-01-01",
+    "date_precision": "day",
+    "region": "India",
+    "place": "Kerala; Supreme Court, New Delhi",
+    "title": "The Sabarimala verdict and Kerala's 620 km Women's Wall",
+    "description": "On 28 September 2018 the Supreme Court ruled that women aged 10 to 50 could not be kept out of the Sabarimala temple. On 1 January 2019 lakhs of women formed a 620 km human chain across Kerala, from Kasaragod to Thiruvananthapuram.",
+    "why_it_matters": "Equality versus custom inside faith is a live Fourth Wave question, and the chain showed how many women can be mobilised in a single day.",
+    "sources": [
+      {
+        "title": "Indian Young Lawyers Association vs The State of Kerala, 28 September 2018",
+        "url": "https://indiankanoon.org/doc/163639357/",
+        "publisher": "Indian Kanoon (Supreme Court judgment)",
+        "date": "2018-09-28",
+        "note": "petition on entry of women aged 10 to 50",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Kerala's wall of resistance: Lakhs of women stand up against patriarchy",
+        "url": "https://www.thenewsminute.com/kerala/keralas-wall-resistance-lakhs-women-stand-against-patriarchy-94314",
+        "publisher": "The News Minute",
+        "date": "2019-01-01",
+        "note": "the Kerala government's Women's Wall; 620 km; Kasaragod to Thiruvananthapuram",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Supreme Court Constitution bench begins hearing on women entry at Sabarimala",
+        "url": "https://www.newsonair.gov.in/supreme-court-constitution-bench-begins-hearing-on-women-entry-at-sabarimala",
+        "publisher": "All India Radio",
+        "date": "2026-04-07 (date from search listing)",
+        "note": "nine-judge bench headed by CJI Surya Kant began hearing the wider reference",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high (2018–19 facts); medium (2026 status)",
+    "caveats": "The Women's Wall was organised by the Kerala government with the ruling front's parties, so it has a party dimension. The verdict is under review: a nine-judge bench began hearing the wider reference in April 2026, and one blog says judgment was reserved in May 2026 (not verified). Frame the entry around equality, avoid party framing, and recheck the status before publishing.",
+    "sensitivity": "very high: religion plus party politics",
+    "image": {
+      "file": "File:Women's wall 2019 Jan 1st at Bakkalam വനിതാമതിൽ 2019 ജനുവരി 1 ബക്കളത്ത്.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Women%27s_wall_2019_Jan_1st_at_Bakkalam_%E0%B4%B5%E0%B4%A8%E0%B4%BF%E0%B4%A4%E0%B4%BE%E0%B4%AE%E0%B4%A4%E0%B4%BF%E0%B5%BD_2019_%E0%B4%9C%E0%B4%A8%E0%B5%81%E0%B4%B5%E0%B4%B0%E0%B4%BF_1_%E0%B4%AC%E0%B4%95%E0%B5%8D%E0%B4%95%E0%B4%B3%E0%B4%A4%E0%B5%8D%E0%B4%A4%E0%B5%8D.jpg",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "licence_basis": null,
+      "author": "FarEnd2018",
+      "source_date": "2019-01-01",
+      "depicts": "Women's Wall at Bakkalam, Kannur, 1 Jan 2019",
+      "credit_line": "FarEnd2018, CC BY-SA 4.0, via Wikimedia Commons",
+      "attribution_required": true,
+      "share_alike": true,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": {
+      "file": "File:Women Wall.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Women_Wall.jpg",
+      "licence": "CC0",
+      "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "licence_basis": null,
+      "author": "Pravs",
+      "source_date": "2 January 2019 (according to Exif data)",
+      "depicts": "Women's Wall, January 2019",
+      "credit_line": "Pravs — CC0, via Wikimedia Commons",
+      "attribution_required": false,
+      "share_alike": false,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "image_note": null
+  },
+  {
+    "n": 33,
+    "id": "metoo-india-2018",
+    "date_display": "Late September to October 2018 (court ruling 17 February 2021)",
+    "date_start": "2018-09",
+    "date_end": "2021-02-17",
+    "date_precision": "month",
+    "region": "India",
+    "place": "Mumbai, Delhi and online",
+    "title": "#MeTooIndia: women name harassment, and a court backs their right to speak",
+    "description": "From late September 2018 actors and women journalists in India publicly named harassers, and a Union minister resigned on 17 October 2018. On 17 February 2021 a Delhi court acquitted journalist Priya Ramani of defamation, holding that the 'right to reputation cannot be protected at the cost of right to dignity'.",
+    "why_it_matters": "Online testimony moved into newsrooms and courtrooms. The Ramani ruling, which also said a woman can raise a grievance even decades later, is a legal shield for survivors who speak out.",
+    "sources": [
+      {
+        "title": "Government Official Resigns As #MeToo Movement Gathers Force In India",
+        "url": "https://wnyc.org/story/metoo-movement-gathers-force-in-india",
+        "publisher": "NPR via WNYC",
+        "date": "2018-10-17",
+        "note": "started late September with Tanushree Dutta; minister resigned; journalists, actors, executives accused",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Delhi Court Acquits Priya Ramani In MJ Akbar's Criminal Defamation Case",
+        "url": "https://livelaw.in/top-stories/delhi-court-acquits-priya-ramani-in-mj-akbars-criminal-defamation-case-169993",
+        "publisher": "LiveLaw",
+        "date": "2021-02-17",
+        "note": "acquittal; 'Right to reputation cannot be protected at the cost of right to dignity'",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high",
+    "caveats": "Do not name accused men on CSP pages. Reports say an appeal against the acquittal was filed in the Delhi High Court; we did not verify its outcome.",
+    "sensitivity": "high: legal and defamation risk",
+    "image": {
+      "file": "File:Priya Ramani.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Priya_Ramani.jpg",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "licence_basis": null,
+      "author": "Subhashish Panigrahi",
+      "source_date": "2023-05-04 21:16:02",
+      "depicts": "Journalist Priya Ramani at an event in Bengaluru, 2023",
+      "credit_line": "Subhashish Panigrahi, CC BY-SA 4.0, via Wikimedia Commons",
+      "attribution_required": true,
+      "share_alike": true,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": null,
+    "image_note": null
+  },
+  {
+    "n": 34,
+    "id": "shaheen-bagh-2019",
+    "date_display": "December 2019 to 24 March 2020",
+    "date_start": "2019-12",
+    "date_end": "2020-03-24",
+    "date_precision": "month",
+    "region": "India",
+    "place": "Shaheen Bagh, Delhi",
+    "title": "Shaheen Bagh: a women-led sit-in in Delhi",
+    "description": "From December 2019, women in Delhi's Shaheen Bagh, including older women nicknamed the 'dadis', held a round-the-clock road sit-in against the Citizenship (Amendment) Act. It lasted about 101 days, until police cleared it during the Covid-19 lockdown on 24 March 2020.",
+    "why_it_matters": "It changed who leads protest: homemakers and grandmothers became national political figures (Bilkis made TIME's 100 list in 2020). The Supreme Court later ruled that public roads cannot be occupied indefinitely, which shapes how protest can be organised.",
+    "sources": [
+      {
+        "title": "After a 101-Day Sit-in, Shaheen Bagh Protest Cleared Due to Coronavirus Lockdown",
+        "url": "https://thewire.in/rights/shaheen-bagh-cleared-coronavirus-lockdown",
+        "publisher": "The Wire",
+        "date": "2020-03-24",
+        "note": "headline only (body is JavaScript-rendered)",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Bilkis: On TIME's 100 Most Influential People Of 2020",
+        "url": "https://feminisminindia.com/2020/09/24/bilkis-shaheen-bagh-time-magazine-top-100/",
+        "publisher": "Feminism in India",
+        "date": "2020-09-24",
+        "note": "'dadis of Shaheen Bagh'; TIME 100",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Amit Sahni v. Commissioner of Police",
+        "url": "https://globalfreedomofexpression.columbia.edu/cases/amit-sahni-v-commissioner-of-police/",
+        "publisher": "Columbia Global Freedom of Expression",
+        "date": "2020-10-08",
+        "note": "SC decision 7 Oct 2020: public ways cannot be occupied indefinitely",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high (dates and form); medium (exact start day)",
+    "caveats": "Very high sensitivity, because the CAA is a polarising issue. If included, describe the women-led form of the protest and do not take a position on the law.",
+    "sensitivity": "very high: citizenship law, religion, party politics",
+    "image": {
+      "file": "File:Shaheen Bagh women protesters 15 Jan 2020.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Shaheen_Bagh_women_protesters_15_Jan_2020.jpg",
+      "licence": "CC0",
+      "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "licence_basis": null,
+      "author": "DTM",
+      "source_date": "2020-01-15 16:38:58",
+      "depicts": "Women at the Shaheen Bagh protest site, 15 Jan 2020",
+      "credit_line": "DTM — CC0, via Wikimedia Commons",
+      "attribution_required": false,
+      "share_alike": false,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": null,
+    "image_note": null
+  },
+  {
+    "n": 35,
+    "id": "woman-life-freedom-2022",
+    "date_display": "16 September 2022",
+    "date_start": "2022-09-16",
+    "date_end": null,
+    "date_precision": "day",
+    "region": "Global (Iran)",
+    "place": "Tehran and across Iran",
+    "title": "Woman, Life, Freedom: Iran rises after Jina Mahsa Amini's death",
+    "description": "Jina Mahsa Amini, a 22-year-old Iranian-Kurdish woman, died in the custody of Iran's morality police on 16 September 2022. Protests followed under the slogan 'Woman, Life, Freedom', and a UN fact-finding mission later found the state responsible for her unlawful death.",
+    "why_it_matters": "Young women led a mass uprising under an explicitly feminist slogan, the clearest 2020s example of feminism as a mass political movement.",
+    "sources": [
+      {
+        "title": "Iranian Government 'Bears Responsibility' For Amini's Death, Brutal Crackdown, UN Mission Says",
+        "url": "https://www.rferl.org/a/iran-un-fact-finding-mission-amini-death-crackdown-protests/32854252.html",
+        "publisher": "Radio Free Europe/Radio Liberty",
+        "date": "2024-03-08",
+        "note": "died 16 Sep; 22-year-old Iranian-Kurdish woman; state bears responsibility; Women, Life, Freedom protests",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high",
+    "caveats": "RFE/RL is US-government funded; the UN Human Rights Council report (March 2024) is the primary document if a second source is needed.",
+    "sensitivity": "medium",
+    "image": {
+      "file": "File:Woman Life Freedom Toronto.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Woman_Life_Freedom_Toronto.jpg",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "licence_basis": null,
+      "author": "Pirehelokan",
+      "source_date": "2022-09-30 19:32:39",
+      "depicts": "'Woman, Life, Freedom' sign in Kurdish and English, Toronto, 30 Sep 2022",
+      "credit_line": "Pirehelokan, CC BY-SA 4.0, via Wikimedia Commons",
+      "attribution_required": true,
+      "share_alike": true,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": null,
+    "image_note": null
+  },
+  {
+    "n": 36,
+    "id": "womens-reservation-act-2023",
+    "date_display": "28 September 2023 (presidential assent)",
+    "date_start": "2023-09-28",
+    "date_end": null,
+    "date_precision": "day",
+    "region": "India",
+    "place": "Parliament, New Delhi",
+    "title": "Parliament passes the Women's Reservation Act",
+    "description": "The Constitution (106th Amendment) Act, called the Nari Shakti Vandan Adhiniyam, received presidential assent on 28 September 2023. It reserves one-third of seats in the Lok Sabha, the state assemblies and the Delhi Assembly for women, including within the seats reserved for SCs and STs.",
+    "why_it_matters": "The 1974 Towards Equality dissent finally became law, but the reservation only starts after a census and a redrawing of constituencies, so 'when does it start?' became the next question.",
+    "sources": [
+      {
+        "title": "President gives assent to India's historic Women's reservation bill",
+        "url": "https://www.onmanorama.com/news/india/2023/09/29/womens-reservation-bill-becomes-law.html",
+        "publisher": "Onmanorama (PTI)",
+        "date": "2023-09-29",
+        "note": "assent on Thursday (28 Sep) per law ministry notice; needs census and delimitation",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "President Droupadi Murmu grants assent to Women's Reservation Bill",
+        "url": "https://www.newsonair.gov.in/president-droupadi-murmu-grants-assent-to-womens-reservation-bill",
+        "publisher": "All India Radio",
+        "date": "2023-09",
+        "note": "33% in Lok Sabha, state assemblies and Delhi; SC/ST sub-quota",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high",
+    "caveats": "Every party claims credit for this law. Keep the entry factual.",
+    "sensitivity": "high: party politics",
+    "image": {
+      "file": "File:Meghalaya 2023 election women queueing to vote 01.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Meghalaya_2023_election_women_queueing_to_vote_01.jpg",
+      "licence": "CC BY 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by/4.0",
+      "licence_basis": null,
+      "author": "Evan Centanni (GeoEvan), www.polgeonow.com",
+      "source_date": "2023-02-27 15:37:29",
+      "depicts": "Women queueing to vote, Shillong, 27 Feb 2023",
+      "credit_line": "Evan Centanni / www.polgeonow.com / CC BY 4.0 (attribution string required by the file page)",
+      "attribution_required": true,
+      "share_alike": false,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": {
+      "file": "File:Sansad Bhavan, Delhi, BNK.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Sansad_Bhavan,_Delhi,_BNK.jpg",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "licence_basis": null,
+      "author": "Nikhilb239",
+      "source_date": "2014-09-05 11:05:48",
+      "depicts": "Old Parliament House (Sansad Bhavan), New Delhi, 2014",
+      "credit_line": "Nikhilb239, CC BY-SA 4.0, via Wikimedia Commons",
+      "attribution_required": true,
+      "share_alike": true,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "image_note": null
+  },
+  {
+    "n": 37,
+    "id": "reclaim-the-night-2024",
+    "date_display": "Night of 14–15 August 2024",
+    "date_start": "2024-08-14",
+    "date_end": "2024-08-15",
+    "date_precision": "day",
+    "region": "India",
+    "place": "Kolkata and across West Bengal",
+    "title": "Reclaim the Night: women take Bengal's streets at midnight",
+    "description": "A postgraduate trainee doctor was raped and murdered on duty at Kolkata's RG Kar Medical College; her body was found on 9 August 2024. From 11:55 pm on 14 August, the eve of Independence Day, thousands of women marched across West Bengal in the 'Reclaim the Night' protests.",
+    "why_it_matters": "One social-media call by Rimjhim Sinha became a statewide night protest. It is Gen Z-style organising, and it demanded safety at work and in public space at night.",
+    "sources": [
+      {
+        "title": "Kolkata doctor rape-murder: Women fill streets across West Bengal in midnight protests, demand justice",
+        "url": "https://www.tribuneindia.com/news/india/kolkata-doctor-rape-murder-women-fill-streets-across-west-bengal-in-midnight-protests-demand-justice",
+        "publisher": "The Tribune (PTI)",
+        "date": "2024-08-15",
+        "note": "began 11:55 pm; Reclaim the Night campaign; body found 9 Aug; Rimjhim Sinha the initiator",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Indian women lead night protests after doctor's rape and murder",
+        "url": "https://www.graphic.com.gh/international/international-news/indian-women-lead-night-protests-after-doctors-rape-and-murder-2.html",
+        "publisher": "Graphic Online (Reuters)",
+        "date": "2024-08-15",
+        "note": "thousands marched from Jadavpur; largely peaceful; hospital ransacked by a small group",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high",
+    "caveats": "Do not name the victim, because Indian law restricts it. A small group ransacked the hospital that night; keep the focus on the peaceful marches.",
+    "sensitivity": "high: sexual violence; West Bengal politics",
+    "image": {
+      "file": "File:Reclaim The Night - Raat Dakhal Karo - Protest Demonstration Against 9th August 2024 On Duty Doctor Rape-Murder Incident Of RG Kar Medical College And Hospital Kolkata - Howrah 2024-09-04 08590.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Reclaim_The_Night_-_Raat_Dakhal_Karo_-_Protest_Demonstration_Against_9th_August_2024_On_Duty_Doctor_Rape-Murder_Incident_Of_RG_Kar_Medical_College_And_Hospital_Kolkata_-_Howrah_2024-09-04_08590.jpg",
+      "licence": "CC BY 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by/4.0",
+      "licence_basis": null,
+      "author": "Gangulybiswarup",
+      "source_date": "2024-09-04 21:54:43",
+      "depicts": "A later Reclaim the Night protest, Howrah, 4 Sep 2024 (not the 14 Aug march)",
+      "credit_line": "Gangulybiswarup, CC BY 4.0, via Wikimedia Commons",
+      "attribution_required": true,
+      "share_alike": false,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": null,
+    "image_note": null
+  },
+  {
+    "n": 38,
+    "id": "pelicot-2024",
+    "date_display": "19 December 2024 (verdicts; trial from September 2024)",
+    "date_start": "2024-12-19",
+    "date_end": null,
+    "date_precision": "day",
+    "region": "Global (France)",
+    "place": "Avignon",
+    "title": "Gisèle Pelicot makes 'shame change sides'",
+    "description": "Gisèle Pelicot refused a closed-door trial so that the public could see the case against 51 men, including the husband who admitted drugging her so that she could be abused. On 19 December 2024 a court in Avignon convicted every one of them.",
+    "why_it_matters": "By choosing to be visible, a survivor flipped the stigma onto perpetrators. Her rallying idea that 'shame must change sides' became a global talking point on consent.",
+    "sources": [
+      {
+        "title": "With guilty verdicts, victim's rape ordeal in France becomes a message of hope",
+        "url": "https://www.bostonglobe.com/2024/12/19/world/with-guilty-verdicts-victims-rape-ordeal-france-becomes-message-hope",
+        "publisher": "Boston Globe (AP)",
+        "date": "2024-12-19",
+        "note": "all 51 accused convicted; husband admitted drugging her over nearly a decade; public trial",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "A French rape victim goes public. She makes 'shame change sides.'",
+        "url": "https://www.csmonitor.com/World/Europe/2024/1008/rape-trial-victim-public",
+        "publisher": "Christian Science Monitor",
+        "date": "2024-10-08",
+        "note": "refused closed trial; 'shame change sides'",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high",
+    "caveats": "Sources differ on who first said 'shame must change sides' (her lawyer or Pelicot). Attribute it as 'her rallying idea'.",
+    "sensitivity": "high: sexual violence",
+    "image": {
+      "file": "File:Gisèle Pelicot 2026.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Gis%C3%A8le_Pelicot_2026.jpg",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "licence_basis": null,
+      "author": "Amrei-Marie",
+      "source_date": "2026-02-26",
+      "depicts": "Gisèle Pelicot at a book event in Munich, 26 Feb 2026",
+      "credit_line": "Amrei-Marie, CC BY-SA 4.0, via Wikimedia Commons",
+      "attribution_required": true,
+      "share_alike": true,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": null,
+    "image_note": null
+  },
+  {
+    "n": 39,
+    "id": "reservation-in-force-2026",
+    "date_display": "16–17 April 2026",
+    "date_start": "2026-04-16",
+    "date_end": "2026-04-17",
+    "date_precision": "day",
+    "region": "India",
+    "place": "Parliament, New Delhi",
+    "title": "Women's reservation is in force but still waiting to start",
+    "description": "On 16 April 2026 the government brought the 2023 Women's Reservation Act into force. The next day, a constitutional amendment that would have let the quota start after a redrawing of seats based on the 2011 census failed in the Lok Sabha (298 for, 230 against, short of two-thirds). So the one-third quota still waits for a redrawing of seats after the next census.",
+    "why_it_matters": "This is the unfinished business of Indian feminism. Seventy-six years after equal votes, equal seats are law but not yet working, which gives Gen Z voters a concrete demand they can track.",
+    "sources": [
+      {
+        "title": "Lok Sabha Rejects Constitution (131st) Amendment Bill 2026 To Increase Seats; Centre Withdraws Delimitation Bill",
+        "url": "https://www.livelaw.in/top-stories/lok-sabha-rejects-constitution-131st-bill-2026-on-delimitation-530736",
+        "publisher": "LiveLaw",
+        "date": "2026-04-17",
+        "note": "298 vs 230; two-thirds needed; 106th Amendment notified in force from 16 Apr 2026",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "The Delimitation Bill, 2026",
+        "url": "https://prsindia.org/billtrack/the-delimitation-bill-2026",
+        "publisher": "PRS Legislative Research",
+        "date": "2026-04",
+        "note": "bills introduced 16 Apr 2026; delimitation on the 2027 census unlikely before 2029, so reservation would not apply in 2029",
+        "opened": true,
+        "accessed": "2026-10-24"
+      },
+      {
+        "title": "Modi Govt Enforces 2023 Women's Reservation Act More Than 900 Days After it Was Passed",
+        "url": "https://thewire.in/government/modi-govt-enforces-2023-womens-reservation-act-more-than-900-days-after-it-was-passed",
+        "publisher": "The Wire",
+        "date": "2026-04-17",
+        "note": "headline only",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high (votes and dates); medium (effect on 2029, which is PRS's analysis)",
+    "caveats": "This is the most sensitive entry in the list: government and opposition blame each other for the delay. State the facts and one demand (implement the one-third quota) without endorsing either side. Recheck the status before publishing.",
+    "sensitivity": "very high: live party conflict",
+    "image": {
+      "file": "File:2026 Assam Legislative Assembly election.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:2026_Assam_Legislative_Assembly_election.jpg",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "licence_basis": null,
+      "author": "Donvikro",
+      "source_date": "2026-04-09 11:25:05",
+      "depicts": "Woman showing her inked finger after voting, Assam, 9 Apr 2026",
+      "credit_line": "Donvikro, CC BY-SA 4.0, via Wikimedia Commons",
+      "attribution_required": true,
+      "share_alike": true,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": null,
+    "image_note": null
+  },
+  {
+    "n": 40,
+    "id": "woman-farmer-2026",
+    "date_display": "2026 (declared 2 May 2024)",
+    "date_start": "2026",
+    "date_end": null,
+    "date_precision": "year",
+    "region": "Global (UN) + India",
+    "place": "Worldwide",
+    "title": "2026: UN International Year of the Woman Farmer",
+    "description": "The UN General Assembly declared 2026 the International Year of the Woman Farmer, to raise awareness of women's crucial role in food systems and to tackle the barriers they face.",
+    "why_it_matters": "It brings rural and working-class women into the 2026 conversation, and it is a hook for CSP research on women in Indian farming.",
+    "sources": [
+      {
+        "title": "FAO welcomes the celebration of the International Year of the Woman Farmer in 2026",
+        "url": "https://www.fao.org/newsroom/detail/fao-welcomes-the-celebration-of-the-international-year-of-the-woman-farmer-in-2026/en",
+        "publisher": "FAO",
+        "date": "2024-05-02",
+        "note": "resolution adopted by the UN General Assembly",
+        "opened": true,
+        "accessed": "2026-10-24"
+      }
+    ],
+    "confidence": "high",
+    "caveats": null,
+    "sensitivity": "low",
+    "image": {
+      "file": "File:Woman picking cotton in Raichur, Karnataka.jpg",
+      "file_page": "https://commons.wikimedia.org/wiki/File:Woman_picking_cotton_in_Raichur,_Karnataka.jpg",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "licence_basis": null,
+      "author": "Nanditha Gogate, WELL Labs",
+      "source_date": "2025-11-17 11:58:04",
+      "depicts": "Woman picking cotton in Raichur district, Karnataka, 2025",
+      "credit_line": "Nanditha Gogate, WELL Labs, CC BY-SA 4.0, via Wikimedia Commons",
+      "attribution_required": true,
+      "share_alike": true,
+      "verified": {
+        "method": "Commons API extmetadata + file-page HTML check",
+        "date": "2026-10-24",
+        "licence_text_on_page": true,
+        "author_on_page": true,
+        "deletion_notice": false
+      }
+    },
+    "alt_image": null,
+    "image_note": null
+  }
+]

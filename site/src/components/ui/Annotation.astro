@@ -1,0 +1,39 @@
+---
+// A handwritten marker note with an arrow: evidence annotations on photos, margins and diagrams.
+// Position it inside a `position: relative` parent using the top/left/right/bottom props (any CSS length).
+export interface Props {
+  text?: string;
+  arrow?: 'left' | 'right' | 'down' | 'up' | 'none';
+  top?: string; left?: string; right?: string; bottom?: string;
+  tilt?: number;
+  color?: 'red' | 'ink' | 'paper';
+  width?: string;
+}
+const { text, arrow = 'down', top, left, right, bottom, tilt = -4, color = 'red', width = '14ch' } = Astro.props;
+const pos = [top && `top:${top}`, left && `left:${left}`, right && `right:${right}`, bottom && `bottom:${bottom}`].filter(Boolean).join(';');
+const paths: Record<string, string> = {
+  down: 'M10 4 C 30 18, 34 40, 22 62 M10 52 L22 64 L34 50',
+  up: 'M22 64 C 6 46, 8 22, 22 6 M8 18 L22 4 L32 20',
+  left: 'M64 14 C 44 4, 20 6, 6 22 M6 8 L4 24 L20 28',
+  right: 'M4 14 C 24 4, 48 6, 62 22 M48 26 L64 24 L60 8',
+};
+---
+<p class:list={['annot', `annot--${color}`, `annot--${arrow}`, { 'annot--abs': !!pos }]} style={`${pos};--tilt:${tilt}deg;--w:${width}`}>
+  <span class="hand">{text}<slot /></span>
+  {arrow !== 'none' && (
+    <svg class="annot__arrow" viewBox="0 0 68 68" width="56" height="56" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d={paths[arrow]} /></svg>
+  )}
+</p>
+
+<style>
+  .annot { display: inline-flex; flex-direction: column; gap: 2px; max-width: var(--w); transform: rotate(var(--tilt)); z-index: 3; line-height: 1; }
+  .annot--abs { position: absolute; }
+  .annot .hand { font-size: clamp(1.25rem, 2.1vw, 1.65rem); }
+  .annot--red { color: var(--red-ink); }
+  .annot--ink { color: var(--ink); }
+  .annot--paper { color: var(--paper-light); }
+  .annot--left, .annot--right { flex-direction: row; align-items: center; }
+  .annot--left { flex-direction: row-reverse; }
+  .annot--up { flex-direction: column-reverse; }
+  .annot--down .annot__arrow { margin-left: 18%; }
+</style>

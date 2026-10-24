@@ -1,0 +1,22 @@
+---
+// A static (non-animated) slogan strip between sections. Wraps on small screens; never scrolls by itself.
+export interface Props { items: string[]; tone?: 'red' | 'ink' | 'marigold' | 'green'; tilt?: number }
+const { items, tone = 'red', tilt = 0 } = Astro.props;
+---
+<div class:list={['ticker', `ticker--${tone}`]} style={tilt ? `--tilt:${tilt}deg` : undefined}>
+  <p class="ticker__row">
+    {items.map((t, i) => (<><span>{t}</span>{i < items.length - 1 && <span class="ticker__dot" aria-hidden="true">✶</span>}</>))}
+  </p>
+</div>
+
+<style>
+  .ticker { --bg: var(--red-ink); --fg: var(--paper-light); background: var(--bg); color: var(--fg); transform: rotate(var(--tilt, 0deg)); border-block: 3px solid var(--ink); }
+  .ticker__row {
+    display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .2em 1em; padding: .6em var(--gutter) .5em;
+    font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(1.4rem, 3.4vw, 2.6rem); line-height: 1;
+  }
+  .ticker__dot { font-size: .6em; opacity: .8; }
+  .ticker--ink { --bg: var(--ink); --fg: var(--paper); }
+  .ticker--marigold { --bg: var(--marigold); --fg: var(--ink); }
+  .ticker--green { --bg: var(--green); --fg: var(--paper); }
+</style>

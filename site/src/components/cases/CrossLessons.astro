@@ -1,0 +1,75 @@
+---
+// "What N movements teach us": eight numbered cross-cutting lessons, each linked to the cases it draws on.
+import Photo from '../media/Photo.astro';
+import { CROSS_LESSONS } from './cross-lessons';
+import { photo as photoMeta } from './case-utils';
+
+export interface Props { cases: Map<string, { title: string; no: string }> }
+const { cases } = Astro.props;
+const lessons = CROSS_LESSONS.map((l) => ({
+  ...l,
+  links: l.cases.filter((id) => cases.has(id)).map((id) => ({ id, ...cases.get(id)! })),
+  hasPhoto: !!photoMeta(l.photo),
+}));
+---
+<ol class="xl" role="list">
+  {lessons.map((l, i) => (
+    <li class:list={['xl__item', { 'xl__item--flip': i % 2 === 1 }]}>
+      <p class="xl__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</p>
+      <div class="xl__body">
+        <h3 class="xl__title"><span class="visually-hidden">Lesson {i + 1}: </span>{l.title}</h3>
+        <p class="xl__text">{l.text}</p>
+        <p class="xl__csp"><span class="label">For CSP</span> {l.forCsp}</p>
+        {l.links.length > 0 && (
+          <div class="xl__links">
+            <p class="label xl__from">Draws on</p>
+            <ul role="list">
+              {l.links.map((c) => <li><a href={`/case-studies/${c.id}/`}><span aria-hidden="true">{c.no}</span> {c.title}</a></li>)}
+            </ul>
+          </div>
+        )}
+      </div>
+      {l.hasPhoto && (
+        <div class="xl__photo">
+          <Photo id={l.photo} tone={l.tone} aspect="4 / 3" caption={false} tilt={i % 2 ? 1.4 : -1.6} tape={i % 3 === 0 ? 'tl' : false} sizes="(min-width: 1000px) 380px, 88vw" widths={[360, 560, 760]} />
+        </div>
+      )}
+    </li>
+  ))}
+</ol>
+
+<style>
+  .xl { counter-reset: xl; border-top: 3px solid var(--line); }
+  .xl__item {
+    display: grid; grid-template-columns: minmax(90px, 150px) minmax(0, 1fr) minmax(240px, 380px); gap: clamp(18px, 3vw, 48px);
+    padding-block: clamp(26px, 4vw, 48px); border-bottom: 1px solid var(--line); align-items: start;
+  }
+  .xl__n { font-weight: 900; font-stretch: var(--display-stretch); font-size: clamp(4.4rem, 9vw, 8rem); line-height: .78; color: var(--red); letter-spacing: -.03em; }
+  .xl__body { display: grid; gap: 14px; max-width: 62ch; }
+  .xl__title { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(2rem, 3.6vw, 3.3rem); line-height: .9; text-wrap: balance; }
+  .xl__text { font-family: var(--font-serif); font-size: clamp(1.08rem, 1.3vw, 1.2rem); line-height: 1.55; color: var(--text); }
+  .xl__csp { font-weight: 650; line-height: 1.45; padding-left: 14px; border-left: 4px solid var(--marigold); }
+  .xl__csp .label { display: block; color: var(--red-ink); margin-bottom: 4px; }
+  .xl__links { display: grid; gap: 8px; margin-top: 4px; }
+  .xl__from { color: var(--ink-soft); }
+  .xl__links ul { display: flex; flex-wrap: wrap; gap: 8px; }
+  .xl__links a {
+    display: inline-flex; align-items: center; gap: .45em; min-height: 40px; padding: 0 12px; border: 1.5px solid var(--ink); border-radius: 999px;
+    color: var(--ink); text-decoration: none; font-weight: 700; font-size: .88rem; background: var(--paper-light);
+  }
+  .xl__links a span { font-weight: 900; color: var(--red-ink); font-size: .78rem; }
+  .xl__links a:hover { background: var(--ink); color: var(--paper); }
+  .xl__links a:hover span { color: var(--marigold); }
+  .xl__photo { padding-top: 6px; }
+  .xl__photo :global(.photo--fixed .photo__img picture) { display: block; height: 100%; }
+  @media (max-width: 1000px) {
+    .xl__item { grid-template-columns: minmax(70px, 110px) minmax(0, 1fr); }
+    .xl__photo { grid-column: 2; max-width: 460px; order: -1; margin-bottom: 6px; }
+    .xl__n { grid-row: 1 / span 2; }
+  }
+  @media (max-width: 600px) {
+    .xl__item { grid-template-columns: 1fr; gap: 14px; }
+    .xl__n { grid-row: auto; font-size: 4.2rem; }
+    .xl__photo { grid-column: 1; order: 0; }
+  }
+</style>

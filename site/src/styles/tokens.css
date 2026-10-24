@@ -1,0 +1,58 @@
+/* Cultural Shock Party design tokens.
+   Colours come from the finalised badge (cream, protest red, forest green, ink, placard pink)
+   and the Women's Day poster (marigold). Text pairs are checked to WCAG AA:
+   red-ink on paper 5.6:1, ink-soft 6.3:1, muted 4.9:1, paper on green 8.2:1, coral on ink 5.5:1. */
+:root {
+  /* grounds */
+  --paper: #F3ECDC;
+  --paper-deep: #E9DEC6;
+  --paper-light: #FBF7EE;
+  --ink: #1D1C18;
+  --green: #34493C;
+  --green-deep: #24342B;
+  --pink: #ECAEA4;
+  --marigold: #F1B362;
+
+  /* reds: --red for large type and fills only; --red-ink for text, links, buttons */
+  --red: #CD2E2B;
+  --red-ink: #B3261E;
+  --coral: #F0675E; /* red text on ink/green */
+
+  /* text */
+  --text: var(--ink);
+  --ink-soft: #5A554D;
+  --muted: #6B655C;
+  --line: #1D1C18;
+  --line-soft: #CFC3AA;
+
+  /* type */
+  --font-sans: 'Archivo Variable', 'Archivo', system-ui, -apple-system, 'Segoe UI', 'Noto Sans Devanagari', sans-serif;
+  --font-serif: 'Newsreader Variable', 'Newsreader', Georgia, 'Times New Roman', 'Noto Serif Devanagari', serif;
+  --font-hand: 'Caveat Brush', 'Comic Sans MS', cursive;
+
+  --display-stretch: 62%; /* Archivo ExtraCondensed */
+  --head-stretch: 75%;
+
+  --fs-hero: clamp(3.6rem, 15vw, 13.5rem);
+  --fs-h1: clamp(2.9rem, 9vw, 7.25rem);
+  --fs-h2: clamp(2.2rem, 5.6vw, 4.6rem);
+  --fs-h3: clamp(1.35rem, 2.4vw, 1.9rem);
+  --fs-lead: clamp(1.15rem, 1.6vw, 1.45rem);
+  --fs-body: 1.0625rem;
+  --fs-small: 0.9rem;
+  --fs-label: 0.74rem;
+
+  /* space + layout */
+  --gutter: clamp(16px, 4vw, 40px);
+  --max: 1320px;
+  --measure: 66ch;
+  --s-1: 0.25rem; --s-2: 0.5rem; --s-3: 0.75rem; --s-4: 1rem; --s-5: 1.5rem;
+  --s-6: 2rem; --s-7: 3rem; --s-8: 4.5rem; --s-9: 7rem;
+
+  --rule: 3px solid var(--line);
+  --rule-thin: 1px solid var(--line);
+  --shadow-hard: 5px 5px 0 var(--ink);
+  --radius: 2px;
+  --focus: 0 0 0 3px var(--paper), 0 0 0 6px var(--ink);
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}

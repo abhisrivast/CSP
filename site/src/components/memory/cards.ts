@@ -1,0 +1,35 @@
+// Typographic "evidence cards" for milestones that have no licensed photo. Every phrase or figure here is
+// taken from the milestone's own sourced text in src/content/memory.json; nothing new is claimed.
+export type TypeCard = { big: string; small: string; lang?: string; list?: string[] };
+
+export const CARDS: Record<string, TypeCard> = {
+  'seneca-falls-1848': { big: '68 + 32', small: 'women and men signed the Declaration of Sentiments' },
+  'tarabai-shinde-1882': { big: 'स्त्री पुरुष तुलना', lang: 'mr', small: '“A Comparison of Women and Men”, Marathi, 1882' },
+  'pandita-ramabai-1889': { big: 'Sharada Sadan', small: 'a home and a school for widowed girls and women' },
+  'new-zealand-suffrage-1893': { big: '31,872', small: 'signatures on the suffrage petition' },
+  'sultanas-dream-1905': { big: 'Ladyland', small: 'where women run everything' },
+  'first-iwd-1911': { big: 'The vote. The right to work.', small: 'and an end to discrimination at work' },
+  'petrograd-strike-1917': { big: 'Bread and peace', small: 'the strike that fixed 8 March' },
+  'wia-suffrage-1917': { big: 'Votes for Indian women', small: 'the demand, December 1917' },
+  'aiwc-1927': { big: 'About 2,000', small: 'people at the first meeting, Fergusson College, Poona' },
+  'aruna-asaf-ali-1942': { big: 'Quit India', small: 'the flag went up anyway' },
+  'constituent-assembly-1946': { big: '15', small: 'women helped write the Constitution of India' },
+  'udhr-hansa-mehta-1948': { big: 'All human beings', small: 'Article 1, not “all men”' },
+  'universal-franchise-1950': { big: '173 million', small: 'voters registered for the first general election, 1951–52' },
+  'sewa-1972': { big: 'SEWA', small: 'a union for the women other unions left out' },
+  'chipko-1973': { big: 'चिपको', lang: 'hi', small: 'Chipko: Gaura Devi and the 27 women of Reni' },
+  'towards-equality-1974': { big: 'Towards Equality', small: 'the 1974 report that started a movement' },
+  'mathura-1983': { big: 'Consent', small: '1978 judgment · 1979 open letter · 1983 law' },
+  'cedaw-1979': { big: '130–0', small: 'the UN vote that adopted CEDAW' },
+  'shah-bano-1985': { big: 'Section 125', small: 'maintenance for a divorced woman who cannot support herself' },
+  'local-reservation-1993': { big: '14 lakh', small: 'women elected to panchayats, 46% of members (Jan 2025)' },
+  'beijing-1995': { big: '189', small: 'countries · 12 critical areas' },
+  'vishaka-1997': { big: 'Vishaka', small: 'India’s first binding rules against sexual harassment at work' },
+  'pwdva-2006': { big: 'Five forms', small: 'of abuse the law recognised', list: ['Physical', 'Sexual', 'Verbal', 'Emotional', 'Economic'] },
+  'posh-act-2013': { big: '16 years', small: 'from the Vishaka guidelines to the POSH Act' },
+  'pinjra-tod-2015': { big: 'पिंजरा तोड़', lang: 'hi', small: 'Pinjra Tod: “break the cage”' },
+  'metoo-2017': { big: '#MeToo', small: 'Tarana Burke, 2006 → the world, 2017' },
+  'metoo-india-2018': { big: '#MeTooIndia', small: 'from testimony to a court ruling on dignity, 2021' },
+  'womens-reservation-act-2023': { big: '⅓', small: 'of seats in the Lok Sabha and state assemblies, reserved for women' },
+  'pelicot-2024': { big: '51', small: 'men convicted, Avignon' },
+};

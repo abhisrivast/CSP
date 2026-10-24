@@ -1,0 +1,107 @@
+---
+// All 12 positions as one printable poster. Each line links to its clause. "Print the poster" prints only this sheet.
+import Stamp from '../ui/Stamp.astro';
+import { CLAUSES, MANIFESTO_VERSION, MANIFESTO_DATE_LABEL, pad, clauseId } from './manifesto';
+---
+<div class="poster" id="poster">
+  <div class="poster__sheet">
+    <header class="poster__head">
+      <p class="label poster__org">Cultural Shock Party <span aria-hidden="true">✶</span> Fourth Wave feminist movement</p>
+      <h2 class="poster__title">The Fourth Wave Manifesto{' '}<span class="poster__count">in 12 lines</span></h2>
+      <span class="poster__stamp"><Stamp text={`Version ${MANIFESTO_VERSION}`} sub={`For consultation · ${MANIFESTO_DATE_LABEL}`} tilt={-9} decorative={false} /></span>
+    </header>
+    <ol class="poster__list" role="list">
+      {CLAUSES.map((c) => (
+        <li>
+          <a href={`#${clauseId(c.n)}`}>
+            <span class="poster__n" aria-hidden="true">{pad(c.n)}</span>
+            <span class="poster__t"><span class="visually-hidden">Clause {c.n}: </span>{c.title}</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+    <footer class="poster__foot">
+      <span>Sign it. Rewrite it with us.</span>
+      <span>culturalshockparty.com/manifesto</span>
+    </footer>
+  </div>
+  <div class="poster__actions">
+    <button type="button" class="btn btn--paper btn--sm poster__print" data-print-poster>Print the poster</button>
+    <p class="small poster__hint">A4, black and red. Stick it up somewhere people will argue about it.</p>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-print-poster]').forEach((b) =>
+    b.addEventListener('click', () => {
+      const html = document.documentElement;
+      html.classList.add('print-poster');
+      const done = () => { html.classList.remove('print-poster'); window.removeEventListener('afterprint', done); };
+      window.addEventListener('afterprint', done);
+      window.print();
+      setTimeout(done, 1500);
+    }),
+  );
+</script>
+
+<style>
+  .poster { position: relative; display: grid; gap: 22px; }
+  .poster__sheet {
+    position: relative; padding: clamp(22px, 4vw, 56px) clamp(18px, 4vw, 60px) clamp(20px, 3vw, 40px);
+    background: var(--paper-light) url('/textures/grain.png') 0 0 / 160px; color: var(--ink);
+    box-shadow: 12px 14px 0 rgba(0, 0, 0, .45); transform: rotate(-.6deg);
+  }
+  .poster__sheet::before, .poster__sheet::after {
+    content: ''; position: absolute; top: -14px; width: 120px; height: 30px; background: rgba(241, 179, 98, .85);
+    clip-path: polygon(3% 0, 97% 8%, 100% 92%, 0 100%);
+  }
+  .poster__sheet::before { left: 6%; transform: rotate(-5deg); }
+  .poster__sheet::after { right: 8%; transform: rotate(4deg); }
+  .poster__head { position: relative; display: grid; gap: 10px; padding-bottom: clamp(16px, 2.4vw, 28px); border-bottom: 6px solid var(--ink); padding-right: clamp(0px, 18vw, 260px); }
+  .poster__org { color: var(--red-ink); }
+  .poster__title {
+    font-weight: 900; font-stretch: 62%; text-transform: uppercase; line-height: .9; letter-spacing: -.01em;
+    font-size: clamp(1.9rem, 3.6vw, 3.3rem); max-width: 18ch;
+  }
+  .poster__count { display: inline-block; font-family: var(--font-hand); font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--red); font-size: .72em; line-height: 1; margin-left: .2em; transform: rotate(-3deg); }
+  .poster__stamp { position: absolute; right: 0; top: 4px; font-size: clamp(.95rem, 1.6vw, 1.35rem); }
+  .poster__stamp :global(.stamp__text) { font-size: 1.35em; }
+  .poster__stamp :global(.stamp__sub) { font-size: .62em; }
+  .poster__list { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(6, auto); grid-auto-flow: column; column-gap: clamp(24px, 4vw, 64px); }
+  .poster__list li { border-bottom: 2px solid var(--ink); }
+  .poster__list a {
+    display: grid; grid-template-columns: 1.55em 1fr; align-items: baseline; gap: .35em; padding: .42em 0 .36em; height: 100%;
+    color: var(--ink); text-decoration: none; font-weight: 900; font-stretch: 62%; text-transform: uppercase; line-height: .9;
+    font-size: clamp(1.45rem, 2.7vw, 2.55rem); letter-spacing: -.005em;
+  }
+  .poster__n { color: var(--red); font-size: .92em; }
+  .poster__list a:hover .poster__t { text-decoration: underline; text-decoration-color: var(--red); text-decoration-thickness: .1em; text-underline-offset: .1em; }
+  .poster__list a:focus-visible { outline-offset: 2px; }
+  .poster__foot {
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 20px; padding-top: 16px;
+    font-weight: 800; font-stretch: 80%; text-transform: uppercase; letter-spacing: .08em; font-size: .85rem;
+  }
+  .poster__foot span:first-child { color: var(--red-ink); }
+  .poster__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+  .poster__hint { color: var(--ink-soft); }
+
+  @media (max-width: 760px) {
+    .poster__head { padding-right: 0; padding-top: 70px; }
+    .poster__stamp { top: 0; right: auto; left: 0; font-size: .9rem; }
+    .poster__list { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; }
+    .poster__list a { font-size: clamp(1.4rem, 7.4vw, 2rem); }
+  }
+
+  @media print {
+    .poster__sheet { box-shadow: none; transform: none; padding: 0; background: #fff; }
+    .poster__sheet::before, .poster__sheet::after, .poster__actions { display: none; }
+    .poster__head { padding-right: 0; padding-top: 0; }
+    .poster__stamp { position: static; justify-self: start; margin-top: 6pt; font-size: 12pt; }
+    .poster__title { font-size: 46pt; max-width: none; }
+    .poster__list a { font-size: 22pt; padding: 7pt 0 6pt; }
+    .poster__foot { font-size: 9pt; }
+    .poster { break-inside: avoid; }
+  }
+  :global(html.print-poster) .poster__list a { font-size: 24pt; padding: 9pt 0 8pt; }
+  :global(html.print-poster) .poster__title { font-size: 52pt; }
+</style>

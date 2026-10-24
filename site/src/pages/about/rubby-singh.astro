@@ -1,0 +1,253 @@
+---
+import Base from '../../layouts/Base.astro';
+import '../../components/about/contrast-fixes.css';
+import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
+import FounderCard from '../../components/about/FounderCard.astro';
+import BookBlock from '../../components/about/BookBlock.astro';
+import Pic from '../../components/about/Pic.astro';
+import SectionHead from '../../components/ui/SectionHead.astro';
+import Engine from '../../components/blocks/Engine.astro';
+import Stamp from '../../components/ui/Stamp.astro';
+import Placard from '../../components/ui/Placard.astro';
+import TornEdge from '../../components/ui/TornEdge.astro';
+import JoinBand from '../../components/blocks/JoinBand.astro';
+import { FOUNDER, SITE } from '../../data/site';
+import { founderNode, bookNode, abs, FOUNDER_ID } from '../../lib/schema';
+
+const path = `/about/${FOUNDER.slug}/`;
+const title = 'Rubby Singh: founder, author of Garbhadosh';
+const description =
+  'Rubby Singh is the founder of Cultural Shock Party, a Fourth Wave feminist movement, and the author of the 2026 novel Garbhadosh: The Fault In Our Wombs.';
+const crumbs = [{ name: 'About', href: '/about/' }, { name: FOUNDER.name, href: path }];
+const book = FOUNDER.book;
+const [bookMain, bookSub] = book.title.split(':').map((s) => s.trim());
+const isbn = `${book.isbn13.slice(0, 3)}-${book.isbn13.slice(3)}`;
+const published = new Date(book.published).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+const handles = [
+  { label: 'Instagram', handle: '@happytappysinghni', href: FOUNDER.sameAs[0], note: 'Her public Instagram profile' },
+  { label: 'Threads', handle: '@happytappysinghni', href: FOUNDER.sameAs[1], note: 'Her public Threads profile' },
+];
+---
+<Base
+  title={title}
+  description={description}
+  pageType="ProfilePage"
+  type="profile"
+  breadcrumbs={crumbs}
+  image="/og/rubby-singh.png"
+  imageAlt="Rubby Singh, founder of Cultural Shock Party"
+  schema={[founderNode(), bookNode(), { '@type': 'ProfilePage', '@id': abs(path) + '#page', mainEntity: { '@id': FOUNDER_ID } }]}
+>
+  <section class="fhero ground-red grain">
+    <div class="wrap fhero__inner">
+      <Breadcrumbs items={crumbs} />
+      <div class="fhero__text">
+        <p class="label-row label fhero__label"><span>Our founder</span><span>Cultural Shock Party</span></p>
+        <h1 class="fhero__title">
+          <span class="fhero__l">Rubby</span>{' '}
+          <span class="fhero__l">Singh<span class="fhero__comma">,</span></span>{' '}
+          <span class="fhero__role hand">founder</span>
+        </h1>
+        <p class="lead fhero__lead">Author, book reviewer and social worker. Founder of Cultural Shock Party, a Fourth Wave feminist movement.</p>
+        <ul class="fhero__tags" role="list" aria-label="Quick facts">
+          <li>Founded CSP in 2026</li>
+          <li>Author of <cite>{bookMain}</cite></li>
+        </ul>
+      </div>
+      <div class="fhero__card">
+        <FounderCard decorative />
+      </div>
+    </div>
+  </section>
+
+  <section class="section bio" aria-labelledby="bio-title">
+    <div class="wrap bio__grid">
+      <div class="bio__main">
+        <p class="label section-label"><span class="num">01</span> / In short</p>
+        <h2 class="h2" id="bio-title">Who is Rubby Singh?</h2>
+        <p class="bio__text serif">{FOUNDER.shortBio}</p>
+        <p class="bio__more">We publish only what we can source. Her own story of her work is hers to tell.</p>
+      </div>
+      <aside class="dossier" aria-labelledby="dossier-title">
+        <p class="label dossier__head" id="dossier-title"><span>At a glance</span><span>File 01</span></p>
+        <dl>
+          <div><dt>Role</dt><dd>Founder, Cultural Shock Party (2026)</dd></div>
+          <div><dt>Describes herself as</dt><dd>Author, book reviewer, social worker</dd></div>
+          <div><dt>Book</dt><dd><cite>{book.title}</cite> ({book.publisher}, 2026)</dd></div>
+          <div><dt>Find her</dt><dd><a href={FOUNDER.sameAs[0]} rel="noopener">Instagram</a> and <a href={FOUNDER.sameAs[1]} rel="noopener">Threads</a>, @happytappysinghni</dd></div>
+        </dl>
+        <p class="dossier__src">Sources: her public <a href={FOUNDER.sameAs[0]} rel="noopener">Instagram profile</a> and the <a href={book.url} rel="noopener">Amazon.in book listing</a>. Checked 24 October 2026.</p>
+        <span class="dossier__stamp" aria-hidden="true"><Stamp text="Sourced" sub="24 Oct 2026" color="green" tilt={-10} /></span>
+      </aside>
+    </div>
+  </section>
+
+  <TornEdge color="var(--ink)" seed={1} />
+  <section class="section ground-ink grain booksec" id="book" aria-labelledby="book-title">
+    <div class="wrap booksec__grid">
+      <div class="booksec__art">
+        <BookBlock />
+      </div>
+      <div class="booksec__text">
+        <p class="label section-label"><span class="num">02</span> / The book</p>
+        <h2 class="booksec__title" id="book-title">{bookMain}<span class="visually-hidden">: </span><span class="booksec__sub">{bookSub}</span></h2>
+        <p class="booksec__gloss"><span lang="hi-Latn"><i>garbh</i></span> womb <span aria-hidden="true">+</span> <span lang="hi-Latn"><i>dosh</i></span> fault, defect</p>
+        <div class="booksec__prose">
+          <p>A novel told in the voice of a girl named Chanda. It follows what happens when an old idea, that a woman’s womb can be “defective”, is turned into a verdict on a woman and her daughter.</p>
+          <p>Along the way it looks hard at everyday patriarchy: the rituals, the advice and the small rules that shape how girls and women are allowed to live. And it is, in the end, a story of awakening.</p>
+        </div>
+        <dl class="bookspecs">
+          <div><dt>Publisher</dt><dd>{book.publisher}</dd></div>
+          <div><dt>Published</dt><dd><time datetime={book.published}>{published}</time></dd></div>
+          <div><dt>Format</dt><dd>Hardcover, first edition</dd></div>
+          <div><dt>Length</dt><dd>{book.pages} pages</dd></div>
+          <div><dt>ISBN-13</dt><dd>{isbn}</dd></div>
+        </dl>
+        <div class="booksec__ctas">
+          <a class="btn btn--paper" href={book.url} rel="noopener" target="_blank">Buy {bookMain} on Amazon.in <span class="arrow" aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+          <p class="small booksec__src">Details from the <a href={book.url} rel="noopener">Amazon.in listing</a>, checked 24 October 2026. Description paraphrased by Cultural Shock Party.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section why" aria-labelledby="why-title">
+    <div class="wrap why__grid">
+      <div class="why__main">
+        <SectionHead num="03" label="Why Cultural Shock Party" id="why-title" title="Why the movement exists" lead="We won’t put words in our founder’s mouth. Here is the movement’s own answer." />
+        <figure class="why__quote">
+          <blockquote class="serif-display"><p>{SITE.mission}</p></blockquote>
+          <figcaption class="label">Cultural Shock Party, mission statement</figcaption>
+        </figure>
+        <div class="why__links">
+          <a class="link-arrow" href="/about/">About Cultural Shock Party <span aria-hidden="true">→</span></a>
+          <a class="link-arrow" href="/manifesto/">The Fourth Wave Manifesto <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="why__photos" aria-hidden="true">
+        <Pic id="078-collage-pinboard" tone="red" aspect="4 / 5" tilt={-3} frame alt="" sizes="(min-width: 900px) 22vw, 46vw" widths={[240, 360, 480]} />
+        <Pic id="077-zines-on-a-table" tone="marigold" aspect="4 / 5" tilt={4} frame alt="" class="why__photo2" sizes="(min-width: 900px) 20vw, 42vw" widths={[240, 360, 480]} />
+        <span class="why__placard"><Placard text="Ideas into action" shape="sticker" color="pink" size="s" tilt={-6} decorative /></span>
+      </div>
+    </div>
+    <div class="wrap why__engine">
+      <Engine compact />
+    </div>
+  </section>
+
+  <TornEdge color="var(--pink)" seed={2} />
+  <section class="section ground-pink grain find" aria-labelledby="find-title">
+    <div class="wrap">
+      <SectionHead num="04" label="Where to find her" id="find-title" title="Where to find her" />
+      <ul class="find__list" role="list">
+        {handles.map((h) => (
+          <li>
+            <a class="handle" href={h.href} rel="noopener" target="_blank">
+              <span class="label handle__net">{h.label}</span>
+              <span class="handle__name">{h.handle}</span>
+              <span class="handle__note">{h.note}</span>
+              <span class="handle__go" aria-hidden="true">↗</span>
+              <span class="visually-hidden"> (opens in a new tab)</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <p class="find__note">These are her personal accounts. For anything about Cultural Shock Party, including press, <a href="/contact/">write to us through the contact page</a>.</p>
+    </div>
+  </section>
+
+  <JoinBand ground="green" />
+</Base>
+
+<style>
+  .booksec :global(.btn--paper) { color: var(--ink); }
+  .section-label { display: flex; gap: .3em; padding-top: 12px; border-top: 3px solid var(--line); }
+  .num { color: var(--red-ink); font-weight: 900; }
+  :global(.ground-ink) .num { color: var(--coral); }
+
+  /* hero */
+  .fhero { padding-block: clamp(24px, 4vw, 44px) clamp(56px, 8vw, 100px); overflow: hidden; border-bottom: var(--rule); }
+  .fhero :global(.crumbs a) { color: var(--paper-light); }
+  .fhero__inner { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); grid-template-areas: 'crumbs crumbs' 'text card'; gap: 28px clamp(28px, 5vw, 72px); align-items: center; }
+  .fhero__inner > :global(.crumbs) { grid-area: crumbs; }
+  .fhero__text { grid-area: text; display: grid; gap: 24px; }
+  .fhero__label { color: var(--paper-light); }
+  .fhero__title { font-weight: 900; font-stretch: 62%; text-transform: uppercase; line-height: .8; letter-spacing: -.02em; font-size: clamp(4.6rem, 23vw, 14.5rem); color: var(--paper-light); }
+  .fhero__l { display: block; }
+  .fhero__comma { color: var(--marigold); }
+  .fhero__role { display: block; margin-top: .12em; font-size: max(.3em, 1.9rem); line-height: 1; text-transform: none; letter-spacing: .01em; color: var(--marigold); transform: rotate(-4deg); transform-origin: left; }
+  .fhero__lead { color: var(--paper-light); max-width: 34ch; }
+  .fhero__tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .fhero__tags li { padding: .45em .75em .4em; border: 2px solid var(--paper-light); font-weight: 750; font-size: .86rem; letter-spacing: .02em; }
+  .fhero__card { grid-area: card; max-width: 460px; justify-self: end; width: 100%; }
+  .fhero__card :global(.fcard) { background: var(--ink); box-shadow: 12px 12px 0 rgba(0, 0, 0, .35); }
+
+  /* bio */
+  .bio__grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 90px); align-items: start; }
+  .bio__main { display: grid; gap: 22px; }
+  .bio__text { font-size: clamp(1.35rem, 2.3vw, 1.85rem); line-height: 1.34; max-width: 36ch; }
+  .bio__more { color: var(--ink-soft); max-width: 52ch; font-size: 1.02rem; }
+  .dossier { position: relative; padding: 22px 24px 26px; background: var(--paper-light); border: 2px solid var(--ink); box-shadow: 7px 7px 0 var(--ink); }
+  .dossier__head { display: flex; justify-content: space-between; padding-bottom: 10px; border-bottom: 3px double var(--ink); color: var(--red-ink); }
+  .dossier dl { display: grid; margin-top: 6px; }
+  .dossier dl > div { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 12px; padding-block: 12px; border-bottom: 1px solid var(--line-soft); }
+  .dossier dt { font-size: var(--fs-label); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); padding-top: .2em; }
+  .dossier dd { font-weight: 650; line-height: 1.35; }
+  .dossier__src { margin-top: 14px; font-size: .8rem; color: var(--muted); line-height: 1.4; }
+  .dossier__stamp { position: absolute; right: -14px; bottom: -22px; font-size: 1rem; }
+  .dossier__stamp :global(.stamp) { background: var(--paper-light); }
+
+  /* book */
+  .booksec__grid { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.3fr); gap: clamp(36px, 6vw, 96px); align-items: center; }
+  .booksec__text { display: grid; gap: 20px; }
+  .booksec__title { font-weight: 900; font-stretch: 62%; text-transform: uppercase; line-height: .84; font-size: clamp(3.2rem, 7.6vw, 6.4rem); letter-spacing: -.015em; }
+  .booksec__title .booksec__sub { display: block; margin-top: .22em; font-family: var(--font-serif); font-weight: 500; font-style: italic; text-transform: none; letter-spacing: -.01em; font-stretch: 100%; font-size: .36em; line-height: 1.1; color: var(--marigold); }
+  .booksec__gloss { font-size: .95rem; color: var(--ink-soft); letter-spacing: .02em; }
+  .booksec__gloss i { font-family: var(--font-serif); font-size: 1.2rem; color: var(--paper); }
+  .booksec__prose { display: grid; gap: 1em; font-family: var(--font-serif); font-size: clamp(1.12rem, 1.4vw, 1.25rem); line-height: 1.6; max-width: 56ch; }
+  .bookspecs { display: flex; flex-wrap: wrap; gap: 14px 30px; padding-block: 16px; border-block: 1px solid rgba(243, 236, 220, .35); }
+  .bookspecs dt { font-size: var(--fs-label); letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--muted); }
+  .bookspecs dd { font-weight: 750; margin-top: 4px; white-space: nowrap; }
+  .booksec__ctas { display: grid; gap: 12px; justify-items: start; }
+  .booksec__src { color: var(--muted); max-width: 56ch; }
+
+  /* why */
+  .why__grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 90px); align-items: center; }
+  .why__main { display: grid; gap: 8px; }
+  .why__quote { position: relative; padding: 26px 0 0 28px; border-left: 6px solid var(--red); }
+  .why__quote blockquote { font-size: clamp(1.4rem, 2.6vw, 2.1rem); line-height: 1.22; max-width: 30ch; }
+  .why__quote figcaption { margin-top: 16px; color: var(--muted); }
+  .why__links { display: flex; flex-wrap: wrap; gap: 18px 30px; margin-top: 30px; }
+  .why__photos { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: end; max-width: 520px; justify-self: end; width: 100%; }
+  .why__photos :global(.why__photo2) { margin-bottom: 40px; }
+  .why__placard { position: absolute; left: 30%; bottom: -26px; z-index: 3; }
+  .why__engine { margin-top: clamp(48px, 7vw, 88px); }
+
+  /* find */
+  .find__list { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 3vw, 32px); }
+  .handle {
+    position: relative; display: grid; gap: 10px; padding: clamp(22px, 3vw, 34px); min-height: 200px; align-content: end;
+    background: var(--paper-light); color: var(--ink); border: 3px solid var(--ink); box-shadow: 8px 8px 0 var(--ink); text-decoration: none;
+    transition: transform .15s var(--ease), box-shadow .15s var(--ease);
+  }
+  .handle:hover { color: var(--ink); transform: translate(-3px, -3px); box-shadow: 11px 11px 0 var(--ink); }
+  .handle__net { color: var(--red-ink); }
+  .handle__name { font-weight: 900; font-stretch: 62%; font-size: clamp(2rem, 4.6vw, 3.8rem); line-height: .9; word-break: break-word; }
+  .handle__note { color: var(--ink-soft); }
+  .handle__go { position: absolute; right: 22px; top: 18px; font-size: 1.8rem; font-weight: 900; color: var(--red); }
+  .find__note { position: relative; z-index: 2; margin-top: 30px; max-width: 60ch; }
+  .find__note a { color: var(--ink); font-weight: 700; }
+
+  @media (max-width: 980px) {
+    .bio__grid, .booksec__grid, .why__grid { grid-template-columns: 1fr; }
+    .why__photos { justify-self: start; max-width: 440px; }
+  }
+  @media (max-width: 760px) {
+    .fhero__inner { grid-template-columns: 1fr; grid-template-areas: 'crumbs' 'text' 'card'; }
+    .fhero__card { justify-self: start; max-width: 320px; }
+    .booksec__art { max-width: 300px; justify-self: center; width: 100%; }
+    .find__list { grid-template-columns: 1fr; }
+    .dossier dl > div { grid-template-columns: 1fr; gap: 2px; }
+    .dossier__stamp { right: 8px; }
+  }
+</style>

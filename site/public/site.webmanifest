@@ -1,0 +1,14 @@
+{
+  "name": "Cultural Shock Party",
+  "short_name": "CSP",
+  "description": "A Fourth Wave feminist movement: ideas into research, research into public consciousness, public consciousness into collective political action.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F3ECDC",
+  "theme_color": "#CD2E2B",
+  "icons": [
+    { "src": "/brand/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/brand/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

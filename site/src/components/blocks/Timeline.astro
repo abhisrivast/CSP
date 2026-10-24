@@ -1,0 +1,61 @@
+---
+// Vertical, numbered timeline. Years in giant condensed type; each event may carry a photo id and a source.
+import Photo from '../media/Photo.astro';
+
+export type TimelineEvent = {
+  date: string;            // display date: "1848", "16 Dec 2012"
+  year?: string;           // big marker; defaults to the first 4-digit run in date
+  title: string;
+  text?: string;
+  place?: string;
+  tag?: string;            // "India", "Global", "Law", "Street"
+  photo?: string;          // registry id
+  source?: { label: string; href: string };
+};
+export interface Props { events: TimelineEvent[]; startIndex?: number; dense?: boolean }
+const { events, startIndex = 1, dense = false } = Astro.props;
+const yearOf = (e: TimelineEvent) => e.year ?? e.date.match(/\d{4}/)?.[0] ?? e.date;
+---
+<ol class:list={['timeline', { 'timeline--dense': dense }]} role="list">
+  {events.map((e, i) => (
+    <li class="tl">
+      <div class="tl__marker" aria-hidden="true">
+        <span class="tl__year">{yearOf(e)}</span>
+        <span class="label tl__idx">{String(startIndex + i).padStart(2, '0')}</span>
+      </div>
+      <div class="tl__body">
+        <p class="label-row label tl__meta">
+          <time>{e.date}</time>
+          {e.place && <span>{e.place}</span>}
+          {e.tag && <span class="tl__tag">{e.tag}</span>}
+        </p>
+        <h3 class="h3 tl__title">{e.title}</h3>
+        {e.text && <p class="tl__text">{e.text}</p>}
+        {e.source && <p class="small tl__src"><span class="label">Source</span> <a href={e.source.href} rel="noopener">{e.source.label}</a></p>}
+      </div>
+      {e.photo && <div class="tl__photo"><Photo id={e.photo} tone="ink" aspect="4 / 3" sizes="(min-width: 900px) 320px, 90vw" widths={[320, 480, 640]} caption={false} tape="tl" /></div>}
+    </li>
+  ))}
+</ol>
+
+<style>
+  .timeline { display: grid; gap: 0; padding: 0; list-style: none; }
+  .tl { display: grid; grid-template-columns: minmax(120px, 220px) 1fr minmax(0, 300px); gap: clamp(16px, 3vw, 40px); padding-block: clamp(22px, 3.5vw, 36px); border-top: 1px solid var(--line); align-items: start; }
+  .tl:first-child { border-top: 3px solid var(--line); }
+  .tl__marker { display: grid; gap: 6px; position: sticky; top: 96px; }
+  .tl__year { font-weight: 900; font-stretch: var(--display-stretch); font-size: clamp(3rem, 7vw, 5.6rem); line-height: .8; color: var(--red); letter-spacing: -.02em; }
+  :global(.ground-ink) .tl__year, :global(.ground-green) .tl__year { color: var(--coral); }
+  .tl__body { display: grid; gap: 10px; max-width: 60ch; }
+  .tl__tag { background: var(--ink); color: var(--paper); padding: .15em .45em; }
+  .tl__tag::before { display: none; }
+  .tl__text { color: var(--ink-soft); }
+  .tl__photo { padding-top: 6px; }
+  .timeline--dense .tl { grid-template-columns: minmax(96px, 160px) 1fr; }
+  .timeline--dense .tl__photo { display: none; }
+  .timeline--dense .tl__year { font-size: clamp(2.4rem, 5vw, 3.8rem); }
+  @media (max-width: 900px) {
+    .tl { grid-template-columns: 1fr; gap: 12px; }
+    .tl__marker { position: static; grid-template-columns: auto auto; justify-content: start; align-items: end; gap: 14px; }
+    .tl__photo { max-width: 420px; }
+  }
+</style>

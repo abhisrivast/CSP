@@ -1,0 +1,47 @@
+---
+// "Suggest an edit" to the manifesto (Netlify Forms). No age gate: the email field is optional and
+// under-18s are asked to leave it blank, so no personal data from children is collected.
+import { CLAUSES, pad } from './manifesto';
+const p = 'edit';
+---
+<form class="edit" name="manifesto-feedback" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field">
+  <input type="hidden" name="form-name" value="manifesto-feedback" />
+  <input type="hidden" name="manifesto_version" value="1.0" />
+  <p class="visually-hidden"><label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+
+  <div class="field">
+    <label for={`${p}-clause`}>Which clause?</label>
+    <select class="select" id={`${p}-clause`} name="clause" required>
+      <option value="">Choose a clause</option>
+      {CLAUSES.map((c) => <option value={String(c.n)}>{pad(c.n)} · {c.title}</option>)}
+      <option value="missing">Something that's missing</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label for={`${p}-text`}>Your suggested edit</label>
+    <textarea class="textarea" id={`${p}-text`} name="suggestion" required minlength="10" maxlength="2000" rows="6" aria-describedby={`${p}-text-hint`}></textarea>
+    <p class="hint" id={`${p}-text-hint`}>Rewrite a line, add a missing group, challenge a claim, or send us a better source. Please don't include names or details of other people.</p>
+  </div>
+
+  <div class="field">
+    <label for={`${p}-email`}>Email <span class="opt">(optional, only if you'd like a reply)</span></label>
+    <input class="input" id={`${p}-email`} type="email" name="email" autocomplete="email" inputmode="email" aria-describedby={`${p}-email-hint`} />
+    <p class="hint" id={`${p}-email-hint`}>Under 18? Please leave this blank. Your suggestion still counts.</p>
+  </div>
+
+  <label class="check">
+    <input type="checkbox" name="consent" value="yes" required />
+    <span>I agree that CSP may read my suggestion and use it to improve the manifesto, and may quote it in a public summary of the consultation without my name or email. CSP uses my email only to reply, deletes both when the consultation closes, and <strong>will never share my details with any political party, candidate or advertiser.</strong> <a href="/privacy/">Privacy notice</a>.</span>
+  </label>
+
+  <button class="btn btn--ink" type="submit">Send my edit <span class="arrow" aria-hidden="true">→</span></button>
+</form>
+
+<style>
+  .edit { display: grid; gap: 18px; }
+  .edit .opt { font-weight: 500; color: var(--muted); }
+  .edit .hint { color: var(--muted); }
+  .edit .check { font-size: .92rem; }
+  .edit .btn { justify-self: start; }
+</style>

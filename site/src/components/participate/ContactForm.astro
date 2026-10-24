@@ -1,0 +1,73 @@
+---
+// The one contact form (Netlify Forms, name="contact"). Minimum data: a name, an email, a topic, a message.
+// Topic links elsewhere on the page are plain #contact-form anchors; with JS they also pre-select the topic,
+// and /contact/?topic=press#contact-form works from other pages.
+import { TOPICS } from './contact-topics';
+---
+<form class="cform" id="contact-form-el" name="contact" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field" data-contact-form>
+  <input type="hidden" name="form-name" value="contact" />
+  <input type="hidden" name="notice_version" value="contact-notice-v1.0-2026-10-24" />
+  <p class="visually-hidden"><label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+
+  <div class="cform__row">
+    <div class="field">
+      <label for="c-name">What should we call you?</label>
+      <input class="input" id="c-name" name="name" type="text" autocomplete="name" maxlength="80" required />
+    </div>
+    <div class="field">
+      <label for="c-email">Email</label>
+      <input class="input" id="c-email" name="email" type="email" autocomplete="email" inputmode="email" required />
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="c-topic">What is it about?</label>
+    <select class="select" id="c-topic" name="topic" required aria-describedby="c-topic-hint">
+      <option value="">Choose a topic</option>
+      {TOPICS.map((t) => <option value={t.v}>{t.l}</option>)}
+    </select>
+    <p class="hint cform__topic-hint" id="c-topic-hint" aria-live="polite" data-topic-hint>Choosing the right topic gets your message to the right person faster.</p>
+  </div>
+
+  <div class="field">
+    <label for="c-message">Your message</label>
+    <textarea class="textarea" id="c-message" name="message" rows="7" maxlength="4000" required aria-describedby="c-message-hint"></textarea>
+    <p class="hint" id="c-message-hint">Please don’t include anyone else’s personal details, or any address or phone number.</p>
+  </div>
+
+  <p class="cform__consent">We’ll use your name, email and message only to reply to you, and delete them after 6 months. <a href="/privacy/">Privacy notice</a></p>
+
+  <button class="btn cform__submit" type="submit">Send message <span class="arrow" aria-hidden="true">→</span></button>
+</form>
+
+<script>
+  // Pre-select the topic from route links (data-topic) and from ?topic= in the URL; show the matching hint.
+  import { TOPICS } from './contact-topics';
+  const form = document.querySelector<HTMLFormElement>('form[data-contact-form]');
+  const select = form?.querySelector<HTMLSelectElement>('select[name="topic"]');
+  const hint = form?.querySelector<HTMLElement>('[data-topic-hint]');
+  if (form && select && hint) {
+    const fallback = hint.textContent;
+    const show = () => { hint.textContent = TOPICS.find((t) => t.v === select.value)?.hint ?? fallback; };
+    const pick = (v: string | null) => { if (v && [...select.options].some((o) => o.value === v)) { select.value = v; show(); } };
+    pick(new URLSearchParams(location.search).get('topic'));
+    select.addEventListener('change', show);
+    document.querySelectorAll<HTMLAnchorElement>('a[data-topic]').forEach((a) =>
+      a.addEventListener('click', () => { pick(a.dataset.topic ?? null); }),
+    );
+  }
+</script>
+
+<style>
+  .cform { display: grid; gap: 20px; padding: clamp(20px, 3vw, 38px); background: var(--paper-light); border: 3px solid var(--ink); box-shadow: 8px 8px 0 var(--ink); }
+  .cform__row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cform .hint { font-size: .86rem; line-height: 1.45; color: var(--muted); }
+  .cform__topic-hint { min-height: 2.9em; }
+  .cform__consent { padding-top: 14px; border-top: 3px solid var(--ink); font-size: .94rem; line-height: 1.45; }
+  .cform__submit { justify-self: start; }
+  @media (max-width: 560px) {
+    .cform { box-shadow: 5px 5px 0 var(--ink); padding: 18px 16px; }
+    .cform__row { grid-template-columns: 1fr; }
+    .cform__submit { width: 100%; justify-content: center; }
+  }
+</style>

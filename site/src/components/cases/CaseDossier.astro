@@ -1,0 +1,57 @@
+---
+// Forensic-Architecture-style metadata table plus the answer-first summary and an in-page contents list.
+export interface Props {
+  rows: { k: string; v: string; href?: string }[];
+  summary: string;
+  contents: { id: string; label: string }[];
+}
+const { rows, summary, contents } = Astro.props;
+---
+<section class="dossier section--tight" aria-labelledby="in-short">
+  <div class="wrap dossier__grid">
+    <div class="dossier__summary">
+      <h2 class="label dossier__label" id="in-short">In short</h2>
+      <p class="dossier__answer">{summary}</p>
+      {contents.length > 1 && (
+        <nav class="dossier__toc" aria-label="On this page">
+          <p class="label">On this page</p>
+          <ol role="list">
+            {contents.map((c, i) => <li><a href={`#${c.id}`}><span aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>{c.label}</a></li>)}
+          </ol>
+        </nav>
+      )}
+    </div>
+    <dl class="dossier__meta" aria-label="Case file">
+      {rows.map((r) => (
+        <div class="dossier__row">
+          <dt class="label">{r.k}</dt>
+          <dd>{r.href ? <a href={r.href}>{r.v}</a> : r.v}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>
+
+<style>
+  .dossier { border-bottom: var(--rule); }
+  .dossier__grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 72px); align-items: start; }
+  .dossier__summary { display: grid; gap: 18px; }
+  .dossier__label { color: var(--red-ink); }
+  .dossier__answer { font-family: var(--font-serif); font-weight: 500; font-size: clamp(1.45rem, 2.5vw, 2.15rem); line-height: 1.22; letter-spacing: -.01em; max-width: 34ch; text-wrap: pretty; }
+  .dossier__toc { margin-top: 10px; display: grid; gap: 10px; }
+  .dossier__toc ol { display: flex; flex-wrap: wrap; gap: 8px; }
+  .dossier__toc a {
+    display: inline-flex; align-items: center; gap: .55em; min-height: 40px; padding: 0 12px; border: 1.5px solid var(--ink);
+    color: var(--ink); text-decoration: none; font-weight: 750; font-size: .88rem; background: var(--paper-light);
+  }
+  .dossier__toc a span { color: var(--red-ink); font-weight: 900; font-size: .78rem; }
+  .dossier__toc a:hover { background: var(--ink); color: var(--paper); }
+  .dossier__toc a:hover span { color: var(--marigold); }
+  .dossier__meta { border-top: 3px solid var(--line); }
+  .dossier__row { display: grid; grid-template-columns: minmax(110px, 38%) 1fr; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .dossier__row dt { color: var(--ink-soft); }
+  .dossier__row dd { font-weight: 650; line-height: 1.35; }
+  @media (max-width: 860px) {
+    .dossier__grid { grid-template-columns: 1fr; }
+  }
+</style>

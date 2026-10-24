@@ -1,0 +1,73 @@
+---
+// A contact route: who it's for, what to include, and a link that scrolls to the form and pre-selects the topic
+// (the link is a plain #contact-form anchor; a tiny script sets the select when JS is on).
+import Shot from './Shot.astro';
+import type { Tone } from '../../lib/photos';
+
+export interface Props {
+  id: string;
+  n: string;
+  title: string;
+  who: string;
+  include: string[];
+  note?: string;
+  topic: string;
+  cta: string;
+  photo?: { id: string; tone: Tone; alt: string; position?: string };
+  ground?: 'paper' | 'marigold' | 'pink';
+}
+const { id, n, title, who, include, note, topic, cta, photo, ground = 'paper' } = Astro.props;
+---
+<article class:list={['route', `route--${ground}`, { 'route--photo': !!photo }]} id={id} aria-labelledby={`${id}-title`}>
+  {photo && (
+    <div class="route__pic">
+      <Shot id={photo.id} tone={photo.tone} aspect="16 / 10" position={photo.position} alt={photo.alt} caption={false}
+        sizes="(min-width: 1000px) 30vw, (min-width: 640px) 45vw, 90vw" widths={[360, 560, 800]} />
+    </div>
+  )}
+  <div class="route__body">
+    <p class="route__n label"><span>{n}</span> Route</p>
+    <h3 class="route__title" id={`${id}-title`}>{title}</h3>
+    <p class="route__who">{who}</p>
+    <p class="label route__inc-label">Please include</p>
+    <ul class="route__inc" role="list">
+      {include.map((i) => <li>{i}</li>)}
+    </ul>
+    {note && <p class="route__note">{note}</p>}
+    <a class="route__cta" href="#contact-form" data-topic={topic}>{cta} <span aria-hidden="true">↓</span></a>
+  </div>
+</article>
+
+<style>
+  .route { --bg: var(--paper-light); display: grid; grid-template-rows: auto 1fr; height: 100%; background: var(--bg); border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); scroll-margin-top: 90px; transition: transform .15s var(--ease), box-shadow .15s var(--ease); }
+  .route:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--ink); }
+  .route--marigold { --bg: var(--marigold); }
+  .route--pink { --bg: var(--pink); }
+  .route__pic { border-bottom: 3px solid var(--ink); }
+  .route__pic :global(.photo__img) { background: var(--ink); }
+  .route__body { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 20px 20px 22px; }
+  .route:not(.route--photo) { grid-template-rows: 1fr; }
+  .route__n { display: flex; gap: .6em; align-items: baseline; color: var(--muted); }
+  .route__n span { color: var(--red-ink); font-weight: 900; font-size: 1rem; }
+  .route--marigold .route__n, .route--pink .route__n { color: #3E3A34; }
+  .route--marigold .route__n span, .route--pink .route__n span { color: var(--ink); }
+  .route__title { font-weight: 900; font-stretch: var(--display-stretch); text-transform: uppercase; font-size: clamp(1.9rem, 2.6vw, 2.4rem); line-height: .88; text-wrap: balance; }
+  .route__who { color: var(--ink-soft); line-height: 1.45; }
+  .route--marigold .route__who, .route--pink .route__who { color: #3E3A34; }
+  .route__inc-label { margin-top: 4px; }
+  .route__inc { display: grid; gap: 4px; font-size: .95rem; line-height: 1.4; }
+  .route__inc li { position: relative; padding-left: 18px; }
+  .route__inc li::before { content: ''; position: absolute; left: 0; top: .55em; width: 8px; height: 8px; background: var(--red-ink); transform: rotate(45deg); }
+  .route__note { font-size: .88rem; line-height: 1.4; padding: 8px 10px; background: rgba(29, 28, 24, .06); border-left: 4px solid var(--ink); }
+  .route__cta {
+    display: inline-flex; align-items: center; gap: .45em; min-height: 44px; margin-top: auto; padding-top: 6px;
+    font-weight: 800; font-stretch: 80%; text-transform: uppercase; letter-spacing: .05em; color: var(--ink); text-decoration: none;
+    border-bottom: 3px solid var(--red);
+  }
+  .route__cta:hover { color: var(--red-ink); }
+  .route--marigold .route__cta { border-color: var(--ink); }
+  @media (max-width: 640px) {
+    .route__pic :global(.photo--fixed) { --aspect: 21 / 9; }
+    .route__title { font-size: 1.9rem; }
+  }
+</style>

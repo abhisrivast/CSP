@@ -1,0 +1,32 @@
+---
+// Photo wall for a case study. Documentary photos stay in natural colour with their real caption;
+// stock photos are duotoned and labelled illustrative.
+import Photo from '../media/Photo.astro';
+import type { PhotoMeta, Tone } from '../../lib/photos';
+import { heroTone, honestCaption } from './case-utils';
+
+export interface Props { photos: PhotoMeta[]; tone: Tone; caseId?: string }
+const { photos, tone, caseId } = Astro.props;
+const cols = Math.min(photos.length, 3);
+---
+<ul class="cgal" role="list" style={`--cols:${cols}`}>
+  {photos.map((p, i) => (
+    <li class:list={['cgal__item', { 'cgal__item--tilt': i % 3 === 1 }]}>
+      <Photo
+        id={p.id}
+        tone={heroTone(p, tone)}
+        caption={honestCaption(p, caseId)}
+        sizes={cols >= 3 ? '(min-width: 1100px) 400px, (min-width: 700px) 46vw, 92vw' : '(min-width: 900px) 600px, 92vw'}
+        widths={[360, 560, 800]}
+        frame={i % 3 === 1}
+      />
+    </li>
+  ))}
+</ul>
+
+<style>
+  .cgal { columns: var(--cols) 260px; column-gap: clamp(18px, 2.6vw, 36px); }
+  .cgal__item { break-inside: avoid; margin-bottom: clamp(22px, 3vw, 40px); }
+  .cgal__item--tilt { transform: rotate(-1deg); }
+  .cgal__item :global(figcaption) { font-size: .82rem; }
+</style>

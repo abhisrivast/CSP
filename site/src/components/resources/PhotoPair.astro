@@ -1,0 +1,13 @@
+---
+// Two photos side by side (wide breakout) inside an article. Usage: <PhotoPair><Photo … /><Photo … /></PhotoPair>
+export interface Props { offset?: boolean }
+const { offset = true } = Astro.props;
+---
+<div class:list={['r-wide', 'photo-pair', { 'photo-pair--offset': offset }]}><slot /></div>
+
+<style>
+  .photo-pair { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 3vw, 32px); align-items: start; margin-block: 2.4em; font-family: var(--font-sans); }
+  .photo-pair > :global(.photo) { margin: 0; }
+  .photo-pair--offset > :global(.photo:nth-child(2)) { margin-top: clamp(24px, 6vw, 72px); }
+  @media (max-width: 560px) { .photo-pair { grid-template-columns: 1fr; } .photo-pair--offset > :global(.photo:nth-child(2)) { margin-top: 0; } }
+</style>

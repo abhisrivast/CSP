@@ -1,0 +1,80 @@
+---
+// Typographic portrait card for the founder: a screen-printed placard, not a grey placeholder.
+// Used until an approved headshot exists (CONTENT-TODO). With `href` the whole card is one link.
+import Stamp from '../ui/Stamp.astro';
+import { FOUNDER } from '../../data/site';
+
+export interface Props {
+  href?: string;
+  cta?: string;
+  decorative?: boolean;   // hide from assistive tech when the name is already the page's H1
+  class?: string;
+}
+const { href, cta = 'Meet our founder', decorative = false, class: cls } = Astro.props;
+const Tag = href ? 'a' : 'div';
+const [first, ...rest] = FOUNDER.name.split(' ');
+---
+<Tag class:list={['fcard', { 'fcard--link': !!href }, cls]} href={href} aria-hidden={decorative ? 'true' : undefined}>
+  <span class="fcard__rays" aria-hidden="true"></span>
+  <span class="fcard__dots" aria-hidden="true"></span>
+  <span class="fcard__tape" aria-hidden="true">Author <i>✶</i> Book reviewer <i>✶</i> Social worker</span>
+  <span class="fcard__mono" aria-hidden="true"><span class="fcard__r">{first[0]}</span><span class="fcard__s">{rest.join(' ')[0]}</span></span>
+  <svg class="fcard__star" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4l13.2 31.8 34.3 2.8-26.1 22.4 8 33.5L50 76.8 20.6 94.5l8-33.5L2.5 38.6l34.3-2.8z" fill="currentColor" /></svg>
+  <span class="fcard__stamp" aria-hidden="true"><Stamp text="Founder" sub="Est. 2026" color="ink" tilt={-12} /></span>
+  <span class="fcard__band">
+    <span class="fcard__name">{first}{' '}<span>{rest.join(' ')}</span></span>
+    <span class="fcard__role">Founder, Cultural Shock Party</span>
+  </span>
+  {href && <span class="fcard__cta">{cta} <span aria-hidden="true">→</span></span>}
+</Tag>
+
+<style>
+  .fcard {
+    position: relative; display: block; container-type: inline-size; aspect-ratio: 4 / 5; overflow: hidden; isolation: isolate;
+    background: var(--red-ink); color: var(--paper-light); border: 3px solid var(--ink); box-shadow: 10px 10px 0 var(--ink);
+    text-decoration: none;
+  }
+  .fcard__rays {
+    position: absolute; inset: 0; z-index: -2;
+    background: repeating-conic-gradient(from -4deg at 50% 46%, rgba(251, 247, 238, .1) 0 5deg, transparent 5deg 13deg);
+  }
+  .fcard__dots {
+    position: absolute; inset: 0; z-index: -1; opacity: .55;
+    background: radial-gradient(circle, rgba(29, 28, 24, .55) 0 1.6px, transparent 2px) 0 0 / 9px 9px;
+    -webkit-mask: linear-gradient(160deg, transparent 38%, #000 92%); mask: linear-gradient(160deg, transparent 38%, #000 92%);
+  }
+  .fcard__tape {
+    position: absolute; top: 5.5cqi; left: -3cqi; z-index: 3; padding: .5em 1.2em .42em 1.6em; transform: rotate(-4deg);
+    background: var(--marigold); color: var(--ink); font-weight: 800; font-stretch: 80%; text-transform: uppercase; letter-spacing: .08em;
+    font-size: clamp(.62rem, 3.3cqi, .95rem); clip-path: polygon(0 6%, 100% 0, 98% 100%, 1% 92%); white-space: nowrap;
+  }
+  .fcard__tape i { font-style: normal; color: var(--red-ink); margin-inline: .25em; }
+  .fcard__mono {
+    position: absolute; left: 50%; top: 47%; transform: translate(-50%, -50%); display: flex; gap: 0; white-space: nowrap;
+    font-weight: 900; font-stretch: 62%; text-transform: uppercase; line-height: .78; font-size: 74cqi; letter-spacing: -.02em;
+  }
+  .fcard__r { color: transparent; -webkit-text-stroke: max(2px, .55cqi) var(--paper-light); }
+  .fcard__s { color: var(--marigold); margin-left: -.06em; text-shadow: 1.4cqi 1.4cqi 0 var(--ink); }
+  .fcard__star { position: absolute; right: 7cqi; top: 22cqi; width: 13cqi; color: var(--paper-light); transform: rotate(10deg); }
+  .fcard__stamp { position: absolute; right: 5cqi; bottom: 31cqi; z-index: 3; font-size: clamp(.8rem, 3.4cqi, 1.1rem); }
+  .fcard__stamp :global(.stamp) { background: var(--paper-light); }
+  .fcard__band {
+    position: absolute; left: -2%; right: -2%; bottom: 8cqi; z-index: 2; display: grid; gap: .35em; padding: 4.5cqi 7cqi 4cqi;
+    background: var(--paper-light); color: var(--ink); transform: rotate(-2.5deg); box-shadow: 0 6px 0 rgba(29, 28, 24, .25);
+  }
+  .fcard__name {
+    font-weight: 900; font-stretch: 62%; text-transform: uppercase; line-height: .84; font-size: 15.5cqi; letter-spacing: -.01em;
+  }
+  .fcard__name span { color: var(--red); }
+  .fcard__role { font-size: clamp(.66rem, 3cqi, .85rem); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+  .fcard__cta {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; padding: .7em 7cqi .6em; background: var(--ink); color: var(--paper);
+    font-weight: 800; font-stretch: 80%; letter-spacing: .06em; text-transform: uppercase; font-size: clamp(.85rem, 3.6cqi, 1.05rem);
+  }
+  .fcard--link .fcard__band { bottom: 16cqi; }
+  .fcard--link .fcard__stamp { bottom: 40cqi; }
+  .fcard--link { transition: transform .2s var(--ease), box-shadow .2s var(--ease); }
+  .fcard--link:hover { color: var(--paper-light); transform: translate(-3px, -3px); box-shadow: 13px 13px 0 var(--ink); }
+  .fcard--link:hover .fcard__cta span { display: inline-block; transform: translateX(4px); }
+  .fcard--link:focus-visible { outline: 3px solid var(--ink); outline-offset: 6px; }
+</style>
